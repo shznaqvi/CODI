@@ -34,13 +34,13 @@
                 android:layout_height="wrap_content">
 
                 <RadioButton
-                    android:id="@+id/dcstatus01"
+                    android:id="@+id/status01"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/complete" />
 
                 <RadioButton
-                    android:id="@+id/dcstatus02"
+                    android:id="@+id/status02"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/incomplete" />

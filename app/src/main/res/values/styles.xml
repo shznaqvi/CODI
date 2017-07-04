@@ -8,6 +8,7 @@
         <item name="android:buttonStyle">@style/buttons</item>
         <item name="android:checkboxStyle">@style/checkbox</item>
         <item name="android:radioButtonStyle">@style/radiobutton</item>
+        <item name="android:layoutDirection">rtl</item>
         <!-- Customize your theme here. -->
     </style>
 
@@ -149,7 +150,6 @@
     <style name="radiogroup">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:gravity">right</item>
         <item name="android:orientation">vertical</item>
         <item name="android:layout_marginBottom">16dp</item>
         <item name="android:background">#d6d6d6</item>
