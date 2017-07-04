@@ -42,8 +42,14 @@
         <activity
             android:name=".activities.EndingActivity"
             android:windowSoftInputMode="adjustResize|stateHidden" />
-        <activity android:name=".activities.EligibilityFormActivity" />
-        <activity android:name=".activities.EnrollmentFormActivity"></activity>
+        <activity
+            android:name=".activities.EligibilityFormActivity"
+            android:theme="@style/AppTheme1"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name=".activities.EnrollmentFormActivity"
+            android:theme="@style/AppTheme1"
+            android:windowSoftInputMode="adjustResize|stateHidden"></activity>
     </application>
 
 </manifest>

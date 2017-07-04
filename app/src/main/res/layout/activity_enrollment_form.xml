@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -31,6 +32,25 @@
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:background="@color/colorPrimaryDark" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:background="@color/colorYellowlight"
+            android:text="@string/bdd"
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold" />
+
+        <io.blackbox_vision.datetimepickeredittext.view.DatePickerInputEditText
+            android:id="@+id/bd01dod1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:focusable="true"
+            android:hint="@string/bdd"
+            android:textColor="@android:color/black"
+            app:dateFormat="dd-MM-yyyy" />
 
 
     </LinearLayout>
