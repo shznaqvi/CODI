@@ -12,27 +12,62 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
     completions."
   </string>
-  <string name="title_activity_splash_screen">Splash Screen Activity</string>
-  <string name="dummy_button">Dummy Button</string>
-  <string name="dummy_content">DUMMY\nCONTENT</string>
 
-  <string name="end_interview"> End </string>
+    <string name="end_interview"> اختتام </string>
     <string name="start_interview"> انٹرویو شروع کریں </string>
-  <string name="nextSection"> Next Section </string>
+    <string name="nextSection"> اگلا سیکشن </string>
     <string name="addMember"> افراد کا اندراج </string>
-  <string name="status"> انٹریو کا نتیجہ</string>
+    <string name="dcstatus"> انٹریو کا نتیجہ</string>
     <string name="complete"> مکمل</string>
     <string name="incomplete">نا مکمل</string>
+    <!-- String related to section headings -->
+    <string name="secALabel">HH Identification and Visit Status</string>
+    <string name="sec2A"> سیکشن 2A: بنیادی معلومات </string>
+    <string name="secBLabel">  سیکشن بی: خاندان کے تمام افراد کی فہرست </string>
+    <string name="secCLabel"> سیکشن سی:گزشتہ ایک سال کے دوران انتقال ہونے والے  افراد</string>
+    <string name="secDLabel">سیکشن ڈی: گھریلوں تعمیر</string>
+    <string name="secELabel">سیکشن ای : ہاتھ دھونا</string>
+    <string name="secFLabel">سیکشن ایف :منتخب شدہ ماؤں کی گزشتہ پیداواری معلومات</string>
+    <string name="secGLabel">سیکشن جی :خاندانی منصوبہ بندی(حمل کی تفصیلات کی طرف جائیں ) </string>
+    <string name="secHLabel">سیکشن ایچ :ضرورت جو پوری نہ ہوسکی</string>
+    <string name="secILabel">سیکشن آئی :شیر خوار اور بڑے بچوں کی غذا</string>
+    <string name="secJLabel">سیکشن  جے: بچے کی صحت کی معلومات</string>
+    <string name="secKLabel"> سیکشن کے:حفاظتی ٹیکے</string>
+    <string name="secLLabel">سیکشن ایل :گھریلو خوراک ی ناقص تحفظ، خوراک کا استعمال اور تبدیل</string>
+    <string name="dcl2heading"> خاندان کی غذا سے متعلق نمنٹے کی حکمت عملی </string>
+    <string name="dcl3heading"> بھوک کا پیمانہ ( گزشتہ ایک ماہ کے متعلق) </string>
+    <string name="secMLabel">سیکشن ایم: گھر کا ماحول</string>
+
+
     <string name="days">دنوں کی تعداد</string>
+
+
+    <!-- Strings that are fixed for all apps -->
+    <string name="title_activity_splashscreen">SplashscreenActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="dcother">دیگر(وضاحت کریں)</string>
+    <string name="dcdkn">معلوم نہیں</string>
+    <string name="dcyes">ہاں</string>
+    <string name="dcno">نہیں</string>
+    <string name="dcna">قابل اطلاق نہیں</string>
+    <string name="dctimes">تعداد</string>
+    <string name="dcmale"> مرد </string>
+    <string name="dcfemale"> عورت </string>
+    <string name="Frequency"> تعداد </string>
 
 
     <!-- Strings related to Sections Below -->
 
+  <!-- Strings of Eligibility Form -->
+  <string name="male">Male</string>
+  <string name="female">Female</string>
+  <string name="dkn">Dont Know</string>
 
-  <string name="celheading"> ELIGIBILITY FORM </string>
-  <string name="yes"> yes </string>
-  <string name="no"> no </string>
-  <string name="others"> OTHER,SPECIFY_______________________ </string>
+  <string name="celheading"> Eligibility Form </string>
+  <string name="yes"> Yes </string>
+  <string name="no"> No </string>
+  <string name="others"> Other, Specify_______________________ </string>
   <string name="celsubheading"> Comparison of duration of immunity following IPV and fIPV: A community based randomized controlled trial in Pakistan </string>
   <string name="celcn"> Name of the child </string>
   <string name="celdob"> Date of birth </string>
@@ -45,237 +80,245 @@
   <string name="cel06"> The child does not have any acute illness? </string>
   <string name="cel07"> The child is not currently or previously enrolled in polio vaccine trials? </string>
   <string name="celeesub"> (if answers to all of the above except #4 for 9 months old and #3 for 14 weeks old is YES, mark the child as eligible) </string>
-  <string name="celee"> Child eligile for enrolment </string>
+  <string name="celee"> Child Eligible For Enrolment </string>
   <string name="celstdid"> Study ID </string>
   <string name="celdoe"> Date of enrolment </string>
 
-  <string name="cenheading"> Enrollment Form </string>
+
+  <!-- Strings Of Enrollment Form-->
+  <string name="DSSID">DSS ID</string>
+  <string name="studyID">Study Number</string>
+
+  <string name="cenheading"> ENROLMENT FORM </string>
   <string name="censubheading"> Comparison of duration of immunity following IPV and fIPV: A community based randomized
   Controlled trial in Pakistan
 </string>
-  <string name="cen01"> DATE OF ENROLMENT </string>
-  <string name="cen02"> ELIGIBILITY CONFIRMED </string>
-  <string name="cen03"> CONSENT FORM SIGNED </string>
-  <string name="cen04sub"> IDENTITY AND FAMILY PARTICULARS </string>
-  <string name="cen04"> NAME OF CHILD </string>
-  <string name="cen05"> NAME OF MOTHER </string>
-  <string name="cen06"> DATE OF BIRTH </string>
-  <string name="cen07"> AGE OF CHILD </string>
-  <string name="cen07a"> WEEKS </string>
-  <string name="cen07b"> MONTHS </string>
-  <string name="cen08"> GENDER OF CHILD </string>
-  <string name="cen09"> ADDRESS OF THE HOUSE </string>
+  <string name="cen01"> Date Of Enrolment </string>
+  <string name="cen02"> Eligibility Confirmed? </string>
+  <string name="cen03"> Consent form signed? </string>
+  <string name="cen04sub"> Identity and Family Particulars </string>
+  <string name="cen04"> Name of Child </string>
+  <string name="cen05"> Name of Mother </string>
+  <string name="cen06"> Date of Birth </string>
+  <string name="cen07"> Age of Child </string>
+  <string name="cen07a"> Weeks </string>
+  <string name="cen07b"> Months </string>
+  <string name="cen08"> Gender of Child </string>
+  <string name="cen09"> Address of the house </string>
   <string name="cen09a"> DSS ID </string>
-  <string name="cenfp"> FATHER’S PHONE NUMBER </string>
-  <string name="cenmp"> MOTHER’S PHONE NUMBER </string>
+  <string name="cenfp"> Father’s phone number </string>
+  <string name="cenmp"> Mother’s phone number </string>
   <string name="cenac"> Alternative Contact Person/s Name/s and Mobile Numbers </string>
-  <string name="cen10"> WHAT IS THE EDUCATIONAL STATUS OF THE CHILD’S FATHER </string>
-  <string name="cen10a"> NO FORMAL EDUCATION </string>
-  <string name="cen10b"> RELIGIOUS EDUCATION ONLY </string>
-  <string name="cen10c"> LESS THAN PRIMARY </string>
-  <string name="cen10d"> COMPLETE PRIMARY </string>
-  <string name="cen10e"> COMPLETE SECONDARY </string>
-  <string name="cen10f"> MORE THAN SECONDARY </string>
-  <string name="cen11"> WHAT IS THE EDUCATIONAL STATUS OF THE CHILD MOTHER? </string>
-  <string name="cen11a"> NO FORMAL EDUCATION </string>
-  <string name="cen11b"> COMPLETE PRIMARY </string>
-  <string name="cen11c"> RELIGIOUS EDUCATION ONLY </string>
-  <string name="cen11d"> COMPLETE SECONDARY </string>
-  <string name="cen11e"> LESS THAN PRIMARY </string>
-  <string name="cen11f"> MORE THAN SECONDARY </string>
-  <string name="cen12"> TOTAL MONTHLY INCOME OF THE HOUSEHOLD :
-    (Includes income of all household member who share one cooking pot) </string>
+  <string name="cen10"> What is the educational status of the child’s father </string>
+  <string name="cen10a"> No formal education </string>
+  <string name="cen10b"> Religious education only </string>
+  <string name="cen10c"> Less than primary </string>
+  <string name="cen10d"> Complete primary </string>
+  <string name="cen10e"> Complete secondary </string>
+  <string name="cen10f"> More than secondary </string>
+  <string name="cen11"> What is the educational status of the child mother? </string>
+  <string name="cen11a"> No formal education </string>
+  <string name="cen11b"> Complete primary </string>
+  <string name="cen11c"> Religious education only </string>
+  <string name="cen11d"> Complete secondary </string>
+  <string name="cen11e"> Less than primary </string>
+  <string name="cen11f"> More than secondary </string>
+  <string name="cen12"> Total monthly income of the household :
+  (Includes income of all household member who share one cooking pot) </string>
   <string name="cen12a"> Less than 2000 </string>
   <string name="cen12b"> 2000 - 5000 </string>
   <string name="cen12c"> 5000 - 10000 </string>
   <string name="cen12d"> > 10000 </string>
-  <string name="cen13"> NUMBER OF PEOPLE IN HOUSEHOLD </string>
-  <string name="cen14"> NUMBER OF CHILDREN Less than 5 IN HOUSEHOLD (excluding this child) </string>
-  <string name="cen15"> FROM BIRTH UNTIL NOW, IS THE CHILD BREAST FED AT ALL? </string>
-  <string name="cen16"> IS THE CHILD CURRENTLY BREASTFED? </string>
-  <string name="cen16a"> NO </string>
-  <string name="cen16b"> PARTIAL BREAST FEDING </string>
-  <string name="cen16c"> EXCLUSIVE BREAST FEEDING </string>
-  <string name="cen17"> IF PARTIAL BREAST FEEDING, WHAT TYPE OF MILK OR OTHER THINGS IS CHILD RECEIVING? </string>
-  <string name="cen17a"> FORMULA MILK </string>
-  <string name="cen17b"> COW MILK </string>
-  <string name="cen18sub"> BLOOD SAMPLING </string>
-  <string name="cen18"> SUCESSFULLY COLLECTED THE BLOOD? </string>
-  <string name="cen19"> QUANTITY OF BLOOD COLLECTED SUFFICIENT? </string>
-  <string name="cen20"> DATE OF BLOOD COLLECTION </string>
-  <string name="cen21"> TIME OF COLLECTION: </string>
-  <string name="cen22"> SERUM SEPARATION DONE? </string>
-  <string name="cen23"> QUANTITY OF SERUM SUFFICIENT (Minimum 0.5 ml)? </string>
-  <string name="cen24"> NUMBER OF SERUM SAMPLE ON CRYOTUBE: (Sample Number - S1) </string>
-  <string name="cen25sub"> RANDOMIZATION </string>
-  <string name="cen25"> DATE OF RANDOMIZATION ( DD / MM / YY ) </string>
-  <string name="cen26"> TIME OF RANDOMIZATION ( hh : mm, 24 hour clock) </string>
-  <string name="cen27"> STUDY ARM : (please circle one of the followings) </string>
+  <string name="cen13"> Number of people in household </string>
+  <string name="cen14"> Number of children less than 5 in household (excluding this child) </string>
+  <string name="cen15"> From birth until now, is the child breast fed at all? </string>
+  <string name="cen16"> Is the child currently breastfed? </string>
+  <string name="cen16a"> No </string>
+  <string name="cen16b"> Partial breast feeding </string>
+  <string name="cen16c"> Exclusive breast feeding </string>
+  <string name="cen17"> If partial breast feeding, what type of milk or other things is child receiving? </string>
+  <string name="cen17a"> Formula milk </string>
+  <string name="cen17b"> Cow milk </string>
+  <string name="cen18sub"> Blood sampling </string>
+  <string name="cen18"> Successfully collected the blood? </string>
+  <string name="cen19"> Quantity of blood collected sufficient? </string>
+  <string name="cen20"> Date of blood collection </string>
+  <string name="cen21"> Time of collection: </string>
+  <string name="cen22"> Serum separation done? </string>
+  <string name="cen23"> Quantity of Serum sufficient (Minimum 0.5 ml)? </string>
+  <string name="cen24"> Number of Serum sample on Cryotube: (Sample Number - S1) </string>
+  <string name="cen24sub"> (Sample Number - S1) </string>
+  <string name="cen25sub"> Randomization </string>
+  <string name="cen25"> Date of randomization ( DD / MM / YY ) </string>
+  <string name="cen26"> Time of randomization ( hh : mm, 24 hour clock) </string>
+  <string name="cen27"> Study Arm : (please circle one of the followings) </string>
   <string name="cen27a"> Arm A </string>
   <string name="cen27b"> Arm B </string>
   <string name="cen27c"> Arm C </string>
   <string name="cen27d"> Arm D </string>
-  <string name="cen28sub"> VACCINE AFTER RANDOMIZATION </string>
-  <string name="cen28"> THE CHILD RECEIVED VACCINE ACCORDING TO RANDOMIZATION? </string>
-  <string name="cen29"> WHICH VACCINE DOES CHILD RECEIVED? (Please tick one) </string>
+  <string name="cen28sub"> Vaccine after randomization </string>
+  <string name="cen28"> The child received vaccine according to randomization? </string>
+  <string name="cen29"> Which vaccine does child received? (Please tick one) </string>
   <string name="cen29a"> IPV (0.5ML) </string>
   <string name="cen29b"> fIPV (0.1ML) </string>
-  <string name="cen30"> DATE VACCINATION RECEIVED ( dd / mm /yy ) </string>
-  <string name="cen31"> TIME OF VACCINATION RECEIVED ( hh : mm, 24 hour clock) </string>
-  <string name="cen32"> CHILD OBSERVED FOR AT LEAST 30 MINUTES POST VACCINATION </string>
-  <string name="cen33"> IF ADVERSE EVENTS WERE OBSERVED, PLEASE SPECIFY BELOW: </string>
-  <string name="cenascsub"> APPOINTMENT FOR SECOND CONTACT VISIT:(28 days after Enrolment ) </string>
-  <string name="cendt"> DATE </string>
-  <string name="centime"> TIME
-    Hrs.(To be written in 24 hours and minutes ) </string>
-  <string name="csvheading"> SECOND VISIT FORM
-    (28 days after Enrolment ) </string>
+  <string name="cen30"> Date vaccination received ( dd / mm /yy ) </string>
+  <string name="cen31"> Time of vaccination received ( hh : mm, 24 hour clock) </string>
+  <string name="cen32"> Child observed for at least 30 minutes post vaccination </string>
+  <string name="cen33"> If adverse events were observed, please specify below: </string>
+  <string name="cenascsub"> Appointment for second contact visit:(28 days after Enrolment ) </string>
+  <string name="cendt"> Date </string>
+  <string name="centime"> Time
+  Hrs.(To be written in 24 hours and minutes ) </string>
+  <string name="csvheading"> Second Visit Form
+  (28 days after Enrolment ) </string>
   <string name="csvstdno"> Study Number </string>
   <string name="csvdssid"> DSS ID </string>
-  <string name="csv01"> EXPECTED DATE OF VISIT </string>
-  <string name="csv02"> ACTUAL DATE OF VISIT </string>
-  <string name="csv03"> STUDY RANDOMIZATION ARM </string>
-  <string name="csv04"> IS THE CHILD HEALTHY? </string>
-  <string name="csv05"> WAS THIS CHILD HOSPITALIZED SINCE LAST VISIT? </string>
-  <string name="csv06"> IF `YES`IN QUESTION ABOVE, HAS A COPY OF THE DISCHARGE SUMMARY ATTACHED HEREWITH? </string>
-  <string name="csv07"> FROM BIRTH UNTIL NOW, IS THE CHILD BREAST FED AT ALL? </string>
-  <string name="csv08"> IS THE CHILD CURRENTLY BREASTFED </string>
-  <string name="csv08a"> NO </string>
-  <string name="csv08b"> PARTIAL BREAST FEDING </string>
-  <string name="csv08c"> EXCLUSIVE BREAST FEEDING </string>
-  <string name="csv09"> IF PARTIAL BREAST FEEDING, WHAT TYPE OF MILK OR OTHER THINGS IS CHILD RECEIVING? </string>
-  <string name="csv09a"> FORMULA MILK </string>
-  <string name="csv09b"> COW MILK </string>
-  <string name="csv10sub"> BLOOD SAMPLING </string>
-  <string name="csv10"> SUCESSFULLY COLLECTED THE BLOOD? </string>
-  <string name="csv11"> QUANTITY OF BLOOD COLLECTED SUFFICIENT? </string>
-  <string name="csv12"> DATE OF BLOOD COLLECTION: </string>
-  <string name="csv13"> TIME OF COLLECTION: </string>
-  <string name="csv14"> SERUM SEPARATION DONE? </string>
-  <string name="csv15"> QUANTITY OF SERUM SUFFICIENT (Minimum 0.5 ml)? </string>
-  <string name="csv16"> NUMBER OF SERUM SAMPLE ON CRYOTUBE: (Sample Number - S1) </string>
-  <string name="csvatcsub"> APPOINTMENT FOR THIRD CONTACT VISIT:
-    (AT AGE 9 MONTHS FOR ARMS A and B )
-    (AT AGE 21 MONTHS FOR ARMS C and D) </string>
-  <string name="csvatcdt"> DATE </string>
-  <string name="csvatctime"> TIME
-    Hrs.(To be written in 24 hours and minutes ) </string>
-  <string name="ctvheading"> THIRD VISIT FORM
-    (9 MONTHS OF AGE ) </string>
+  <string name="csv01"> Expected date of visit </string>
+  <string name="csv02"> actual date of visit </string>
+  <string name="csv03"> Study Randomization Arm </string>
+  <string name="csv04"> Is the child healthy? </string>
+  <string name="csv05"> Was this child hospitalized since last visit? </string>
+  <string name="csv06"> If `YES`in question above, has a copy of the discharge summary attached herewith? </string>
+  <string name="csv07"> From birth until now, is the child breast fed at all? </string>
+  <string name="csv08"> Is the child currently breastfed </string>
+  <string name="csv08a"> No </string>
+  <string name="csv08b"> Partial breast feeding </string>
+  <string name="csv08c"> Exclusive breast feeding </string>
+  <string name="csv09"> If partial breast feeding, what type of milk or other things is child receiving? </string>
+  <string name="csv09a"> Formula milk </string>
+  <string name="csv09b"> Cow milk </string>
+  <string name="csv10sub"> Blood Sampling </string>
+  <string name="csv10"> Successfully collected the blood? </string>
+  <string name="csv11"> Quantity of blood collected sufficient? </string>
+  <string name="csv12"> Date of blood collection: </string>
+  <string name="csv13"> Time of collection: </string>
+  <string name="csv14"> Serum separation done? </string>
+  <string name="csv15"> Quantity of serum sufficient (Minimum 0.5 ml)? </string>
+  <string name="csv16"> Number of serum sample on Cryotube: (Sample Number - S1) </string>
+  <string name="csvatcsub"> Appointment for third contact visit:
+  (At Age 9 Months For Arms A and B )
+  (At Age 21 Months For Arms C and D) </string>
+  <string name="csvatcdt"> Date </string>
+  <string name="csvatctime"> Time
+  Hrs.(To be written in 24 hours and minutes ) </string>
+  <string name="ctvheading"> Third Visit Form
+  (9 Months Of Age ) </string>
   <string name="ctvstdno"> Study Number </string>
   <string name="ctvdssid"> DSS ID </string>
-  <string name="ctv01"> EXPECTED DATE OF VISIT </string>
-  <string name="ctv02"> ACTUAL DATE OF VISIT </string>
-  <string name="ctv03"> STUDY RANDOMIZATION ARM </string>
-  <string name="ctv04"> IS THE CHILD HEALTHY? </string>
-  <string name="ctv05"> WAS THIS CHILD HOSPITALIZED SINCE LAST VISIT? </string>
-  <string name="ctv06"> IF `YES`IN QUESTION ABOVE, HAS A COPY OF THE DISCHARGE SUMMARY ATTACHED HEREWITH? </string>
-  <string name="ctv07"> FROM BIRTH UNTIL NOW, IS THE CHILD BREAST FED AT ALL </string>
-  <string name="ctv08"> IS THE CHILD CURRENTLY BREASTFED </string>
-  <string name="ctv08a"> NO </string>
-  <string name="ctv08b"> PARTIAL BREAST FEDING </string>
-  <string name="ctv08c"> EXCLUSIVE BREAST FEEDING </string>
-  <string name="ctv09"> IF PARTIAL BREAST FEEDING, WHAT TYPE OF MILK OR OTHER THINGS IS CHILD RECEIVING? </string>
-  <string name="ctv09a"> FORMULA MILK </string>
-  <string name="ctv09b"> COW MILK </string>
-  <string name="ctv10sub"> VACCINE ADMINISRATION </string>
-  <string name="ctv10"> THE CHILD RECEIVED VACCINE ACCORDING TO RANDOMIZATION? </string>
-  <string name="ctv11"> WHICH VACCINE DOES CHILD RECEIVED? </string>
+  <string name="ctv01"> Expected date of visit </string>
+  <string name="ctv02"> Actual date of visit </string>
+  <string name="ctv03"> Study randomization arm </string>
+  <string name="ctv04"> Is the child healthy? </string>
+  <string name="ctv05"> Was this child hospitalized since last visit? </string>
+  <string name="ctv06"> If `YES`in question above, has a copy of the discharge summary attached herewith? </string>
+  <string name="ctv07"> From birth until now, is the child breast fed at all </string>
+  <string name="ctv08"> Is the child currently breastfed? </string>
+  <string name="ctv08a"> No </string>
+  <string name="ctv08b"> Partial breast feeding </string>
+  <string name="ctv08c"> Exclusive breast feeding </string>
+  <string name="ctv09"> If partial breast feeding, what type of milk or other things is child receiving? </string>
+  <string name="ctv09a"> Formula milk </string>
+  <string name="ctv09b"> Cow milk </string>
+  <string name="ctv10sub"> Vaccine Adminisration </string>
+  <string name="ctv10"> The child received vaccine according to randomization? </string>
+  <string name="ctv11"> Which vaccine does child received? </string>
   <string name="ctv11a"> IPV (0.5ML) </string>
   <string name="ctv11b"> fIPV (0.1ML) </string>
-  <string name="ctv12"> DATE VACCINATION RECEIVED ( dd / mm /yy ) </string>
-  <string name="ctv13"> TIME OF VACCINATION RECEIVED ( hh : mm, 24 hour clock) </string>
-  <string name="ctv14"> CHILD OBSERVED FOR AT LEAST 30 MINUTES POST VACCINATION </string>
-  <string name="ctv15"> IF ADVERSE EVENTS WERE OBSERVED, PLEASE SPECIFY BELOW: </string>
-  <string name="ctvafcsub"> APPOINTMENT FOR FOURTH CONTACT VISIT: (AT AGE 10 MONTHS FOR ARMS A and B ONLY ) </string>
-  <string name="ctvafcdt"> DATE </string>
-  <string name="ctvafctime"> TIME
-    Hrs.(To be written in 24 hours and minutes ) </string>
-  <string name="ctvbheading"> THIRD VISIT FORM
-    (21 MONTHS OF AGE ) </string>
+  <string name="ctv12"> Date vaccination received ( dd / mm /yy ) </string>
+  <string name="ctv13"> Time of vaccination received ( hh : mm, 24 hour clock) </string>
+  <string name="ctv14"> Child observed for at least 30 minutes post vaccination </string>
+  <string name="ctv15"> If adverse events were observed, please specify below: </string>
+  <string name="ctvafcsub"> Appointment For Fourth Contact Visit: (At Age 10 Months For Arms A And B Only ) </string>
+  <string name="ctvafcdt"> Date </string>
+  <string name="ctvafctime"> Time
+  Hrs.(To be written in 24 hours and minutes ) </string>
+  <string name="ctvbheading"> Third Visit Form
+  (21 Months of Age ) </string>
   <string name="ctvbstdno"> Study Number </string>
   <string name="ctvbdssid"> DSS ID </string>
-  <string name="ctvb01"> EXPECTED DATE OF VISIT </string>
-  <string name="ctvb02"> ACTUAL DATE OF VISIT </string>
-  <string name="ctvb03"> STUDY RANDOMIZATION ARM </string>
-  <string name="ctvb04"> IS THE CHILD HEALTHY? </string>
-  <string name="ctvb05"> WAS THIS CHILD HOSPITALIZED SINCE LAST VISIT? </string>
-  <string name="ctvb06"> IF `YES` IN QUESTION ABOVE, HAS A COPY OF THE DISCHARGE SUMMARY ATTACHED HEREWITH? </string>
-  <string name="ctvb07"> FROM BIRTH UNTIL NOW, IS THE CHILD BREAST FED AT ALL? </string>
-  <string name="ctvb08"> IS THE CHILD CURRENTLY BREASTFED </string>
-  <string name="ctvb08a"> NO </string>
-  <string name="ctvb08b"> PARTIAL BREAST FEDING </string>
-  <string name="ctvb08c"> EXCLUSIVE BREAST FEEDING </string>
-  <string name="ctvb09"> IF PARTIAL BREAST FEEDING, WHAT TYPE OF MILK OR OTHER THINGS IS CHILD RECEIVING? </string>
-  <string name="ctvb09a"> FORMULA MILK </string>
-  <string name="ctvb09b"> COW MILK </string>
-  <string name="ctvb10sub"> BLOOD SAMPLING </string>
-  <string name="ctvb10"> SUCESSFULLY COLLECTED THE BLOOD? </string>
-  <string name="ctvb11"> QUANTITY OF BLOOD COLLECTED SUFFICIENT?
-    (Minimum - Quantity Peripheral 2 ml) </string>
-  <string name="ctvb12"> DATE OF BLOOD COLLECTION: </string>
-  <string name="ctvb13"> TIME OF COLLECTION:
-    Hrs. (To be written in 24 hours and minutes ) </string>
-  <string name="ctvb14"> SERUM SEPARATION DONE? </string>
-  <string name="ctvb15"> QUANTITY OF SERUM SUFFICIENT (Minimum 0.5 ml)? </string>
-  <string name="ctvb16"> NUMBER OF SERUM SAMPLE ON CRYOTUBE: (Sample Number - S1) </string>
-  <string name="cfvheading"> FOURTH VISIT FORM
-    (10 MONTHS OF AGE FOR ARMS A and B ) </string>
+  <string name="ctvb01"> Expected Date of Visit </string>
+  <string name="ctvb02"> Actual date of visit </string>
+  <string name="ctvb03"> Study Randomization Arm </string>
+  <string name="ctvb04"> Is the child healthy? </string>
+  <string name="ctvb05"> Was this child hospitalized since last visit? </string>
+  <string name="ctvb06"> If `YES` in question above, has a copy of the discharge summary attached herewith? </string>
+  <string name="ctvb07"> From birth until now, is the child breast fed at all? </string>
+  <string name="ctvb08"> Is the child currently breastfed </string>
+  <string name="ctvb08a"> No </string>
+  <string name="ctvb08b"> Partial breast feeding </string>
+  <string name="ctvb08c"> Exclusive breast feeding </string>
+  <string name="ctvb09"> If partial breast feeding, what type of milk or other things is child receiving? </string>
+  <string name="ctvb09a"> Formula milk </string>
+  <string name="ctvb09b"> Cow milk </string>
+  <string name="ctvb10sub"> Blood Sampling </string>
+  <string name="ctvb10"> Successfully collected the blood? </string>
+  <string name="ctvb11"> Quantity of blood collected sufficient?
+  (Minimum - Quantity Peripheral 2 ml) </string>
+  <string name="ctvb12"> Date of blood collection: </string>
+  <string name="ctvb13"> Time of collection:
+  Hrs. (To be written in 24 hours and minutes ) </string>
+  <string name="ctvb14"> Serum separation done? </string>
+  <string name="ctvb15"> Quantity of serum sufficient (Minimum 0.5 ml)? </string>
+  <string name="ctvb16"> Number of serum sample on Cryotube: (Sample Number - S1) </string>
+  <string name="cfvheading"> Fourth Visit Form
+  (10 Months of age for arms A and B ) </string>
   <string name="cfvstdno"> Study Number </string>
   <string name="cfvdssid"> DSS ID </string>
-  <string name="cfv01"> EXPECTED DATE OF VISIT </string>
-  <string name="cfv02"> ACTUAL DATE OF VISIT </string>
-  <string name="cfv03"> STUDY RANDOMIZATION ARM </string>
-  <string name="cfv04"> IS THE CHILD HEALTHY? </string>
-  <string name="cfv05"> WAS THIS CHILD HOSPITALIZED SINCE LAST VISIT? </string>
-  <string name="cfv06"> IF `YES`IN QUESTION ABOVE, HAS A COPY OF THE DISCHARGE SUMMARY ATTACHED HEREWITH? </string>
-  <string name="cfv07"> FROM BIRTH UNTIL NOW, IS THE CHILD BREAST FED AT ALL? </string>
-  <string name="cfv08"> IS THE CHILD CURRENTLY BREASTFED </string>
-  <string name="cfv08a"> NO </string>
-  <string name="cfv08b"> PARTIAL BREAST FEDING </string>
-  <string name="cfv08c"> EXCLUSIVE BREAST FEEDING </string>
-  <string name="cfv09"> IF PARTIAL BREAST FEEDING, WHAT TYPE OF MILK OR OTHER THINGS IS CHILD RECEIVING? </string>
-  <string name="cfv09a"> FORMULA MILK </string>
-  <string name="cfv09b"> COW MILK </string>
-  <string name="cfv10sub"> BLOOD SAMPLING </string>
-  <string name="cfv10"> SUCESSFULLY COLLECTED THE BLOOD? </string>
-  <string name="cfv11"> QUANTITY OF BLOOD COLLECTED SUFFICIENT? </string>
-  <string name="cfv12"> DATE OF BLOOD COLLECTION: </string>
-  <string name="cfv13"> TIME OF COLLECTION:
-    (Minimum - Quantity Peripheral 2 ml) </string>
-  <string name="cfv14"> SERUM SEPARATION DONE? </string>
-  <string name="cfv15"> QUANTITY OF SERUM SUFFICIENT (Minimum 0.5 ml)? </string>
-  <string name="cfv16"> NUMBER OF SERUM SAMPLE ON CRYOTUBE: (Sample Number - S1) </string>
-  <string name="cfvafcsub"> APPOINTMENT FOR FIFTH CONTACT VISIT:(21 MONTHS OF AGE ) </string>
-  <string name="cfvafcdt"> DATE </string>
-  <string name="cfvafctime"> TIME
-    Hrs.(To be written in 24 hours and minutes ) </string>
-  <string name="cfivheading"> FIFTH VISIT FORM
-    (21 MONTHS OF AGE FOR ARMS A and B ) </string>
+  <string name="cfv01"> Expected date of visit </string>
+  <string name="cfv02"> Actual date of visit </string>
+  <string name="cfv03"> Study randomization arm </string>
+  <string name="cfv04"> Is the child healthy? </string>
+  <string name="cfv05"> Was this child hospitalized since last visit? </string>
+  <string name="cfv06"> If `YES`in question above, has a copy of the discharge summary attached herewith? </string>
+  <string name="cfv07"> From birth until now, is the child breast fed at all? </string>
+  <string name="cfv08"> Is the child currently breastfed </string>
+  <string name="cfv08a"> No </string>
+  <string name="cfv08b"> Partial Breast Feeding </string>
+  <string name="cfv08c"> Exclusive breast feeding </string>
+  <string name="cfv09"> If partial breast feeding, what type of milk or other things is child receiving? </string>
+  <string name="cfv09a"> Formula milk </string>
+  <string name="cfv09b"> Cow milk </string>
+  <string name="cfv10sub"> Blood Sampling </string>
+  <string name="cfv10"> Sucessfully collected the blood? </string>
+  <string name="cfv11"> Quantity of blood collected sufficient? </string>
+  <string name="cfv12"> Date of blood collection: </string>
+  <string name="cfv13"> Time of collection:
+  (Minimum - Quantity Peripheral 2 ml) </string>
+  <string name="cfv14"> Serum separation done? </string>
+  <string name="cfv15"> Quantity of serum sufficient (Minimum 0.5 ml)? </string>
+  <string name="cfv16"> Number of serum sample on Cryotube: (Sample Number - S1) </string>
+  <string name="cfvafcsub"> Appointment for Fifth Contact Visit:(21 months of age ) </string>
+  <string name="cfvafcdt"> Date </string>
+  <string name="cfvafctime"> Time
+  Hrs.(To be written in 24 hours and minutes ) </string>
+  <string name="cfivheading"> Fifth visit form
+  (21 months of age for arms A and B ) </string>
   <string name="cfivstdno"> Study Number </string>
   <string name="cfivdssid"> DSS ID </string>
-  <string name="cfiv01"> EXPECTED DATE OF VISIT </string>
-  <string name="cfiv02"> ACTUAL DATE OF VISIT </string>
-  <string name="cfiv03"> STUDY RANDOMIZATION ARM </string>
-  <string name="cfiv04"> IS THE CHILD HEALTHY? </string>
-  <string name="cfiv05"> WAS THIS CHILD HOSPITALIZED SINCE LAST VISIT? </string>
-  <string name="cfiv06"> IF `YES`IN QUESTION ABOVE, HAS A COPY OF THE DISCHARGE SUMMARY ATTACHED HEREWITH? </string>
-  <string name="cfiv07"> FROM BIRTH UNTIL NOW, IS THE CHILD BREAST FED AT ALL? </string>
-  <string name="cfiv08"> IS THE CHILD CURRENTLY BREASTFED </string>
-  <string name="cfiv08a"> NO </string>
-  <string name="cfiv08b"> PARTIAL BREAST FEDING </string>
-  <string name="cfiv08c"> EXCLUSIVE BREAST FEEDING </string>
-  <string name="cfiv09"> IF PARTIAL BREAST FEEDING, WHAT TYPE OF MILK OR OTHER THINGS IS CHILD RECEIVING? </string>
-  <string name="cfiv09a"> FORMULA MILK </string>
-  <string name="cfiv09b"> COW MILK </string>
-  <string name="cfiv10sub"> BLOOD SAMPLING </string>
-  <string name="cfiv10"> SUCESSFULLY COLLECTED THE BLOOD? </string>
-  <string name="cfiv11"> QUANTITY OF BLOOD COLLECTED SUFFICIENT?
-    (Minimum - Quantity Peripheral 2 ml) </string>
-  <string name="cfiv12"> DATE OF BLOOD COLLECTION: </string>
-  <string name="cfiv13"> TIME OF COLLECTION:
-    Hrs. (To be written in 24 hours and minutes ) </string>
-  <string name="cfiv14"> SERUM SEPARATION DONE? </string>
-  <string name="cfiv15"> QUANTITY OF SERUM SUFFICIENT (Minimum 0.5 ml)? </string>
-  <string name="cfiv16"> NUMBER OF SERUM SAMPLE ON CRYOTUBE: (Sample Number - S1) </string>
+  <string name="cfiv01"> Expected date of visit </string>
+  <string name="cfiv02"> actual date of visit </string>
+  <string name="cfiv03"> Study randomization arm </string>
+  <string name="cfiv04"> Is the child healthy? </string>
+  <string name="cfiv05"> Was this child hospitalized since last visit? </string>
+  <string name="cfiv06"> If `YES`in question above, has a copy of the discharge summary attached herewith? </string>
+  <string name="cfiv07"> From birth until now, is the child breast fed at all? </string>
+  <string name="cfiv08"> Is the child currently breastfed </string>
+  <string name="cfiv08a"> No </string>
+  <string name="cfiv08b"> Partial Breast Feeding </string>
+  <string name="cfiv08c"> Exclusive breast feeding </string>
+  <string name="cfiv09"> If partial breast feeding, what type of milk or other things is child receiving? </string>
+  <string name="cfiv09a"> Formula milk </string>
+  <string name="cfiv09b"> Cow Milk </string>
+  <string name="cfiv10sub"> Blood Sampling </string>
+  <string name="cfiv10"> Successfully collected the blood? </string>
+  <string name="cfiv11"> Quantity of blood collected sufficient?
+  (Minimum - Quantity Peripheral 2 ml) </string>
+  <string name="cfiv12"> Date of blood collection: </string>
+  <string name="cfiv13"> Time of collection:
+  Hrs. (To be written in 24 hours and minutes ) </string>
+  <string name="cfiv14"> Serum separation done? </string>
+  <string name="cfiv15"> Quantity of serum sufficient (Minimum 0.5 ml)? </string>
+  <string name="cfiv16"> Number of serum sample on Cryotube: (Sample Number - S1) </string>
+
+
 </resources>
