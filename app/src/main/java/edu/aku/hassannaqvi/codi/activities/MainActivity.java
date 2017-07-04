@@ -172,7 +172,7 @@ public class MainActivity extends Activity {
 
     public void openForm(View v) {
         if (sharedPref.getString("tagName", null) != "" && sharedPref.getString("tagName", null) != null) {
-            Intent oF = new Intent(MainActivity.this, EnrollmentFormActivity.class);
+            Intent oF = new Intent(MainActivity.this, EligibilityFormActivity.class);
             startActivity(oF);
         } else {
 
@@ -191,7 +191,7 @@ public class MainActivity extends Activity {
                         editor.putString("tagName", m_Text);
                         editor.commit();
 
-                        Intent oF = new Intent(MainActivity.this, EnrollmentFormActivity.class);
+                        Intent oF = new Intent(MainActivity.this, EligibilityFormActivity.class);
                         startActivity(oF);
                     }
                 }

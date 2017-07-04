@@ -74,7 +74,7 @@ public class EndingActivity extends Activity {
         Toast.makeText(this, "Validating This Section ", Toast.LENGTH_SHORT).show();
 
         if (dcstatus.getCheckedRadioButtonId() == -1) {
-            Toast.makeText(this, "ERROR(Not Selected): " + getString(R.string.status), Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "ERROR(Not Selected): " + getString(R.string.dcstatus), Toast.LENGTH_LONG).show();
             status02.setError("Please Select One");    // Set Error on last radio button
             Log.i(TAG, "status: This data is Required!");
             return false;

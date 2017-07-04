@@ -1,9 +1,12 @@
 package edu.aku.hassannaqvi.codi.activities;
 
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -13,8 +16,10 @@ import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 
 import butterknife.BindView;
+import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import edu.aku.hassannaqvi.codi.R;
@@ -22,7 +27,7 @@ import edu.aku.hassannaqvi.codi.core.DatabaseHelper;
 import io.blackbox_vision.datetimepickeredittext.view.DatePickerInputEditText;
 
 
-public class EligibilityFormActivity extends AppCompatActivity {
+public class EligibilityFormActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener {
 
     private static final String TAG = EligibilityFormActivity.class.getSimpleName();
 
@@ -84,6 +89,15 @@ public class EligibilityFormActivity extends AppCompatActivity {
     EditText celstdid;
     @BindView(R.id.celdoe)
     DatePickerInputEditText celdoe;
+    @BindView(R.id.fldGrpcelEligible)
+    LinearLayout fldGrpcelEligible;
+
+    @BindViews({R.id.celdob, R.id.celdoe})
+    List<DatePickerInputEditText> dates;
+    @BindViews({R.id.cel01, R.id.cel02, R.id.cel05, R.id.cel06, R.id.cel07})
+    List<RadioGroup> celEligible;
+    @BindViews({R.id.cel01a, R.id.cel02a, R.id.cel05a, R.id.cel06a, R.id.cel07a})
+    List<RadioButton> celEligibleYes;
 
 
     @Override
@@ -94,10 +108,15 @@ public class EligibilityFormActivity extends AppCompatActivity {
 
         String dateToday = new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime());
 
-        celdob.setManager(getSupportFragmentManager());
-        celdoe.setManager(getSupportFragmentManager());
-        celdob.setMaxDate(dateToday);
-        celdoe.setMaxDate(dateToday);
+        for (DatePickerInputEditText de : dates) {
+            de.setManager(getSupportFragmentManager());
+            de.setMaxDate(dateToday);
+        }
+
+        //================== Q7 Skip Pattern ===========
+        for (RadioGroup rg : celEligible) {
+            rg.setOnCheckedChangeListener(this);
+        }
 
     }
 
@@ -272,40 +291,71 @@ public class EligibilityFormActivity extends AppCompatActivity {
             cel07b.setError(null);
         }
 
-        // =================== celee ====================
-        if (celee.getCheckedRadioButtonId() == -1) {
-            Toast.makeText(this, "ERROR(Empty)" + getString(R.string.celee), Toast.LENGTH_SHORT).show();
-            celeeb.setError("This data is Required!");
-            Log.i(TAG, "celee: This Data is Required!");
-            return false;
-        } else {
-            celeeb.setError(null);
-        }
+        if (isYes()) {
+            // =================== celee ====================
+            if (celee.getCheckedRadioButtonId() == -1) {
+                Toast.makeText(this, "ERROR(Empty)" + getString(R.string.celee), Toast.LENGTH_SHORT).show();
+                celeeb.setError("This data is Required!");
+                Log.i(TAG, "celee: This Data is Required!");
+                return false;
+            } else {
+                celeeb.setError(null);
+            }
 
-        // =================== celstdid ====================
-        if (celstdid.getText().toString().isEmpty()) {
-            Toast.makeText(this, "ERROR(Empty)" + getString(R.string.celstdid), Toast.LENGTH_SHORT).show();
-            celstdid.setError("This data is required");
-            Log.d(TAG, "celstdid:empty ");
-            return false;
-        } else {
-            celstdid.setError(null);
-        }
+            // =================== celstdid ====================
+            if (celstdid.getText().toString().isEmpty()) {
+                Toast.makeText(this, "ERROR(Empty)" + getString(R.string.celstdid), Toast.LENGTH_SHORT).show();
+                celstdid.setError("This data is required");
+                Log.d(TAG, "celstdid:empty ");
+                return false;
+            } else {
+                celstdid.setError(null);
+            }
 
-        // =================== doe ====================
-        if (celdoe.getText().toString().isEmpty()) {
-            Toast.makeText(this, "ERROR(Empty)" + getString(R.string.celdoe), Toast.LENGTH_SHORT).show();
-            celdoe.setError("This data is required");
-            Log.d(TAG, "celdoe:empty ");
-            return false;
-        } else {
-            celdoe.setError(null);
+            // =================== doe ====================
+            if (celdoe.getText().toString().isEmpty()) {
+                Toast.makeText(this, "ERROR(Empty)" + getString(R.string.celdoe), Toast.LENGTH_SHORT).show();
+                celdoe.setError("This data is required");
+                Log.d(TAG, "celdoe:empty ");
+                return false;
+            } else {
+                celdoe.setError(null);
+            }
         }
 
 
         return true;
     }
 
-  
+
+    @Override
+    public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+        if (isYes()) {
+            // Show answer here
+            fldGrpcelEligible.setVisibility(View.VISIBLE);
+
+        } else {
+            fldGrpcelEligible.setVisibility(View.GONE);
+            celee.clearCheck();
+            celstdid.setText(null);
+            celdoe.setText(null);
+        }
+
+    }
+
+    public boolean isYes() {
+
+        int i = 0;
+        for (RadioButton rg : celEligibleYes) {
+            if (rg.isChecked())
+                i++;
+        }
+
+        // Show answer here
+        return i == celEligibleYes.size();
+    }
+
 }
+
+
 
