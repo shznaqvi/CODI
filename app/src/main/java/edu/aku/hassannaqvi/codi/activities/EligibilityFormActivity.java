@@ -147,21 +147,21 @@ public class EligibilityFormActivity extends AppCompatActivity {
     private void SaveDraft() throws JSONException {
         Toast.makeText(this, "Saving Draft for this Section", Toast.LENGTH_SHORT).show();
 
-        JSONObject se = new JSONObject();
+        JSONObject sel = new JSONObject();
 
-        se.put("celcn", celcn.getText().toString());
-        se.put("celdob", celdob.getText().toString());
-        se.put("celmn", celmn.getText().toString());
-        se.put("cel01", cel01a.isChecked() ? "1" : cel01b.isChecked() ? "2" : "0");
-        se.put("cel02", cel02a.isChecked() ? "1" : cel02b.isChecked() ? "2" : "0");
-        se.put("cel03", cel03a.isChecked() ? "1" : cel03b.isChecked() ? "2" : "0");
-        se.put("cel04", cel04a.isChecked() ? "1" : cel04b.isChecked() ? "2" : "0");
-        se.put("cel05", cel05a.isChecked() ? "1" : cel05b.isChecked() ? "2" : "0");
-        se.put("cel06", cel06a.isChecked() ? "1" : cel06b.isChecked() ? "2" : "0");
-        se.put("cel07", cel07a.isChecked() ? "1" : cel07b.isChecked() ? "2" : "0");
-        se.put("celee", celeea.isChecked() ? "1" : celeeb.isChecked() ? "2" : "0");
-        se.put("celstdid", celstdid.getText().toString());
-        se.put("celdoe", celdoe.getText().toString());
+        sel.put("celcn", celcn.getText().toString());
+        sel.put("celdob", celdob.getText().toString());
+        sel.put("celmn", celmn.getText().toString());
+        sel.put("cel01", cel01a.isChecked() ? "1" : cel01b.isChecked() ? "2" : "0");
+        sel.put("cel02", cel02a.isChecked() ? "1" : cel02b.isChecked() ? "2" : "0");
+        sel.put("cel03", cel03a.isChecked() ? "1" : cel03b.isChecked() ? "2" : "0");
+        sel.put("cel04", cel04a.isChecked() ? "1" : cel04b.isChecked() ? "2" : "0");
+        sel.put("cel05", cel05a.isChecked() ? "1" : cel05b.isChecked() ? "2" : "0");
+        sel.put("cel06", cel06a.isChecked() ? "1" : cel06b.isChecked() ? "2" : "0");
+        sel.put("cel07", cel07a.isChecked() ? "1" : cel07b.isChecked() ? "2" : "0");
+        sel.put("celee", celeea.isChecked() ? "1" : celeeb.isChecked() ? "2" : "0");
+        sel.put("celstdid", celstdid.getText().toString());
+        sel.put("celdoe", celdoe.getText().toString());
 
 
         Toast.makeText(this, "Validation Successful! - Saving Draft...", Toast.LENGTH_SHORT).show();
