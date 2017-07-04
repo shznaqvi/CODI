@@ -499,6 +499,10 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                     MainApp.userName = mEmail;
                     MainApp.admin = mEmail.contains("@");
 
+                    finish();
+                    Intent iLogin = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(iLogin);
+
                    /* if (!MainApp.regionDss.equals("") || (mEmail.equals("dmu@aku") && mPassword.equals("aku?dmu"))) {
                         finish();
 

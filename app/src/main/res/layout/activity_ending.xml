@@ -24,23 +24,23 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:background="@color/colorPrimary"
-                android:text="@string/dcstatus"
+                android:text="@string/status"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="@android:color/white" />
 
             <RadioGroup
-                android:id="@+id/dcstatus"
+                android:id="@+id/status"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <RadioButton
-                    android:id="@+id/dcstatus01"
+                    android:id="@+id/status01"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/complete" />
 
                 <RadioButton
-                    android:id="@+id/dcstatus02"
+                    android:id="@+id/status02"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/incomplete" />

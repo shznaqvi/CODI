@@ -12,58 +12,27 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
     completions."
   </string>
+  <string name="title_activity_splash_screen">Splash Screen Activity</string>
+  <string name="dummy_button">Dummy Button</string>
+  <string name="dummy_content">DUMMY\nCONTENT</string>
 
-    <string name="end_interview"> اختتام </string>
+  <string name="end_interview"> End </string>
     <string name="start_interview"> انٹرویو شروع کریں </string>
-    <string name="nextSection"> اگلا سیکشن </string>
+  <string name="nextSection"> Next Section </string>
     <string name="addMember"> افراد کا اندراج </string>
-    <string name="dcstatus"> انٹریو کا نتیجہ</string>
+  <string name="status"> انٹریو کا نتیجہ</string>
     <string name="complete"> مکمل</string>
     <string name="incomplete">نا مکمل</string>
-    <!-- String related to section headings -->
-    <string name="secALabel">HH Identification and Visit Status</string>
-    <string name="sec2A"> سیکشن 2A: بنیادی معلومات </string>
-    <string name="secBLabel">  سیکشن بی: خاندان کے تمام افراد کی فہرست </string>
-    <string name="secCLabel"> سیکشن سی:گزشتہ ایک سال کے دوران انتقال ہونے والے  افراد</string>
-    <string name="secDLabel">سیکشن ڈی: گھریلوں تعمیر</string>
-    <string name="secELabel">سیکشن ای : ہاتھ دھونا</string>
-    <string name="secFLabel">سیکشن ایف :منتخب شدہ ماؤں کی گزشتہ پیداواری معلومات</string>
-    <string name="secGLabel">سیکشن جی :خاندانی منصوبہ بندی(حمل کی تفصیلات کی طرف جائیں ) </string>
-    <string name="secHLabel">سیکشن ایچ :ضرورت جو پوری نہ ہوسکی</string>
-    <string name="secILabel">سیکشن آئی :شیر خوار اور بڑے بچوں کی غذا</string>
-    <string name="secJLabel">سیکشن  جے: بچے کی صحت کی معلومات</string>
-    <string name="secKLabel"> سیکشن کے:حفاظتی ٹیکے</string>
-    <string name="secLLabel">سیکشن ایل :گھریلو خوراک ی ناقص تحفظ، خوراک کا استعمال اور تبدیل</string>
-    <string name="dcl2heading"> خاندان کی غذا سے متعلق نمنٹے کی حکمت عملی </string>
-    <string name="dcl3heading"> بھوک کا پیمانہ ( گزشتہ ایک ماہ کے متعلق) </string>
-    <string name="secMLabel">سیکشن ایم: گھر کا ماحول</string>
-
-
     <string name="days">دنوں کی تعداد</string>
-
-
-    <!-- Strings that are fixed for all apps -->
-    <string name="title_activity_splashscreen">SplashscreenActivity</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
-    <string name="dcother">دیگر(وضاحت کریں)</string>
-    <string name="dcdkn">معلوم نہیں</string>
-    <string name="dcyes">ہاں</string>
-    <string name="dcno">نہیں</string>
-    <string name="dcna">قابل اطلاق نہیں</string>
-    <string name="dctimes">تعداد</string>
-    <string name="dcmale"> مرد </string>
-    <string name="dcfemale"> عورت </string>
-    <string name="Frequency"> تعداد </string>
 
 
     <!-- Strings related to Sections Below -->
 
 
   <string name="celheading"> ELIGIBILITY FORM </string>
-  <string name="celyes"> yes </string>
-  <string name="celno"> no </string>
-  <string name="celothers"> OTHER,SPECIFY_______________________ </string>
+  <string name="yes"> yes </string>
+  <string name="no"> no </string>
+  <string name="others"> OTHER,SPECIFY_______________________ </string>
   <string name="celsubheading"> Comparison of duration of immunity following IPV and fIPV: A community based randomized controlled trial in Pakistan </string>
   <string name="celcn"> Name of the child </string>
   <string name="celdob"> Date of birth </string>
@@ -76,9 +45,10 @@
   <string name="cel06"> The child does not have any acute illness? </string>
   <string name="cel07"> The child is not currently or previously enrolled in polio vaccine trials? </string>
   <string name="celeesub"> (if answers to all of the above except #4 for 9 months old and #3 for 14 weeks old is YES, mark the child as eligible) </string>
-  <string name="celee"> CHILD ELIGIBLE FOR ENROLMENT </string>
+  <string name="celee"> Child eligile for enrolment </string>
   <string name="celstdid"> Study ID </string>
   <string name="celdoe"> Date of enrolment </string>
+
   <string name="cenheading"> Enrollment Form </string>
   <string name="censubheading"> Comparison of duration of immunity following IPV and fIPV: A community based randomized
   Controlled trial in Pakistan
