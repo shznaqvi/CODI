@@ -499,16 +499,16 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                     MainApp.userName = mEmail;
                     MainApp.admin = mEmail.contains("@");
 
-                   /* if (!MainApp.regionDss.equals("") || (mEmail.equals("dmu@aku") && mPassword.equals("aku?dmu"))) {
+                    if ((mEmail.equals("dmu@aku") && mPassword.equals("aku?dmu"))) {
                         finish();
 
                         Intent iLogin = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(iLogin);
 
-                        Toast.makeText(LoginActivity.this, "You are assigned to " + MainApp.regionDss + " Block", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(LoginActivity.this, "You are assigned to " + MainApp.regionDss + " Block", Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(LoginActivity.this, "You are not assigned to any block", Toast.LENGTH_SHORT).show();
-                    }*/
+                        //Toast.makeText(LoginActivity.this, "You are not assigned to any block", Toast.LENGTH_SHORT).show();
+                    }
 
                 } else {
                     mPasswordView.setError(getString(R.string.error_incorrect_password));
