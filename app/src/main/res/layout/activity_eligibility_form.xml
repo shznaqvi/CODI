@@ -291,6 +291,12 @@
             android:textSize="25sp"
             tools:typeface="serif" />
 
+        <LinearLayout
+            android:id="@+id/fldGrpcelEligible"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -348,6 +354,8 @@
             android:hint="@string/celdoe"
             android:textColor="@android:color/black"
             app:dateFormat="dd-MM-yyyy" />
+
+        </LinearLayout>
 
         <Button
             android:id="@+id/btnNext"
