@@ -207,6 +207,11 @@ public class MainActivity extends Activity {
         }
     }
 
+    public void openForm1(View v) {
+        Intent iMem = new Intent(this, EnrollmentFormActivity.class);
+        startActivity(iMem);
+    }
+
     public void openMembers(View v) {
        /* Intent iMem = new Intent(this, MotherListActivity.class);
         startActivity(iMem);*/
