@@ -275,7 +275,7 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
         if (cel06.getCheckedRadioButtonId() == -1) {
             Toast.makeText(this, "ERROR(Empty)" + getString(R.string.cel06), Toast.LENGTH_SHORT).show();
             cel06b.setError("This data is Required!");
-            Log.i(TAG, "cel06: This Data is Required!");
+            Log.i(TAG, "cel06 : This Data is Required!");
             return false;
         } else {
             cel06b.setError(null);
@@ -285,7 +285,7 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
         if (cel07.getCheckedRadioButtonId() == -1) {
             Toast.makeText(this, "ERROR(Empty)" + getString(R.string.cel07), Toast.LENGTH_SHORT).show();
             cel07b.setError("This data is Required!");
-            Log.i(TAG, "cel07: This Data is Required!");
+            Log.i(TAG, "cel07 : This Data is Required!");
             return false;
         } else {
             cel07b.setError(null);

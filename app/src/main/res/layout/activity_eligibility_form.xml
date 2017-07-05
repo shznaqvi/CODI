@@ -49,7 +49,6 @@
             android:layout_marginTop="8dp"
             android:text="@string/celcn" />
 
-
         <EditText
             android:id="@+id/celcn"
             android:layout_width="match_parent"
@@ -366,6 +365,21 @@
             android:hint="@string/celdoe"
             android:textColor="@android:color/black"
             app:dateFormat="dd-MM-yyyy" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/celner" />
+
+
+            <EditText
+                android:id="@+id/celner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                android:hint="@string/celner" />
 
         </LinearLayout>
 

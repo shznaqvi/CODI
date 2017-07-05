@@ -69,7 +69,7 @@
   <string name="celee"> Child Eligible For Enrolment </string>
   <string name="celstdid"> Study ID </string>
   <string name="celdoe"> Date of enrolment </string>
-
+  <string name="celner">Notes for NON-ELIGIBLE CHILDREN (Reasons): </string>
 
   <!-- Strings Of Enrollment Form-->
   <string name="DSSID">DSS ID</string>
