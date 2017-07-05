@@ -104,10 +104,14 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
 
     @BindViews({R.id.celdob, R.id.celdoe})
     List<DatePickerInputEditText> dates;
-    @BindViews({R.id.cel05, R.id.cel06, R.id.cel07})
+    @BindViews({R.id.cel03, R.id.cel05, R.id.cel06, R.id.cel07})
     List<RadioGroup> celEligible;
-    @BindViews({R.id.cel05a, R.id.cel06a, R.id.cel07a})
+    @BindViews({R.id.cel04, R.id.cel05, R.id.cel06, R.id.cel07})
+    List<RadioGroup> celEligible1;
+    @BindViews({R.id.cel04a, R.id.cel05a, R.id.cel06a, R.id.cel07a})
     List<RadioButton> celEligibleYes;
+    @BindViews({R.id.cel03a, R.id.cel05a, R.id.cel06a, R.id.cel07a})
+    List<RadioButton> celEligibleYes1;
 
 
     @Override
@@ -343,7 +347,7 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
                 cel07b.setError(null);
             }
 
-            if (isYes()) {
+            if (isYes() || isYes2()) {
                 // =================== celee ====================
                 if (celee.getCheckedRadioButtonId() == -1) {
                     Toast.makeText(this, "ERROR(Empty)" + getString(R.string.celee), Toast.LENGTH_SHORT).show();
@@ -395,7 +399,7 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
 
     @Override
     public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
-        if (isYes() && (cel03a.isChecked() || cel04a.isChecked())) {
+        if (isYes() || isYes2()) {
             // Show answer here
             fldGrpcelEligible.setVisibility(View.VISIBLE);
             fldGrprsn.setVisibility(View.GONE);
@@ -424,6 +428,19 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
         // Show answer here
         return i == celEligibleYes.size();
     }
+
+    public boolean isYes2() {
+
+        int i = 0;
+        for (RadioButton rg : celEligibleYes) {
+            if (rg.isChecked())
+                i++;
+        }
+
+        // Show answer here
+        return i == celEligibleYes.size();
+    }
+
 
 }
 
