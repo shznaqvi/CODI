@@ -91,6 +91,8 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
     DatePickerInputEditText celdoe;
     @BindView(R.id.fldGrpcelEligible)
     LinearLayout fldGrpcelEligible;
+    @BindView(R.id.celner)
+    EditText celner;
 
     @BindViews({R.id.celdob, R.id.celdoe})
     List<DatePickerInputEditText> dates;
@@ -181,6 +183,7 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
         sel.put("celee", celeea.isChecked() ? "1" : celeeb.isChecked() ? "2" : "0");
         sel.put("celstdid", celstdid.getText().toString());
         sel.put("celdoe", celdoe.getText().toString());
+        sel.put("celner", celner.getText().toString());
 
 
         Toast.makeText(this, "Validation Successful! - Saving Draft...", Toast.LENGTH_SHORT).show();
@@ -321,6 +324,16 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
             } else {
                 celdoe.setError(null);
             }
+        }
+
+        // =================== celner ====================
+        if (celner.getText().toString().isEmpty()) {
+            Toast.makeText(this, "ERROR (Empty)" + getString(R.string.celner), Toast.LENGTH_SHORT).show();
+            celner.setError("this data is required");
+            Log.d(TAG, "celner : empty ");
+            return false;
+        } else {
+            celner.setError(null);
         }
 
 
