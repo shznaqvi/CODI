@@ -43,18 +43,24 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
     RadioButton cel01a;
     @BindView(R.id.cel01b)
     RadioButton cel01b;
+    @BindView(R.id.fldGrpcel02)
+    LinearLayout fldGrpcel02;
     @BindView(R.id.cel02)
     RadioGroup cel02;
     @BindView(R.id.cel02a)
     RadioButton cel02a;
     @BindView(R.id.cel02b)
     RadioButton cel02b;
+    @BindView(R.id.fldGrp14wks)
+    LinearLayout fldGrp14wks;
     @BindView(R.id.cel03)
     RadioGroup cel03;
     @BindView(R.id.cel03a)
     RadioButton cel03a;
     @BindView(R.id.cel03b)
     RadioButton cel03b;
+    @BindView(R.id.fldGrp9m)
+    LinearLayout fldGrp9m;
     @BindView(R.id.cel04)
     RadioGroup cel04;
     @BindView(R.id.cel04a)
@@ -79,6 +85,8 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
     RadioButton cel07a;
     @BindView(R.id.cel07b)
     RadioButton cel07b;
+    @BindView(R.id.fldGrpcelEligible)
+    LinearLayout fldGrpcelEligible;
     @BindView(R.id.celee)
     RadioGroup celee;
     @BindView(R.id.celeea)
@@ -89,16 +97,16 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
     EditText celstdid;
     @BindView(R.id.celdoe)
     DatePickerInputEditText celdoe;
-    @BindView(R.id.fldGrpcelEligible)
-    LinearLayout fldGrpcelEligible;
     @BindView(R.id.celner)
     EditText celner;
+    @BindView(R.id.fldGrprsn)
+    LinearLayout fldGrprsn;
 
     @BindViews({R.id.celdob, R.id.celdoe})
     List<DatePickerInputEditText> dates;
-    @BindViews({R.id.cel01, R.id.cel02, R.id.cel05, R.id.cel06, R.id.cel07})
+    @BindViews({R.id.cel05, R.id.cel06, R.id.cel07})
     List<RadioGroup> celEligible;
-    @BindViews({R.id.cel01a, R.id.cel02a, R.id.cel05a, R.id.cel06a, R.id.cel07a})
+    @BindViews({R.id.cel05a, R.id.cel06a, R.id.cel07a})
     List<RadioButton> celEligibleYes;
 
 
@@ -119,6 +127,43 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
         for (RadioGroup rg : celEligible) {
             rg.setOnCheckedChangeListener(this);
         }
+
+        cel01.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+                if (cel01a.isChecked()) {
+                    fldGrpcel02.setVisibility(View.VISIBLE);
+                } else {
+                    fldGrpcel02.setVisibility(View.GONE);
+                    cel02.clearCheck();
+                    cel03.clearCheck();
+                    cel04.clearCheck();
+                    cel05.clearCheck();
+                    cel06.clearCheck();
+                    cel07.clearCheck();
+                    celee.clearCheck();
+                    celstdid.setText(null);
+                    celdoe.setText(null);
+                    celner.setText(null);
+
+                }
+            }
+        });
+
+        cel02.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+                if (cel02a.isChecked()) {
+                    fldGrp9m.setVisibility(View.VISIBLE);
+                    fldGrp14wks.setVisibility(View.GONE);
+                    cel04.clearCheck();
+                } else {
+                    fldGrp9m.setVisibility(View.GONE);
+                    fldGrp14wks.setVisibility(View.VISIBLE);
+                    cel03.clearCheck();
+                }
+            }
+        });
 
     }
 
@@ -232,109 +277,116 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
             cel01b.setError(null);
         }
 
-        // =================== cel02 ====================
-        if (cel02.getCheckedRadioButtonId() == -1) {
-            Toast.makeText(this, "ERROR(Empty)" + getString(R.string.cel02), Toast.LENGTH_SHORT).show();
-            cel02b.setError("This data is Required!");
-            Log.i(TAG, "cel02: This Data is Required!");
-            return false;
-        } else {
-            cel02b.setError(null);
-        }
-
-
-        // =================== cel03 ====================
-        if (cel03.getCheckedRadioButtonId() == -1) {
-            Toast.makeText(this, "ERROR(Empty)" + getString(R.string.cel03), Toast.LENGTH_SHORT).show();
-            cel03b.setError("This data is Required!");
-            Log.i(TAG, "cel03: This Data is Required!");
-            return false;
-        } else {
-            cel03b.setError(null);
-        }
-
-
-        // =================== cel04 ====================
-        if (cel04.getCheckedRadioButtonId() == -1) {
-            Toast.makeText(this, "ERROR(Empty)" + getString(R.string.cel04), Toast.LENGTH_SHORT).show();
-            cel04b.setError("This data is Required!");
-            Log.i(TAG, "cel04: This Data is Required!");
-            return false;
-        } else {
-            cel04b.setError(null);
-        }
-
-        // =================== cel05 ====================
-        if (cel05.getCheckedRadioButtonId() == -1) {
-            Toast.makeText(this, "ERROR(Empty)" + getString(R.string.cel05), Toast.LENGTH_SHORT).show();
-            cel05b.setError("This data is Required!");
-            Log.i(TAG, "cel05: This Data is Required!");
-            return false;
-        } else {
-            cel05b.setError(null);
-        }
-
-        // =================== cel06 ====================
-        if (cel06.getCheckedRadioButtonId() == -1) {
-            Toast.makeText(this, "ERROR(Empty)" + getString(R.string.cel06), Toast.LENGTH_SHORT).show();
-            cel06b.setError("This data is Required!");
-            Log.i(TAG, "cel06 : This Data is Required!");
-            return false;
-        } else {
-            cel06b.setError(null);
-        }
-
-        // =================== cel07 ====================
-        if (cel07.getCheckedRadioButtonId() == -1) {
-            Toast.makeText(this, "ERROR(Empty)" + getString(R.string.cel07), Toast.LENGTH_SHORT).show();
-            cel07b.setError("This data is Required!");
-            Log.i(TAG, "cel07 : This Data is Required!");
-            return false;
-        } else {
-            cel07b.setError(null);
-        }
-
-        if (isYes()) {
-            // =================== celee ====================
-            if (celee.getCheckedRadioButtonId() == -1) {
-                Toast.makeText(this, "ERROR(Empty)" + getString(R.string.celee), Toast.LENGTH_SHORT).show();
-                celeeb.setError("This data is Required!");
-                Log.i(TAG, "celee: This Data is Required!");
+        if (cel01a.isChecked()) {
+            // =================== cel02 ====================
+            if (cel02.getCheckedRadioButtonId() == -1) {
+                Toast.makeText(this, "ERROR(Empty)" + getString(R.string.cel02), Toast.LENGTH_SHORT).show();
+                cel02b.setError("This data is Required!");
+                Log.i(TAG, "cel02: This Data is Required!");
                 return false;
             } else {
-                celeeb.setError(null);
+                cel02b.setError(null);
             }
 
-            // =================== celstdid ====================
-            if (celstdid.getText().toString().isEmpty()) {
-                Toast.makeText(this, "ERROR(Empty)" + getString(R.string.celstdid), Toast.LENGTH_SHORT).show();
-                celstdid.setError("This data is required");
-                Log.d(TAG, "celstdid:empty ");
-                return false;
-            } else {
-                celstdid.setError(null);
+            if (cel02b.isChecked()) {
+
+                // =================== cel03 ====================
+                if (cel03.getCheckedRadioButtonId() == -1) {
+                    Toast.makeText(this, "ERROR(Empty)" + getString(R.string.cel03), Toast.LENGTH_SHORT).show();
+                    cel03b.setError("This data is Required!");
+                    Log.i(TAG, "cel03: This Data is Required!");
+                    return false;
+                } else {
+                    cel03b.setError(null);
+                }
             }
 
-            // =================== doe ====================
-            if (celdoe.getText().toString().isEmpty()) {
-                Toast.makeText(this, "ERROR(Empty)" + getString(R.string.celdoe), Toast.LENGTH_SHORT).show();
-                celdoe.setError("This data is required");
-                Log.d(TAG, "celdoe:empty ");
+            if (cel02a.isChecked()) {
+                // =================== cel04 ====================
+                if (cel04.getCheckedRadioButtonId() == -1) {
+                    Toast.makeText(this, "ERROR(Empty)" + getString(R.string.cel04), Toast.LENGTH_SHORT).show();
+                    cel04b.setError("This data is Required!");
+                    Log.i(TAG, "cel04: This Data is Required!");
+                    return false;
+                } else {
+                    cel04b.setError(null);
+                }
+            }
+
+            // =================== cel05 ====================
+            if (cel05.getCheckedRadioButtonId() == -1) {
+                Toast.makeText(this, "ERROR(Empty)" + getString(R.string.cel05), Toast.LENGTH_SHORT).show();
+                cel05b.setError("This data is Required!");
+                Log.i(TAG, "cel05: This Data is Required!");
                 return false;
             } else {
-                celdoe.setError(null);
+                cel05b.setError(null);
+            }
+
+            // =================== cel06 ====================
+            if (cel06.getCheckedRadioButtonId() == -1) {
+                Toast.makeText(this, "ERROR(Empty)" + getString(R.string.cel06), Toast.LENGTH_SHORT).show();
+                cel06b.setError("This data is Required!");
+                Log.i(TAG, "cel06 : This Data is Required!");
+                return false;
+            } else {
+                cel06b.setError(null);
+            }
+
+            // =================== cel07 ====================
+            if (cel07.getCheckedRadioButtonId() == -1) {
+                Toast.makeText(this, "ERROR(Empty)" + getString(R.string.cel07), Toast.LENGTH_SHORT).show();
+                cel07b.setError("This data is Required!");
+                Log.i(TAG, "cel07 : This Data is Required!");
+                return false;
+            } else {
+                cel07b.setError(null);
+            }
+
+            if (isYes()) {
+                // =================== celee ====================
+                if (celee.getCheckedRadioButtonId() == -1) {
+                    Toast.makeText(this, "ERROR(Empty)" + getString(R.string.celee), Toast.LENGTH_SHORT).show();
+                    celeeb.setError("This data is Required!");
+                    Log.i(TAG, "celee: This Data is Required!");
+                    return false;
+                } else {
+                    celeeb.setError(null);
+                }
+
+                // =================== celstdid ====================
+                if (celstdid.getText().toString().isEmpty()) {
+                    Toast.makeText(this, "ERROR(Empty)" + getString(R.string.celstdid), Toast.LENGTH_SHORT).show();
+                    celstdid.setError("This data is required");
+                    Log.d(TAG, "celstdid:empty ");
+                    return false;
+                } else {
+                    celstdid.setError(null);
+                }
+
+                // =================== doe ====================
+                if (celdoe.getText().toString().isEmpty()) {
+                    Toast.makeText(this, "ERROR(Empty)" + getString(R.string.celdoe), Toast.LENGTH_SHORT).show();
+                    celdoe.setError("This data is required");
+                    Log.d(TAG, "celdoe:empty ");
+                    return false;
+                } else {
+                    celdoe.setError(null);
+                }
+            } else {
+                // =================== celner ====================
+                if (celner.getText().toString().isEmpty()) {
+                    Toast.makeText(this, "ERROR (Empty)" + getString(R.string.celner), Toast.LENGTH_SHORT).show();
+                    celner.setError("this data is required");
+                    Log.d(TAG, "celner : empty ");
+                    return false;
+                } else {
+                    celner.setError(null);
+                }
             }
         }
 
-        // =================== celner ====================
-        if (celner.getText().toString().isEmpty()) {
-            Toast.makeText(this, "ERROR (Empty)" + getString(R.string.celner), Toast.LENGTH_SHORT).show();
-            celner.setError("this data is required");
-            Log.d(TAG, "celner : empty ");
-            return false;
-        } else {
-            celner.setError(null);
-        }
+
 
 
         return true;
@@ -343,15 +395,20 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
 
     @Override
     public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
-        if (isYes()) {
+        if (isYes() && (cel03a.isChecked() || cel04a.isChecked())) {
             // Show answer here
             fldGrpcelEligible.setVisibility(View.VISIBLE);
+            fldGrprsn.setVisibility(View.GONE);
+            celner.setText(null);
+
 
         } else {
             fldGrpcelEligible.setVisibility(View.GONE);
             celee.clearCheck();
             celstdid.setText(null);
             celdoe.setText(null);
+            fldGrprsn.setVisibility(View.VISIBLE);
+
         }
 
     }

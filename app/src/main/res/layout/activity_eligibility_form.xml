@@ -119,7 +119,13 @@
 
         </RadioGroup>
 
-        <TextView
+        <LinearLayout
+            android:id="@+id/fldGrpcel02"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -149,7 +155,13 @@
 
         </RadioGroup>
 
-        <TextView
+            <LinearLayout
+                android:id="@+id/fldGrp14wks"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -179,7 +191,15 @@
 
         </RadioGroup>
 
-        <TextView
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/fldGrp9m"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -209,7 +229,9 @@
 
         </RadioGroup>
 
-        <TextView
+            </LinearLayout>
+
+            <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -366,6 +388,14 @@
             android:textColor="@android:color/black"
             app:dateFormat="dd-MM-yyyy" />
 
+        </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/fldGrprsn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -380,6 +410,8 @@
                 android:layout_marginTop="1dp"
                 android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 android:hint="@string/celner" />
+            </LinearLayout>
+
 
         </LinearLayout>
 
