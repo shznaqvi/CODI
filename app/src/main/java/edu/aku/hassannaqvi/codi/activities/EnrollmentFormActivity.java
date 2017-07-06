@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -323,8 +324,6 @@ public class EnrollmentFormActivity extends AppCompatActivity {
 
     @OnClick(R.id.btnScan)
     void onBtnScanClick() {
-        //TODO implement
-
         cen24.setText(null);
         IntentIntegrator integrator = new IntentIntegrator(this);
         integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
@@ -334,6 +333,25 @@ public class EnrollmentFormActivity extends AppCompatActivity {
         integrator.setBarcodeImageEnabled(true);
         integrator.setOrientationLocked(false);
 
+        integrator.initiateScan();
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+
+        if (result != null) {
+            if (result.getContents() == null) {
+                Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
+                cen24.setText("§" + result.getContents());
+                //mngsticker.setEnabled(false);
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
 
@@ -398,7 +416,11 @@ public class EnrollmentFormActivity extends AppCompatActivity {
         sen.put("cen21", cen21.getText().toString());
         sen.put("cen22", cen22a.isChecked() ? "1" : cen22b.isChecked() ? "2" : "0");
         sen.put("cen23", cen23a.isChecked() ? "1" : cen23b.isChecked() ? "2" : "0");
-        sen.put("cen24", cen24.getText().toString());
+        if (cen24.getText().toString().equals("Sticker")) {
+            sen.put("cen24", "");
+        } else {
+            sen.put("cen24", cen24.getText().toString());
+        }
         sen.put("cen25", cen25.getText().toString());
         sen.put("cen26", cen26.getText().toString());
         sen.put("cen27", cen27a.isChecked() ? "1" : cen27b.isChecked() ? "2" : cen27c.isChecked() ? "3" : cen27d.isChecked() ? "4" : "0");
