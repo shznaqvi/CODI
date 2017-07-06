@@ -104,14 +104,10 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
 
     @BindViews({R.id.celdob, R.id.celdoe})
     List<DatePickerInputEditText> dates;
-    @BindViews({R.id.cel03, R.id.cel05, R.id.cel06, R.id.cel07})
+    @BindViews({R.id.cel03, R.id.cel04, R.id.cel05, R.id.cel06, R.id.cel07})
     List<RadioGroup> celEligible;
-    @BindViews({R.id.cel04, R.id.cel05, R.id.cel06, R.id.cel07})
-    List<RadioGroup> celEligible1;
-    @BindViews({R.id.cel04a, R.id.cel05a, R.id.cel06a, R.id.cel07a})
+    @BindViews({R.id.cel05a, R.id.cel06a, R.id.cel07a})
     List<RadioButton> celEligibleYes;
-    @BindViews({R.id.cel03a, R.id.cel05a, R.id.cel06a, R.id.cel07a})
-    List<RadioButton> celEligibleYes1;
 
 
     @Override
@@ -347,7 +343,7 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
                 cel07b.setError(null);
             }
 
-            if (isYes() || isYes2()) {
+            if ((isYes() && cel03a.isChecked()) || (isYes() && cel04a.isChecked())) {
                 // =================== celee ====================
                 if (celee.getCheckedRadioButtonId() == -1) {
                     Toast.makeText(this, "ERROR(Empty)" + getString(R.string.celee), Toast.LENGTH_SHORT).show();
@@ -399,12 +395,19 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
 
     @Override
     public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
-        if (isYes() || isYes2()) {
+        if ((isYes() && cel03a.isChecked()) || (isYes() && cel04a.isChecked())) {
             // Show answer here
             fldGrpcelEligible.setVisibility(View.VISIBLE);
             fldGrprsn.setVisibility(View.GONE);
             celner.setText(null);
 
+
+        } else if (isYes() && (cel03b.isChecked() || cel04b.isChecked())) {
+            fldGrpcelEligible.setVisibility(View.GONE);
+            celee.clearCheck();
+            celstdid.setText(null);
+            celdoe.setText(null);
+            fldGrprsn.setVisibility(View.VISIBLE);
 
         } else {
             fldGrpcelEligible.setVisibility(View.GONE);
@@ -428,19 +431,6 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
         // Show answer here
         return i == celEligibleYes.size();
     }
-
-    public boolean isYes2() {
-
-        int i = 0;
-        for (RadioButton rg : celEligibleYes) {
-            if (rg.isChecked())
-                i++;
-        }
-
-        // Show answer here
-        return i == celEligibleYes.size();
-    }
-
 
 }
 
