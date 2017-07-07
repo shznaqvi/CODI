@@ -153,7 +153,7 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
         cel02.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
-                if (cel02a.isChecked()) {
+                if (cel02b.isChecked()) {
                     fldGrp9m.setVisibility(View.VISIBLE);
                     fldGrp14wks.setVisibility(View.GONE);
                     cel04.clearCheck();
@@ -288,7 +288,7 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
                 cel02b.setError(null);
             }
 
-            if (cel02b.isChecked()) {
+            if (cel02a.isChecked()) {
 
                 // =================== cel03 ====================
                 if (cel03.getCheckedRadioButtonId() == -1) {
@@ -301,7 +301,7 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
                 }
             }
 
-            if (cel02a.isChecked()) {
+            if (cel02b.isChecked()) {
                 // =================== cel04 ====================
                 if (cel04.getCheckedRadioButtonId() == -1) {
                     Toast.makeText(this, "ERROR(Empty)" + getString(R.string.cel04), Toast.LENGTH_SHORT).show();

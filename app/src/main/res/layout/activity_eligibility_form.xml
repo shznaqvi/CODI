@@ -370,7 +370,7 @@
             android:layout_marginTop="1dp"
             android:hint="@string/celstdid"
             android:inputType="number"
-            android:maxLength="3" />
+            android:maxLength="6" />
 
         <TextView
             android:layout_width="match_parent"
