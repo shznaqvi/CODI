@@ -62,7 +62,9 @@ public class MainApp extends Application {
     public static EligibilityContract elc;
     public static String userName = "0000";
     public static String areaCode;
-    public static String enrollDate = "01-07-2017";
+    public static String enrollDate;
+    public static int arm = 0;
+
     //    Total No of members got from Section A
     public static int NoMembersCount = 0;
     public static int NoMaleCount = 0;

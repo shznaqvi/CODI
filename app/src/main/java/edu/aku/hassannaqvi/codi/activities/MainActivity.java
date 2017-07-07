@@ -208,7 +208,7 @@ public class MainActivity extends Activity {
     }
 
     public void openForm1(View v) {
-        Intent iMem = new Intent(this, EnrollmentFormActivity.class);
+        Intent iMem = new Intent(this, EnrollmentInfoActivity.class);
         startActivity(iMem);
     }
 

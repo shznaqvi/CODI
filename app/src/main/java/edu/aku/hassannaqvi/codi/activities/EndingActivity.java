@@ -1,6 +1,7 @@
 package edu.aku.hassannaqvi.codi.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.RadioButton;
@@ -12,19 +13,33 @@ import org.json.JSONException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import edu.aku.hassannaqvi.codi.R;
+import edu.aku.hassannaqvi.codi.core.DatabaseHelper;
+import edu.aku.hassannaqvi.codi.core.MainApp;
 
 public class EndingActivity extends Activity {
 
     private static final String TAG = EndingActivity.class.getSimpleName();
+
     @BindView(R.id.scrollView01)
     ScrollView scrollView01;
-    @BindView(R.id.dcstatus)
-    RadioGroup dcstatus;
-    @BindView(R.id.status01)
-    RadioButton status01;
-    @BindView(R.id.status02)
-    RadioButton status02;
+    @BindView(R.id.iStatus)
+    RadioGroup iStatus;
+    @BindView(R.id.iStatusa)
+    RadioButton iStatusa;
+    @BindView(R.id.iStatusb)
+    RadioButton iStatusb;
+    @BindView(R.id.iStatusc)
+    RadioButton iStatusc;
+    @BindView(R.id.iStatusd)
+    RadioButton iStatusd;
+    @BindView(R.id.iStatuse)
+    RadioButton iStatuse;
+    @BindView(R.id.iStatusf)
+    RadioButton iStatusf;
+    @BindView(R.id.iStatusg)
+    RadioButton iStatusg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,64 +47,90 @@ public class EndingActivity extends Activity {
         setContentView(R.layout.activity_ending);
         ButterKnife.bind(this);
 
-        Boolean check = getIntent().getExtras().getBoolean("check");
+        Boolean check = getIntent().getExtras().getBoolean("complete");
 
         if (check) {
-            status01.setEnabled(true);
-            status02.setEnabled(false);
+            iStatusa.setEnabled(true);
+            iStatusb.setEnabled(false);
+            iStatusc.setEnabled(false);
+            iStatusd.setEnabled(false);
+            iStatuse.setEnabled(false);
+            iStatusf.setEnabled(false);
+            iStatusg.setEnabled(false);
 
         } else {
             //fldGrpmn0823Reason.setVisibility(View.GONE);
-            status01.setEnabled(false);
-            status02.setEnabled(true);
+            iStatusa.setEnabled(false);
+            iStatusb.setEnabled(true);
+            iStatusc.setEnabled(true);
+            iStatusd.setEnabled(true);
+            iStatuse.setEnabled(true);
+            iStatusf.setEnabled(true);
+            iStatusg.setEnabled(true);
+
+
+
         }
 
     }
 
+    @OnClick(R.id.btn_End)
+    void onBtnEndClick() {
+
+        Intent endSec = new Intent(this, MainActivity.class);
+        endSec.putExtra("complete", false);
+        startActivity(endSec);
+    }
 
     private void SaveDraft() throws JSONException {
         Toast.makeText(this, "Saving Draft for  This Section", Toast.LENGTH_SHORT).show();
 
-        //MainApp.elc.setIstatus(status01.isChecked() ? "1" : status02.isChecked() ? "2" : "0");
+        MainApp.enc.setIstatus(iStatusa.isChecked() ? "1" : iStatusb.isChecked() ? "2" : iStatusc.isChecked() ? "3"
+                : iStatusd.isChecked() ? "4" : iStatuse.isChecked() ? "5" : iStatusf.isChecked() ? "6"
+                : iStatusg.isChecked() ? "7" : "0");
 
         Toast.makeText(this, "Validation Successful! - Saving Draft...", Toast.LENGTH_SHORT).show();
     }
 
-    private boolean UpdateDB() {
-        /*DatabaseHelper db = new DatabaseHelper(this);
 
-        int updcount = db.updateEnd();
-
-        if (updcount == 1) {
-            Toast.makeText(this, "Updating Database... Successful!", Toast.LENGTH_SHORT).show();
-            return true;
-        } else {
-            Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();*/
-        return false;
-        //}
-    }
-
-    public boolean ValidateForm() {
+    private boolean formValidation() {
         Toast.makeText(this, "Validating This Section ", Toast.LENGTH_SHORT).show();
 
-        if (dcstatus.getCheckedRadioButtonId() == -1) {
-            Toast.makeText(this, "ERROR(Not Selected): " + getString(R.string.dcstatus), Toast.LENGTH_LONG).show();
-            status02.setError("Please Select One");    // Set Error on last radio button
-            Log.i(TAG, "status: This data is Required!");
+        if (iStatus.getCheckedRadioButtonId() == -1) {
+            Toast.makeText(this, "ERROR(Not Selected): " + getString(R.string.iStatus), Toast.LENGTH_LONG).show();
+            iStatusa.setError("Please Select One");    // Set Error on last radio button
+            Log.i(TAG, "dcstatus: This data is Required!");
             return false;
         } else {
-            status02.setError(null);
+            iStatusa.setError(null);
         }
 
 
         return true;
     }
 
+    private boolean UpdateDB() {
+        DatabaseHelper db = new DatabaseHelper(this);
+
+       /* int updcount = db.updateEnding();
+
+        if (updcount == 1) {
+            Toast.makeText(this, "Updating Database... Successful!", Toast.LENGTH_SHORT).show();
+            return true;
+        } else {
+            Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
+            return false;
+        }*/
+        return true;
+
+    }
 
     @Override
     public void onBackPressed() {
         Toast.makeText(getApplicationContext(), "You Can't go back", Toast.LENGTH_LONG).show();
     }
+
+
 
 
 }

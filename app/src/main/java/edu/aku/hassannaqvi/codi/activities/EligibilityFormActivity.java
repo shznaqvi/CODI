@@ -230,6 +230,8 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
         sel.put("celdoe", celdoe.getText().toString());
         sel.put("celner", celner.getText().toString());
 
+        //MainApp.elc.setsEnInfo(String.valueOf(sEnInfo));
+
 
         Toast.makeText(this, "Validation Successful! - Saving Draft...", Toast.LENGTH_SHORT).show();
     }
@@ -430,6 +432,11 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
 
         // Show answer here
         return i == celEligibleYes.size();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(getApplicationContext(), "You Can't go back", Toast.LENGTH_LONG).show();
     }
 
 }
