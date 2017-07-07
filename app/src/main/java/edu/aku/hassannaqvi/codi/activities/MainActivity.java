@@ -21,16 +21,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
-import java.util.Collection;
 import java.util.Date;
 import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import edu.aku.hassannaqvi.codi.R;
-import edu.aku.hassannaqvi.codi.contracts.FormsContract;
 import edu.aku.hassannaqvi.codi.core.AndroidDatabaseManager;
-import edu.aku.hassannaqvi.codi.core.DatabaseHelper;
 import edu.aku.hassannaqvi.codi.core.MainApp;
 import edu.aku.hassannaqvi.codi.sync.SyncForms;
 
@@ -102,10 +99,10 @@ public class MainActivity extends Activity {
         if (sharedPref.getString("tagName", null) == "" || sharedPref.getString("tagName", null) == null) {
             builder.show();
         }
-
+/*
         DatabaseHelper db = new DatabaseHelper(this);
-        Collection<FormsContract> todaysForms = db.getTodayForms();
-        Collection<FormsContract> unsyncedForms = db.getUnsyncedForms();
+        Collection<EligibilityContract> todaysForms = db.getTodayForms();
+        Collection<EligibilityContract> unsyncedForms = db.getUnsyncedForms();
 
         rSumText += "TODAY'S RECORDS SUMMARY\r\n";
 
@@ -120,7 +117,7 @@ public class MainActivity extends Activity {
             rSumText += "[ DSS_ID ] \t[Form Status] \t[Sync Status]----------\r\n";
             rSumText += "--------------------------------------------------\r\n";
 
-            for (FormsContract fc : todaysForms) {
+            for (EligibilityContract fc : todaysForms) {
                 if (fc.getIstatus() != null) {
                     switch (fc.getIstatus()) {
                         case "1":
@@ -151,6 +148,7 @@ public class MainActivity extends Activity {
                 rSumText += "--------------------------------------------------\r\n";
             }
         }
+*/
 
 
         if (MainApp.admin) {
@@ -161,7 +159,9 @@ public class MainActivity extends Activity {
             rSumText += "Last Data Upload: \t" + syncPref.getString("LastUpSyncServer", "Never Synced");
             rSumText += "\r\n";
             rSumText += "\r\n";
-            rSumText += "Unsynced Forms: \t" + unsyncedForms.size();
+            //rSumText += "Unsynced Forms: \t" + unsyncedElForms.size();
+            //rSumText += "Unsynced Forms: \t" + unsyncedEnForms.size();
+            //rSumText += "Unsynced Forms: \t" + unsyncedV2Forms.size();
             rSumText += "\r\n";
         }
         Log.d(TAG, "onCreate: " + rSumText);

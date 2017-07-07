@@ -418,15 +418,15 @@ public class EnrollmentFormActivity extends AppCompatActivity {
     private boolean UpdateDB() {
         DatabaseHelper db = new DatabaseHelper(this);
 
-       /* long updcount = db.addForm(AppMain.fc);
+       /* long updcount = db.addForm(AppMain.elc);
 
-        AppMain.fc.setID(String.valueOf(updcount));
+        AppMain.elc.setID(String.valueOf(updcount));
 
         if (updcount != 0) {
             Toast.makeText(this, "Updating Database... Successful!", Toast.LENGTH_SHORT).show();
 
-            AppMain.fc.setUID(
-                    (AppMain.fc.getDeviceID() + AppMain.fc.getID()));
+            AppMain.elc.setUID(
+                    (AppMain.elc.getDeviceID() + AppMain.elc.getID()));
             db.updateFormID();
         } else {
             Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();

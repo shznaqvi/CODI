@@ -13,7 +13,6 @@ import org.json.JSONException;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import edu.aku.hassannaqvi.codi.R;
-import edu.aku.hassannaqvi.codi.core.MainApp;
 
 public class EndingActivity extends Activity {
 
@@ -51,7 +50,7 @@ public class EndingActivity extends Activity {
     private void SaveDraft() throws JSONException {
         Toast.makeText(this, "Saving Draft for  This Section", Toast.LENGTH_SHORT).show();
 
-        MainApp.fc.setIstatus(status01.isChecked() ? "1" : status02.isChecked() ? "2" : "0");
+        //MainApp.elc.setIstatus(status01.isChecked() ? "1" : status02.isChecked() ? "2" : "0");
 
         Toast.makeText(this, "Validation Successful! - Saving Draft...", Toast.LENGTH_SHORT).show();
     }

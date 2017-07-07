@@ -19,7 +19,8 @@ import java.util.Date;
 import java.util.List;
 
 import edu.aku.hassannaqvi.codi.activities.EndingActivity;
-import edu.aku.hassannaqvi.codi.contracts.FormsContract;
+import edu.aku.hassannaqvi.codi.contracts.EligibilityContract;
+import edu.aku.hassannaqvi.codi.contracts.EnrollmentContract;
 
 /**
  * Created by hassan.naqvi on 11/30/2016.
@@ -58,7 +59,7 @@ public class MainApp extends Application {
     public static String interviewerCode;
     public static int loginFieldArea = -1;
     public static String child_name = "TEST";
-    public static FormsContract fc;
+    public static EligibilityContract elc;
     public static String userName = "0000";
     public static String areaCode;
     //    Total No of members got from Section A
@@ -90,6 +91,7 @@ public class MainApp extends Application {
     public static int selectedPos = -1;
     public static int selectedCh = -1;
     public static List<String> insertMem;
+    public static EnrollmentContract enc;
     protected static LocationManager locationManager;
     Location location;
 

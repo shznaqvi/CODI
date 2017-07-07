@@ -23,7 +23,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Collection;
 
-import edu.aku.hassannaqvi.codi.contracts.FormsContract;
+import edu.aku.hassannaqvi.codi.contracts.EligibilityContract;
 import edu.aku.hassannaqvi.codi.core.DatabaseHelper;
 import edu.aku.hassannaqvi.codi.core.MainApp;
 
@@ -63,7 +63,7 @@ public class SyncForms extends AsyncTask<Void, Void, String> {
     @Override
     protected String doInBackground(Void... params) {
         try {
-            String url = MainApp._HOST_URL + FormsContract.FormsTable._URL;
+            String url = MainApp._HOST_URL + EligibilityContract.EligibilityTable._URL;
             Log.d(TAG, "doInBackground: URL " + url);
             return downloadUrl(url);
         } catch (IOException e) {
@@ -75,7 +75,7 @@ public class SyncForms extends AsyncTask<Void, Void, String> {
         String line = "No Response";
 
         DatabaseHelper db = new DatabaseHelper(mContext);
-        Collection<FormsContract> Forms = db.getUnsyncedForms();
+        Collection<EligibilityContract> Forms = db.getUnsyncedForms();
         Log.d(TAG, String.valueOf(Forms.size()));
 
         if (Forms.size() > 0) {
@@ -104,8 +104,8 @@ public class SyncForms extends AsyncTask<Void, Void, String> {
 
 //            pd.setMessage("Total Forms: " );
 
-                    for (FormsContract fc : Forms) {
-                        //if (fc.getIstatus().equals("1")) {
+                    for (EligibilityContract fc : Forms) {
+                        //if (elc.getIstatus().equals("1")) {
                         jsonSync.put(fc.toJSONObject());
                         //}
                     }
