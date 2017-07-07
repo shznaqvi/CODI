@@ -11,7 +11,9 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -52,6 +54,7 @@ public class RandomizationActivity extends AppCompatActivity {
         cen25.setManager(getSupportFragmentManager());
         cen26.setManager(getSupportFragmentManager());
         cen25.setMaxDate(dateToday);
+        cen25.setMinDate(convertDateFormat(MainApp.enrollDate));
 
     }
 
@@ -175,6 +178,18 @@ public class RandomizationActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Toast.makeText(getApplicationContext(), "You Can't go back", Toast.LENGTH_LONG).show();
+    }
+
+    public String convertDateFormat(String dateStr) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        try {
+            Date d = sdf.parse(dateStr);
+            return new SimpleDateFormat("dd/MM/yyyy").format(d);
+        } catch (ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        return "";
     }
 
 

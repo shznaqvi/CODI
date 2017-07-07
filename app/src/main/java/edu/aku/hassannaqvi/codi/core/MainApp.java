@@ -64,6 +64,7 @@ public class MainApp extends Application {
     public static String areaCode;
     public static String enrollDate;
     public static int arm = 0;
+    public static int age = 0;
 
     //    Total No of members got from Section A
     public static int NoMembersCount = 0;

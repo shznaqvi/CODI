@@ -18,7 +18,9 @@ import com.google.zxing.integration.android.IntentResult;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -77,9 +79,11 @@ public class BloodSamplingActivity extends AppCompatActivity {
 
         dateToday = new SimpleDateFormat("dd/MM/yyyy").format(System.currentTimeMillis());
 
+
         cen20.setManager(getSupportFragmentManager());
         cen21.setManager(getSupportFragmentManager());
         cen20.setMaxDate(dateToday);
+        cen20.setMinDate(convertDateFormat(MainApp.enrollDate));
 
 
         //================ Blood Sampling Skip Pattern============
@@ -305,6 +309,17 @@ public class BloodSamplingActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), "You Can't go back", Toast.LENGTH_LONG).show();
     }
 
+    public String convertDateFormat(String dateStr) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        try {
+            Date d = sdf.parse(dateStr);
+            return new SimpleDateFormat("dd/MM/yyyy").format(d);
+        } catch (ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        return "";
+    }
 
 
 }

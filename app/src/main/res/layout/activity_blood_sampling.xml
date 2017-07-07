@@ -228,7 +228,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:hint="@string/cen24sub"
-                    android:inputType="text" />
+                    android:inputType="textCapCharacters"
+                    android:maxLength="12" />
 
                 <Button
                     android:id="@+id/btnScan"
