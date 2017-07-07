@@ -20,7 +20,10 @@ import com.google.zxing.integration.android.IntentResult;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -29,12 +32,14 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import edu.aku.hassannaqvi.codi.R;
 import edu.aku.hassannaqvi.codi.core.DatabaseHelper;
+import edu.aku.hassannaqvi.codi.core.MainApp;
 import io.blackbox_vision.datetimepickeredittext.view.DatePickerInputEditText;
 import io.blackbox_vision.datetimepickeredittext.view.TimePickerInputEditText;
 
 public class EnrollmentFormActivity extends AppCompatActivity {
 
     private static final String TAG = EnrollmentFormActivity.class.getSimpleName();
+    final SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 
     @BindView(R.id.dssid)
     TextView dssid;
@@ -224,16 +229,20 @@ public class EnrollmentFormActivity extends AppCompatActivity {
     EditText cen33a;
     @BindView(R.id.cen33b)
     EditText cen33b;
-    @BindView(R.id.cendt)
+    /*@BindView(R.id.cendt)
     DatePickerInputEditText cendt;
     @BindView(R.id.centime)
-    TimePickerInputEditText centime;
+    TimePickerInputEditText centime;*/
+    @BindView(R.id.cendt)
+    TextView cendt;
+    @BindView(R.id.centime)
+    TextView centime;
 
     @BindViews({R.id.cen01, R.id.cen06, R.id.cen20, R.id.cen25,
-            R.id.cen30, R.id.cendt})
+            R.id.cen30})
     List<DatePickerInputEditText> dates;
 
-    @BindViews({R.id.cen21, R.id.cen26, R.id.cen31, R.id.centime})
+    @BindViews({R.id.cen21, R.id.cen26, R.id.cen31})
     List<TimePickerInputEditText> time;
     String dateToday;
 
@@ -272,7 +281,7 @@ public class EnrollmentFormActivity extends AppCompatActivity {
         cen16.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
-                if (cen16b.isChecked()) {
+                if (cen16a.isChecked() || cen16b.isChecked()) {
                     fldGrpcen17.setVisibility(View.VISIBLE);
                 } else {
                     fldGrpcen17.setVisibility(View.GONE);
@@ -318,6 +327,23 @@ public class EnrollmentFormActivity extends AppCompatActivity {
             }
         });
 
+        //============== Vaccine based on Arm ========
+        cen27.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+                if (cen27c.isChecked()) {
+                    cen28b.setEnabled(false);
+                    cen28b.setChecked(false);
+                } else {
+                    cen28b.setEnabled(true);
+                }
+            }
+        });
+
+        Calendar cal = getCalendarDate(MainApp.enrollDate);
+        cal.add(Calendar.DAY_OF_MONTH, 28);
+        cendt.setText(sdf.format(cal.getTime()));
+        centime.setText(new SimpleDateFormat("hh:mm").format(System.currentTimeMillis()));
 
 
     }
@@ -431,6 +457,8 @@ public class EnrollmentFormActivity extends AppCompatActivity {
         sen.put("cen32", cen32a.isChecked() ? "1" : cen32b.isChecked() ? "2" : "0");
         sen.put("cen33a", cen33a.getText().toString());
         sen.put("cen33b", cen33b.getText().toString());
+
+
         sen.put("cendt", cendt.getText().toString());
         sen.put("centime", centime.getText().toString());
 
@@ -630,7 +658,7 @@ public class EnrollmentFormActivity extends AppCompatActivity {
             cen16a.setError(null);
         }
 
-        if (cen16b.isChecked()) {
+        if (cen16a.isChecked() || cen16b.isChecked()) {
             if (cen17.getCheckedRadioButtonId() == -1) {
                 Toast.makeText(this, "ERROR(Empty)" + getString(R.string.cen17), Toast.LENGTH_SHORT).show();
                 cen17a.setError("This data is Required!");
@@ -797,7 +825,7 @@ public class EnrollmentFormActivity extends AppCompatActivity {
 
         }
 
-        if (cendt.getText().toString().isEmpty()) {
+        /*if (cendt.getText().toString().isEmpty()) {
             Toast.makeText(this, "ERROR(Empty)" + getString(R.string.cendt), Toast.LENGTH_SHORT).show();
             cendt.setError("This data is Required!");
 
@@ -816,13 +844,25 @@ public class EnrollmentFormActivity extends AppCompatActivity {
         } else {
             centime.setError(null);
         }
-
+*/
 
         return true;
     }
 
 
+    public Calendar getCalendarDate(String value) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        Calendar calendar = Calendar.getInstance();
+        try {
+            Date date = sdf.parse(value);
+            calendar.setTime(date);
+            return calendar;
 
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return calendar;
+    }
 
 
 

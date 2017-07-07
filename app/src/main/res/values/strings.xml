@@ -151,7 +151,7 @@
   <string name="cen31"> Time of vaccination received ( hh : mm, 24 hour clock) </string>
   <string name="cen32"> Child observed for at least 30 minutes post vaccination </string>
   <string name="cen33"> If adverse events were observed, please specify below: </string>
-  <string name="cenascsub"> Appointment for second contact visit:(28 days after Enrolment ) </string>
+    <string name="cenascsub"> Appointment For Second Contact Visit (28 days after Enrolment) </string>
   <string name="cendt"> Date </string>
   <string name="centime"> Time
   Hrs.(To be written in 24 hours and minutes ) </string>

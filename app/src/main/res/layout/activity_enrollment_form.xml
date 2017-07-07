@@ -1221,7 +1221,7 @@
             android:layout_height="wrap_content"
             android:background="@color/pink_100"
             android:gravity="center"
-            android:text="@string/cen04sub"
+            android:text="@string/cenascsub"
             android:textColor="@color/colorPrimary"
             android:textSize="27sp"
             android:textStyle="bold" />
@@ -1231,38 +1231,73 @@
             android:layout_height="2dp"
             android:background="@color/colorPrimary" />
 
-        <TextView
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="@string/cendt" />
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="@string/cendt" />
 
-        <io.blackbox_vision.datetimepickeredittext.view.DatePickerInputEditText
-            android:id="@+id/cendt"
+            <!--<io.blackbox_vision.datetimepickeredittext.view.DatePickerInputEditText
+                android:id="@+id/cendt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:focusable="true"
+                android:hint="@string/cendt"
+                android:textColor="@android:color/black"
+                app:dateFormat="dd-MM-yyyy" />-->
+
+            <TextView
+                android:id="@+id/cendt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_weight="1"
+                android:background="@color/colorPrimaryAlpha"
+                android:gravity="center"
+                android:text="" />
+        </LinearLayout>
+
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="1dp"
-            android:focusable="true"
-            android:hint="@string/cendt"
-            android:textColor="@android:color/black"
-            app:dateFormat="dd-MM-yyyy" />
+            android:orientation="horizontal">
 
-
-        <TextView
+            <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+                android:layout_weight="1"
+                android:gravity="center"
             android:text="@string/centime" />
 
-        <io.blackbox_vision.datetimepickeredittext.view.TimePickerInputEditText
-            android:id="@+id/centime"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="1dp"
-            android:focusable="true"
-            android:hint="@string/centime"
-            android:textColor="@android:color/black"
-            app:timeFormat="HH:mm" />
+            <!--<io.blackbox_vision.datetimepickeredittext.view.TimePickerInputEditText
+                android:id="@+id/centime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:focusable="true"
+                android:hint="@string/centime"
+                android:textColor="@android:color/black"
+                app:timeFormat="HH:mm" />-->
+
+            <TextView
+                android:id="@+id/centime"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="16dp"
+                android:background="@color/colorPrimaryAlpha"
+                android:gravity="center"
+                android:text="" />
+        </LinearLayout>
 
 
         <Button

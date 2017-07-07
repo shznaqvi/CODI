@@ -49,7 +49,12 @@
         <activity
             android:name=".activities.EnrollmentFormActivity"
             android:theme="@style/AppTheme1"
-            android:windowSoftInputMode="adjustResize|stateHidden"></activity>
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity android:name=".activities.EnrollmentInfoActivity" />
+        <activity android:name=".activities.VisitInfoActivity" />
+        <activity android:name=".activities.BloodSamplingActivity" />
+        <activity android:name=".activities.VaccineActivity" />
+        <activity android:name=".activities.AppointmentActivity"></activity>
     </application>
 
 </manifest>
