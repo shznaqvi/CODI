@@ -50,11 +50,30 @@
             android:name=".activities.EnrollmentFormActivity"
             android:theme="@style/AppTheme1"
             android:windowSoftInputMode="adjustResize|stateHidden" />
-        <activity android:name=".activities.EnrollmentInfoActivity" />
-        <activity android:name=".activities.VisitInfoActivity" />
-        <activity android:name=".activities.BloodSamplingActivity" />
-        <activity android:name=".activities.VaccineActivity" />
-        <activity android:name=".activities.AppointmentActivity"></activity>
+        <activity
+            android:name=".activities.EnrollmentInfoActivity"
+            android:theme="@style/AppTheme1"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name=".activities.VisitInfoActivity"
+            android:theme="@style/AppTheme1"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name=".activities.BloodSamplingActivity"
+            android:theme="@style/AppTheme1"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name=".activities.VaccineActivity"
+            android:theme="@style/AppTheme1"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name=".activities.AppointmentActivity"
+            android:theme="@style/AppTheme1"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name=".activities.RandomizationActivity"
+            android:theme="@style/AppTheme1"
+            android:windowSoftInputMode="adjustResize|stateHidden"></activity>
     </application>
 
 </manifest>

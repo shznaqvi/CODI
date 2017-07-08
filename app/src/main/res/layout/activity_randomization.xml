@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    tools:context="edu.aku.hassannaqvi.codi.activities.AppointmentActivity">
+    tools:context="edu.aku.hassannaqvi.codi.activities.RandomizationActivity">
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,13 +21,12 @@
             android:layout_marginTop="16dp"
             android:background="@color/colorPrimary" />
 
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/pink_100"
             android:gravity="center"
-            android:text="@string/cenascsub"
+            android:text="@string/cen25sub"
             android:textColor="@color/colorPrimary"
             android:textSize="27sp"
             android:textStyle="bold" />
@@ -35,68 +36,84 @@
             android:layout_height="2dp"
             android:background="@color/colorPrimary" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/cen25" />
 
-        <!--<io.blackbox_vision.datetimepickeredittext.view.DatePickerInputEditText
-            android:id="@+id/cendt"
+        <io.blackbox_vision.datetimepickeredittext.view.DatePickerInputEditText
+            android:id="@+id/cen25"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="1dp"
-            android:focusable="true"
-            android:hint="@string/cendt"
+            android:focusable="false"
+            android:hint="@string/cen25"
             android:textColor="@android:color/black"
-            app:dateFormat="dd-MM-yyyy" />-->
+            app:dateFormat="dd-MM-yyyy" />
 
         <TextView
-            android:id="@+id/cendt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="80dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text=""
-            android:textSize="50sp" />
+            android:layout_marginTop="16dp"
+            android:text="@string/cen26" />
 
-
-        <LinearLayout
+        <io.blackbox_vision.datetimepickeredittext.view.TimePickerInputEditText
+            android:id="@+id/cen26"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:visibility="gone">
+            android:layout_marginTop="1dp"
+            android:focusable="false"
+            android:hint="@string/cen26"
+            android:textColor="@android:color/black"
+            app:timeFormat="HH:mm" />
 
-            <TextView
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/cen27" />
+
+        <RadioGroup
+            android:id="@+id/cen27"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/cen27a"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/centime" />
+                android:layout_marginBottom="1dp"
+                android:text="@string/cen27a" />
 
-            <!--<io.blackbox_vision.datetimepickeredittext.view.TimePickerInputEditText
-                android:id="@+id/centime"
+            <RadioButton
+                android:id="@+id/cen27b"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="1dp"
-                android:focusable="true"
-                android:hint="@string/centime"
-                android:textColor="@android:color/black"
-                app:timeFormat="HH:mm" />-->
+                android:layout_marginBottom="1dp"
+                android:text="@string/cen27b" />
 
-            <TextView
-                android:id="@+id/centime"
+            <RadioButton
+                android:id="@+id/cen27c"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_weight="2"
-                android:background="@color/colorPrimaryAlpha"
-                android:gravity="center"
-                android:text="" />
-        </LinearLayout>
+                android:layout_marginBottom="1dp"
+                android:text="@string/cen27c" />
+
+            <RadioButton
+                android:id="@+id/cen27d"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="1dp"
+                android:text="@string/cen27d" />
+
+        </RadioGroup>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:layout_marginTop="80dp"
             android:orientation="horizontal">
 
             <Button

@@ -24,26 +24,56 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:background="@color/colorPrimary"
-                android:text="@string/dcstatus"
+                android:text="@string/iStatus"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="@android:color/white" />
 
             <RadioGroup
-                android:id="@+id/dcstatus"
+                android:id="@+id/iStatus"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <RadioButton
-                    android:id="@+id/status01"
+                    android:id="@+id/iStatusa"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/complete" />
+                    android:text="@string/iStatusa" />
 
                 <RadioButton
-                    android:id="@+id/status02"
+                    android:id="@+id/iStatusb"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/incomplete" />
+                    android:text="@string/iStatusb" />
+
+                <RadioButton
+                    android:id="@+id/iStatusc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/iStatusc" />
+
+                <RadioButton
+                    android:id="@+id/iStatusd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/iStatusd" />
+
+                <RadioButton
+                    android:id="@+id/iStatuse"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/iStatuse" />
+
+                <RadioButton
+                    android:id="@+id/iStatusf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/iStatusf" />
+
+                <RadioButton
+                    android:id="@+id/iStatusg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/iStatusg" />
 
             </RadioGroup>
 
