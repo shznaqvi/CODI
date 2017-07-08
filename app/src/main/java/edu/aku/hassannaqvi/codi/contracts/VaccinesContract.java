@@ -10,7 +10,7 @@ import org.json.JSONObject;
  * Created by hassan.naqvi on 11/30/2016.
  */
 
-public class EnrollmentContract {
+public class VaccinesContract {
 
     private final String projectName = "CODI";
     //private final String surveyType = "Enrollment";
@@ -20,6 +20,7 @@ public class EnrollmentContract {
     private String studyID = "";
     private String childName = "";
     private String formDate = ""; // Date
+    private String formType = ""; // [EN, V1, V2, V3, V4, V5]
     private String user = ""; // Interviewer
     private String nextApp = ""; // Next Appointment Date Time
 
@@ -40,17 +41,18 @@ public class EnrollmentContract {
     private String synced = "";
     private String synced_date = "";
 
-    public EnrollmentContract() {
+    public VaccinesContract() {
     }
 
 
-    public EnrollmentContract Sync(JSONObject jsonObject) throws JSONException {
+    public VaccinesContract Sync(JSONObject jsonObject) throws JSONException {
         this._ID = jsonObject.getString(EnrollmentTable._ID);
         this._UID = jsonObject.getString(EnrollmentTable.COLUMN__UID);
         this.DSSID = jsonObject.getString(EnrollmentTable.COLUMN_DSSID);
         this.studyID = jsonObject.getString(EnrollmentTable.COLUMN_STUDYID);
         this.childName = jsonObject.getString(EnrollmentTable.COLUMN_CHILDNAME);
         this.formDate = jsonObject.getString(EnrollmentTable.COLUMN_FORMDATE);
+        this.formType = jsonObject.getString(EnrollmentTable.COLUMN_FORMTYPE);
         this.user = jsonObject.getString(EnrollmentTable.COLUMN_USER);
         this.istatus = jsonObject.getString(EnrollmentTable.COLUMN_ISTATUS);
         this.nextApp = jsonObject.getString(EnrollmentTable.COLUMN_NEXTAPP);
@@ -70,13 +72,14 @@ public class EnrollmentContract {
 
     }
 
-    public EnrollmentContract Hydrate(Cursor cursor) {
+    public VaccinesContract Hydrate(Cursor cursor) {
         this._ID = cursor.getString(cursor.getColumnIndex(EnrollmentTable._ID));
         this._UID = cursor.getString(cursor.getColumnIndex(EnrollmentTable.COLUMN__UID));
         this.DSSID = cursor.getString(cursor.getColumnIndex(EnrollmentTable.COLUMN_DSSID));
         this.studyID = cursor.getString(cursor.getColumnIndex(EnrollmentTable.COLUMN_STUDYID));
         this.childName = cursor.getString(cursor.getColumnIndex(EnrollmentTable.COLUMN_CHILDNAME));
         this.formDate = cursor.getString(cursor.getColumnIndex(EnrollmentTable.COLUMN_FORMDATE));
+        this.formType = cursor.getString(cursor.getColumnIndex(EnrollmentTable.COLUMN_FORMTYPE));
         this.user = cursor.getString(cursor.getColumnIndex(EnrollmentTable.COLUMN_USER));
         this.istatus = cursor.getString(cursor.getColumnIndex(EnrollmentTable.COLUMN_ISTATUS));
         this.nextApp = cursor.getString(cursor.getColumnIndex(EnrollmentTable.COLUMN_NEXTAPP));
@@ -108,6 +111,7 @@ public class EnrollmentContract {
         json.put(EnrollmentTable.COLUMN_STUDYID, this.studyID == null ? JSONObject.NULL : this.studyID);
         json.put(EnrollmentTable.COLUMN_CHILDNAME, this.childName == null ? JSONObject.NULL : this.childName);
         json.put(EnrollmentTable.COLUMN_FORMDATE, this.formDate == null ? JSONObject.NULL : this.formDate);
+        json.put(EnrollmentTable.COLUMN_FORMTYPE, this.formType == null ? JSONObject.NULL : this.formType);
         json.put(EnrollmentTable.COLUMN_USER, this.user == null ? JSONObject.NULL : this.user);
         json.put(EnrollmentTable.COLUMN_ISTATUS, this.istatus == null ? JSONObject.NULL : this.istatus);
         json.put(EnrollmentTable.COLUMN_NEXTAPP, this.nextApp == null ? JSONObject.NULL : this.nextApp);
@@ -178,6 +182,22 @@ public class EnrollmentContract {
         this.formDate = formDate;
     }
 
+    public String getFormType() {
+        return formType;
+    }
+
+    public void setFormType(String formType) {
+        this.formType = formType;
+    }
+
+    public String getIstatus() {
+        return istatus;
+    }
+
+    public void setIstatus(String istatus) {
+        this.istatus = istatus;
+    }
+
     public String getUser() {
         return user;
     }
@@ -196,10 +216,6 @@ public class EnrollmentContract {
 
     public String getIStatus() {
         return istatus;
-    }
-
-    public void setIstatus(String istatus) {
-        this.istatus = istatus;
     }
 
     public String getsEnInfo() {
@@ -311,6 +327,7 @@ public class EnrollmentContract {
         public static final String COLUMN_STUDYID = "studyid";
         public static final String COLUMN_CHILDNAME = "childname";
         public static final String COLUMN_FORMDATE = "formdate";
+        public static final String COLUMN_FORMTYPE = "formtype";
         public static final String COLUMN_USER = "user";
         public static final String COLUMN_NEXTAPP = "nextapp";
         public static final String COLUMN_ISTATUS = "istatus";

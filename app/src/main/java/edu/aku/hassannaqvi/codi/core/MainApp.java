@@ -20,7 +20,7 @@ import java.util.List;
 
 import edu.aku.hassannaqvi.codi.activities.EndingActivity;
 import edu.aku.hassannaqvi.codi.contracts.EligibilityContract;
-import edu.aku.hassannaqvi.codi.contracts.EnrollmentContract;
+import edu.aku.hassannaqvi.codi.contracts.FormsContract;
 
 /**
  * Created by hassan.naqvi on 11/30/2016.
@@ -92,7 +92,7 @@ public class MainApp extends Application {
     public static int selectedPos = -1;
     public static int selectedCh = -1;
     public static List<String> insertMem;
-    public static EnrollmentContract enc;
+    public static FormsContract enc;
     protected static LocationManager locationManager;
     Location location;
 

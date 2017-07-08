@@ -24,6 +24,7 @@ import java.net.URL;
 import java.util.Collection;
 
 import edu.aku.hassannaqvi.codi.contracts.EligibilityContract;
+import edu.aku.hassannaqvi.codi.contracts.FormsContract;
 import edu.aku.hassannaqvi.codi.core.DatabaseHelper;
 import edu.aku.hassannaqvi.codi.core.MainApp;
 
@@ -75,7 +76,7 @@ public class SyncForms extends AsyncTask<Void, Void, String> {
         String line = "No Response";
 
         DatabaseHelper db = new DatabaseHelper(mContext);
-        Collection<EligibilityContract> Forms = db.getUnsyncedForms();
+        Collection<FormsContract> Forms = db.getUnsyncedForms();
         Log.d(TAG, String.valueOf(Forms.size()));
 
         if (Forms.size() > 0) {
@@ -104,7 +105,7 @@ public class SyncForms extends AsyncTask<Void, Void, String> {
 
 //            pd.setMessage("Total Forms: " );
 
-                    for (EligibilityContract fc : Forms) {
+                    for (FormsContract fc : Forms) {
                         //if (elc.getIstatus().equals("1")) {
                         jsonSync.put(fc.toJSONObject());
                         //}

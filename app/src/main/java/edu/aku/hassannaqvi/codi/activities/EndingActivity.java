@@ -13,6 +13,7 @@ import org.json.JSONException;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import edu.aku.hassannaqvi.codi.R;
+import edu.aku.hassannaqvi.codi.core.DatabaseHelper;
 
 public class EndingActivity extends Activity {
 
@@ -56,17 +57,17 @@ public class EndingActivity extends Activity {
     }
 
     private boolean UpdateDB() {
-        /*DatabaseHelper db = new DatabaseHelper(this);
+        DatabaseHelper db = new DatabaseHelper(this);
 
-        int updcount = db.updateEnd();
+        int updcount = db.updateEnEnding();
 
         if (updcount == 1) {
             Toast.makeText(this, "Updating Database... Successful!", Toast.LENGTH_SHORT).show();
             return true;
         } else {
-            Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();*/
+            Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
         return false;
-        //}
+        }
     }
 
     public boolean ValidateForm() {

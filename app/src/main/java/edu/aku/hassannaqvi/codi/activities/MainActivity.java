@@ -148,7 +148,7 @@ public class MainActivity extends Activity {
                 rSumText += "--------------------------------------------------\r\n";
             }
         }
-*/
+
 
 
         if (MainApp.admin) {
