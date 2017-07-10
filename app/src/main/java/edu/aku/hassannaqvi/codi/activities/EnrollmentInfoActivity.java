@@ -5,14 +5,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateFormat;
 import android.util.Log;
-import android.view.View;
-import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -21,7 +17,6 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -30,6 +25,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import edu.aku.hassannaqvi.codi.R;
+import edu.aku.hassannaqvi.codi.contracts.ChildrenContract;
 import edu.aku.hassannaqvi.codi.contracts.FormsContract;
 import edu.aku.hassannaqvi.codi.core.AppMain;
 import edu.aku.hassannaqvi.codi.core.DatabaseHelper;
@@ -128,7 +124,7 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
     EditText cen13;
     @BindView(R.id.cen14)
     EditText cen14;
-    @BindView(R.id.cen15)
+    /*@BindView(R.id.cen15)
     RadioGroup cen15;
     @BindView(R.id.cen15a)
     RadioButton cen15a;
@@ -154,7 +150,7 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
     RadioButton cen1788;
     @BindView(R.id.cen1788x)
     EditText cen1788x;
-
+*/
     String dateToday;
 
     @Override
@@ -169,31 +165,7 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
         cen06.setManager(getSupportFragmentManager());
         cen06.setMaxDate(dateToday);
 
-        cen1788.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    cen1788x.setVisibility(View.VISIBLE);
-                } else {
-                    cen1788x.setVisibility(View.GONE);
-                    cen1788x.setText(null);
-                }
-            }
-        });
-
-        //============= Partial Breast feeding skip pattern ===========
-        cen16.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
-                if (cen16a.isChecked() || cen16b.isChecked()) {
-                    fldGrpcen17.setVisibility(View.VISIBLE);
-                } else {
-                    fldGrpcen17.setVisibility(View.GONE);
-                    cen17.clearCheck();
-                    cen1788x.setText(null);
-                }
-            }
-        });
+        //double ageInDays = AppMain.ageInDays(cen06.); //
 
 
 
@@ -254,6 +226,7 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
         SharedPreferences sharedPref = getSharedPreferences("tagName", MODE_PRIVATE);
 
         AppMain.fc = new FormsContract();
+        AppMain.cc = new ChildrenContract();
 
         AppMain.fc.setDevicetagID(sharedPref.getString("tagName", null));
         AppMain.fc.setDeviceID(Settings.Secure.getString(getApplicationContext().getContentResolver(),
@@ -262,7 +235,7 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
         AppMain.fc.setUser(AppMain.userName);
 
         AppMain.enrollDate = cen01.getText().toString();
-        Calendar cal = getCalendarDate(AppMain.enrollDate);
+        Calendar cal = AppMain.getCalendarDate(AppMain.enrollDate);
         cal.add(Calendar.DAY_OF_MONTH, 28);
         AppMain.fc.setNextApp((new SimpleDateFormat("dd-MM-yyyy").format(cal.getTime()) + " " + new SimpleDateFormat("HH:mm").format(System.currentTimeMillis())));
 
@@ -289,13 +262,10 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
         sInfo.put("cen12", cen12a.isChecked() ? "1" : cen12b.isChecked() ? "2" : cen12c.isChecked() ? "3" : cen12d.isChecked() ? "4" : "0");
         sInfo.put("cen13", cen13.getText().toString());
         sInfo.put("cen14", cen14.getText().toString());
-        sInfo.put("cen15", cen15a.isChecked() ? "1" : cen15b.isChecked() ? "2" : "0");
-        sInfo.put("cen16", cen16a.isChecked() ? "1" : cen16b.isChecked() ? "2" : cen16c.isChecked() ? "3" : "0");
-        sInfo.put("cen17", cen17a.isChecked() ? "1" : cen17b.isChecked() ? "2" : cen1788.isChecked() ? "3" : "0");
-        sInfo.put("cen1788x", cen1788x.getText().toString());
 
 
         AppMain.fc.setsInfo(String.valueOf(sInfo));
+        AppMain.fc.setFormType("EN");
 
         setGPS();
 
@@ -476,47 +446,7 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
             cen14.setError(null);
         }
 
-        if (cen15.getCheckedRadioButtonId() == -1) {
-            Toast.makeText(this, "ERROR(Empty)" + getString(R.string.cen15), Toast.LENGTH_SHORT).show();
-            cen15a.setError("This data is Required!");
 
-            Log.i(TAG, "cen15: This Data is Required!");
-            return false;
-        } else {
-            cen15a.setError(null);
-        }
-
-        if (cen16.getCheckedRadioButtonId() == -1) {
-            Toast.makeText(this, "ERROR(Empty)" + getString(R.string.cen16), Toast.LENGTH_SHORT).show();
-            cen16a.setError("This data is Required!");
-
-            Log.i(TAG, "cen16: This Data is Required!");
-            return false;
-        } else {
-            cen16a.setError(null);
-        }
-
-        if (cen16a.isChecked() || cen16b.isChecked()) {
-            if (cen17.getCheckedRadioButtonId() == -1) {
-                Toast.makeText(this, "ERROR(Empty)" + getString(R.string.cen17), Toast.LENGTH_SHORT).show();
-                cen17a.setError("This data is Required!");
-
-                Log.i(TAG, "cen17: This Data is Required!");
-                return false;
-            } else {
-                cen17a.setError(null);
-            }
-
-            if (cen1788.isChecked() && cen1788x.getText().toString().isEmpty()) {
-                Toast.makeText(this, "ERROR(Empty)" + getString(R.string.cen17) + " - " + getString(R.string.others), Toast.LENGTH_SHORT).show();
-                cen1788x.setError("This data is Required!");
-
-                Log.i(TAG, "cen1788x: This Data is Required!");
-                return false;
-            } else {
-                cen1788x.setError(null);
-            }
-        }
 
 
         return true;
@@ -555,7 +485,7 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
 
     }
 
-    public Calendar getCalendarDate(String value) {
+   /* public Calendar getCalendarDate(String value) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         Calendar calendar = Calendar.getInstance();
         try {
@@ -568,6 +498,22 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
         }
         return calendar;
     }
+
+    public String convertDateFormat(String dateStr) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        try {
+            Date d = sdf.parse(dateStr);
+            return new SimpleDateFormat("dd/MM/yyyy").format(d);
+        } catch (ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        return "";
+    }
+*/
+
+
+
 
     @Override
     public void onBackPressed() {

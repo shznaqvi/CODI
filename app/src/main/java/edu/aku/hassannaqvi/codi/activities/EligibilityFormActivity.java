@@ -23,6 +23,7 @@ import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import edu.aku.hassannaqvi.codi.R;
+import edu.aku.hassannaqvi.codi.core.AppMain;
 import edu.aku.hassannaqvi.codi.core.DatabaseHelper;
 import io.blackbox_vision.datetimepickeredittext.view.DatePickerInputEditText;
 
@@ -108,6 +109,8 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
     List<RadioGroup> celEligible;
     @BindViews({R.id.cel05a, R.id.cel06a, R.id.cel07a})
     List<RadioButton> celEligibleYes;
+    String date14Weeks;
+    String date9Months;
 
 
     @Override
@@ -117,11 +120,18 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
         ButterKnife.bind(this);
 
         String dateToday = new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime());
+        date14Weeks = new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTimeInMillis() - ((AppMain.MILLISECONDS_IN_14_WEEKS)));
+        date9Months = new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTimeInMillis() - ((AppMain.MILLISECONDS_IN_9_MONTH) + (AppMain.MILLISECONDS_IN_DAY)));
 
         for (DatePickerInputEditText de : dates) {
             de.setManager(getSupportFragmentManager());
-            de.setMaxDate(dateToday);
         }
+        celdoe.setMaxDate(dateToday);
+
+        celdob.setMaxDate(date14Weeks);
+        celdob.setMinDate(date9Months);
+
+
 
         //================== Q7 Skip Pattern ===========
         for (RadioGroup rg : celEligible) {
@@ -194,19 +204,19 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
     private boolean UpdateDB() {
         DatabaseHelper db = new DatabaseHelper(this);
 
-       /* long updcount = db.addForm(AppMain.elc);
+        long updcount = db.addEligibility(AppMain.elc);
 
-        AppMain.elc.setID(String.valueOf(updcount));
+        AppMain.elc.set_ID(String.valueOf(updcount));
 
         if (updcount != 0) {
             Toast.makeText(this, "Updating Database... Successful!", Toast.LENGTH_SHORT).show();
 
-            AppMain.elc.setUID(
-                    (AppMain.elc.getDeviceID() + AppMain.elc.getID()));
+            AppMain.elc.set_UID(
+                    (AppMain.elc.getDeviceID() + AppMain.elc.get_ID()));
             db.updateFormID();
         } else {
             Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
-        }*/
+        }
         return true;
     }
 
@@ -230,7 +240,9 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
         sel.put("celdoe", celdoe.getText().toString());
         sel.put("celner", celner.getText().toString());
 
-        //AppMain.elc.setsEnInfo(String.valueOf(sEnInfo));
+        //AppMain.dob = celdob.getText().toString();
+
+        AppMain.elc.setsEn(String.valueOf(sel));
 
 
         Toast.makeText(this, "Validation Successful! - Saving Draft...", Toast.LENGTH_SHORT).show();

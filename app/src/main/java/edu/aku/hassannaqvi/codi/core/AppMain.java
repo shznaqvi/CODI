@@ -14,11 +14,15 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.text.format.DateFormat;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import edu.aku.hassannaqvi.codi.activities.EndingActivity;
+import edu.aku.hassannaqvi.codi.contracts.ChildrenContract;
 import edu.aku.hassannaqvi.codi.contracts.EligibilityContract;
 import edu.aku.hassannaqvi.codi.contracts.FormsContract;
 
@@ -51,8 +55,10 @@ public class AppMain extends Application {
     public static final long MILLISECONDS_IN_YEAR = MILLIS_IN_SECOND * SECONDS_IN_MINUTE * MINUTES_IN_HOUR * HOURS_IN_DAY * DAYS_IN_YEAR;
     private static final long DAYS_IN_MONTH = 30;
     public static final long MILLISECONDS_IN_MONTH = MILLIS_IN_SECOND * SECONDS_IN_MINUTE * MINUTES_IN_HOUR * HOURS_IN_DAY * DAYS_IN_MONTH;
-    //public static final long MILLISECONDS_IN_100_YEAR = MILLISECONDS_IN_YEAR * 100;
-
+    private static final long DAYS_IN_14_WEEKS = 7 * 14;
+    public static final long MILLISECONDS_IN_14_WEEKS = MILLIS_IN_SECOND * SECONDS_IN_MINUTE * MINUTES_IN_HOUR * HOURS_IN_DAY * DAYS_IN_14_WEEKS;
+    private static final long DAYS_IN_9_MONTHS = (30 * 9) + 29;
+    public static final long MILLISECONDS_IN_9_MONTH = MILLIS_IN_SECOND * SECONDS_IN_MINUTE * MINUTES_IN_HOUR * HOURS_IN_DAY * DAYS_IN_9_MONTHS;
     public static String deviceId;
 
     public static Boolean admin = false;
@@ -64,7 +70,8 @@ public class AppMain extends Application {
     public static String areaCode;
     public static String enrollDate;
     public static int arm = 0;
-    public static int age = 0;
+    public static String dob;
+
 
     //    Total No of members got from Section A
     public static int NoMembersCount = 0;
@@ -96,6 +103,7 @@ public class AppMain extends Application {
     public static int selectedCh = -1;
     public static List<String> insertMem;
     public static FormsContract fc;
+    public static ChildrenContract cc;
     protected static LocationManager locationManager;
     Location location;
 
@@ -215,6 +223,47 @@ public class AppMain extends Application {
         alert.show();
     }
 
+    public static double ageInDays(String dateStr) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        Calendar cal = getCalendarDate(dateStr);
+        Date dob = cal.getTime();
+        Date today = new Date();
+
+        Long diff = today.getTime() - dob.getTime();
+
+        double ageindays = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+
+
+        return ageindays;
+
+    }
+
+    public static Calendar getCalendarDate(String value) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        Calendar calendar = Calendar.getInstance();
+        try {
+            Date date = sdf.parse(value);
+            calendar.setTime(date);
+            return calendar;
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return calendar;
+    }
+
+    public static String convertDateFormat(String dateStr) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        try {
+            Date d = sdf.parse(dateStr);
+            return new SimpleDateFormat("dd/MM/yyyy").format(d);
+        } catch (ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        return "";
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -309,7 +358,6 @@ public class AppMain extends Application {
         return provider1.equals(provider2);
     }
 
-
     public class GPSLocationListener implements LocationListener {
         public void onLocationChanged(Location location) {
 
@@ -354,6 +402,7 @@ public class AppMain extends Application {
 
         }
     }
+
 
 }
 

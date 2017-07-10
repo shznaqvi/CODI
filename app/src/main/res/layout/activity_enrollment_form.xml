@@ -1272,12 +1272,12 @@
             android:orientation="horizontal">
 
             <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:layout_weight="1"
                 android:gravity="center"
-            android:text="@string/centime" />
+                android:text="@string/centime" />
 
             <!--<io.blackbox_vision.datetimepickeredittext.view.TimePickerInputEditText
                 android:id="@+id/centime"

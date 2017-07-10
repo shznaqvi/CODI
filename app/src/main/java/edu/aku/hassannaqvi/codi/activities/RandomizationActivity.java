@@ -4,33 +4,29 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import edu.aku.hassannaqvi.codi.R;
 import edu.aku.hassannaqvi.codi.core.AppMain;
-import io.blackbox_vision.datetimepickeredittext.view.DatePickerInputEditText;
-import io.blackbox_vision.datetimepickeredittext.view.TimePickerInputEditText;
 
 public class RandomizationActivity extends AppCompatActivity {
 
     private static final String TAG = RandomizationActivity.class.getSimpleName();
 
     @BindView(R.id.cen25)
-    DatePickerInputEditText cen25;
-    @BindView(R.id.cen26)
-    TimePickerInputEditText cen26;
+    EditText cen25;
+    /*@BindView(R.id.cen26)
+    TimePickerInputEditText cen26;*/
     @BindView(R.id.cen27)
     RadioGroup cen27;
     @BindView(R.id.cen27a)
@@ -49,12 +45,28 @@ public class RandomizationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_randomization);
         ButterKnife.bind(this);
-        dateToday = new SimpleDateFormat("dd/MM/yyyy").format(System.currentTimeMillis());
+        //dateToday = new SimpleDateFormat("dd/MM/yyyy").format(System.currentTimeMillis());
 
-        cen25.setManager(getSupportFragmentManager());
-        cen26.setManager(getSupportFragmentManager());
-        cen25.setMaxDate(dateToday);
-        cen25.setMinDate(convertDateFormat(AppMain.enrollDate));
+        cen25.setText(new SimpleDateFormat("dd-MM-yyyy HH:mm").format(System.currentTimeMillis()));
+
+
+        double ageInDays = AppMain.ageInDays("01-04-2017"); //
+
+
+        if (ageInDays >= 98 && ageInDays <= 104) // 14 Weeks
+        {
+            cen27a.setEnabled(true);
+            cen27b.setEnabled(true);
+            cen27c.setEnabled(false);
+            cen27d.setEnabled(false);
+        } else if (ageInDays >= 273.7 && ageInDays < 304) { // 9 Months
+            cen27a.setEnabled(false);
+            cen27b.setEnabled(false);
+            cen27c.setEnabled(true);
+            cen27d.setEnabled(true);
+        }
+
+
 
     }
 
@@ -108,16 +120,15 @@ public class RandomizationActivity extends AppCompatActivity {
     private void SaveDraft() throws JSONException {
         Toast.makeText(this, "Saving Draft for this Section", Toast.LENGTH_SHORT).show();
 
-        JSONObject sRandomization = new JSONObject();
+        /*JSONObject sRandomization = new JSONObject();
 
         sRandomization.put("cen25", cen25.getText().toString());
-        sRandomization.put("cen26", cen26.getText().toString());
         sRandomization.put("cen27", cen27a.isChecked() ? "1" : cen27b.isChecked() ? "2" : cen27c.isChecked() ? "3"
                 : cen27d.isChecked() ? "4" : "0");
+*/
+        AppMain.cc.setRandDate(cen25.getText().toString());
+        AppMain.cc.setArmSlc(String.valueOf(cen27.indexOfChild(findViewById(cen27.getCheckedRadioButtonId())) + 1));
 
-        AppMain.arm = cen27.indexOfChild(findViewById(cen27.getCheckedRadioButtonId())) + 1;
-
-        AppMain.fc.setsRandomization(String.valueOf(sRandomization));
 
         Toast.makeText(this, "Validation Successful! - Saving Draft...", Toast.LENGTH_SHORT).show();
     }
@@ -151,15 +162,6 @@ public class RandomizationActivity extends AppCompatActivity {
             cen25.setError(null);
         }
 
-        if (cen26.getText().toString().isEmpty()) {
-            Toast.makeText(this, "ERROR(Empty)" + getString(R.string.cen26), Toast.LENGTH_SHORT).show();
-            cen26.setError("This data is Required!");
-
-            Log.i(TAG, "cen26: This Data is Required!");
-            return false;
-        } else {
-            cen26.setError(null);
-        }
 
         if (cen27.getCheckedRadioButtonId() == -1) {
             Toast.makeText(this, "ERROR(Empty)" + getString(R.string.cen27), Toast.LENGTH_SHORT).show();
@@ -180,17 +182,7 @@ public class RandomizationActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), "You Can't go back", Toast.LENGTH_LONG).show();
     }
 
-    public String convertDateFormat(String dateStr) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-        try {
-            Date d = sdf.parse(dateStr);
-            return new SimpleDateFormat("dd/MM/yyyy").format(d);
-        } catch (ParseException ex) {
-            ex.printStackTrace();
-        }
 
-        return "";
-    }
 
 
 }

@@ -99,6 +99,7 @@ public class MainActivity extends Activity {
         if (sharedPref.getString("tagName", null) == "" || sharedPref.getString("tagName", null) == null) {
             builder.show();
         }
+
 /*
         DatabaseHelper db = new DatabaseHelper(this);
         Collection<EligibilityContract> todaysForms = db.getTodayForms();
@@ -168,6 +169,7 @@ public class MainActivity extends Activity {
         recordSummary.setText(rSumText);
 
 
+    }*/
     }
 
     public void openForm(View v) {
@@ -214,7 +216,7 @@ public class MainActivity extends Activity {
 
     public void openMembers(View v) {
        /* Intent iMem = new Intent(this, MotherListActivity.class);
-        startActivity(iMem);*/
+        startActivity(iMem);
     }
 
     public void openA(View v) {

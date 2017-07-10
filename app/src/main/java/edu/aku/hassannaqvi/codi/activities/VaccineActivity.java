@@ -93,7 +93,7 @@ public class VaccineActivity extends AppCompatActivity {
         });
 
         //============== Vaccine based on Arm ========
-        if (AppMain.arm == 3) {
+        if (AppMain.cc.getArmSlc().equals("3")) {
             cen29b.setEnabled(false);
             cen29b.setChecked(false);
         } else {

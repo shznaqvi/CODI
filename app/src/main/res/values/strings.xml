@@ -135,6 +135,7 @@
     <string name="cen24"> Number of Serum sample on Cryotube: (Sample Number - S1) </string>
     <string name="cen24sub"> (Sample Number - S1) </string>
     <string name="cen25sub"> Randomization </string>
+    <string name="chbf"> Child Health and Breast Feed </string>
     <string name="cen25"> Date of randomization ( DD / MM / YY ) </string>
     <string name="cen26"> Time of randomization ( hh : mm, 24 hour clock) </string>
     <string name="cen27"> Study Arm : (please circle one of the followings) </string>
