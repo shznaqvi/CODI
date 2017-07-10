@@ -40,7 +40,6 @@ public class RandomizationActivity extends AppCompatActivity {
     @BindView(R.id.cen27d)
     RadioButton cen27d;
 
-    String dateToday;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
