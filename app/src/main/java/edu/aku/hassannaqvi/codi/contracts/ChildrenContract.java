@@ -30,11 +30,11 @@ public class ChildrenContract {
 
 
     public ChildrenContract Sync(JSONObject jsonObject) throws JSONException {
-        this._ID = jsonObject.getLong(ChildrenTable._ID);
+//        this._ID = jsonObject.getLong(ChildrenTable._ID);
         this.DSSID = jsonObject.getString(ChildrenTable.COLUMN_DSSID);
         this.armGrp = jsonObject.getString(ChildrenTable.COLUMN_ARMGRP);
         this.armSlc = jsonObject.getString(ChildrenTable.COLUMN_ARMSLC);
-        this.randDate = jsonObject.getString(ChildrenTable.COLUMN_RANDOMIZATION_DATE);
+//        this.randDate = jsonObject.getString(ChildrenTable.COLUMN_RANDOMIZATION_DATE);
 
         return this;
 
@@ -122,12 +122,12 @@ public class ChildrenContract {
     public static abstract class ChildrenTable implements BaseColumns {
 
         public static final String TABLE_NAME = "children";
-        public static final String _URI = "children";
+        public static final String _URI = "getchildren.php";
         public static final String _ID = "id";
 
         public static final String COLUMN_DSSID = "dssid";
         public static final String COLUMN_ARMGRP = "armgrp";
-        public static final String COLUMN_ARMSLC = "armslc";
+        public static final String COLUMN_ARMSLC = "armslct";
         public static final String COLUMN_RANDOMIZATION_DATE = "randdt";
         public static final String COLUMN_SYNCED = "synced";
         public static final String COLUMN_SYNCED_DATE = "synced_date";

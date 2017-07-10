@@ -6,9 +6,13 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.text.format.DateFormat;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -18,6 +22,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -37,9 +42,9 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
     final SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 
     @BindView(R.id.dssid)
-    TextView dssid;
+    EditText dssid;
     @BindView(R.id.studyId)
-    TextView studyId;
+    EditText studyId;
     @BindView(R.id.cen01)
     DatePickerInputEditText cen01;
     @BindView(R.id.cen02)
@@ -124,6 +129,9 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
     EditText cen13;
     @BindView(R.id.cen14)
     EditText cen14;
+
+    @BindView(R.id.fldGrpCheckChild)
+    LinearLayout fldGrpCheckChild;
     /*@BindView(R.id.cen15)
     RadioGroup cen15;
     @BindView(R.id.cen15a)
@@ -153,6 +161,10 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
 */
     String dateToday;
 
+    DatabaseHelper db;
+
+    Boolean flag = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -167,56 +179,102 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
 
         //double ageInDays = AppMain.ageInDays(cen06.); //
 
+        db = new DatabaseHelper(this);
 
+        dssid.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                flag = false;
+                fldGrpCheckChild.setVisibility(View.GONE);
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
 
     }
 
-    @OnClick(R.id.btn_End)
-    void onBtnEndClick() {
-        Toast.makeText(this, "Processing This Section", Toast.LENGTH_SHORT).show();
+    @OnClick(R.id.btn_Check) void onBtnCheckClick() {
+        //TODO implement
 
-        if (ValidateForm()) {
-            try {
-                SaveDraft();
-            } catch (JSONException e) {
-                e.printStackTrace();
+        AppMain.getEnrollmentChild = db.getChildByDSS(dssid.getText().toString());
+
+        if(AppMain.getEnrollmentChild.size()!=0){
+
+            if (AppMain.getEnrollmentChild.get(0).getArmSlc().equals("null")) {
+
+                Toast.makeText(getApplicationContext(), "Children found", Toast.LENGTH_LONG).show();
+
+                fldGrpCheckChild.setVisibility(View.VISIBLE);
+
+                flag = true;
+            }else {
+                Toast.makeText(getApplicationContext(),"Children Already Randomized!",Toast.LENGTH_LONG).show();
             }
-            if (UpdateDB()) {
-                finish();
-                Toast.makeText(this, "Starting Form Ending Section", Toast.LENGTH_SHORT).show();
-                Intent endSec = new Intent(this, EndingActivity.class);
-                endSec.putExtra("complete", false);
-                startActivity(endSec);
-            } else {
-                Toast.makeText(this, "Failed to Update Database!", Toast.LENGTH_SHORT).show();
-            }
+        }else {
+             Toast.makeText(getApplicationContext(),"Children Not found",Toast.LENGTH_LONG).show();
+
+            flag = false;
         }
-
     }
+
+//    @OnClick(R.id.btn_End)
+//    void onBtnEndClick() {
+//        Toast.makeText(this, "Processing This Section", Toast.LENGTH_SHORT).show();
+//
+//        if (ValidateForm()) {
+//            try {
+//                SaveDraft();
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//            if (UpdateDB()) {
+//                finish();
+//                Toast.makeText(this, "Starting Form Ending Section", Toast.LENGTH_SHORT).show();
+//                Intent endSec = new Intent(this, EndingActivity.class);
+//                endSec.putExtra("complete", false);
+//                startActivity(endSec);
+//            } else {
+//                Toast.makeText(this, "Failed to Update Database!", Toast.LENGTH_SHORT).show();
+//            }
+//        }
+//
+//    }
 
 
     @OnClick(R.id.btn_Continue)
     void onBtnContinueClick() {
 
-        if (ValidateForm()) {
-            try {
-                SaveDraft();
-            } catch (JSONException e) {
-                e.printStackTrace();
+        if (flag) {
+            if (ValidateForm()) {
+                try {
+                    SaveDraft();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                if (UpdateDB()) {
+                    Toast.makeText(this, "Starting Next Section", Toast.LENGTH_SHORT).show();
+
+                    finish();
+
+                    startActivity(new Intent(this, BloodSamplingActivity.class));
+
+                } else {
+                    Toast.makeText(this, "Failed to Update Database!", Toast.LENGTH_SHORT).show();
+                }
             }
-            if (UpdateDB()) {
-                Toast.makeText(this, "Starting Next Section", Toast.LENGTH_SHORT).show();
-
-                finish();
-
-
-                startActivity(new Intent(this, BloodSamplingActivity.class));
-
-            } else {
-                Toast.makeText(this, "Failed to Update Database!", Toast.LENGTH_SHORT).show();
-            }
+        }else {
+            Toast.makeText(getApplicationContext(),"Click on CHECK button to check.",Toast.LENGTH_LONG).show();
         }
-
     }
 
 
@@ -226,7 +284,6 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
         SharedPreferences sharedPref = getSharedPreferences("tagName", MODE_PRIVATE);
 
         AppMain.fc = new FormsContract();
-        AppMain.cc = new ChildrenContract();
 
         AppMain.fc.setDevicetagID(sharedPref.getString("tagName", null));
         AppMain.fc.setDeviceID(Settings.Secure.getString(getApplicationContext().getContentResolver(),
@@ -517,7 +574,8 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Toast.makeText(getApplicationContext(), "You Can't go back", Toast.LENGTH_LONG).show();
+//        Toast.makeText(getApplicationContext(), "You Can't go back", Toast.LENGTH_LONG).show();
+        super.onBackPressed();
     }
 
 

@@ -49,11 +49,13 @@ public class AppointmentActivity extends Activity {
 
         Toast.makeText(this, "Processing This Section", Toast.LENGTH_SHORT).show();
 
-        finish();
+/*        finish();
         Toast.makeText(this, "Starting Form Ending Section", Toast.LENGTH_SHORT).show();
         Intent endSec = new Intent(this, EndingActivity.class);
         endSec.putExtra("complete", true);
-        startActivity(endSec);
+        startActivity(endSec);*/
+
+        AppMain.endActivity(this,this);
 
     }
 

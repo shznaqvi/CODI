@@ -108,7 +108,7 @@ public class VaccineActivity extends AppCompatActivity {
     void onBtnEndClick() {
         Toast.makeText(this, "Processing This Section", Toast.LENGTH_SHORT).show();
 
-        if (ValidateForm()) {
+/*        if (ValidateForm()) {
             try {
                 SaveDraft();
             } catch (JSONException e) {
@@ -123,7 +123,8 @@ public class VaccineActivity extends AppCompatActivity {
             } else {
                 Toast.makeText(this, "Failed to Update Database!", Toast.LENGTH_SHORT).show();
             }
-        }
+        }*/
+        AppMain.endActivity(this,this);
     }
 
 

@@ -107,6 +107,13 @@ public class AppMain extends Application {
     protected static LocationManager locationManager;
     Location location;
 
+
+    /*Enrollment Variables*/
+
+    public static List<ChildrenContract> getEnrollmentChild;
+
+
+
     public static int monthsBetweenDates(Date startDate, Date endDate) {
 
         Calendar start = Calendar.getInstance();

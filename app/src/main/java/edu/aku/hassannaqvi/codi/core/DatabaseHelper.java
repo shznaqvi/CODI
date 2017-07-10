@@ -48,14 +48,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + singleUser.REGION_DSS + " TEXT );";
 
     private static final String SQL_CREATE_CHILDREN = "CREATE TABLE " + ChildrenTable.TABLE_NAME + "("
-            + singleUser._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + ChildrenTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
             + ChildrenTable.COLUMN_DSSID + " TEXT,"
             + ChildrenTable.COLUMN_ARMGRP + " TEXT,"
             + ChildrenTable.COLUMN_ARMSLC + " TEXT,"
             + ChildrenTable.COLUMN_RANDOMIZATION_DATE + " TEXT,"
             + ChildrenTable.COLUMN_SYNCED + " TEXT,"
             + ChildrenTable.COLUMN_SYNCED_DATE + " TEXT"
-
             + " );";
 
     private static final String SQL_CREATE_ELIGIBILITY = "CREATE TABLE "
@@ -204,11 +203,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 values.put(ChildrenTable.COLUMN_ARMGRP, cc.getArmGrp());
                 values.put(ChildrenTable.COLUMN_ARMSLC, cc.getArmSlc());
                 values.put(ChildrenTable.COLUMN_RANDOMIZATION_DATE, cc.getArmSlc());
-
+                db.insert(ChildrenTable.TABLE_NAME, null, values);
             }
 
         } catch (Exception e) {
-            Log.d(TAG, "syncUser(e): " + e);
+            Log.d(TAG, "syncChildren(e): " + e);
         } finally {
             db.close();
         }
@@ -327,17 +326,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return count;
     }
 
-    public int updateSRandomization() {
+    public int updateSRandomization(String DSSID) {
         SQLiteDatabase db = this.getReadableDatabase();
 
 // New value for one column
         ContentValues values = new ContentValues();
-        values.put(FormsTable.COLUMN_SRANDOMIZATION, AppMain.fc.getsRandomization());
+        values.put(ChildrenTable.COLUMN_RANDOMIZATION_DATE, AppMain.cc.getRandDate());
+        values.put(ChildrenTable.COLUMN_ARMSLC, AppMain.cc.getArmSlc());
 // Which row to update, based on the ID
-        String selection = EligibilityTable._ID + " = ?";
-        String[] selectionArgs = {String.valueOf(AppMain.elc.get_ID())};
+        String selection = ChildrenTable.COLUMN_DSSID + " = ?";
+        String[] selectionArgs = {String.valueOf(DSSID)};
 
-        int count = db.update(EligibilityTable.TABLE_NAME,
+        int count = db.update(ChildrenTable.TABLE_NAME,
                 values,
                 selection,
                 selectionArgs);

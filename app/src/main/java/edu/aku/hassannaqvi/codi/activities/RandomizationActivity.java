@@ -17,7 +17,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import edu.aku.hassannaqvi.codi.R;
+import edu.aku.hassannaqvi.codi.contracts.ChildrenContract;
 import edu.aku.hassannaqvi.codi.core.AppMain;
+import edu.aku.hassannaqvi.codi.core.DatabaseHelper;
 
 public class RandomizationActivity extends AppCompatActivity {
 
@@ -67,6 +69,21 @@ public class RandomizationActivity extends AppCompatActivity {
         }
 
 
+        String arms = AppMain.getEnrollmentChild.get(0).getArmGrp();
+
+        Log.d("ArmsGrp",arms);
+
+        if (arms.equals("AB")){
+            cen27a.setEnabled(true);
+            cen27b.setEnabled(true);
+            cen27c.setEnabled(false);
+            cen27d.setEnabled(false);
+        }else {
+            cen27c.setEnabled(true);
+            cen27d.setEnabled(true);
+            cen27a.setEnabled(false);
+            cen27b.setEnabled(false);
+        }
 
     }
 
@@ -74,7 +91,7 @@ public class RandomizationActivity extends AppCompatActivity {
     void onBtnEndClick() {
         Toast.makeText(this, "Processing This Section", Toast.LENGTH_SHORT).show();
 
-        if (ValidateForm()) {
+/*        if (ValidateForm()) {
             try {
                 SaveDraft();
             } catch (JSONException e) {
@@ -89,7 +106,9 @@ public class RandomizationActivity extends AppCompatActivity {
             } else {
                 Toast.makeText(this, "Failed to Update Database!", Toast.LENGTH_SHORT).show();
             }
-        }
+        }*/
+
+        AppMain.endActivity(this,this);
     }
 
 
@@ -126,18 +145,21 @@ public class RandomizationActivity extends AppCompatActivity {
         sRandomization.put("cen27", cen27a.isChecked() ? "1" : cen27b.isChecked() ? "2" : cen27c.isChecked() ? "3"
                 : cen27d.isChecked() ? "4" : "0");
 */
-        AppMain.cc.setRandDate(cen25.getText().toString());
-        AppMain.cc.setArmSlc(String.valueOf(cen27.indexOfChild(findViewById(cen27.getCheckedRadioButtonId())) + 1));
+        AppMain.cc = new ChildrenContract();
 
+        AppMain.cc.setRandDate(cen25.getText().toString());
+//        AppMain.cc.setArmSlc(String.valueOf(cen27.indexOfChild(findViewById(cen27.getCheckedRadioButtonId())) + 1));
+        AppMain.cc.setArmSlc(cen27a.isChecked() ? "A" : cen27b.isChecked() ? "B" : cen27c.isChecked() ? "C"
+                : cen27d.isChecked() ? "D" : "0");
 
         Toast.makeText(this, "Validation Successful! - Saving Draft...", Toast.LENGTH_SHORT).show();
     }
 
     private boolean UpdateDB() {
 
-        /*DatabaseHelper db = new DatabaseHelper(this);
+        DatabaseHelper db = new DatabaseHelper(this);
 
-        int updcount = db.updateSenRandomization();
+        int updcount = db.updateSRandomization(AppMain.getEnrollmentChild.get(0).getDSSID());
 
         if (updcount == 1) {
             Toast.makeText(this, "Updating Database... Successful!", Toast.LENGTH_SHORT).show();
@@ -145,9 +167,7 @@ public class RandomizationActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
             return false;
-        }*/
-
-        return true;
+        }
     }
 
     public boolean ValidateForm() {

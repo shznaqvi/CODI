@@ -83,7 +83,7 @@ public class GetChildren extends AsyncTask<String, String, String> {
             DatabaseHelper db = new DatabaseHelper(mContext);
             try {
                 JSONArray jsonArray = new JSONArray(json);
-                db.syncUser(jsonArray);
+                db.getChildren(jsonArray);
                 pd.setMessage("Received: " + jsonArray.length());
                 pd.show();
             } catch (JSONException e) {

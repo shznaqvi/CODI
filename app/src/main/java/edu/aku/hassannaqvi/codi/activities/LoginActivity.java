@@ -59,6 +59,7 @@ import butterknife.OnClick;
 import edu.aku.hassannaqvi.codi.R;
 import edu.aku.hassannaqvi.codi.core.AppMain;
 import edu.aku.hassannaqvi.codi.core.DatabaseHelper;
+import edu.aku.hassannaqvi.codi.get.GetChildren;
 import edu.aku.hassannaqvi.codi.get.GetUsers;
 
 
@@ -563,6 +564,9 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                 public void run() {
                     Toast.makeText(LoginActivity.this, "Sync User", Toast.LENGTH_LONG).show();
                     new GetUsers(mContext).execute();
+
+                    Toast.makeText(LoginActivity.this, "Sync Childrens", Toast.LENGTH_LONG).show();
+                    new GetChildren(mContext).execute();
                 }
             });
 
