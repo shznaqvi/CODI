@@ -206,7 +206,7 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
     @OnClick(R.id.btn_Check) void onBtnCheckClick() {
         //TODO implement
 
-        AppMain.getEnrollmentChild = db.getChildByDSS(dssid.getText().toString());
+        AppMain.getEnrollmentChild = db.getChildByDSS(dssid.getText().toString().toUpperCase());
 
         if(AppMain.getEnrollmentChild.size()!=0){
 
