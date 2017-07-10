@@ -20,6 +20,7 @@ public class ChildrenContract {
     private String DSSID;
     private String armGrp; // hh02
     private String armSlc;  // Structure
+    private String randDate;  // Randomization Date & Time
 
     private String synced = "";
     private String synced_date = "";
@@ -33,6 +34,7 @@ public class ChildrenContract {
         this.DSSID = jsonObject.getString(ChildrenTable.COLUMN_DSSID);
         this.armGrp = jsonObject.getString(ChildrenTable.COLUMN_ARMGRP);
         this.armSlc = jsonObject.getString(ChildrenTable.COLUMN_ARMSLC);
+        this.randDate = jsonObject.getString(ChildrenTable.COLUMN_RANDOMIZATION_DATE);
 
         return this;
 
@@ -43,6 +45,7 @@ public class ChildrenContract {
         this.DSSID = cursor.getString(cursor.getColumnIndex(ChildrenTable.COLUMN_DSSID));
         this.armGrp = cursor.getString(cursor.getColumnIndex(ChildrenTable.COLUMN_ARMGRP));
         this.armSlc = cursor.getString(cursor.getColumnIndex(ChildrenTable.COLUMN_ARMSLC));
+        this.randDate = cursor.getString(cursor.getColumnIndex(ChildrenTable.COLUMN_RANDOMIZATION_DATE));
 
         return this;
     }
@@ -79,6 +82,14 @@ public class ChildrenContract {
         this.armSlc = armSlc;
     }
 
+    public String getRandDate() {
+        return randDate;
+    }
+
+    public void setRandDate(String randDate) {
+        this.randDate = randDate;
+    }
+
     public String getSynced() {
         return synced;
     }
@@ -102,6 +113,7 @@ public class ChildrenContract {
         json.put(ChildrenTable.COLUMN_DSSID, this.DSSID == null ? JSONObject.NULL : this.DSSID);
         json.put(ChildrenTable.COLUMN_ARMGRP, this.armGrp == null ? JSONObject.NULL : this.armGrp);
         json.put(ChildrenTable.COLUMN_ARMSLC, this.armSlc == null ? JSONObject.NULL : this.armSlc);
+        json.put(ChildrenTable.COLUMN_RANDOMIZATION_DATE, this.randDate == null ? JSONObject.NULL : this.randDate);
 
 
         return json;
@@ -116,6 +128,7 @@ public class ChildrenContract {
         public static final String COLUMN_DSSID = "dssid";
         public static final String COLUMN_ARMGRP = "armgrp";
         public static final String COLUMN_ARMSLC = "armslc";
+        public static final String COLUMN_RANDOMIZATION_DATE = "randdt";
         public static final String COLUMN_SYNCED = "synced";
         public static final String COLUMN_SYNCED_DATE = "synced_date";
 

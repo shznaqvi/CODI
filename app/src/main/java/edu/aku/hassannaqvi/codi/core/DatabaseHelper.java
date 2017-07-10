@@ -52,6 +52,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + ChildrenTable.COLUMN_DSSID + " TEXT,"
             + ChildrenTable.COLUMN_ARMGRP + " TEXT,"
             + ChildrenTable.COLUMN_ARMSLC + " TEXT,"
+            + ChildrenTable.COLUMN_RANDOMIZATION_DATE + " TEXT,"
             + ChildrenTable.COLUMN_SYNCED + " TEXT,"
             + ChildrenTable.COLUMN_SYNCED_DATE + " TEXT"
 
@@ -202,6 +203,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 values.put(ChildrenTable.COLUMN_DSSID, cc.getDSSID());
                 values.put(ChildrenTable.COLUMN_ARMGRP, cc.getArmGrp());
                 values.put(ChildrenTable.COLUMN_ARMSLC, cc.getArmSlc());
+                values.put(ChildrenTable.COLUMN_RANDOMIZATION_DATE, cc.getArmSlc());
 
             }
 
@@ -687,7 +689,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 ChildrenTable._ID,
                 ChildrenTable.COLUMN_DSSID,
                 ChildrenTable.COLUMN_ARMGRP,
-                ChildrenTable.COLUMN_ARMSLC
+                ChildrenTable.COLUMN_ARMSLC,
+                ChildrenTable.COLUMN_RANDOMIZATION_DATE
         };
         String whereClause = ChildrenTable.COLUMN_SYNCED + " is null and " + ChildrenTable.COLUMN_ARMSLC + " is not null";
         String[] whereArgs = null;
