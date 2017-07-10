@@ -14,10 +14,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
 
-import edu.aku.hassannaqvi.codi.contracts.ChildrenContract;
-import edu.aku.hassannaqvi.codi.contracts.UsersContract;
+import edu.aku.hassannaqvi.codi.contracts.ChildrenContract.ChildrenTable;
 import edu.aku.hassannaqvi.codi.core.AppMain;
 import edu.aku.hassannaqvi.codi.core.DatabaseHelper;
 
@@ -27,7 +25,7 @@ import edu.aku.hassannaqvi.codi.core.DatabaseHelper;
 
 public class GetChildren extends AsyncTask<String, String, String> {
 
-    private final String TAG = "GetUsers()";
+    private final String TAG = "GetChildren()";
     HttpURLConnection urlConnection;
     private Context mContext;
     private ProgressDialog pd;
@@ -40,7 +38,7 @@ public class GetChildren extends AsyncTask<String, String, String> {
     protected void onPreExecute() {
         super.onPreExecute();
         pd = new ProgressDialog(mContext);
-        pd.setTitle("Syncing Users");
+        pd.setTitle("Syncing Children");
         pd.setMessage("Getting connected to server...");
         pd.show();
 
@@ -52,7 +50,7 @@ public class GetChildren extends AsyncTask<String, String, String> {
         StringBuilder result = new StringBuilder();
 
         try {
-            URL url = new URL(AppMain._HOST_URL + ChildrenContract.ChildrenTable._URI);
+            URL url = new URL(AppMain._HOST_URL + ChildrenTable._URI);
             urlConnection = (HttpURLConnection) url.openConnection();
             if (urlConnection.getResponseCode() == HttpURLConnection.HTTP_OK) {
                 InputStream in = new BufferedInputStream(urlConnection.getInputStream());
@@ -61,7 +59,6 @@ public class GetChildren extends AsyncTask<String, String, String> {
 
                 String line;
                 while ((line = reader.readLine()) != null) {
-                    Log.i(TAG, "User In: " + line);
                     result.append(line);
                 }
             }
@@ -80,17 +77,11 @@ public class GetChildren extends AsyncTask<String, String, String> {
     @Override
     protected void onPostExecute(String result) {
 
-        //Do something with the JSON string
-
         String json = result;
-        //json = json.replaceAll("\\[", "").replaceAll("\\]","");
         Log.d(TAG, result);
         if (json.length() > 0) {
-            ArrayList<UsersContract> userArrayList;
             DatabaseHelper db = new DatabaseHelper(mContext);
             try {
-                userArrayList = new ArrayList<UsersContract>();
-                //JSONObject jsonObject = new JSONObject(json);
                 JSONArray jsonArray = new JSONArray(json);
                 db.syncUser(jsonArray);
                 pd.setMessage("Received: " + jsonArray.length());
@@ -98,7 +89,6 @@ public class GetChildren extends AsyncTask<String, String, String> {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            // db.getAllUsers();
         } else {
             pd.setMessage("Received: " + json.length() + "");
             pd.show();
