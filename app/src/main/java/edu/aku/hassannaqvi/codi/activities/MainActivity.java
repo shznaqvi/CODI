@@ -28,7 +28,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import edu.aku.hassannaqvi.codi.R;
 import edu.aku.hassannaqvi.codi.core.AndroidDatabaseManager;
-import edu.aku.hassannaqvi.codi.core.MainApp;
+import edu.aku.hassannaqvi.codi.core.AppMain;
 import edu.aku.hassannaqvi.codi.sync.SyncForms;
 
 public class MainActivity extends Activity {
@@ -60,14 +60,14 @@ public class MainActivity extends Activity {
 
         ButterKnife.bind(this);
 
-        if (MainApp.admin) {
+        if (AppMain.admin) {
             adminsec.setVisibility(View.VISIBLE);
         } else {
             adminsec.setVisibility(View.GONE);
         }
 
         // Reset working variables
-        MainApp.child_name = "Test";
+        AppMain.child_name = "Test";
 
         sharedPref = getSharedPreferences("tagName", MODE_PRIVATE);
         editor = sharedPref.edit();
@@ -151,7 +151,7 @@ public class MainActivity extends Activity {
 
 
 
-        if (MainApp.admin) {
+        if (AppMain.admin) {
             adminsec.setVisibility(View.VISIBLE);
             SharedPreferences syncPref = getSharedPreferences("SyncInfo", Context.MODE_PRIVATE);
             rSumText += "Last Data Download: \t" + syncPref.getString("LastDownSyncServer", "Never Updated");
@@ -300,7 +300,7 @@ public class MainActivity extends Activity {
 
     public void CheckCluster(View v) {
         /*Intent cluster_list = new Intent(getApplicationContext(), FormsList.class);
-        cluster_list.putExtra("dssid", MainApp.regionDss);
+        cluster_list.putExtra("dssid", AppMain.regionDss);
         startActivity(cluster_list);
 */
     }

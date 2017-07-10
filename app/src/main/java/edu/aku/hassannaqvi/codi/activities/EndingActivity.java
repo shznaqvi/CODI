@@ -15,8 +15,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import edu.aku.hassannaqvi.codi.R;
+import edu.aku.hassannaqvi.codi.core.AppMain;
 import edu.aku.hassannaqvi.codi.core.DatabaseHelper;
-import edu.aku.hassannaqvi.codi.core.MainApp;
 
 public class EndingActivity extends Activity {
 
@@ -85,7 +85,7 @@ public class EndingActivity extends Activity {
     private void SaveDraft() throws JSONException {
         Toast.makeText(this, "Saving Draft for  This Section", Toast.LENGTH_SHORT).show();
 
-        MainApp.enc.setIstatus(iStatusa.isChecked() ? "1" : iStatusb.isChecked() ? "2" : iStatusc.isChecked() ? "3"
+        AppMain.fc.setIstatus(iStatusa.isChecked() ? "1" : iStatusb.isChecked() ? "2" : iStatusc.isChecked() ? "3"
                 : iStatusd.isChecked() ? "4" : iStatuse.isChecked() ? "5" : iStatusf.isChecked() ? "6"
                 : iStatusg.isChecked() ? "7" : "0");
 

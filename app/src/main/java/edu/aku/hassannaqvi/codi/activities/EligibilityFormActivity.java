@@ -230,7 +230,7 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
         sel.put("celdoe", celdoe.getText().toString());
         sel.put("celner", celner.getText().toString());
 
-        //MainApp.elc.setsEnInfo(String.valueOf(sEnInfo));
+        //AppMain.elc.setsEnInfo(String.valueOf(sEnInfo));
 
 
         Toast.makeText(this, "Validation Successful! - Saving Draft...", Toast.LENGTH_SHORT).show();

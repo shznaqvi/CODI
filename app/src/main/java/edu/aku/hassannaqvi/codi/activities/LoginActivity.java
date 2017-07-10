@@ -57,8 +57,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import edu.aku.hassannaqvi.codi.R;
+import edu.aku.hassannaqvi.codi.core.AppMain;
 import edu.aku.hassannaqvi.codi.core.DatabaseHelper;
-import edu.aku.hassannaqvi.codi.core.MainApp;
 import edu.aku.hassannaqvi.codi.get.GetUsers;
 
 
@@ -185,7 +185,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         spUC.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                MainApp.areaCode = values.get(position);
+                AppMain.areaCode = values.get(position);
 
                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
@@ -496,8 +496,8 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                 DatabaseHelper db = new DatabaseHelper(LoginActivity.this);
                 if ((mEmail.equals("dmu@aku") && mPassword.equals("aku?dmu")) || db.Login(mEmail, mPassword)
                         || (mEmail.equals("test1234") && mPassword.equals("test1234"))) {
-                    MainApp.userName = mEmail;
-                    MainApp.admin = mEmail.contains("@");
+                    AppMain.userName = mEmail;
+                    AppMain.admin = mEmail.contains("@");
 
                         finish();
 

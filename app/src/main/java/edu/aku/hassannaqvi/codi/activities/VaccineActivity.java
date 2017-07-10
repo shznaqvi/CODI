@@ -21,8 +21,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import edu.aku.hassannaqvi.codi.R;
+import edu.aku.hassannaqvi.codi.core.AppMain;
 import edu.aku.hassannaqvi.codi.core.DatabaseHelper;
-import edu.aku.hassannaqvi.codi.core.MainApp;
 import io.blackbox_vision.datetimepickeredittext.view.DatePickerInputEditText;
 import io.blackbox_vision.datetimepickeredittext.view.TimePickerInputEditText;
 
@@ -93,7 +93,7 @@ public class VaccineActivity extends AppCompatActivity {
         });
 
         //============== Vaccine based on Arm ========
-        if (MainApp.arm == 3) {
+        if (AppMain.arm == 3) {
             cen29b.setEnabled(false);
             cen29b.setChecked(false);
         } else {
@@ -154,17 +154,17 @@ public class VaccineActivity extends AppCompatActivity {
     private void SaveDraft() throws JSONException {
         Toast.makeText(this, "Saving Draft for this Section", Toast.LENGTH_SHORT).show();
 
-        JSONObject sEnVaccine = new JSONObject();
+        JSONObject sVaccine = new JSONObject();
 
-        sEnVaccine.put("cen28", cen28a.isChecked() ? "1" : cen28b.isChecked() ? "2" : "0");
-        sEnVaccine.put("cen29", cen29a.isChecked() ? "1" : cen29b.isChecked() ? "2" : "0");
-        sEnVaccine.put("cen30", cen30.getText().toString());
-        sEnVaccine.put("cen31", cen31.getText().toString());
-        sEnVaccine.put("cen32", cen32a.isChecked() ? "1" : cen32b.isChecked() ? "2" : "0");
-        sEnVaccine.put("cen33a", cen33a.getText().toString());
-        sEnVaccine.put("cen33b", cen33b.getText().toString());
+        sVaccine.put("cen28", cen28a.isChecked() ? "1" : cen28b.isChecked() ? "2" : "0");
+        sVaccine.put("cen29", cen29a.isChecked() ? "1" : cen29b.isChecked() ? "2" : "0");
+        sVaccine.put("cen30", cen30.getText().toString());
+        sVaccine.put("cen31", cen31.getText().toString());
+        sVaccine.put("cen32", cen32a.isChecked() ? "1" : cen32b.isChecked() ? "2" : "0");
+        sVaccine.put("cen33a", cen33a.getText().toString());
+        sVaccine.put("cen33b", cen33b.getText().toString());
 
-        MainApp.enc.setsEnVaccine(String.valueOf(sEnVaccine));
+        AppMain.fc.setsVaccine(String.valueOf(sVaccine));
 
         Toast.makeText(this, "Validation Successful! - Saving Draft...", Toast.LENGTH_SHORT).show();
     }

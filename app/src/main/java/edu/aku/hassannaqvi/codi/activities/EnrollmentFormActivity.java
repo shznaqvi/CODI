@@ -31,8 +31,8 @@ import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import edu.aku.hassannaqvi.codi.R;
+import edu.aku.hassannaqvi.codi.core.AppMain;
 import edu.aku.hassannaqvi.codi.core.DatabaseHelper;
-import edu.aku.hassannaqvi.codi.core.MainApp;
 import io.blackbox_vision.datetimepickeredittext.view.DatePickerInputEditText;
 import io.blackbox_vision.datetimepickeredittext.view.TimePickerInputEditText;
 
@@ -340,7 +340,7 @@ public class EnrollmentFormActivity extends AppCompatActivity {
             }
         });
 
-        Calendar cal = getCalendarDate(MainApp.enrollDate);
+        Calendar cal = getCalendarDate(AppMain.enrollDate);
         cal.add(Calendar.DAY_OF_MONTH, 28);
         cendt.setText(sdf.format(cal.getTime()));
         centime.setText(new SimpleDateFormat("hh:mm").format(System.currentTimeMillis()));

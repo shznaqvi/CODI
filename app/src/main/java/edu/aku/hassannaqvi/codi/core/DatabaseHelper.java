@@ -18,6 +18,8 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
+import edu.aku.hassannaqvi.codi.contracts.ChildrenContract;
+import edu.aku.hassannaqvi.codi.contracts.ChildrenContract.ChildrenTable;
 import edu.aku.hassannaqvi.codi.contracts.EligibilityContract;
 import edu.aku.hassannaqvi.codi.contracts.EligibilityContract.EligibilityTable;
 import edu.aku.hassannaqvi.codi.contracts.FormsContract;
@@ -44,6 +46,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + singleUser.ROW_PASSWORD + " TEXT,"
             + singleUser.FULL_NAME + " TEXT,"
             + singleUser.REGION_DSS + " TEXT );";
+
+    private static final String SQL_CREATE_CHILDREN = "CREATE TABLE " + ChildrenTable.TABLE_NAME + "("
+            + singleUser._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + ChildrenTable.COLUMN_DSSID + " TEXT,"
+            + ChildrenTable.COLUMN_ARMGRP + " TEXT,"
+            + ChildrenTable.COLUMN_ARMSLC + " TEXT,"
+            + ChildrenTable.COLUMN_SYNCED + " TEXT,"
+            + ChildrenTable.COLUMN_SYNCED_DATE + " TEXT"
+
+            + " );";
 
     private static final String SQL_CREATE_ELIGIBILITY = "CREATE TABLE "
             + EligibilityTable.TABLE_NAME + "("
@@ -80,10 +92,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + FormsTable.COLUMN_USER + " TEXT,"
             + FormsTable.COLUMN_NEXTAPP + " TEXT,"
             + FormsTable.COLUMN_ISTATUS + " TEXT,"
-            + FormsTable.COLUMN_SENINFO + " TEXT,"
-            + FormsTable.COLUMN_SENBLOODSAMPLE + " TEXT,"
-            + FormsTable.COLUMN_SENRANDOMIZATION + " TEXT,"
-            + FormsTable.COLUMN_SENVACCINE + " TEXT,"
+            + FormsTable.COLUMN_SINFO + " TEXT,"
+            + FormsTable.COLUMN_SCHBF + " TEXT,"
+            + FormsTable.COLUMN_SBLOODSAMPLE + " TEXT,"
+            + FormsTable.COLUMN_SRANDOMIZATION + " TEXT,"
+            + FormsTable.COLUMN_SVACCINE + " TEXT,"
             + FormsTable.COLUMN_GPSLAT + " TEXT,"
             + FormsTable.COLUMN_GPSLNG + " TEXT,"
             + FormsTable.COLUMN_GPSDT + " TEXT,"
@@ -103,6 +116,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             "DROP TABLE IF EXISTS " + EligibilityTable.TABLE_NAME;
     private static final String SQL_DELETE_FORMS =
             "DROP TABLE IF EXISTS " + FormsTable.TABLE_NAME;
+    private static final String SQL_DELETE_CHILDREN =
+            "DROP TABLE IF EXISTS " + ChildrenTable.TABLE_NAME;
 
 
     private static final String SQL_SELECT_MOTHER_BY_CHILD =
@@ -129,6 +144,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_CREATE_USERS);
         db.execSQL(SQL_CREATE_ELIGIBILITY);
         db.execSQL(SQL_CREATE_FORMS);
+        db.execSQL(SQL_CREATE_CHILDREN);
 
 
     }
@@ -138,6 +154,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_DELETE_USERS);
         db.execSQL(SQL_DELETE_ELIGIBILITY);
         db.execSQL(SQL_DELETE_FORMS);
+        db.execSQL(SQL_DELETE_CHILDREN);
 
     }
 
@@ -169,6 +186,32 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    public void getChildren(JSONArray userlist) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(ChildrenTable.TABLE_NAME, null, null);
+        try {
+            JSONArray jsonArray = userlist;
+            for (int i = 0; i < jsonArray.length(); i++) {
+
+                JSONObject jsonObjectUser = jsonArray.getJSONObject(i);
+
+                ChildrenContract cc = new ChildrenContract();
+                cc.Sync(jsonObjectUser);
+                ContentValues values = new ContentValues();
+
+                values.put(ChildrenTable.COLUMN_DSSID, cc.getDSSID());
+                values.put(ChildrenTable.COLUMN_ARMGRP, cc.getArmGrp());
+                values.put(ChildrenTable.COLUMN_ARMSLC, cc.getArmSlc());
+
+            }
+
+        } catch (Exception e) {
+            Log.d(TAG, "syncUser(e): " + e);
+        } finally {
+            db.close();
+        }
+    }
+
 
     public boolean Login(String username, String password) throws SQLException {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -179,7 +222,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
                 if (mCursor.moveToFirst()) {
 /*
-                    MainApp.regionDss = mCursor.getString(mCursor.getColumnIndex("region_dss"));
+                    AppMain.regionDss = mCursor.getString(mCursor.getColumnIndex("region_dss"));
 */
                 }
                 return true;
@@ -240,10 +283,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(FormsTable.COLUMN_USER, enc.getUser());
         values.put(FormsTable.COLUMN_NEXTAPP, enc.getNextApp());
         values.put(FormsTable.COLUMN_ISTATUS, enc.getIstatus());
-        values.put(FormsTable.COLUMN_SENINFO, enc.getsInfo());
-     /*   values.put(FormsTable.COLUMN_SENBLOODSAMPLE, enc.getsBloodSample());
-        values.put(FormsTable.COLUMN_SENRANDOMIZATION, enc.getsRandomization());
-        values.put(FormsTable.COLUMN_SENVACCINE, enc.getsVaccine());*/
+        values.put(FormsTable.COLUMN_SINFO, enc.getsInfo());
+        values.put(FormsTable.COLUMN_SCHBF, enc.getsCHBF());
+        /*
+        values.put(FormsTable.COLUMN_SBLOODSAMPLE, fc.getsBloodSample());
+        values.put(FormsTable.COLUMN_SRANDOMIZATION, fc.getsRandomization());
+        values.put(FormsTable.COLUMN_SVACCINE, fc.getsVaccine());
+        */
         values.put(FormsTable.COLUMN_GPSLAT, enc.getGpsLat());
         values.put(FormsTable.COLUMN_GPSLNG, enc.getGpsLng());
         values.put(FormsTable.COLUMN_GPSDT, enc.getGpsDT());
@@ -261,16 +307,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return newRowId;
     }
 
-    public int updateSenBloodSample() {
+    public int updateSBloodSample() {
         SQLiteDatabase db = this.getReadableDatabase();
 
 // New value for one column
         ContentValues values = new ContentValues();
-        values.put(FormsTable.COLUMN_SENBLOODSAMPLE, MainApp.enc.getsBloodSample());
+        values.put(FormsTable.COLUMN_SBLOODSAMPLE, AppMain.fc.getsBloodSample());
 
 // Which row to update, based on the ID
         String selection = EligibilityTable._ID + " = ?";
-        String[] selectionArgs = {String.valueOf(MainApp.elc.get_ID())};
+        String[] selectionArgs = {String.valueOf(AppMain.elc.get_ID())};
 
         int count = db.update(EligibilityTable.TABLE_NAME,
                 values,
@@ -279,15 +325,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return count;
     }
 
-    public int updateSenRandomization() {
+    public int updateSRandomization() {
         SQLiteDatabase db = this.getReadableDatabase();
 
 // New value for one column
         ContentValues values = new ContentValues();
-        values.put(FormsTable.COLUMN_SENRANDOMIZATION, MainApp.enc.getsRandomization());
+        values.put(FormsTable.COLUMN_SRANDOMIZATION, AppMain.fc.getsRandomization());
 // Which row to update, based on the ID
         String selection = EligibilityTable._ID + " = ?";
-        String[] selectionArgs = {String.valueOf(MainApp.elc.get_ID())};
+        String[] selectionArgs = {String.valueOf(AppMain.elc.get_ID())};
 
         int count = db.update(EligibilityTable.TABLE_NAME,
                 values,
@@ -296,15 +342,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return count;
     }
 
-    public int updateSenVaccine() {
+    public int updateSVaccine() {
         SQLiteDatabase db = this.getReadableDatabase();
 
 // New value for one column
         ContentValues values = new ContentValues();
-        values.put(FormsTable.COLUMN_SENVACCINE, MainApp.enc.getsVaccine());
+        values.put(FormsTable.COLUMN_SVACCINE, AppMain.fc.getsVaccine());
 // Which row to update, based on the ID
         String selection = EligibilityTable._ID + " = ?";
-        String[] selectionArgs = {String.valueOf(MainApp.elc.get_ID())};
+        String[] selectionArgs = {String.valueOf(AppMain.elc.get_ID())};
 
         int count = db.update(EligibilityTable.TABLE_NAME,
                 values,
@@ -314,10 +360,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public List<EligibilityContract> getFormsByDSS(String dssID) {
-        List<EligibilityContract> formList = new ArrayList<EligibilityContract>();
+    public List<ChildrenContract> getChildByDSS(String dssID) {
+        List<ChildrenContract> childrenList = new ArrayList<>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM " + EligibilityTable.TABLE_NAME;
+        String selectQuery = "SELECT * FROM " + ChildrenTable.TABLE_NAME + " where " + ChildrenTable.COLUMN_DSSID + " = '" + dssID + "';";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor c = db.rawQuery(selectQuery, null);
@@ -325,17 +371,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // looping through all rows and adding to list
         if (c.moveToFirst()) {
             do {
-                EligibilityContract fc = new EligibilityContract();
-                formList.add(fc.Hydrate(c));
+                ChildrenContract cc = new ChildrenContract();
+                childrenList.add(cc.Hydrate(c));
             } while (c.moveToNext());
         }
 
         // return contact list
-        return formList;
+        return childrenList;
     }
 
 
-    public void updateSyncedForms(String id) {
+    public void updateSyncedEligibility(String id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
 // New value for one column
@@ -469,7 +515,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return allFC;
     }
 
-    public Collection<FormsContract> getAllEnrollment() {
+    public Collection<FormsContract> getAllForms() {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = null;
         String[] columns = {
@@ -484,10 +530,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 FormsTable.COLUMN_USER,
                 FormsTable.COLUMN_NEXTAPP,
                 FormsTable.COLUMN_ISTATUS,
-                FormsTable.COLUMN_SENINFO,
-                FormsTable.COLUMN_SENBLOODSAMPLE,
-                FormsTable.COLUMN_SENRANDOMIZATION,
-                FormsTable.COLUMN_SENVACCINE,
+                FormsTable.COLUMN_SINFO,
+                FormsTable.COLUMN_SCHBF,
+                FormsTable.COLUMN_SBLOODSAMPLE,
+                FormsTable.COLUMN_SRANDOMIZATION,
+                FormsTable.COLUMN_SVACCINE,
                 FormsTable.COLUMN_GPSLAT,
                 FormsTable.COLUMN_GPSLNG,
                 FormsTable.COLUMN_GPSDT,
@@ -547,10 +594,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 FormsTable.COLUMN_USER,
                 FormsTable.COLUMN_NEXTAPP,
                 FormsTable.COLUMN_ISTATUS,
-                FormsTable.COLUMN_SENINFO,
-                FormsTable.COLUMN_SENBLOODSAMPLE,
-                FormsTable.COLUMN_SENRANDOMIZATION,
-                FormsTable.COLUMN_SENVACCINE,
+                FormsTable.COLUMN_SINFO,
+                FormsTable.COLUMN_SCHBF,
+                FormsTable.COLUMN_SBLOODSAMPLE,
+                FormsTable.COLUMN_SRANDOMIZATION,
+                FormsTable.COLUMN_SVACCINE,
                 FormsTable.COLUMN_GPSLAT,
                 FormsTable.COLUMN_GPSLNG,
                 FormsTable.COLUMN_GPSDT,
@@ -592,6 +640,106 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             }
         }
         return allFC;
+    }
+
+    public int updateFormID() {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+// New value for one column
+        ContentValues values = new ContentValues();
+        values.put(FormsTable.COLUMN__UID, AppMain.fc.get_UID());
+
+// Which row to update, based on the ID
+        String selection = FormsTable._ID + " LIKE ?";
+        String[] selectionArgs = {String.valueOf(AppMain.fc.get_ID())};
+
+        int count = db.update(FormsTable.TABLE_NAME,
+                values,
+                selection,
+                selectionArgs);
+        return count;
+    }
+
+    public void updateSyncedForms(String id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+// New value for one column
+        ContentValues values = new ContentValues();
+        values.put(FormsTable.COLUMN_SYNCED, true);
+        values.put(FormsTable.COLUMN_SYNCED_DATE, new Date().toString());
+
+// Which row to update, based on the title
+        String where = FormsTable._ID + " LIKE ?";
+        String[] whereArgs = {id};
+
+        int count = db.update(
+                FormsTable.TABLE_NAME,
+                values,
+                where,
+                whereArgs);
+    }
+
+
+    public Collection<ChildrenContract> getUnsyncedChildren() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = null;
+        String[] columns = {
+                ChildrenTable._ID,
+                ChildrenTable.COLUMN_DSSID,
+                ChildrenTable.COLUMN_ARMGRP,
+                ChildrenTable.COLUMN_ARMSLC
+        };
+        String whereClause = ChildrenTable.COLUMN_SYNCED + " is null and " + ChildrenTable.COLUMN_ARMSLC + " is not null";
+        String[] whereArgs = null;
+        String groupBy = null;
+        String having = null;
+
+        String orderBy =
+                ChildrenTable._ID + " ASC";
+
+        Collection<ChildrenContract> allFC = new ArrayList<>();
+        try {
+            c = db.query(
+                    ChildrenTable.TABLE_NAME,  // The table to query
+                    columns,                   // The columns to return
+                    whereClause,               // The columns for the WHERE clause
+                    whereArgs,                 // The values for the WHERE clause
+                    groupBy,                   // don't group the rows
+                    having,                    // don't filter by row groups
+                    orderBy                    // The sort order
+            );
+            while (c.moveToNext()) {
+                ChildrenContract fc = new ChildrenContract();
+                allFC.add(fc.Hydrate(c));
+            }
+        } finally {
+            if (c != null) {
+                c.close();
+            }
+            if (db != null) {
+                db.close();
+            }
+        }
+        return allFC;
+    }
+
+    public void updateSyncedChildren(String id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+// New value for one column
+        ContentValues values = new ContentValues();
+        values.put(ChildrenTable.COLUMN_SYNCED, true);
+        values.put(ChildrenTable.COLUMN_SYNCED_DATE, new Date().toString());
+
+// Which row to update, based on the title
+        String where = ChildrenTable._ID + " LIKE ?";
+        String[] whereArgs = {id};
+
+        int count = db.update(
+                ChildrenTable.TABLE_NAME,
+                values,
+                where,
+                whereArgs);
     }
 
     public Collection<EligibilityContract> getTodayForms() {
@@ -693,11 +841,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 // New value for one column
         ContentValues values = new ContentValues();
-        values.put(EligibilityTable.COLUMN_ISTATUS, MainApp.elc.getIstatus());
+        values.put(EligibilityTable.COLUMN_ISTATUS, AppMain.elc.getIstatus());
 
 // Which row to update, based on the ID
-        String selection = " _ID = " + MainApp.elc.get_ID();
-        String[] selectionArgs = {String.valueOf(MainApp.elc.get_ID())};
+        String selection = " _ID = " + AppMain.elc.get_ID();
+        String[] selectionArgs = {String.valueOf(AppMain.elc.get_ID())};
 
         int count = db.update(EligibilityTable.TABLE_NAME,
                 values,

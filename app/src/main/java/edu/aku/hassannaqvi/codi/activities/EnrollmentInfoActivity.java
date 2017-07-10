@@ -30,9 +30,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import edu.aku.hassannaqvi.codi.R;
-import edu.aku.hassannaqvi.codi.contracts.EnrollmentContract;
+import edu.aku.hassannaqvi.codi.contracts.FormsContract;
+import edu.aku.hassannaqvi.codi.core.AppMain;
 import edu.aku.hassannaqvi.codi.core.DatabaseHelper;
-import edu.aku.hassannaqvi.codi.core.MainApp;
 import io.blackbox_vision.datetimepickeredittext.view.DatePickerInputEditText;
 
 public class EnrollmentInfoActivity extends AppCompatActivity {
@@ -253,49 +253,49 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
 
         SharedPreferences sharedPref = getSharedPreferences("tagName", MODE_PRIVATE);
 
-        MainApp.enc = new EnrollmentContract();
+        AppMain.fc = new FormsContract();
 
-        MainApp.enc.setDevicetagID(sharedPref.getString("tagName", null));
-        MainApp.enc.setDeviceID(Settings.Secure.getString(getApplicationContext().getContentResolver(),
+        AppMain.fc.setDevicetagID(sharedPref.getString("tagName", null));
+        AppMain.fc.setDeviceID(Settings.Secure.getString(getApplicationContext().getContentResolver(),
                 Settings.Secure.ANDROID_ID));
-        MainApp.enc.setFormDate((DateFormat.format("dd-MM-yyyy HH:mm", new Date())).toString());
-        MainApp.enc.setUser(MainApp.userName);
+        AppMain.fc.setFormDate((DateFormat.format("dd-MM-yyyy HH:mm", new Date())).toString());
+        AppMain.fc.setUser(AppMain.userName);
 
-        MainApp.enrollDate = cen01.getText().toString();
-        Calendar cal = getCalendarDate(MainApp.enrollDate);
+        AppMain.enrollDate = cen01.getText().toString();
+        Calendar cal = getCalendarDate(AppMain.enrollDate);
         cal.add(Calendar.DAY_OF_MONTH, 28);
-        MainApp.enc.setNextApp((new SimpleDateFormat("dd-MM-yyyy").format(cal.getTime()) + " " + new SimpleDateFormat("HH:mm").format(System.currentTimeMillis())));
+        AppMain.fc.setNextApp((new SimpleDateFormat("dd-MM-yyyy").format(cal.getTime()) + " " + new SimpleDateFormat("HH:mm").format(System.currentTimeMillis())));
 
-        JSONObject sEnInfo = new JSONObject();
+        JSONObject sInfo = new JSONObject();
 
-        sEnInfo.put("dssid", dssid.getText().toString());
-        sEnInfo.put("studyId", studyId.getText().toString());
-        sEnInfo.put("cen01", cen01.getText().toString());
+        sInfo.put("dssid", dssid.getText().toString());
+        sInfo.put("studyId", studyId.getText().toString());
+        sInfo.put("cen01", cen01.getText().toString());
 
-        sEnInfo.put("cen02", cen02a.isChecked() ? "1" : cen02b.isChecked() ? "2" : "0");
-        sEnInfo.put("cen03", cen03a.isChecked() ? "1" : cen03b.isChecked() ? "2" : "0");
-        sEnInfo.put("cen04", cen04.getText().toString());
-        sEnInfo.put("cen05", cen05.getText().toString());
-        sEnInfo.put("cen06", cen06.getText().toString());
-        sEnInfo.put("cen07w", cen07w.getText().toString());
-        sEnInfo.put("cen07m", cen07m.getText().toString());
-        sEnInfo.put("cen08", cen08a.isChecked() ? "1" : cen08b.isChecked() ? "2" : "0");
-        sEnInfo.put("cen09", cen09.getText().toString());
-        sEnInfo.put("cenfp", cenfp.getText().toString());
-        sEnInfo.put("cenmp", cenmp.getText().toString());
-        sEnInfo.put("cenac", cenac.getText().toString());
-        sEnInfo.put("cen10", cen10a.isChecked() ? "1" : cen10b.isChecked() ? "2" : cen10c.isChecked() ? "3" : cen10d.isChecked() ? "4" : cen10e.isChecked() ? "5" : cen10f.isChecked() ? "6" : cen1099.isChecked() ? "99" : "0");
-        sEnInfo.put("cen11", cen11a.isChecked() ? "1" : cen11b.isChecked() ? "2" : cen11c.isChecked() ? "3" : cen11d.isChecked() ? "4" : cen11e.isChecked() ? "5" : cen11f.isChecked() ? "6" : "0");
-        sEnInfo.put("cen12", cen12a.isChecked() ? "1" : cen12b.isChecked() ? "2" : cen12c.isChecked() ? "3" : cen12d.isChecked() ? "4" : "0");
-        sEnInfo.put("cen13", cen13.getText().toString());
-        sEnInfo.put("cen14", cen14.getText().toString());
-        sEnInfo.put("cen15", cen15a.isChecked() ? "1" : cen15b.isChecked() ? "2" : "0");
-        sEnInfo.put("cen16", cen16a.isChecked() ? "1" : cen16b.isChecked() ? "2" : cen16c.isChecked() ? "3" : "0");
-        sEnInfo.put("cen17", cen17a.isChecked() ? "1" : cen17b.isChecked() ? "2" : cen1788.isChecked() ? "3" : "0");
-        sEnInfo.put("cen1788x", cen1788x.getText().toString());
+        sInfo.put("cen02", cen02a.isChecked() ? "1" : cen02b.isChecked() ? "2" : "0");
+        sInfo.put("cen03", cen03a.isChecked() ? "1" : cen03b.isChecked() ? "2" : "0");
+        sInfo.put("cen04", cen04.getText().toString());
+        sInfo.put("cen05", cen05.getText().toString());
+        sInfo.put("cen06", cen06.getText().toString());
+        sInfo.put("cen07w", cen07w.getText().toString());
+        sInfo.put("cen07m", cen07m.getText().toString());
+        sInfo.put("cen08", cen08a.isChecked() ? "1" : cen08b.isChecked() ? "2" : "0");
+        sInfo.put("cen09", cen09.getText().toString());
+        sInfo.put("cenfp", cenfp.getText().toString());
+        sInfo.put("cenmp", cenmp.getText().toString());
+        sInfo.put("cenac", cenac.getText().toString());
+        sInfo.put("cen10", cen10a.isChecked() ? "1" : cen10b.isChecked() ? "2" : cen10c.isChecked() ? "3" : cen10d.isChecked() ? "4" : cen10e.isChecked() ? "5" : cen10f.isChecked() ? "6" : cen1099.isChecked() ? "99" : "0");
+        sInfo.put("cen11", cen11a.isChecked() ? "1" : cen11b.isChecked() ? "2" : cen11c.isChecked() ? "3" : cen11d.isChecked() ? "4" : cen11e.isChecked() ? "5" : cen11f.isChecked() ? "6" : "0");
+        sInfo.put("cen12", cen12a.isChecked() ? "1" : cen12b.isChecked() ? "2" : cen12c.isChecked() ? "3" : cen12d.isChecked() ? "4" : "0");
+        sInfo.put("cen13", cen13.getText().toString());
+        sInfo.put("cen14", cen14.getText().toString());
+        sInfo.put("cen15", cen15a.isChecked() ? "1" : cen15b.isChecked() ? "2" : "0");
+        sInfo.put("cen16", cen16a.isChecked() ? "1" : cen16b.isChecked() ? "2" : cen16c.isChecked() ? "3" : "0");
+        sInfo.put("cen17", cen17a.isChecked() ? "1" : cen17b.isChecked() ? "2" : cen1788.isChecked() ? "3" : "0");
+        sInfo.put("cen1788x", cen1788x.getText().toString());
 
 
-        MainApp.enc.setsEnInfo(String.valueOf(sEnInfo));
+        AppMain.fc.setsInfo(String.valueOf(sInfo));
 
         setGPS();
 
@@ -305,22 +305,21 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
     private boolean UpdateDB() {
         DatabaseHelper db = new DatabaseHelper(this);
 
-       /* Long updcount = db.addEnrollment(MainApp.enc);
-        MainApp.enc.set_ID(String.valueOf(updcount));
+        Long updcount = db.addEnrollment(AppMain.fc);
+        AppMain.fc.set_ID(String.valueOf(updcount));
 
         if (updcount != 0) {
             Toast.makeText(this, "Updating Database... Successful!", Toast.LENGTH_SHORT).show();
 
-            MainApp.enc.set_UID(
-                    (MainApp.enc.getDeviceID() + MainApp.enc.get_ID()));
-
+            AppMain.fc.set_UID(
+                    (AppMain.fc.getDeviceID() + AppMain.fc.get_ID()));
+            db.updateFormID();
             return true;
         } else {
             Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
             return false;
         }
-*/
-        return true;
+
     }
 
     public boolean ValidateForm() {
@@ -542,11 +541,11 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
 
             String date = DateFormat.format("dd-MM-yyyy HH:mm", Long.parseLong(GPSPref.getString("Time", "0"))).toString();
 
-            MainApp.enc.setGpsLat(GPSPref.getString("Latitude", "0"));
-            MainApp.enc.setGpsLng(GPSPref.getString("Longitude", "0"));
-            MainApp.enc.setGpsAcc(GPSPref.getString("Accuracy", "0"));
+            AppMain.fc.setGpsLat(GPSPref.getString("Latitude", "0"));
+            AppMain.fc.setGpsLng(GPSPref.getString("Longitude", "0"));
+            AppMain.fc.setGpsAcc(GPSPref.getString("Accuracy", "0"));
 //            AppMain.fc.setGpsTime(GPSPref.getString(date, "0")); // Timestamp is converted to date above
-            MainApp.enc.setGpsDT(date); // Timestamp is converted to date above
+            AppMain.fc.setGpsDT(date); // Timestamp is converted to date above
 
             Toast.makeText(this, "GPS set", Toast.LENGTH_SHORT).show();
 

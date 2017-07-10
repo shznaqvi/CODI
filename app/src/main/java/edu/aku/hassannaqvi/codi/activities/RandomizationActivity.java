@@ -19,7 +19,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import edu.aku.hassannaqvi.codi.R;
-import edu.aku.hassannaqvi.codi.core.MainApp;
+import edu.aku.hassannaqvi.codi.core.AppMain;
 import io.blackbox_vision.datetimepickeredittext.view.DatePickerInputEditText;
 import io.blackbox_vision.datetimepickeredittext.view.TimePickerInputEditText;
 
@@ -54,7 +54,7 @@ public class RandomizationActivity extends AppCompatActivity {
         cen25.setManager(getSupportFragmentManager());
         cen26.setManager(getSupportFragmentManager());
         cen25.setMaxDate(dateToday);
-        cen25.setMinDate(convertDateFormat(MainApp.enrollDate));
+        cen25.setMinDate(convertDateFormat(AppMain.enrollDate));
 
     }
 
@@ -108,16 +108,16 @@ public class RandomizationActivity extends AppCompatActivity {
     private void SaveDraft() throws JSONException {
         Toast.makeText(this, "Saving Draft for this Section", Toast.LENGTH_SHORT).show();
 
-        JSONObject sEnRandomization = new JSONObject();
+        JSONObject sRandomization = new JSONObject();
 
-        sEnRandomization.put("cen25", cen25.getText().toString());
-        sEnRandomization.put("cen26", cen26.getText().toString());
-        sEnRandomization.put("cen27", cen27a.isChecked() ? "1" : cen27b.isChecked() ? "2" : cen27c.isChecked() ? "3"
+        sRandomization.put("cen25", cen25.getText().toString());
+        sRandomization.put("cen26", cen26.getText().toString());
+        sRandomization.put("cen27", cen27a.isChecked() ? "1" : cen27b.isChecked() ? "2" : cen27c.isChecked() ? "3"
                 : cen27d.isChecked() ? "4" : "0");
 
-        MainApp.arm = cen27.indexOfChild(findViewById(cen27.getCheckedRadioButtonId())) + 1;
+        AppMain.arm = cen27.indexOfChild(findViewById(cen27.getCheckedRadioButtonId())) + 1;
 
-        MainApp.enc.setsEnRandomization(String.valueOf(sEnRandomization));
+        AppMain.fc.setsRandomization(String.valueOf(sRandomization));
 
         Toast.makeText(this, "Validation Successful! - Saving Draft...", Toast.LENGTH_SHORT).show();
     }

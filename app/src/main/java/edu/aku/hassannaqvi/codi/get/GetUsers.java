@@ -18,8 +18,8 @@ import java.util.ArrayList;
 
 import edu.aku.hassannaqvi.codi.contracts.UsersContract;
 import edu.aku.hassannaqvi.codi.contracts.UsersContract.singleUser;
+import edu.aku.hassannaqvi.codi.core.AppMain;
 import edu.aku.hassannaqvi.codi.core.DatabaseHelper;
-import edu.aku.hassannaqvi.codi.core.MainApp;
 
 /**
  * Created by hassan.naqvi on 11/30/2016.
@@ -52,7 +52,7 @@ public class GetUsers extends AsyncTask<String, String, String> {
         StringBuilder result = new StringBuilder();
 
         try {
-            URL url = new URL(MainApp._HOST_URL + singleUser._URI);
+            URL url = new URL(AppMain._HOST_URL + singleUser._URI);
             urlConnection = (HttpURLConnection) url.openConnection();
             if (urlConnection.getResponseCode() == HttpURLConnection.HTTP_OK) {
                 InputStream in = new BufferedInputStream(urlConnection.getInputStream());

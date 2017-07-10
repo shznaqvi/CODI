@@ -26,11 +26,11 @@ import edu.aku.hassannaqvi.codi.contracts.FormsContract;
  * Created by hassan.naqvi on 11/30/2016.
  */
 
-public class MainApp extends Application {
+public class AppMain extends Application {
 
     public static final String _IP = "43.245.131.159"; // Test PHP server
     public static final Integer _PORT = 8080; // Port - with colon (:)
-    public static final String _HOST_URL = "http://" + MainApp._IP + ":" + MainApp._PORT + "/codi/api/";
+    public static final String _HOST_URL = "http://" + AppMain._IP + ":" + AppMain._PORT + "/codi/api/";
 
     /*
         public static final String _IP = "43.245.131.159"; // Test server
@@ -95,7 +95,7 @@ public class MainApp extends Application {
     public static int selectedPos = -1;
     public static int selectedCh = -1;
     public static List<String> insertMem;
-    public static FormsContract enc;
+    public static FormsContract fc;
     protected static LocationManager locationManager;
     Location location;
 
@@ -152,7 +152,7 @@ public class MainApp extends Application {
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog,
                                                 int id) {
-//                                MainApp.memFlag--;
+//                                AppMain.memFlag--;
                                 activity.finish();
                             }
                         });

@@ -48,26 +48,27 @@ public class FormsContract {
 
 
     public FormsContract Sync(JSONObject jsonObject) throws JSONException {
-        this._ID = jsonObject.getString(VaccinesContract.EnrollmentTable._ID);
-        this._UID = jsonObject.getString(VaccinesContract.EnrollmentTable.COLUMN__UID);
-        this.DSSID = jsonObject.getString(VaccinesContract.EnrollmentTable.COLUMN_DSSID);
-        this.studyID = jsonObject.getString(VaccinesContract.EnrollmentTable.COLUMN_STUDYID);
-        this.childName = jsonObject.getString(VaccinesContract.EnrollmentTable.COLUMN_CHILDNAME);
-        this.formDate = jsonObject.getString(VaccinesContract.EnrollmentTable.COLUMN_FORMDATE);
-        this.formType = jsonObject.getString(VaccinesContract.EnrollmentTable.COLUMN_FORMTYPE);
-        this.user = jsonObject.getString(VaccinesContract.EnrollmentTable.COLUMN_USER);
-        this.istatus = jsonObject.getString(VaccinesContract.EnrollmentTable.COLUMN_ISTATUS);
-        this.nextApp = jsonObject.getString(VaccinesContract.EnrollmentTable.COLUMN_NEXTAPP);
-        this.sInfo = jsonObject.getString(VaccinesContract.EnrollmentTable.COLUMN_SENINFO);
-        this.sBloodSample = jsonObject.getString(VaccinesContract.EnrollmentTable.COLUMN_SENBLOODSAMPLE);
-        this.sRandomization = jsonObject.getString(VaccinesContract.EnrollmentTable.COLUMN_SENRANDOMIZATION);
-        this.sVaccine = jsonObject.getString(VaccinesContract.EnrollmentTable.COLUMN_SENVACCINE);
-        this.gpsLat = jsonObject.getString(VaccinesContract.EnrollmentTable.COLUMN_GPSLAT);
-        this.gpsLng = jsonObject.getString(VaccinesContract.EnrollmentTable.COLUMN_GPSLNG);
-        this.gpsDT = jsonObject.getString(VaccinesContract.EnrollmentTable.COLUMN_GPSDT);
-        this.gpsAcc = jsonObject.getString(VaccinesContract.EnrollmentTable.COLUMN_GPSACC);
-        this.deviceID = jsonObject.getString(VaccinesContract.EnrollmentTable.COLUMN_DEVICEID);
-        this.devicetagID = jsonObject.getString(VaccinesContract.EnrollmentTable.COLUMN_DEVICETAGID);
+        this._ID = jsonObject.getString(FormsTable._ID);
+        this._UID = jsonObject.getString(FormsTable.COLUMN__UID);
+        this.DSSID = jsonObject.getString(FormsTable.COLUMN_DSSID);
+        this.studyID = jsonObject.getString(FormsTable.COLUMN_STUDYID);
+        this.childName = jsonObject.getString(FormsTable.COLUMN_CHILDNAME);
+        this.formDate = jsonObject.getString(FormsTable.COLUMN_FORMDATE);
+        this.formType = jsonObject.getString(FormsTable.COLUMN_FORMTYPE);
+        this.user = jsonObject.getString(FormsTable.COLUMN_USER);
+        this.istatus = jsonObject.getString(FormsTable.COLUMN_ISTATUS);
+        this.nextApp = jsonObject.getString(FormsTable.COLUMN_NEXTAPP);
+        this.sInfo = jsonObject.getString(FormsTable.COLUMN_SINFO);
+        this.sCHBF = jsonObject.getString(FormsTable.COLUMN_SCHBF);
+        this.sBloodSample = jsonObject.getString(FormsTable.COLUMN_SBLOODSAMPLE);
+        this.sRandomization = jsonObject.getString(FormsTable.COLUMN_SRANDOMIZATION);
+        this.sVaccine = jsonObject.getString(FormsTable.COLUMN_SVACCINE);
+        this.gpsLat = jsonObject.getString(FormsTable.COLUMN_GPSLAT);
+        this.gpsLng = jsonObject.getString(FormsTable.COLUMN_GPSLNG);
+        this.gpsDT = jsonObject.getString(FormsTable.COLUMN_GPSDT);
+        this.gpsAcc = jsonObject.getString(FormsTable.COLUMN_GPSACC);
+        this.deviceID = jsonObject.getString(FormsTable.COLUMN_DEVICEID);
+        this.devicetagID = jsonObject.getString(FormsTable.COLUMN_DEVICETAGID);
 
 
         return this;
@@ -75,26 +76,27 @@ public class FormsContract {
     }
 
     public FormsContract Hydrate(Cursor cursor) {
-        this._ID = cursor.getString(cursor.getColumnIndex(VaccinesContract.EnrollmentTable._ID));
-        this._UID = cursor.getString(cursor.getColumnIndex(VaccinesContract.EnrollmentTable.COLUMN__UID));
-        this.DSSID = cursor.getString(cursor.getColumnIndex(VaccinesContract.EnrollmentTable.COLUMN_DSSID));
-        this.studyID = cursor.getString(cursor.getColumnIndex(VaccinesContract.EnrollmentTable.COLUMN_STUDYID));
-        this.childName = cursor.getString(cursor.getColumnIndex(VaccinesContract.EnrollmentTable.COLUMN_CHILDNAME));
-        this.formDate = cursor.getString(cursor.getColumnIndex(VaccinesContract.EnrollmentTable.COLUMN_FORMDATE));
-        this.formType = cursor.getString(cursor.getColumnIndex(VaccinesContract.EnrollmentTable.COLUMN_FORMTYPE));
-        this.user = cursor.getString(cursor.getColumnIndex(VaccinesContract.EnrollmentTable.COLUMN_USER));
-        this.istatus = cursor.getString(cursor.getColumnIndex(VaccinesContract.EnrollmentTable.COLUMN_ISTATUS));
-        this.nextApp = cursor.getString(cursor.getColumnIndex(VaccinesContract.EnrollmentTable.COLUMN_NEXTAPP));
-        this.sInfo = cursor.getString(cursor.getColumnIndex(VaccinesContract.EnrollmentTable.COLUMN_SENINFO));
-        this.sBloodSample = cursor.getString(cursor.getColumnIndex(VaccinesContract.EnrollmentTable.COLUMN_SENBLOODSAMPLE));
-        this.sRandomization = cursor.getString(cursor.getColumnIndex(VaccinesContract.EnrollmentTable.COLUMN_SENRANDOMIZATION));
-        this.sVaccine = cursor.getString(cursor.getColumnIndex(VaccinesContract.EnrollmentTable.COLUMN_SENVACCINE));
-        this.gpsLat = cursor.getString(cursor.getColumnIndex(VaccinesContract.EnrollmentTable.COLUMN_GPSLAT));
-        this.gpsLng = cursor.getString(cursor.getColumnIndex(VaccinesContract.EnrollmentTable.COLUMN_GPSLNG));
-        this.gpsDT = cursor.getString(cursor.getColumnIndex(VaccinesContract.EnrollmentTable.COLUMN_GPSDT));
-        this.gpsAcc = cursor.getString(cursor.getColumnIndex(VaccinesContract.EnrollmentTable.COLUMN_GPSACC));
-        this.deviceID = cursor.getString(cursor.getColumnIndex(VaccinesContract.EnrollmentTable.COLUMN_DEVICEID));
-        this.devicetagID = cursor.getString(cursor.getColumnIndex(VaccinesContract.EnrollmentTable.COLUMN_DEVICETAGID));
+        this._ID = cursor.getString(cursor.getColumnIndex(FormsTable._ID));
+        this._UID = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN__UID));
+        this.DSSID = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_DSSID));
+        this.studyID = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_STUDYID));
+        this.childName = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_CHILDNAME));
+        this.formDate = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_FORMDATE));
+        this.formType = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_FORMTYPE));
+        this.user = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_USER));
+        this.istatus = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_ISTATUS));
+        this.nextApp = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_NEXTAPP));
+        this.sInfo = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_SINFO));
+        this.sCHBF = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_SCHBF));
+        this.sBloodSample = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_SBLOODSAMPLE));
+        this.sRandomization = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_SRANDOMIZATION));
+        this.sVaccine = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_SVACCINE));
+        this.gpsLat = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_GPSLAT));
+        this.gpsLng = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_GPSLNG));
+        this.gpsDT = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_GPSDT));
+        this.gpsAcc = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_GPSACC));
+        this.deviceID = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_DEVICEID));
+        this.devicetagID = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_DEVICETAGID));
 
 
         return this;
@@ -106,27 +108,28 @@ public class FormsContract {
 
         JSONObject json = new JSONObject();
 
-        json.put(VaccinesContract.EnrollmentTable.COLUMN_PROJECTNAME, this.projectName);
-        json.put(VaccinesContract.EnrollmentTable._ID, this._ID == null ? JSONObject.NULL : this._ID);
-        json.put(VaccinesContract.EnrollmentTable.COLUMN__UID, this._UID == null ? JSONObject.NULL : this._UID);
-        json.put(VaccinesContract.EnrollmentTable.COLUMN_DSSID, this.DSSID == null ? JSONObject.NULL : this.DSSID);
-        json.put(VaccinesContract.EnrollmentTable.COLUMN_STUDYID, this.studyID == null ? JSONObject.NULL : this.studyID);
-        json.put(VaccinesContract.EnrollmentTable.COLUMN_CHILDNAME, this.childName == null ? JSONObject.NULL : this.childName);
-        json.put(VaccinesContract.EnrollmentTable.COLUMN_FORMDATE, this.formDate == null ? JSONObject.NULL : this.formDate);
-        json.put(VaccinesContract.EnrollmentTable.COLUMN_FORMTYPE, this.formType == null ? JSONObject.NULL : this.formType);
-        json.put(VaccinesContract.EnrollmentTable.COLUMN_USER, this.user == null ? JSONObject.NULL : this.user);
-        json.put(VaccinesContract.EnrollmentTable.COLUMN_ISTATUS, this.istatus == null ? JSONObject.NULL : this.istatus);
-        json.put(VaccinesContract.EnrollmentTable.COLUMN_NEXTAPP, this.nextApp == null ? JSONObject.NULL : this.nextApp);
-        json.put(VaccinesContract.EnrollmentTable.COLUMN_SENINFO, this.sInfo == null ? JSONObject.NULL : this.sInfo);
-        json.put(VaccinesContract.EnrollmentTable.COLUMN_SENBLOODSAMPLE, this.sBloodSample == null ? JSONObject.NULL : this.sBloodSample);
-        json.put(VaccinesContract.EnrollmentTable.COLUMN_SENRANDOMIZATION, this.sRandomization == null ? JSONObject.NULL : this.sRandomization);
-        json.put(VaccinesContract.EnrollmentTable.COLUMN_SENVACCINE, this.sVaccine == null ? JSONObject.NULL : this.sVaccine);
-        json.put(VaccinesContract.EnrollmentTable.COLUMN_GPSLAT, this.gpsLat == null ? JSONObject.NULL : this.gpsLat);
-        json.put(VaccinesContract.EnrollmentTable.COLUMN_GPSLNG, this.gpsLng == null ? JSONObject.NULL : this.gpsLng);
-        json.put(VaccinesContract.EnrollmentTable.COLUMN_GPSDT, this.gpsDT == null ? JSONObject.NULL : this.gpsDT);
-        json.put(VaccinesContract.EnrollmentTable.COLUMN_GPSACC, this.gpsAcc == null ? JSONObject.NULL : this.gpsAcc);
-        json.put(VaccinesContract.EnrollmentTable.COLUMN_DEVICEID, this.deviceID == null ? JSONObject.NULL : this.deviceID);
-        json.put(VaccinesContract.EnrollmentTable.COLUMN_DEVICETAGID, this.devicetagID == null ? JSONObject.NULL : this.devicetagID);
+        json.put(FormsTable.COLUMN_PROJECTNAME, this.projectName);
+        json.put(FormsTable._ID, this._ID == null ? JSONObject.NULL : this._ID);
+        json.put(FormsTable.COLUMN__UID, this._UID == null ? JSONObject.NULL : this._UID);
+        json.put(FormsTable.COLUMN_DSSID, this.DSSID == null ? JSONObject.NULL : this.DSSID);
+        json.put(FormsTable.COLUMN_STUDYID, this.studyID == null ? JSONObject.NULL : this.studyID);
+        json.put(FormsTable.COLUMN_CHILDNAME, this.childName == null ? JSONObject.NULL : this.childName);
+        json.put(FormsTable.COLUMN_FORMDATE, this.formDate == null ? JSONObject.NULL : this.formDate);
+        json.put(FormsTable.COLUMN_FORMTYPE, this.formType == null ? JSONObject.NULL : this.formType);
+        json.put(FormsTable.COLUMN_USER, this.user == null ? JSONObject.NULL : this.user);
+        json.put(FormsTable.COLUMN_ISTATUS, this.istatus == null ? JSONObject.NULL : this.istatus);
+        json.put(FormsTable.COLUMN_NEXTAPP, this.nextApp == null ? JSONObject.NULL : this.nextApp);
+        json.put(FormsTable.COLUMN_SINFO, this.sInfo == null ? JSONObject.NULL : new JSONObject(this.sInfo));
+        json.put(FormsTable.COLUMN_SCHBF, this.sCHBF == null ? JSONObject.NULL : new JSONObject(this.sCHBF));
+        json.put(FormsTable.COLUMN_SBLOODSAMPLE, this.sBloodSample == null ? JSONObject.NULL : new JSONObject(this.sBloodSample));
+        json.put(FormsTable.COLUMN_SRANDOMIZATION, this.sRandomization == null ? JSONObject.NULL : new JSONObject(this.sRandomization));
+        json.put(FormsTable.COLUMN_SVACCINE, this.sVaccine == null ? JSONObject.NULL : new JSONObject(this.sVaccine));
+        json.put(FormsTable.COLUMN_GPSLAT, this.gpsLat == null ? JSONObject.NULL : this.gpsLat);
+        json.put(FormsTable.COLUMN_GPSLNG, this.gpsLng == null ? JSONObject.NULL : this.gpsLng);
+        json.put(FormsTable.COLUMN_GPSDT, this.gpsDT == null ? JSONObject.NULL : this.gpsDT);
+        json.put(FormsTable.COLUMN_GPSACC, this.gpsAcc == null ? JSONObject.NULL : this.gpsAcc);
+        json.put(FormsTable.COLUMN_DEVICEID, this.deviceID == null ? JSONObject.NULL : this.deviceID);
+        json.put(FormsTable.COLUMN_DEVICETAGID, this.devicetagID == null ? JSONObject.NULL : this.devicetagID);
 
 
         return json;
@@ -226,6 +229,14 @@ public class FormsContract {
 
     public void setsInfo(String sInfo) {
         this.sInfo = sInfo;
+    }
+
+    public String getsCHBF() {
+        return sCHBF;
+    }
+
+    public void setsCHBF(String sCHBF) {
+        this.sCHBF = sCHBF;
     }
 
     public String getsBloodSample() {
@@ -335,17 +346,18 @@ public class FormsContract {
         public static final String COLUMN_USER = "user";
         public static final String COLUMN_NEXTAPP = "nextapp";
         public static final String COLUMN_ISTATUS = "istatus";
-        public static final String COLUMN_SENINFO = "seninfo";
-        public static final String COLUMN_SENBLOODSAMPLE = "senbloodsample";
-        public static final String COLUMN_SENRANDOMIZATION = "senrandomization";
-        public static final String COLUMN_SENVACCINE = "senvaccine";
+        public static final String COLUMN_SINFO = "sinfo";
+        public static final String COLUMN_SCHBF = "schbf";
+        public static final String COLUMN_SBLOODSAMPLE = "sbloodsample";
+        public static final String COLUMN_SRANDOMIZATION = "srandomization";
+        public static final String COLUMN_SVACCINE = "svaccine";
         public static final String COLUMN_GPSLAT = "gpslat";
         public static final String COLUMN_GPSLNG = "gpslng";
         public static final String COLUMN_GPSDT = "gpsdt";
         public static final String COLUMN_GPSACC = "gpsacc";
         public static final String COLUMN_DEVICEID = "deviceid";
         public static final String COLUMN_DEVICETAGID = "devicetagid";
-        public static final String COLUMN_SYNCED = "fsynced";
+        public static final String COLUMN_SYNCED = "synced";
         public static final String COLUMN_SYNCED_DATE = "synced_date";
 
 

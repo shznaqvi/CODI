@@ -26,8 +26,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import edu.aku.hassannaqvi.codi.R;
+import edu.aku.hassannaqvi.codi.core.AppMain;
 import edu.aku.hassannaqvi.codi.core.DatabaseHelper;
-import edu.aku.hassannaqvi.codi.core.MainApp;
 import io.blackbox_vision.datetimepickeredittext.view.DatePickerInputEditText;
 import io.blackbox_vision.datetimepickeredittext.view.TimePickerInputEditText;
 
@@ -83,7 +83,7 @@ public class BloodSamplingActivity extends AppCompatActivity {
         cen20.setManager(getSupportFragmentManager());
         cen21.setManager(getSupportFragmentManager());
         cen20.setMaxDate(dateToday);
-        cen20.setMinDate(convertDateFormat(MainApp.enrollDate));
+        cen20.setMinDate(convertDateFormat(AppMain.enrollDate));
 
 
         //================ Blood Sampling Skip Pattern============
@@ -204,7 +204,7 @@ public class BloodSamplingActivity extends AppCompatActivity {
             sEnBloodSample.put("cen24", cen24.getText().toString());
         }
 
-        MainApp.enc.setsEnBloodSample(String.valueOf(sEnBloodSample));
+        AppMain.fc.setsBloodSample(String.valueOf(sEnBloodSample));
 
         Toast.makeText(this, "Validation Successful! - Saving Draft...", Toast.LENGTH_SHORT).show();
     }

@@ -25,8 +25,8 @@ import java.util.Collection;
 
 import edu.aku.hassannaqvi.codi.contracts.EligibilityContract;
 import edu.aku.hassannaqvi.codi.contracts.FormsContract;
+import edu.aku.hassannaqvi.codi.core.AppMain;
 import edu.aku.hassannaqvi.codi.core.DatabaseHelper;
-import edu.aku.hassannaqvi.codi.core.MainApp;
 
 /**
  * Created by hassan.naqvi on 7/26/2016.
@@ -64,7 +64,7 @@ public class SyncForms extends AsyncTask<Void, Void, String> {
     @Override
     protected String doInBackground(Void... params) {
         try {
-            String url = MainApp._HOST_URL + EligibilityContract.EligibilityTable._URL;
+            String url = AppMain._HOST_URL + EligibilityContract.EligibilityTable._URL;
             Log.d(TAG, "doInBackground: URL " + url);
             return downloadUrl(url);
         } catch (IOException e) {

@@ -18,7 +18,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import edu.aku.hassannaqvi.codi.R;
-import edu.aku.hassannaqvi.codi.core.MainApp;
+import edu.aku.hassannaqvi.codi.core.AppMain;
 
 public class AppointmentActivity extends Activity {
 
@@ -36,7 +36,7 @@ public class AppointmentActivity extends Activity {
         setContentView(R.layout.activity_appointment);
         ButterKnife.bind(this);
 
-        Calendar cal = getCalendarDate(MainApp.enrollDate);
+        Calendar cal = getCalendarDate(AppMain.enrollDate);
         cal.add(Calendar.DAY_OF_MONTH, 28);
         cendt.setText("Date: " + sdf.format(cal.getTime()) + "\n\nTime : " + new SimpleDateFormat("HH:mm").format(System.currentTimeMillis()));
         //centime.setText(new SimpleDateFormat("hh:mm").format(System.currentTimeMillis()));
@@ -95,7 +95,7 @@ public class AppointmentActivity extends Activity {
         nextApp.put("cendt", cendt.getText().toString());
 
 
-        MainApp.enc.setNextApp(String.valueOf(nextApp));
+        AppMain.fc.setNextApp(String.valueOf(nextApp));
 
         Toast.makeText(this, "Validation Successful! - Saving Draft...", Toast.LENGTH_SHORT).show();
     }
