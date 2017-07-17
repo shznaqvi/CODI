@@ -23,6 +23,7 @@ import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import edu.aku.hassannaqvi.codi.R;
+import edu.aku.hassannaqvi.codi.contracts.EligibilityContract;
 import edu.aku.hassannaqvi.codi.core.AppMain;
 import edu.aku.hassannaqvi.codi.core.DatabaseHelper;
 import io.blackbox_vision.datetimepickeredittext.view.DatePickerInputEditText;
@@ -222,6 +223,9 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
 
     private void SaveDraft() throws JSONException {
         Toast.makeText(this, "Saving Draft for this Section", Toast.LENGTH_SHORT).show();
+
+        AppMain.elc = new EligibilityContract();
+
 
         JSONObject sel = new JSONObject();
 
