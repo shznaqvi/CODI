@@ -248,7 +248,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(EligibilityTable.COLUMN_CHILDNAME, elc.getChildName());
         values.put(EligibilityTable.COLUMN_FORMDATE, elc.getFormDate());
         values.put(EligibilityTable.COLUMN_USER, elc.getUser());
-        values.put(EligibilityTable.COLUMN_SEN, elc.getsEn());
+        values.put(EligibilityTable.COLUMN_SEN, elc.getsEl());
         values.put(EligibilityTable.COLUMN_GPSLAT, elc.getGpsLat());
         values.put(EligibilityTable.COLUMN_GPSLNG, elc.getGpsLng());
         values.put(EligibilityTable.COLUMN_GPSDT, elc.getGpsDT());
@@ -654,6 +654,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 // Which row to update, based on the ID
         String selection = FormsTable._ID + " LIKE ?";
         String[] selectionArgs = {String.valueOf(AppMain.fc.get_ID())};
+
+        int count = db.update(FormsTable.TABLE_NAME,
+                values,
+                selection,
+                selectionArgs);
+        return count;
+    }
+
+    public int updateELC() {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+// New value for one column
+        ContentValues values = new ContentValues();
+        values.put(FormsTable.COLUMN__UID, AppMain.elc.get_UID());
+
+// Which row to update, based on the ID
+        String selection = FormsTable._ID + " LIKE ?";
+        String[] selectionArgs = {String.valueOf(AppMain.elc.get_ID())};
 
         int count = db.update(FormsTable.TABLE_NAME,
                 values,

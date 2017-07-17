@@ -24,7 +24,7 @@ public class EligibilityContract {
 
 
     private String istatus = ""; // Interview Status
-    private String sEn = "";
+    private String sEl = "";
     //private String sB = ""; // commented out for Members
     //private String sC = ""; // Commented out for Deceased
 
@@ -51,7 +51,7 @@ public class EligibilityContract {
         this.formDate = jsonObject.getString(EligibilityTable.COLUMN_FORMDATE);
         this.user = jsonObject.getString(EligibilityTable.COLUMN_USER);
         this.istatus = jsonObject.getString(EligibilityTable.COLUMN_ISTATUS);
-        this.sEn = jsonObject.getString(EligibilityTable.COLUMN_SEN);
+        this.sEl = jsonObject.getString(EligibilityTable.COLUMN_SEN);
         this.gpsLat = jsonObject.getString(EligibilityTable.COLUMN_GPSLAT);
         this.gpsLng = jsonObject.getString(EligibilityTable.COLUMN_GPSLNG);
         this.gpsDT = jsonObject.getString(EligibilityTable.COLUMN_GPSDT);
@@ -72,7 +72,7 @@ public class EligibilityContract {
         this.formDate = cursor.getString(cursor.getColumnIndex(EligibilityTable.COLUMN_FORMDATE));
         this.user = cursor.getString(cursor.getColumnIndex(EligibilityTable.COLUMN_USER));
         this.istatus = cursor.getString(cursor.getColumnIndex(EligibilityTable.COLUMN_ISTATUS));
-        this.sEn = cursor.getString(cursor.getColumnIndex(EligibilityTable.COLUMN_SEN));
+        this.sEl = cursor.getString(cursor.getColumnIndex(EligibilityTable.COLUMN_SEN));
         this.gpsLat = cursor.getString(cursor.getColumnIndex(EligibilityTable.COLUMN_GPSLAT));
         this.gpsLng = cursor.getString(cursor.getColumnIndex(EligibilityTable.COLUMN_GPSLNG));
         this.gpsDT = cursor.getString(cursor.getColumnIndex(EligibilityTable.COLUMN_GPSDT));
@@ -100,7 +100,7 @@ public class EligibilityContract {
         json.put(EligibilityTable.COLUMN_FORMDATE, this.formDate == null ? JSONObject.NULL : this.formDate);
         json.put(EligibilityTable.COLUMN_USER, this.user == null ? JSONObject.NULL : this.user);
         json.put(EligibilityTable.COLUMN_ISTATUS, this.istatus == null ? JSONObject.NULL : this.istatus);
-        json.put(EligibilityTable.COLUMN_SEN, this.sEn == null ? JSONObject.NULL : this.sEn);
+        json.put(EligibilityTable.COLUMN_SEN, this.sEl == null ? JSONObject.NULL : this.sEl);
         json.put(EligibilityTable.COLUMN_GPSLAT, this.gpsLat == null ? JSONObject.NULL : this.gpsLat);
         json.put(EligibilityTable.COLUMN_GPSLNG, this.gpsLng == null ? JSONObject.NULL : this.gpsLng);
         json.put(EligibilityTable.COLUMN_GPSDT, this.gpsDT == null ? JSONObject.NULL : this.gpsDT);
@@ -180,12 +180,12 @@ public class EligibilityContract {
         this.istatus = istatus;
     }
 
-    public String getsEn() {
-        return sEn;
+    public String getsEl() {
+        return sEl;
     }
 
-    public void setsEn(String sEn) {
-        this.sEn = sEn;
+    public void setsEl(String sEl) {
+        this.sEl = sEl;
     }
 
     public String getGpsLat() {

@@ -1,8 +1,12 @@
 package edu.aku.hassannaqvi.codi.activities;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -16,6 +20,7 @@ import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -33,6 +38,8 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
 
     private static final String TAG = EligibilityFormActivity.class.getSimpleName();
 
+    @BindView(R.id.dca03)
+    EditText dca03;
     @BindView(R.id.celcn)
     EditText celcn;
     @BindView(R.id.celdob)
@@ -89,12 +96,12 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
     RadioButton cel07b;
     @BindView(R.id.fldGrpcelEligible)
     LinearLayout fldGrpcelEligible;
-    @BindView(R.id.celee)
-    RadioGroup celee;
-    @BindView(R.id.celeea)
-    RadioButton celeea;
-    @BindView(R.id.celeeb)
-    RadioButton celeeb;
+    /*  @BindView(R.id.celee)
+      RadioGroup celee;
+      @BindView(R.id.celeea)
+      RadioButton celeea;
+      @BindView(R.id.celeeb)
+      RadioButton celeeb;*/
     @BindView(R.id.celstdid)
     EditText celstdid;
     @BindView(R.id.celdoe)
@@ -106,9 +113,9 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
 
     @BindViews({R.id.celdob, R.id.celdoe})
     List<DatePickerInputEditText> dates;
-    @BindViews({R.id.cel03, R.id.cel04, R.id.cel05, R.id.cel06, R.id.cel07})
+    @BindViews({R.id.cel03, R.id.cel04, R.id.cel05, R.id.cel06, R.id.cel07, R.id.cel01})
     List<RadioGroup> celEligible;
-    @BindViews({R.id.cel05a, R.id.cel06a, R.id.cel07a})
+    @BindViews({R.id.cel05a, R.id.cel06a, R.id.cel07a, R.id.cel01a})
     List<RadioButton> celEligibleYes;
     String date14Weeks;
     String date9Months;
@@ -139,27 +146,7 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
             rg.setOnCheckedChangeListener(this);
         }
 
-        cel01.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
-                if (cel01a.isChecked()) {
-                    fldGrpcel02.setVisibility(View.VISIBLE);
-                } else {
-                    fldGrpcel02.setVisibility(View.GONE);
-                    cel02.clearCheck();
-                    cel03.clearCheck();
-                    cel04.clearCheck();
-                    cel05.clearCheck();
-                    cel06.clearCheck();
-                    cel07.clearCheck();
-                    celee.clearCheck();
-                    celstdid.setText(null);
-                    celdoe.setText(null);
-                    celner.setText(null);
 
-                }
-            }
-        });
 
         cel02.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -176,7 +163,9 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
             }
         });
 
+
     }
+
 
     @OnClick(R.id.btnNext)
     void onBtnNextClick() {
@@ -205,7 +194,7 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
     private boolean UpdateDB() {
         DatabaseHelper db = new DatabaseHelper(this);
 
-        long updcount = db.addEligibility(AppMain.elc);
+       /* long updcount = db.addEligibility(AppMain.elc);
 
         AppMain.elc.set_ID(String.valueOf(updcount));
 
@@ -214,18 +203,25 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
 
             AppMain.elc.set_UID(
                     (AppMain.elc.getDeviceID() + AppMain.elc.get_ID()));
-            db.updateFormID();
+            db.updateELC();
         } else {
             Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
-        }
+        }*/
         return true;
     }
 
     private void SaveDraft() throws JSONException {
         Toast.makeText(this, "Saving Draft for this Section", Toast.LENGTH_SHORT).show();
 
+        SharedPreferences sharedPref = getSharedPreferences("tagName", MODE_PRIVATE);
+
         AppMain.elc = new EligibilityContract();
 
+        AppMain.elc.setDevicetagID(sharedPref.getString("tagName", null));
+        AppMain.elc.setFormDate(new Date().toString());
+        AppMain.elc.setUser(AppMain.userName);
+        AppMain.elc.setDeviceID(Settings.Secure.getString(getApplicationContext().getContentResolver(),
+                Settings.Secure.ANDROID_ID));
 
         JSONObject sel = new JSONObject();
 
@@ -239,15 +235,15 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
         sel.put("cel05", cel05a.isChecked() ? "1" : cel05b.isChecked() ? "2" : "0");
         sel.put("cel06", cel06a.isChecked() ? "1" : cel06b.isChecked() ? "2" : "0");
         sel.put("cel07", cel07a.isChecked() ? "1" : cel07b.isChecked() ? "2" : "0");
-        sel.put("celee", celeea.isChecked() ? "1" : celeeb.isChecked() ? "2" : "0");
+        sel.put("celee", isYes() ? "1" : "2");
         sel.put("celstdid", celstdid.getText().toString());
         sel.put("celdoe", celdoe.getText().toString());
         sel.put("celner", celner.getText().toString());
 
-        //AppMain.dob = celdob.getText().toString();
+        AppMain.dob = celdob.getText().toString();
 
-        AppMain.elc.setsEn(String.valueOf(sel));
-
+        AppMain.elc.setsEl(String.valueOf(sel));
+        setGPS();
 
         Toast.makeText(this, "Validation Successful! - Saving Draft...", Toast.LENGTH_SHORT).show();
     }
@@ -295,7 +291,7 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
             cel01b.setError(null);
         }
 
-        if (cel01a.isChecked()) {
+
             // =================== cel02 ====================
             if (cel02.getCheckedRadioButtonId() == -1) {
                 Toast.makeText(this, "ERROR(Empty)" + getString(R.string.cel02), Toast.LENGTH_SHORT).show();
@@ -363,14 +359,14 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
 
             if ((isYes() && cel03a.isChecked()) || (isYes() && cel04a.isChecked())) {
                 // =================== celee ====================
-                if (celee.getCheckedRadioButtonId() == -1) {
+               /* if (celee.getCheckedRadioButtonId() == -1) {
                     Toast.makeText(this, "ERROR(Empty)" + getString(R.string.celee), Toast.LENGTH_SHORT).show();
                     celeeb.setError("This data is Required!");
                     Log.i(TAG, "celee: This Data is Required!");
                     return false;
                 } else {
                     celeeb.setError(null);
-                }
+                }*/
 
                 // =================== celstdid ====================
                 if (celstdid.getText().toString().isEmpty()) {
@@ -402,10 +398,6 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
                     celner.setError(null);
                 }
             }
-        }
-
-
-
 
         return true;
     }
@@ -422,14 +414,14 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
 
         } else if (isYes() && (cel03b.isChecked() || cel04b.isChecked())) {
             fldGrpcelEligible.setVisibility(View.GONE);
-            celee.clearCheck();
+            //  celee.clearCheck();
             celstdid.setText(null);
             celdoe.setText(null);
             fldGrprsn.setVisibility(View.VISIBLE);
 
         } else {
             fldGrpcelEligible.setVisibility(View.GONE);
-            celee.clearCheck();
+            //    celee.clearCheck();
             celstdid.setText(null);
             celdoe.setText(null);
             fldGrprsn.setVisibility(View.VISIBLE);
@@ -454,6 +446,39 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
     public void onBackPressed() {
 //        Toast.makeText(getApplicationContext(), "You Can't go back", Toast.LENGTH_LONG).show();
         super.onBackPressed();
+    }
+
+    public void setGPS() {
+        SharedPreferences GPSPref = getSharedPreferences("GPSCoordinates", Context.MODE_PRIVATE);
+
+//        String date = DateFormat.format("dd-MM-yyyy HH:mm", Long.parseLong(GPSPref.getString("Time", "0"))).toString();
+
+        try {
+            String lat = GPSPref.getString("Latitude", "0");
+            String lang = GPSPref.getString("Longitude", "0");
+            String acc = GPSPref.getString("Accuracy", "0");
+            String dt = GPSPref.getString("Time", "0");
+
+            if (lat == "0" && lang == "0") {
+                Toast.makeText(this, "Could not obtained GPS points", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "GPS set", Toast.LENGTH_SHORT).show();
+            }
+
+            String date = DateFormat.format("dd-MM-yyyy HH:mm", Long.parseLong(GPSPref.getString("Time", "0"))).toString();
+
+            AppMain.elc.setGpsLat(GPSPref.getString("Latitude", "0"));
+            AppMain.elc.setGpsLng(GPSPref.getString("Longitude", "0"));
+            AppMain.elc.setGpsAcc(GPSPref.getString("Accuracy", "0"));
+//            AppMain.fc.setGpsTime(GPSPref.getString(date, "0")); // Timestamp is converted to date above
+            AppMain.elc.setGpsDT(date); // Timestamp is converted to date above
+
+            Toast.makeText(this, "GPS set", Toast.LENGTH_SHORT).show();
+
+        } catch (Exception e) {
+            Log.e(TAG, "setGPS: " + e.getMessage());
+        }
+
     }
 
 }

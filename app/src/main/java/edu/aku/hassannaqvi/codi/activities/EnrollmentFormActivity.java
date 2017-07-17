@@ -468,7 +468,7 @@ public class EnrollmentFormActivity extends AppCompatActivity {
     private boolean UpdateDB() {
         DatabaseHelper db = new DatabaseHelper(this);
 
-       /* long updcount = db.addForm(AppMain.elc);
+      /* long updcount = db.addForm(AppMain.elc);
 
         AppMain.elc.setID(String.valueOf(updcount));
 
