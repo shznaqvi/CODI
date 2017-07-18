@@ -68,6 +68,7 @@ public class AppMain extends Application {
     public static String child_name = "TEST";
     public static EligibilityContract elc;
     public static String userName = "0000";
+    public static String dssID = "";
     public static String areaCode;
     public static String enrollDate;
     public static String arm;

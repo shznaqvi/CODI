@@ -1,10 +1,12 @@
 package edu.aku.hassannaqvi.codi.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -464,21 +466,22 @@ public class EnrollmentFormActivity extends AppCompatActivity {
         sen.put("cen32", cen32a.isChecked() ? "1" : cen32b.isChecked() ? "2" : "0");
         sen.put("cen33a", cen33a.getText().toString());
         sen.put("cen33b", cen33b.getText().toString());
-
-
         sen.put("cendt", cendt.getText().toString());
         sen.put("centime", centime.getText().toString());
 
 
         AppMain.fc.setsEN(String.valueOf(sen));
+        setGPS();
 
         Toast.makeText(this, "Validation Successful! - Saving Draft...", Toast.LENGTH_SHORT).show();
     }
 
     private boolean UpdateDB() {
+
         DatabaseHelper db = new DatabaseHelper(this);
 
         long updcount = db.addEnrollment(AppMain.fc);
+        AppMain.fc.set_ID(String.valueOf(updcount));
 
         if (updcount != 0) {
             Toast.makeText(this, "Updating Database... Successful!", Toast.LENGTH_SHORT).show();
@@ -873,6 +876,37 @@ public class EnrollmentFormActivity extends AppCompatActivity {
         return calendar;
     }
 
+    public void setGPS() {
+        SharedPreferences GPSPref = getSharedPreferences("GPSCoordinates", Context.MODE_PRIVATE);
 
+//        String date = DateFormat.format("dd-MM-yyyy HH:mm", Long.parseLong(GPSPref.getString("Time", "0"))).toString();
+
+        try {
+            String lat = GPSPref.getString("Latitude", "0");
+            String lang = GPSPref.getString("Longitude", "0");
+            String acc = GPSPref.getString("Accuracy", "0");
+            String dt = GPSPref.getString("Time", "0");
+
+            if (lat == "0" && lang == "0") {
+                Toast.makeText(this, "Could not obtained GPS points", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "GPS set", Toast.LENGTH_SHORT).show();
+            }
+
+            String date = DateFormat.format("dd-MM-yyyy HH:mm", Long.parseLong(GPSPref.getString("Time", "0"))).toString();
+
+            AppMain.fc.setGpsLat(GPSPref.getString("Latitude", "0"));
+            AppMain.fc.setGpsLng(GPSPref.getString("Longitude", "0"));
+            AppMain.fc.setGpsAcc(GPSPref.getString("Accuracy", "0"));
+//            AppMain.fc.setGpsTime(GPSPref.getString(date, "0")); // Timestamp is converted to date above
+            AppMain.fc.setGpsDT(date); // Timestamp is converted to date above
+
+            Toast.makeText(this, "GPS set", Toast.LENGTH_SHORT).show();
+
+        } catch (Exception e) {
+            Log.e(TAG, "setGPS: " + e.getMessage());
+        }
+
+    }
 
 }

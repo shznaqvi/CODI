@@ -298,6 +298,7 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
 
         AppMain.fc.setFormDate((DateFormat.format("dd-MM-yyyy HH:mm", new Date())).toString());
         AppMain.fc.setUser(AppMain.userName);
+        AppMain.elc.setDSSID(AppMain.dssID);
         AppMain.fc.setChildName(AppMain.elc.getChildName());
 
         Calendar cal = AppMain.getCalendarDate(AppMain.enrollDate);
