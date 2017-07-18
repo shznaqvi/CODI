@@ -69,7 +69,8 @@ public class AppMain extends Application {
     public static String userName = "0000";
     public static String areaCode;
     public static String enrollDate;
-    public static int arm = 0;
+    public static String arm;
+    public static String formType;
     public static String dob;
 
 
@@ -104,15 +105,12 @@ public class AppMain extends Application {
     public static List<String> insertMem;
     public static FormsContract fc;
     public static ChildrenContract cc;
+    public static List<ChildrenContract> getEnrollmentChild;
     protected static LocationManager locationManager;
-    Location location;
 
 
     /*Enrollment Variables*/
-
-    public static List<ChildrenContract> getEnrollmentChild;
-
-
+    Location location;
 
     public static int monthsBetweenDates(Date startDate, Date endDate) {
 

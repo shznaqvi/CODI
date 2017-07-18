@@ -1,6 +1,7 @@
 package edu.aku.hassannaqvi.codi.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -119,6 +120,7 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
     List<RadioButton> celEligibleYes;
     String date14Weeks;
     String date9Months;
+    Boolean flag = false;
 
 
     @Override
@@ -179,6 +181,13 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
                 Toast.makeText(this, "Starting Next Section", Toast.LENGTH_SHORT).show();
 
                 finish();
+
+                if (flag) {
+                    startActivity(new Intent(this, EnrollmentInfoActivity.class));
+                } else {
+                    AppMain.endActivity(this, this);
+
+                }
 
 /*
                 startActivity(new Intent(this, SectionBActivity.class));
@@ -243,6 +252,7 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
         AppMain.dob = celdob.getText().toString();
 
         AppMain.elc.setsEl(String.valueOf(sel));
+        AppMain.formType = "EL";
         setGPS();
 
         Toast.makeText(this, "Validation Successful! - Saving Draft...", Toast.LENGTH_SHORT).show();
@@ -407,12 +417,14 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
     public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
         if ((isYes() && cel03a.isChecked()) || (isYes() && cel04a.isChecked())) {
             // Show answer here
+            flag = true;
             fldGrpcelEligible.setVisibility(View.VISIBLE);
             fldGrprsn.setVisibility(View.GONE);
             celner.setText(null);
 
 
         } else if (isYes() && (cel03b.isChecked() || cel04b.isChecked())) {
+            flag = false;
             fldGrpcelEligible.setVisibility(View.GONE);
             //  celee.clearCheck();
             celstdid.setText(null);
@@ -420,6 +432,7 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
             fldGrprsn.setVisibility(View.VISIBLE);
 
         } else {
+            flag = false;
             fldGrpcelEligible.setVisibility(View.GONE);
             //    celee.clearCheck();
             celstdid.setText(null);
