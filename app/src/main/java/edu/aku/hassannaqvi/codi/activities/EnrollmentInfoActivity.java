@@ -295,10 +295,11 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
         AppMain.fc.setDevicetagID(sharedPref.getString("tagName", null));
         AppMain.fc.setDeviceID(Settings.Secure.getString(getApplicationContext().getContentResolver(),
                 Settings.Secure.ANDROID_ID));
+
         AppMain.fc.setFormDate((DateFormat.format("dd-MM-yyyy HH:mm", new Date())).toString());
         AppMain.fc.setUser(AppMain.userName);
+        AppMain.fc.setChildName(AppMain.elc.getChildName());
 
-        AppMain.enrollDate = cen01.getText().toString();
         Calendar cal = AppMain.getCalendarDate(AppMain.enrollDate);
         cal.add(Calendar.DAY_OF_MONTH, 28);
         AppMain.fc.setNextApp((new SimpleDateFormat("dd-MM-yyyy").format(cal.getTime()) + " " + new SimpleDateFormat("HH:mm").format(System.currentTimeMillis())));
@@ -308,12 +309,10 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
         sInfo.put("dssid", dssid.getText().toString());
         sInfo.put("studyId", studyId.getText().toString());
         sInfo.put("cen01", cen01.getText().toString());
-
-        sInfo.put("cen02", cen02a.isChecked() ? "1" : cen02b.isChecked() ? "2" : "0");
-        sInfo.put("cen03", cen03a.isChecked() ? "1" : cen03b.isChecked() ? "2" : "0");
-        sInfo.put("cen04", cen04.getText().toString());
-        sInfo.put("cen05", cen05.getText().toString());
-        sInfo.put("cen06", cen06.getText().toString());
+        sInfo.put("cen02", "1");
+        sInfo.put("cen03", "1");
+        sInfo.put("cen05", AppMain.elc.getMotherName());
+        sInfo.put("cen06", AppMain.elc.getDob());
         sInfo.put("cen07w", cen07w.getText().toString());
         sInfo.put("cen07m", cen07m.getText().toString());
         sInfo.put("cen08", cen08a.isChecked() ? "1" : cen08b.isChecked() ? "2" : "0");

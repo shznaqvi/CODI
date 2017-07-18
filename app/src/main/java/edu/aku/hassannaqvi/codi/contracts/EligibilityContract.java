@@ -19,6 +19,8 @@ public class EligibilityContract {
     private String DSSID = "";
     private String studyID = "";
     private String childName = "";
+    private String motherName = "";
+    private String dob = "";
     private String formDate = ""; // Date
     private String user = ""; // Interviewer
 
@@ -48,6 +50,8 @@ public class EligibilityContract {
         this.DSSID = jsonObject.getString(EligibilityTable.COLUMN_DSSID);
         this.studyID = jsonObject.getString(EligibilityTable.COLUMN_STUDYID);
         this.childName = jsonObject.getString(EligibilityTable.COLUMN_CHILDNAME);
+        this.motherName = jsonObject.getString(EligibilityTable.COLUMN_MOTHERNAME);
+        this.dob = jsonObject.getString(EligibilityTable.COLUMN_DOB);
         this.formDate = jsonObject.getString(EligibilityTable.COLUMN_FORMDATE);
         this.user = jsonObject.getString(EligibilityTable.COLUMN_USER);
         this.istatus = jsonObject.getString(EligibilityTable.COLUMN_ISTATUS);
@@ -69,6 +73,8 @@ public class EligibilityContract {
         this.DSSID = cursor.getString(cursor.getColumnIndex(EligibilityTable.COLUMN_DSSID));
         this.studyID = cursor.getString(cursor.getColumnIndex(EligibilityTable.COLUMN_STUDYID));
         this.childName = cursor.getString(cursor.getColumnIndex(EligibilityTable.COLUMN_CHILDNAME));
+        this.motherName = cursor.getString(cursor.getColumnIndex(EligibilityTable.COLUMN_MOTHERNAME));
+        this.dob = cursor.getString(cursor.getColumnIndex(EligibilityTable.COLUMN_DOB));
         this.formDate = cursor.getString(cursor.getColumnIndex(EligibilityTable.COLUMN_FORMDATE));
         this.user = cursor.getString(cursor.getColumnIndex(EligibilityTable.COLUMN_USER));
         this.istatus = cursor.getString(cursor.getColumnIndex(EligibilityTable.COLUMN_ISTATUS));
@@ -97,6 +103,8 @@ public class EligibilityContract {
         json.put(EligibilityTable.COLUMN_DSSID, this.DSSID == null ? JSONObject.NULL : this.DSSID);
         json.put(EligibilityTable.COLUMN_STUDYID, this.studyID == null ? JSONObject.NULL : this.studyID);
         json.put(EligibilityTable.COLUMN_CHILDNAME, this.childName == null ? JSONObject.NULL : this.childName);
+        json.put(EligibilityTable.COLUMN_MOTHERNAME, this.motherName == null ? JSONObject.NULL : this.motherName);
+        json.put(EligibilityTable.COLUMN_DOB, this.dob == null ? JSONObject.NULL : this.dob);
         json.put(EligibilityTable.COLUMN_FORMDATE, this.formDate == null ? JSONObject.NULL : this.formDate);
         json.put(EligibilityTable.COLUMN_USER, this.user == null ? JSONObject.NULL : this.user);
         json.put(EligibilityTable.COLUMN_ISTATUS, this.istatus == null ? JSONObject.NULL : this.istatus);
@@ -154,6 +162,22 @@ public class EligibilityContract {
 
     public void setChildName(String childName) {
         this.childName = childName;
+    }
+
+    public String getMotherName() {
+        return motherName;
+    }
+
+    public void setMotherName(String motherName) {
+        this.motherName = motherName;
+    }
+
+    public String getDob() {
+        return dob;
+    }
+
+    public void setDob(String dob) {
+        this.dob = dob;
     }
 
     public String getFormDate() {
@@ -264,6 +288,8 @@ public class EligibilityContract {
         public static final String COLUMN_DSSID = "dssid";
         public static final String COLUMN_STUDYID = "studyid";
         public static final String COLUMN_CHILDNAME = "childname";
+        public static final String COLUMN_MOTHERNAME = "mothername";
+        public static final String COLUMN_DOB = "dob";
         public static final String COLUMN_FORMDATE = "formdate";
         public static final String COLUMN_USER = "user";
         public static final String COLUMN_ISTATUS = "istatus";

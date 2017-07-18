@@ -68,7 +68,6 @@
 
             <Button
                 android:id="@+id/checkDSSID"
-                style="@style/buttons"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="2dp"
@@ -457,17 +456,35 @@
 
         </LinearLayout>
 
-
-        <Button
-            android:id="@+id/btnNext"
+        <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:orientation="horizontal"
+            android:paddingTop="32dp">
+
+            <Button
+                android:id="@+id/btn_End"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:onClick="endForm"
+                android:text="@string/end_interview"
+                android:textColor="#ff1e1e" />
+
+
+            <Button
+            android:id="@+id/btnNext"
+                android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
             android:layout_weight="1"
             android:onClick="submitSecA"
-            android:text="@string/saveForm"
-            android:textColor="@android:color/holo_green_light"
-            android:textSize="24sp" />
+                android:text="@string/nextSection"
+                android:textColor="@android:color/holo_green_light" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

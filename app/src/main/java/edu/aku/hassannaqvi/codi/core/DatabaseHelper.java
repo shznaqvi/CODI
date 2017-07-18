@@ -65,6 +65,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + EligibilityTable.COLUMN_DSSID + " TEXT,"
             + EligibilityTable.COLUMN_STUDYID + " TEXT,"
             + EligibilityTable.COLUMN_CHILDNAME + " TEXT,"
+            + EligibilityTable.COLUMN_MOTHERNAME + " TEXT,"
+            + EligibilityTable.COLUMN_DOB + " TEXT,"
             + EligibilityTable.COLUMN_FORMDATE + " TEXT,"
             + EligibilityTable.COLUMN_USER + " TEXT,"
             + EligibilityTable.COLUMN_SEN + " TEXT,"
@@ -246,6 +248,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(EligibilityTable.COLUMN_DSSID, elc.getDSSID());
         values.put(EligibilityTable.COLUMN_STUDYID, elc.getStudyID());
         values.put(EligibilityTable.COLUMN_CHILDNAME, elc.getChildName());
+        values.put(EligibilityTable.COLUMN_MOTHERNAME, elc.getMotherName());
+        values.put(EligibilityTable.COLUMN_DOB, elc.getDob());
         values.put(EligibilityTable.COLUMN_FORMDATE, elc.getFormDate());
         values.put(EligibilityTable.COLUMN_USER, elc.getUser());
         values.put(EligibilityTable.COLUMN_SEN, elc.getsEl());
@@ -413,6 +417,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 EligibilityTable.COLUMN_DSSID,
                 EligibilityTable.COLUMN_STUDYID,
                 EligibilityTable.COLUMN_CHILDNAME,
+                EligibilityTable.COLUMN_MOTHERNAME,
+                EligibilityTable.COLUMN_DOB,
                 EligibilityTable.COLUMN_FORMDATE,
                 EligibilityTable.COLUMN_USER,
                 EligibilityTable.COLUMN_SEN,
@@ -470,6 +476,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 EligibilityTable.COLUMN_DSSID,
                 EligibilityTable.COLUMN_STUDYID,
                 EligibilityTable.COLUMN_CHILDNAME,
+                EligibilityTable.COLUMN_MOTHERNAME,
+                EligibilityTable.COLUMN_DOB,
                 EligibilityTable.COLUMN_FORMDATE,
                 EligibilityTable.COLUMN_USER,
                 EligibilityTable.COLUMN_SEN,

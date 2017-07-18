@@ -168,6 +168,16 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
 
     }
 
+    @OnClick(R.id.checkDSSID)
+    void onCheckDSSIDClick() {
+        //TODO implement
+    }
+
+
+    @OnClick(R.id.btn_End)
+    void onBtnEndClick() {
+        //TODO implement
+    }
 
     @OnClick(R.id.btnNext)
     void onBtnNextClick() {
@@ -203,7 +213,7 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
     private boolean UpdateDB() {
         DatabaseHelper db = new DatabaseHelper(this);
 
-       /* long updcount = db.addEligibility(AppMain.elc);
+        long updcount = db.addEligibility(AppMain.elc);
 
         AppMain.elc.set_ID(String.valueOf(updcount));
 
@@ -215,7 +225,7 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
             db.updateELC();
         } else {
             Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
-        }*/
+        }
         return true;
     }
 
@@ -254,6 +264,7 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
 
         AppMain.elc.setsEl(String.valueOf(sel));
         AppMain.formType = "EL";
+
         setGPS();
 
         Toast.makeText(this, "Validation Successful! - Saving Draft...", Toast.LENGTH_SHORT).show();

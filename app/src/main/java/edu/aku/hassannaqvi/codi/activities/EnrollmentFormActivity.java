@@ -1,6 +1,7 @@
 package edu.aku.hassannaqvi.codi.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
@@ -31,6 +32,7 @@ import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import edu.aku.hassannaqvi.codi.R;
+import edu.aku.hassannaqvi.codi.contracts.FormsContract;
 import edu.aku.hassannaqvi.codi.core.AppMain;
 import edu.aku.hassannaqvi.codi.core.DatabaseHelper;
 import io.blackbox_vision.datetimepickeredittext.view.DatePickerInputEditText;
@@ -410,6 +412,11 @@ public class EnrollmentFormActivity extends AppCompatActivity {
     private void SaveDraft() throws JSONException {
         Toast.makeText(this, "Saving Draft for this Section", Toast.LENGTH_SHORT).show();
 
+        SharedPreferences sharedPref = getSharedPreferences("tagName", MODE_PRIVATE);
+
+        AppMain.fc = new FormsContract();
+
+
         JSONObject sen = new JSONObject();
 
         //sen.put("dssid", dssid.getText().toString());
@@ -462,25 +469,27 @@ public class EnrollmentFormActivity extends AppCompatActivity {
         sen.put("cendt", cendt.getText().toString());
         sen.put("centime", centime.getText().toString());
 
+
+        AppMain.fc.setsEN(String.valueOf(sen));
+
         Toast.makeText(this, "Validation Successful! - Saving Draft...", Toast.LENGTH_SHORT).show();
     }
 
     private boolean UpdateDB() {
         DatabaseHelper db = new DatabaseHelper(this);
 
-      /* long updcount = db.addForm(AppMain.elc);
-
-        AppMain.elc.setID(String.valueOf(updcount));
+        long updcount = db.addEnrollment(AppMain.fc);
 
         if (updcount != 0) {
             Toast.makeText(this, "Updating Database... Successful!", Toast.LENGTH_SHORT).show();
 
-            AppMain.elc.setUID(
-                    (AppMain.elc.getDeviceID() + AppMain.elc.getID()));
+            AppMain.fc.set_UID(
+                    (AppMain.fc.getDeviceID() + AppMain.fc.get_ID()));
             db.updateFormID();
+
         } else {
             Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
-        }*/
+        }
         return true;
     }
 
