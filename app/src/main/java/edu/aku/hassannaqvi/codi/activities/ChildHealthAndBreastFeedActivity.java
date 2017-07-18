@@ -155,8 +155,14 @@ public class ChildHealthAndBreastFeedActivity extends Activity {
 
                 finish();
 
+                if (AppMain.formType.equals("V3") && AppMain.arm.equals("AB")) {
+                    startActivity(new Intent(this, VaccineActivity.class));
+                } else {
+                    startActivity(new Intent(this, BloodSamplingActivity.class));
+                }
 
-                startActivity(new Intent(this, BloodSamplingActivity.class));
+
+                //startActivity(new Intent(this, BloodSamplingActivity.class));
 
             } else {
                 Toast.makeText(this, "Failed to Update Database!", Toast.LENGTH_SHORT).show();

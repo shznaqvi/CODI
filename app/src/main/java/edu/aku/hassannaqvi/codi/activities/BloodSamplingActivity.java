@@ -180,8 +180,12 @@ public class BloodSamplingActivity extends AppCompatActivity {
 
                 finish();
 
+                if (AppMain.formType.equals("EN")) {
 
-                startActivity(new Intent(this, RandomizationActivity.class));
+                    startActivity(new Intent(this, RandomizationActivity.class));
+                } else {
+                    startActivity(new Intent(this, AppointmentActivity.class));
+                }
 
             } else {
                 Toast.makeText(this, "Failed to Update Database!", Toast.LENGTH_SHORT).show();

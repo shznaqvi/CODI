@@ -64,7 +64,7 @@
                 android:layout_weight="1"
                 android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
                 android:inputType="text"
-                android:maxLength="11" />
+                android:maxLength="12" />
 
             <Button
                 android:id="@+id/checkDSSID"

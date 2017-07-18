@@ -15,14 +15,12 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -30,7 +28,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import edu.aku.hassannaqvi.codi.R;
-import edu.aku.hassannaqvi.codi.contracts.ChildrenContract;
 import edu.aku.hassannaqvi.codi.contracts.FormsContract;
 import edu.aku.hassannaqvi.codi.core.AppMain;
 import edu.aku.hassannaqvi.codi.core.DatabaseHelper;
@@ -170,11 +167,13 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enrollment_info);
         ButterKnife.bind(this);
+
         dateToday = new SimpleDateFormat("dd/MM/yyyy").format(System.currentTimeMillis());
 
         cen01.setManager(getSupportFragmentManager());
         cen01.setMaxDate(dateToday);
         cen06.setManager(getSupportFragmentManager());
+
         cen06.setMaxDate(dateToday);
 
         //double ageInDays = AppMain.ageInDays(cen06.); //
@@ -266,7 +265,15 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
 
                     finish();
 
-                    startActivity(new Intent(this, BloodSamplingActivity.class));
+                    /*if(AppMain.formType.equals("V3") && AppMain.arm.equals("AB"))
+                    {
+                        startActivity(new Intent(this, VaccineActivity.class));
+                    }else {
+                        startActivity(new Intent(this, BloodSamplingActivity.class));
+                    }
+*/
+                    startActivity(new Intent(this, ChildHealthAndBreastFeedActivity.class));
+
 
                 } else {
                     Toast.makeText(this, "Failed to Update Database!", Toast.LENGTH_SHORT).show();

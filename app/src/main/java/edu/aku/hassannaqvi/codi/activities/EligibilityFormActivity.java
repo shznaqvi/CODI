@@ -233,6 +233,7 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
                 Settings.Secure.ANDROID_ID));
 
         JSONObject sel = new JSONObject();
+        AppMain.elc.setDSSID(dca03.getText().toString());
 
         sel.put("celcn", celcn.getText().toString());
         sel.put("celdob", celdob.getText().toString());

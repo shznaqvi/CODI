@@ -41,8 +41,8 @@ public class EnrollmentFormActivity extends AppCompatActivity {
     private static final String TAG = EnrollmentFormActivity.class.getSimpleName();
     final SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 
-    @BindView(R.id.dssid)
-    TextView dssid;
+    /*@BindView(R.id.dssid)
+    TextView dssid;*/
     @BindView(R.id.studyId)
     TextView studyId;
     @BindView(R.id.cen01)
@@ -412,7 +412,7 @@ public class EnrollmentFormActivity extends AppCompatActivity {
 
         JSONObject sen = new JSONObject();
 
-        sen.put("dssid", dssid.getText().toString());
+        //sen.put("dssid", dssid.getText().toString());
         sen.put("studyId", studyId.getText().toString());
         sen.put("cen01", cen01.getText().toString());
         sen.put("cen02", cen02a.isChecked() ? "1" : cen02b.isChecked() ? "2" : "0");

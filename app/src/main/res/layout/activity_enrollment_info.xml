@@ -37,12 +37,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="@string/DSSID" />
+            android:text="@string/DSSID"
+            android:visibility="gone" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <EditText
                 android:id="@+id/dssid"
@@ -65,10 +67,10 @@
 
 
         <LinearLayout
+            android:id="@+id/fldGrpCheckChild"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:id="@+id/fldGrpCheckChild"
             android:visibility="gone">
 
             <TextView
@@ -605,8 +607,8 @@
                 android:enabled="false"
                 android:onClick="endInterview"
                 android:text="@string/end_interview"
-                android:visibility="gone"
-                android:textColor="#ff1e1e" />
+                android:textColor="#ff1e1e"
+                android:visibility="gone" />
 
             <!--'onClick' for btn_End will NOT change and always call 'endInterview'-->
 
