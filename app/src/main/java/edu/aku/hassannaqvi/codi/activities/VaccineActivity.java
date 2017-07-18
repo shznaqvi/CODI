@@ -58,6 +58,12 @@ public class VaccineActivity extends AppCompatActivity {
     EditText cen33a;
     @BindView(R.id.cen33b)
     EditText cen33b;
+    @BindView(R.id.cen34a)
+    EditText cen34a;
+    @BindView(R.id.cen34b)
+    EditText cen34b;
+    @BindView(R.id.fldGrpcen34)
+    LinearLayout fldGrpcen34;
 
     String dateToday;
 
@@ -88,6 +94,8 @@ public class VaccineActivity extends AppCompatActivity {
                     cen32.clearCheck();
                     cen33a.setText(null);
                     cen33b.setText(null);
+                    cen34a.setText(null);
+                    cen34b.setText(null);
                 }
             }
         });
@@ -100,6 +108,13 @@ public class VaccineActivity extends AppCompatActivity {
             cen29b.setEnabled(true);
         }
 
+        if (cen32a.isChecked()) {
+            fldGrpcen34.setVisibility(View.GONE);
+            cen34a.setText(null);
+            cen34b.setText(null);
+        } else {
+            fldGrpcen34.setVisibility(View.VISIBLE);
+        }
 
 
     }
@@ -164,6 +179,8 @@ public class VaccineActivity extends AppCompatActivity {
         sVaccine.put("cen32", cen32a.isChecked() ? "1" : cen32b.isChecked() ? "2" : "0");
         sVaccine.put("cen33a", cen33a.getText().toString());
         sVaccine.put("cen33b", cen33b.getText().toString());
+        sVaccine.put("cen34a", cen34a.getText().toString());
+        sVaccine.put("cen34b", cen34b.getText().toString());
 
         AppMain.fc.setsVaccine(String.valueOf(sVaccine));
 
@@ -238,6 +255,30 @@ public class VaccineActivity extends AppCompatActivity {
             } else {
                 cen32a.setError(null);
             }
+
+            if (cen32b.isChecked()) {
+                if (cen34a.getText().toString().isEmpty() && cen34b.getText().toString().isEmpty()) {
+                    Toast.makeText(this, "ERROR(Empty)" + getString(R.string.cen34), Toast.LENGTH_SHORT).show();
+                    cen34a.setError("This data is Required!");
+
+                    Log.i(TAG, "cen34: This Data is Required!");
+                    return false;
+                } else {
+                    cen34a.setError(null);
+                }
+            }
+
+            if (cen33a.getText().toString().isEmpty() && cen33b.getText().toString().isEmpty()) {
+                Toast.makeText(this, "ERROR(Empty)" + getString(R.string.cen33), Toast.LENGTH_SHORT).show();
+                cen33a.setError("This data is Required!");
+
+                Log.i(TAG, "cen33: This Data is Required!");
+                return false;
+            } else {
+                cen33a.setError(null);
+            }
+
+
 
         }
 

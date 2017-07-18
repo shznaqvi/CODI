@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
@@ -39,8 +41,8 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
 
     private static final String TAG = EligibilityFormActivity.class.getSimpleName();
 
-    @BindView(R.id.dca03)
-    EditText dca03;
+    @BindView(R.id.dssID)
+    EditText dssID;
     @BindView(R.id.celcn)
     EditText celcn;
     @BindView(R.id.celdob)
@@ -122,6 +124,11 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
     String date9Months;
     Boolean flag = false;
 
+    DatabaseHelper db;
+    Boolean check = false;
+    @BindView(R.id.fldGrpChild)
+    LinearLayout fldGrpChild;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -165,19 +172,54 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
             }
         });
 
+        db = new DatabaseHelper(this);
+        dssID.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                flag = false;
+                fldGrpChild.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
 
     }
 
-    @OnClick(R.id.checkDSSID)
-    void onCheckDSSIDClick() {
-        //TODO implement
-    }
+    @OnClick(R.id.btn_check)
+    void onBtnCheckClick() {
 
 
-    @OnClick(R.id.btn_End)
-    void onBtnEndClick() {
-        //TODO implement
+        AppMain.getEnrollmentChild = db.getChildByDSS(dssID.getText().toString().toUpperCase());
+
+        if (AppMain.getEnrollmentChild.size() != 0) {
+
+            if (AppMain.getEnrollmentChild.get(0).getArmSlc().equals("null")) {
+
+                Toast.makeText(getApplicationContext(), "Children found", Toast.LENGTH_LONG).show();
+
+                fldGrpChild.setVisibility(View.VISIBLE);
+
+                check = true;
+            } else {
+                Toast.makeText(getApplicationContext(), "Children Already Randomized!", Toast.LENGTH_LONG).show();
+            }
+        } else {
+            Toast.makeText(getApplicationContext(), "Children Not found", Toast.LENGTH_LONG).show();
+
+            check = false;
+        }
     }
+
 
     @OnClick(R.id.btnNext)
     void onBtnNextClick() {
@@ -241,9 +283,12 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
         AppMain.elc.setUser(AppMain.userName);
         AppMain.elc.setDeviceID(Settings.Secure.getString(getApplicationContext().getContentResolver(),
                 Settings.Secure.ANDROID_ID));
+        AppMain.elc.setChildName(AppMain.child_name);
+        AppMain.elc.setMotherName(celmn.getText().toString());
+        AppMain.elc.setDob(AppMain.dob);
 
         JSONObject sel = new JSONObject();
-        AppMain.elc.setDSSID(dca03.getText().toString());
+        AppMain.elc.setDSSID(dssID.getText().toString());
 
         sel.put("celcn", celcn.getText().toString());
         sel.put("celdob", celdob.getText().toString());

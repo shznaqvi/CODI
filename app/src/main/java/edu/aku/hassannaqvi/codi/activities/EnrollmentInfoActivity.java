@@ -6,15 +6,13 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.text.format.DateFormat;
 import android.util.Log;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -39,11 +37,11 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
     final SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 
     @BindView(R.id.dssid)
-    EditText dssid;
+    TextView dssid;
     @BindView(R.id.studyId)
-    EditText studyId;
+    TextView studyId;
     @BindView(R.id.cen01)
-    DatePickerInputEditText cen01;
+    TextView cen01;
     @BindView(R.id.cen02)
     RadioGroup cen02;
     @BindView(R.id.cen02a)
@@ -57,9 +55,9 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
     @BindView(R.id.cen03b)
     RadioButton cen03b;
     @BindView(R.id.cen04)
-    EditText cen04;
+    TextView cen04;
     @BindView(R.id.cen05)
-    EditText cen05;
+    TextView cen05;
     @BindView(R.id.cen06)
     DatePickerInputEditText cen06;
     @BindView(R.id.cen07w)
@@ -170,15 +168,22 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
 
         dateToday = new SimpleDateFormat("dd/MM/yyyy").format(System.currentTimeMillis());
 
-        cen01.setManager(getSupportFragmentManager());
-        cen01.setMaxDate(dateToday);
-        cen06.setManager(getSupportFragmentManager());
+        dssid.setText(AppMain.elc.getDSSID());
+        studyId.setText(AppMain.elc.getStudyID());
+        cen01.setText(new SimpleDateFormat("dd-MM-yyyy").format(System.currentTimeMillis()));
+        cen04.setText(AppMain.elc.getChildName());
+        cen05.setText(AppMain.elc.getMotherName());
+        cen06.setText(AppMain.elc.getDob());
 
-        cen06.setMaxDate(dateToday);
+        //cen01.setManager(getSupportFragmentManager());
+        //cen01.setMaxDate(dateToday);
+        //cen06.setManager(getSupportFragmentManager());
+
+        //cen06.setMaxDate(dateToday);
 
         //double ageInDays = AppMain.ageInDays(cen06.); //
 
-        db = new DatabaseHelper(this);
+        /*db = new DatabaseHelper(this);
 
         dssid.addTextChangedListener(new TextWatcher() {
             @Override
@@ -198,11 +203,11 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
             public void afterTextChanged(Editable editable) {
 
             }
-        });
+        });*/
 
     }
 
-    @OnClick(R.id.btn_Check) void onBtnCheckClick() {
+    /*@OnClick(R.id.btn_Check) void onBtnCheckClick() {
         //TODO implement
 
         AppMain.getEnrollmentChild = db.getChildByDSS(dssid.getText().toString().toUpperCase());
@@ -225,7 +230,7 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
             flag = false;
         }
     }
-
+*/
 //    @OnClick(R.id.btn_End)
 //    void onBtnEndClick() {
 //        Toast.makeText(this, "Processing This Section", Toast.LENGTH_SHORT).show();
@@ -298,7 +303,7 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
 
         AppMain.fc.setFormDate((DateFormat.format("dd-MM-yyyy HH:mm", new Date())).toString());
         AppMain.fc.setUser(AppMain.userName);
-        AppMain.elc.setDSSID(AppMain.dssID);
+        AppMain.fc.setDSSID(AppMain.elc.getDSSID());
         AppMain.fc.setChildName(AppMain.elc.getChildName());
 
         Calendar cal = AppMain.getCalendarDate(AppMain.enrollDate);

@@ -243,7 +243,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
 
         values.put(EligibilityTable.COLUMN_PROJECTNAME, elc.getProjectName());
-        values.put(EligibilityTable._ID, elc.get_ID());
         values.put(EligibilityTable.COLUMN_UID, elc.get_UID());
         values.put(EligibilityTable.COLUMN_DSSID, elc.getDSSID());
         values.put(EligibilityTable.COLUMN_STUDYID, elc.getStudyID());

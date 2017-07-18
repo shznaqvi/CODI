@@ -33,36 +33,40 @@
             android:layout_height="2dp"
             android:background="@color/colorPrimary" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/DSSID"
-            android:visibility="visible" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:visibility="visible">
 
-            <EditText
+            <TextView
+                android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+                android:layout_weight="1"
+            android:text="@string/DSSID"
+                android:visibility="visible" />
+
+
+            <TextView
                 android:id="@+id/dssid"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
                 android:layout_marginRight="3dp"
-                android:layout_weight="60"
-                android:hint="@string/DSSID"
+                android:layout_marginTop="16dp"
+                android:layout_weight="1"
+                android:background="@color/pink_100"
                 android:inputType="text" />
 
-            <Button
+            <!--<Button
                 android:id="@+id/btn_Check"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="20"
                 android:text="CHECK"
                 android:textColor="@color/red"
-                android:textSize="15dp" />
+                android:textSize="15dp" />-->
         </LinearLayout>
 
 
@@ -71,51 +75,79 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="gone">
+            android:visibility="visible">
 
-            <TextView
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/studyID" />
+                    android:layout_weight="1"
+                    android:text="@string/studyID" />
 
-            <EditText
+                <TextView
                 android:id="@+id/studyId"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/studyID"
-                android:inputType="text" />
+                    android:layout_marginTop="16dp"
+                    android:layout_weight="1"
+                    android:background="@color/pink_100"
+                    android:inputType="text" />
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                    android:layout_weight="1"
+                    android:text="@string/cen01"
+                    android:visibility="visible" />
+
+
+                <!--<io.blackbox_vision.datetimepickeredittext.view.DatePickerInputEditText
+                    android:id="@+id/cen01"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="1dp"
+                    android:focusable="true"
+                    android:hint="@string/cen01"
+                    android:textColor="@android:color/black"
+                    app:dateFormat="dd-MM-yyyy" />
+    -->
+                <TextView
+                    android:id="@+id/cen01"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_weight="1"
+                    android:background="@color/pink_100" />
+            </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/cen01" />
-
-            <io.blackbox_vision.datetimepickeredittext.view.DatePickerInputEditText
-                android:id="@+id/cen01"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="1dp"
-                android:focusable="true"
-                android:hint="@string/cen01"
-                android:textColor="@android:color/black"
-                app:dateFormat="dd-MM-yyyy" />
-
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/cen02" />
+                android:text="@string/cen02"
+                android:visibility="gone" />
 
             <RadioGroup
                 android:id="@+id/cen02"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <RadioButton
                     android:id="@+id/cen02a"
@@ -144,13 +176,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/cen03" />
+                android:text="@string/cen03"
+                android:visibility="gone" />
 
             <RadioGroup
                 android:id="@+id/cen03"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <RadioButton
                     android:id="@+id/cen03a"
@@ -169,74 +203,75 @@
                     android:text="@string/no" />
             </RadioGroup>
 
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_marginTop="16dp"
-                android:background="@color/colorPrimary" />
-
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/pink_100"
-                android:gravity="center"
-                android:text="@string/cen04sub"
-                android:textColor="@color/colorPrimary"
-                android:textSize="27sp"
-                android:textStyle="bold" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@color/colorPrimary" />
-
+                android:orientation="horizontal">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:layout_weight="1"
                 android:text="@string/cen04" />
 
-            <EditText
+            <TextView
                 android:id="@+id/cen04"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKMLNOPQRSTUVWXYZ"
-                android:hint="@string/cen04"
-                android:inputType="textCapWords" />
+                android:layout_marginTop="16dp"
+                android:layout_weight="1"
+                android:background="@color/pink_100" />
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:layout_weight="1"
                 android:text="@string/cen05" />
 
-            <EditText
+                <TextView
                 android:id="@+id/cen05"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKMLNOPQRSTUVWXYZ"
-                android:hint="@string/cen05"
-                android:inputType="textCapWords" />
+                    android:layout_marginTop="16dp"
+                    android:layout_weight="1"
+                    android:background="@color/pink_100" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
 
-            <TextView
+                <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/cen06" />
+                    android:layout_weight="1"
+                    android:text="@string/cen06" />
 
             <io.blackbox_vision.datetimepickeredittext.view.DatePickerInputEditText
                 android:id="@+id/cen06"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"
+                android:layout_weight="1"
                 android:focusable="true"
                 android:hint="@string/cen06"
                 android:textColor="@android:color/black"
                 app:dateFormat="dd-MM-yyyy" />
+
+            </LinearLayout>
 
 
             <TextView
