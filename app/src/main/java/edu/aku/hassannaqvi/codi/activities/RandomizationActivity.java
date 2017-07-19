@@ -10,6 +10,7 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 
@@ -119,18 +120,19 @@ public class RandomizationActivity extends AppCompatActivity {
     private void SaveDraft() throws JSONException {
         Toast.makeText(this, "Saving Draft for this Section", Toast.LENGTH_SHORT).show();
 
-        /*JSONObject sRandomization = new JSONObject();
+        JSONObject sRandomization = new JSONObject();
 
         sRandomization.put("cen25", cen25.getText().toString());
-        sRandomization.put("cen27", cen27a.isChecked() ? "1" : cen27b.isChecked() ? "2" : cen27c.isChecked() ? "3"
-                : cen27d.isChecked() ? "4" : "0");
-*/
+        sRandomization.put("cen27", cen27a.isChecked() ? "A" : cen27b.isChecked() ? "B" : cen27c.isChecked() ? "C"
+                : cen27d.isChecked() ? "D" : "0");
+        AppMain.fc.setsRandomization(String.valueOf(sRandomization));
+
         AppMain.cc = new ChildrenContract();
 
         AppMain.cc.setRandDate(cen25.getText().toString());
-//        AppMain.cc.setArmSlc(String.valueOf(cen27.indexOfChild(findViewById(cen27.getCheckedRadioButtonId())) + 1));
         AppMain.cc.setArmSlc(cen27a.isChecked() ? "A" : cen27b.isChecked() ? "B" : cen27c.isChecked() ? "C"
                 : cen27d.isChecked() ? "D" : "0");
+
 
         Toast.makeText(this, "Validation Successful! - Saving Draft...", Toast.LENGTH_SHORT).show();
     }
@@ -139,9 +141,10 @@ public class RandomizationActivity extends AppCompatActivity {
 
         DatabaseHelper db = new DatabaseHelper(this);
 
-        int updcount = db.updateSRandomization(AppMain.getEnrollmentChild.get(0).getDSSID());
+        int updcount = db.updateSRandomizationChild(AppMain.getEnrollmentChild.get(0).getDSSID());
+        int updCount2 = db.updateSRandomization();
 
-        if (updcount == 1) {
+        if (updcount == 1 && updCount2 == 1) {
             Toast.makeText(this, "Updating Database... Successful!", Toast.LENGTH_SHORT).show();
             return true;
         } else {

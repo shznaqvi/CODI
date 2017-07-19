@@ -283,16 +283,21 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
         AppMain.elc.setUser(AppMain.userName);
         AppMain.elc.setDeviceID(Settings.Secure.getString(getApplicationContext().getContentResolver(),
                 Settings.Secure.ANDROID_ID));
+        AppMain.child_name = celcn.getText().toString();
         AppMain.elc.setChildName(AppMain.child_name);
         AppMain.elc.setMotherName(celmn.getText().toString());
+        AppMain.dob = celdob.getText().toString();
         AppMain.elc.setDob(AppMain.dob);
+        AppMain.elc.setStudyID(celstdid.getText().toString());
+        AppMain.elc.setDSSID(dssID.getText().toString());
+        AppMain.enrollDate = celdoe.getText().toString();
 
         JSONObject sel = new JSONObject();
-        AppMain.elc.setDSSID(dssID.getText().toString());
 
-        sel.put("celcn", celcn.getText().toString());
-        sel.put("celdob", celdob.getText().toString());
-        sel.put("celmn", celmn.getText().toString());
+
+        //sel.put("celcn", celcn.getText().toString());
+        //sel.put("celdob", celdob.getText().toString());
+        //sel.put("celmn", celmn.getText().toString());
         sel.put("cel01", cel01a.isChecked() ? "1" : cel01b.isChecked() ? "2" : "0");
         sel.put("cel02", cel02a.isChecked() ? "1" : cel02b.isChecked() ? "2" : "0");
         sel.put("cel03", cel03a.isChecked() ? "1" : cel03b.isChecked() ? "2" : "0");
@@ -301,11 +306,10 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
         sel.put("cel06", cel06a.isChecked() ? "1" : cel06b.isChecked() ? "2" : "0");
         sel.put("cel07", cel07a.isChecked() ? "1" : cel07b.isChecked() ? "2" : "0");
         sel.put("celee", isYes() ? "1" : "2");
-        sel.put("celstdid", celstdid.getText().toString());
+        //sel.put("celstdid", celstdid.getText().toString());
         sel.put("celdoe", celdoe.getText().toString());
         sel.put("celner", celner.getText().toString());
 
-        AppMain.dob = celdob.getText().toString();
 
         AppMain.elc.setsEl(String.valueOf(sel));
         AppMain.formType = "EL";

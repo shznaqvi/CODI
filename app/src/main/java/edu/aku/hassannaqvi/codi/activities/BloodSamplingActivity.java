@@ -180,7 +180,7 @@ public class BloodSamplingActivity extends AppCompatActivity {
 
                 finish();
 
-                if (AppMain.formType.equals("EN")) {
+                if (AppMain.fc.getFormType().equals("EN")) {
 
                     startActivity(new Intent(this, RandomizationActivity.class));
                 } else {
@@ -219,7 +219,7 @@ public class BloodSamplingActivity extends AppCompatActivity {
         DatabaseHelper db = new DatabaseHelper(this);
 
 
-        /*int updcount = db.updateSenBloodSample();
+        int updcount = db.updateSBloodSample();
 
         if (updcount == 1) {
             Toast.makeText(this, "Updating Database... Successful!", Toast.LENGTH_SHORT).show();
@@ -227,8 +227,8 @@ public class BloodSamplingActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
             return false;
-        }*/
-        return true;
+        }
+
     }
 
     public boolean ValidateForm() {

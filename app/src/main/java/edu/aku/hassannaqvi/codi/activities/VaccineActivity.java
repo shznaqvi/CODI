@@ -101,21 +101,25 @@ public class VaccineActivity extends AppCompatActivity {
         });
 
         //============== Vaccine based on Arm ========
-        if (AppMain.cc.getArmSlc().equals("3")) {
+        if (AppMain.cc.getArmSlc().equals("C")) {
             cen29b.setEnabled(false);
             cen29b.setChecked(false);
         } else {
             cen29b.setEnabled(true);
         }
 
-        if (cen32a.isChecked()) {
-            fldGrpcen34.setVisibility(View.GONE);
-            cen34a.setText(null);
-            cen34b.setText(null);
-        } else {
-            fldGrpcen34.setVisibility(View.VISIBLE);
-        }
-
+        cen32.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+                if (cen32a.isChecked()) {
+                    fldGrpcen34.setVisibility(View.GONE);
+                    cen34a.setText(null);
+                    cen34b.setText(null);
+                } else {
+                    fldGrpcen34.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
     }
 
@@ -190,7 +194,7 @@ public class VaccineActivity extends AppCompatActivity {
     private boolean UpdateDB() {
         DatabaseHelper db = new DatabaseHelper(this);
 
-        /*int updcount = db.updateSenVaccine();
+        int updcount = db.updateSVaccine();
 
         if (updcount == 1) {
             Toast.makeText(this, "Updating Database... Successful!", Toast.LENGTH_SHORT).show();
@@ -198,9 +202,9 @@ public class VaccineActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
             return false;
-        }*/
+        }
 
-        return true;
+        //return true;
     }
 
     public boolean ValidateForm() {

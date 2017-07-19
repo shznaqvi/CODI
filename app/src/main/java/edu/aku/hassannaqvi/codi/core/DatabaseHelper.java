@@ -277,7 +277,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
 
         values.put(FormsTable.COLUMN_PROJECTNAME, enc.getProjectName());
-        values.put(FormsTable._ID, enc.get_ID());
         values.put(FormsTable.COLUMN__UID, enc.get_UID());
         values.put(FormsTable.COLUMN_DSSID, enc.getDSSID());
         values.put(FormsTable.COLUMN_STUDYID, enc.getStudyID());
@@ -289,11 +288,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(FormsTable.COLUMN_ISTATUS, enc.getIstatus());
         values.put(FormsTable.COLUMN_SINFO, enc.getsInfo());
         values.put(FormsTable.COLUMN_SCHBF, enc.getsCHBF());
-        /*
-        values.put(FormsTable.COLUMN_SBLOODSAMPLE, fc.getsBloodSample());
-        values.put(FormsTable.COLUMN_SRANDOMIZATION, fc.getsRandomization());
-        values.put(FormsTable.COLUMN_SVACCINE, fc.getsVaccine());
-        */
+        values.put(FormsTable.COLUMN_SBLOODSAMPLE, enc.getsBloodSample());
+        values.put(FormsTable.COLUMN_SRANDOMIZATION, enc.getsRandomization());
+        values.put(FormsTable.COLUMN_SVACCINE, enc.getsVaccine());
         values.put(FormsTable.COLUMN_GPSLAT, enc.getGpsLat());
         values.put(FormsTable.COLUMN_GPSLNG, enc.getGpsLng());
         values.put(FormsTable.COLUMN_GPSDT, enc.getGpsDT());
@@ -317,25 +314,47 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 // New value for one column
         ContentValues values = new ContentValues();
         values.put(FormsTable.COLUMN_SBLOODSAMPLE, AppMain.fc.getsBloodSample());
+        //values.put(FormsTable.COLUMN__UID, AppMain.fc.get_UID());
 
 // Which row to update, based on the ID
-        String selection = EligibilityTable._ID + " = ?";
-        String[] selectionArgs = {String.valueOf(AppMain.elc.get_ID())};
+        String selection = FormsTable._ID + " = ?";
+        String[] selectionArgs = {String.valueOf(AppMain.fc.get_ID())};
 
-        int count = db.update(EligibilityTable.TABLE_NAME,
+        int count = db.update(FormsTable.TABLE_NAME,
                 values,
                 selection,
                 selectionArgs);
         return count;
     }
 
-    public int updateSRandomization(String DSSID) {
+    public int updateSCHBF() {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+// New value for one column
+        ContentValues values = new ContentValues();
+        values.put(FormsTable.COLUMN_SCHBF, AppMain.fc.getsCHBF());
+        //values.put(FormsTable.COLUMN__UID, AppMain.fc.get_UID());
+
+// Which row to update, based on the ID
+        String selection = FormsTable._ID + " = ?";
+        String[] selectionArgs = {String.valueOf(AppMain.fc.get_ID())};
+
+        int count = db.update(FormsTable.TABLE_NAME,
+                values,
+                selection,
+                selectionArgs);
+        return count;
+    }
+
+
+    public int updateSRandomizationChild(String DSSID) {
         SQLiteDatabase db = this.getReadableDatabase();
 
 // New value for one column
         ContentValues values = new ContentValues();
         values.put(ChildrenTable.COLUMN_RANDOMIZATION_DATE, AppMain.cc.getRandDate());
         values.put(ChildrenTable.COLUMN_ARMSLC, AppMain.cc.getArmSlc());
+
 // Which row to update, based on the ID
         String selection = ChildrenTable.COLUMN_DSSID + " = ?";
         String[] selectionArgs = {String.valueOf(DSSID)};
@@ -347,17 +366,38 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return count;
     }
 
+    public int updateSRandomization() {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+// New value for one column
+        ContentValues values = new ContentValues();
+        values.put(FormsTable.COLUMN_SRANDOMIZATION, AppMain.fc.getsRandomization());
+        //values.put(FormsTable.COLUMN__UID, AppMain.fc.get_UID());
+
+// Which row to update, based on the ID
+        String selection = FormsTable._ID + " = ?";
+        String[] selectionArgs = {String.valueOf(AppMain.fc.get_ID())};
+
+        int count = db.update(FormsTable.TABLE_NAME,
+                values,
+                selection,
+                selectionArgs);
+        return count;
+    }
+
+
     public int updateSVaccine() {
         SQLiteDatabase db = this.getReadableDatabase();
 
 // New value for one column
         ContentValues values = new ContentValues();
         values.put(FormsTable.COLUMN_SVACCINE, AppMain.fc.getsVaccine());
+        //values.put(FormsTable.COLUMN__UID, AppMain.fc.get_UID());
 // Which row to update, based on the ID
-        String selection = EligibilityTable._ID + " = ?";
-        String[] selectionArgs = {String.valueOf(AppMain.elc.get_ID())};
+        String selection = FormsTable._ID + " = ?";
+        String[] selectionArgs = {String.valueOf(AppMain.fc.get_ID())};
 
-        int count = db.update(EligibilityTable.TABLE_NAME,
+        int count = db.update(FormsTable.TABLE_NAME,
                 values,
                 selection,
                 selectionArgs);

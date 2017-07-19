@@ -29,7 +29,6 @@ import edu.aku.hassannaqvi.codi.R;
 import edu.aku.hassannaqvi.codi.contracts.FormsContract;
 import edu.aku.hassannaqvi.codi.core.AppMain;
 import edu.aku.hassannaqvi.codi.core.DatabaseHelper;
-import io.blackbox_vision.datetimepickeredittext.view.DatePickerInputEditText;
 
 public class EnrollmentInfoActivity extends AppCompatActivity {
 
@@ -59,7 +58,7 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
     @BindView(R.id.cen05)
     TextView cen05;
     @BindView(R.id.cen06)
-    DatePickerInputEditText cen06;
+    TextView cen06;
     @BindView(R.id.cen07w)
     EditText cen07w;
     @BindView(R.id.cen07m)
@@ -258,7 +257,7 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
     @OnClick(R.id.btn_Continue)
     void onBtnContinueClick() {
 
-        if (flag) {
+        //if (flag) {
             if (ValidateForm()) {
                 try {
                     SaveDraft();
@@ -284,9 +283,9 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
                     Toast.makeText(this, "Failed to Update Database!", Toast.LENGTH_SHORT).show();
                 }
             }
-        }else {
+        /*}else {
             Toast.makeText(getApplicationContext(),"Click on CHECK button to check.",Toast.LENGTH_LONG).show();
-        }
+        }*/
     }
 
 
@@ -305,6 +304,9 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
         AppMain.fc.setUser(AppMain.userName);
         AppMain.fc.setDSSID(AppMain.elc.getDSSID());
         AppMain.fc.setChildName(AppMain.elc.getChildName());
+        AppMain.fc.setStudyID(AppMain.elc.getStudyID());
+        AppMain.fc.setFormType("EN");
+
 
         Calendar cal = AppMain.getCalendarDate(AppMain.enrollDate);
         cal.add(Calendar.DAY_OF_MONTH, 28);
@@ -312,8 +314,8 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
 
         JSONObject sInfo = new JSONObject();
 
-        sInfo.put("dssid", dssid.getText().toString());
-        sInfo.put("studyId", studyId.getText().toString());
+        //sInfo.put("dssid", AppMain.elc.getDSSID());
+        //sInfo.put("studyId", AppMain.elc.getStudyID());
         sInfo.put("cen01", cen01.getText().toString());
         sInfo.put("cen02", "1");
         sInfo.put("cen03", "1");
@@ -334,7 +336,7 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
 
 
         AppMain.fc.setsInfo(String.valueOf(sInfo));
-        AppMain.fc.setFormType("EN");
+
 
         setGPS();
 
@@ -364,7 +366,7 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
     public boolean ValidateForm() {
 
 
-        if (cen01.getText().toString().isEmpty()) {
+        /*if (cen01.getText().toString().isEmpty()) {
             Toast.makeText(this, "ERROR(Empty)" + getString(R.string.cen01), Toast.LENGTH_SHORT).show();
             cen01.setError("This data is Required!");
 
@@ -423,7 +425,7 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
         } else {
             cen06.setError(null);
         }
-
+*/
         if (cen07w.getText().toString().isEmpty()) {
             Toast.makeText(this, "ERROR(Empty)" + getString(R.string.cen07a), Toast.LENGTH_SHORT).show();
             cen07w.setError("This data is Required!");

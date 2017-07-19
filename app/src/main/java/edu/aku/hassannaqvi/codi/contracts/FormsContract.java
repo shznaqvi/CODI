@@ -354,7 +354,6 @@ public class FormsContract {
         public static final String COLUMN_DSSID = "dssid";
         public static final String COLUMN_STUDYID = "studyid";
         public static final String COLUMN_CHILDNAME = "childname";
-        public static final String COLUMN_MOTHERNAME = "mothername";
         public static final String COLUMN_SEN = "sen";
         public static final String COLUMN_FORMDATE = "formdate";
         public static final String COLUMN_FORMTYPE = "formtype";
