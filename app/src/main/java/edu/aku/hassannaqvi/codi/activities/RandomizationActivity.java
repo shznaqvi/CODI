@@ -49,31 +49,31 @@ public class RandomizationActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         //dateToday = new SimpleDateFormat("dd/MM/yyyy").format(System.currentTimeMillis());
 
-        cen25.setText(new SimpleDateFormat("dd-MM-yyyy HH:mm").format(System.currentTimeMillis()));
+        //cen25.setText(new SimpleDateFormat("dd-MM-yyyy HH:mm").format(System.currentTimeMillis()));
 
 
-        double ageInDays = AppMain.ageInDays("01-04-2017"); //
+        //double ageInDays = AppMain.ageInDays("01-04-2017"); //
 
 
-        if (ageInDays >= 98 && ageInDays <= 104) // 14 Weeks
+        /*if (AppMain.fc.getStudyID().contains("14W")) // 14 Weeks
         {
             cen27a.setEnabled(true);
             cen27b.setEnabled(true);
             cen27c.setEnabled(false);
             cen27d.setEnabled(false);
-        } else if (ageInDays >= 273.7 && ageInDays < 304) { // 9 Months
+        } else if (AppMain.fc.getStudyID().contains("9M")) { // 9 Months
             cen27a.setEnabled(false);
             cen27b.setEnabled(false);
             cen27c.setEnabled(true);
             cen27d.setEnabled(true);
-        }
+        }*/
 
 
         String arms = AppMain.getEnrollmentChild.get(0).getArmGrp();
 
         Log.d("ArmsGrp",arms);
 
-        if (arms.equals("AB")){
+        if (arms.equals("AB") && AppMain.fc.getStudyID().contains("14W")) {
             cen27a.setEnabled(true);
             cen27b.setEnabled(true);
             cen27c.setEnabled(false);
@@ -122,14 +122,14 @@ public class RandomizationActivity extends AppCompatActivity {
 
         JSONObject sRandomization = new JSONObject();
 
-        sRandomization.put("cen25", cen25.getText().toString());
+        sRandomization.put("cen25", new SimpleDateFormat("dd-MM-yyyy HH:mm").format(System.currentTimeMillis()));
         sRandomization.put("cen27", cen27a.isChecked() ? "A" : cen27b.isChecked() ? "B" : cen27c.isChecked() ? "C"
                 : cen27d.isChecked() ? "D" : "0");
         AppMain.fc.setsRandomization(String.valueOf(sRandomization));
 
         AppMain.cc = new ChildrenContract();
 
-        AppMain.cc.setRandDate(cen25.getText().toString());
+        AppMain.cc.setRandDate(new SimpleDateFormat("dd-MM-yyyy HH:mm").format(System.currentTimeMillis()));
         AppMain.cc.setArmSlc(cen27a.isChecked() ? "A" : cen27b.isChecked() ? "B" : cen27c.isChecked() ? "C"
                 : cen27d.isChecked() ? "D" : "0");
 
@@ -155,7 +155,7 @@ public class RandomizationActivity extends AppCompatActivity {
 
     public boolean ValidateForm() {
 
-        if (cen25.getText().toString().isEmpty()) {
+       /* if (cen25.getText().toString().isEmpty()) {
             Toast.makeText(this, "ERROR(Empty)" + getString(R.string.cen25), Toast.LENGTH_SHORT).show();
             cen25.setError("This data is Required!");
 
@@ -163,7 +163,7 @@ public class RandomizationActivity extends AppCompatActivity {
             return false;
         } else {
             cen25.setError(null);
-        }
+        }*/
 
 
         if (cen27.getCheckedRadioButtonId() == -1) {

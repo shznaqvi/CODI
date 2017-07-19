@@ -200,8 +200,7 @@ public class BloodSamplingActivity extends AppCompatActivity {
 
         sEnBloodSample.put("cen18", cen18a.isChecked() ? "1" : cen18b.isChecked() ? "2" : "0");
         sEnBloodSample.put("cen19", cen19a.isChecked() ? "1" : cen19b.isChecked() ? "2" : "0");
-        sEnBloodSample.put("cen20", cen20.getText().toString());
-        sEnBloodSample.put("cen21", cen21.getText().toString());
+        sEnBloodSample.put("cen20", new SimpleDateFormat("dd-MM-yyyy HH:mm").format(System.currentTimeMillis()));
         sEnBloodSample.put("cen22", cen22a.isChecked() ? "1" : cen22b.isChecked() ? "2" : "0");
         sEnBloodSample.put("cen23", cen23a.isChecked() ? "1" : cen23b.isChecked() ? "2" : "0");
         if (cen24.getText().toString().equals("Sticker")) {
@@ -255,7 +254,7 @@ public class BloodSamplingActivity extends AppCompatActivity {
                 cen19a.setError(null);
             }
 
-            if (cen20.getText().toString().isEmpty()) {
+            /*if (cen20.getText().toString().isEmpty()) {
                 Toast.makeText(this, "ERROR(Empty)" + getString(R.string.cen20), Toast.LENGTH_SHORT).show();
                 cen20.setError("This data is Required!");
 
@@ -273,7 +272,7 @@ public class BloodSamplingActivity extends AppCompatActivity {
                 return false;
             } else {
                 cen21.setError(null);
-            }
+            }*/
 
             if (cen22.getCheckedRadioButtonId() == -1) {
                 Toast.makeText(this, "ERROR(Empty)" + getString(R.string.cen22), Toast.LENGTH_SHORT).show();

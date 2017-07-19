@@ -178,8 +178,7 @@ public class VaccineActivity extends AppCompatActivity {
 
         sVaccine.put("cen28", cen28a.isChecked() ? "1" : cen28b.isChecked() ? "2" : "0");
         sVaccine.put("cen29", cen29a.isChecked() ? "1" : cen29b.isChecked() ? "2" : "0");
-        sVaccine.put("cen30", cen30.getText().toString());
-        sVaccine.put("cen31", cen31.getText().toString());
+        sVaccine.put("cen30", new SimpleDateFormat("dd-MM-yyyy HH:mm").format(System.currentTimeMillis()));
         sVaccine.put("cen32", cen32a.isChecked() ? "1" : cen32b.isChecked() ? "2" : "0");
         sVaccine.put("cen33a", cen33a.getText().toString());
         sVaccine.put("cen33b", cen33b.getText().toString());
@@ -230,7 +229,7 @@ public class VaccineActivity extends AppCompatActivity {
                 cen29a.setError(null);
             }
 
-            if (cen30.getText().toString().isEmpty()) {
+            /*if (cen30.getText().toString().isEmpty()) {
                 Toast.makeText(this, "ERROR(Empty)" + getString(R.string.cen30), Toast.LENGTH_SHORT).show();
                 cen30.setError("This data is Required!");
 
@@ -249,7 +248,7 @@ public class VaccineActivity extends AppCompatActivity {
             } else {
                 cen31.setError(null);
             }
-
+*/
             if (cen32.getCheckedRadioButtonId() == -1) {
                 Toast.makeText(this, "ERROR(Empty)" + getString(R.string.cen32), Toast.LENGTH_SHORT).show();
                 cen32a.setError("This data is Required!");
