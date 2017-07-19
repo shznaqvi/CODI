@@ -449,6 +449,55 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
                     celstdid.setError(null);
                 }
 
+                if (celstdid.getText().length() < 11 && !celstdid.getText().toString().contains("-")) {
+                    Toast.makeText(this, "ERROR(invalid)" + getString(R.string.celstdid), Toast.LENGTH_SHORT).show();
+                    celstdid.setError("Wrong Study ID.. Please correct");
+                    Log.d(TAG, "celstdid:invalid ");
+                    return false;
+                } else {
+                    celstdid.setError(null);
+                }
+
+                if (cel02a.isChecked() && (!celstdid.getText().toString().contains("14W"))) {
+                    Toast.makeText(this, "ERROR(invalid)" + getString(R.string.celstdid) + " - " + getString(R.string.cel02), Toast.LENGTH_SHORT).show();
+                    celstdid.setError("Please check age and study id again ");
+                    cel02a.setError("Please check age and study id again");
+                    Log.d(TAG, "celstdid:invalid ");
+                    return false;
+                } else if ((cel02a.isChecked() && celstdid.getText().toString().contains("14W")) && (Integer.valueOf(celstdid.getText().toString().substring(8)) > 300)) {
+                    Toast.makeText(this, "ERROR(invalid)" + getString(R.string.celstdid) + " - " + getString(R.string.cel02), Toast.LENGTH_SHORT).show();
+                    celstdid.setError("Please check age and study id again ");
+                    cel02a.setError("Please check age and study id again");
+                    Log.d(TAG, "celstdid:invalid ");
+                    return false;
+                } else {
+                    celstdid.setError(null);
+                    cel02a.setError(null);
+                }
+
+                if (cel02b.isChecked() && (!celstdid.getText().toString().contains("9M"))) {
+                    Toast.makeText(this, "ERROR(invalid)" + getString(R.string.celstdid) + " - " + getString(R.string.cel02), Toast.LENGTH_SHORT).show();
+                    celstdid.setError("Please check age and study id again ");
+                    cel02a.setError("Please check age and study id again");
+                    Log.d(TAG, "celstdid:invalid ");
+                    return false;
+                } else if ((cel02a.isChecked() && celstdid.getText().toString().contains("9M")) && (Integer.valueOf(celstdid.getText().toString().substring(8)) < 300)) {
+                    Toast.makeText(this, "ERROR(invalid)" + getString(R.string.celstdid) + " - " + getString(R.string.cel02), Toast.LENGTH_SHORT).show();
+                    celstdid.setError("Please check age and study id again ");
+                    cel02a.setError("Please check age and study id again");
+                    Log.d(TAG, "celstdid:invalid ");
+                    return false;
+                } else {
+                    celstdid.setError(null);
+                    cel02a.setError(null);
+                }
+
+
+
+
+
+
+
                 // =================== doe ====================
                 if (celdoe.getText().toString().isEmpty()) {
                     Toast.makeText(this, "ERROR(Empty)" + getString(R.string.celdoe), Toast.LENGTH_SHORT).show();
