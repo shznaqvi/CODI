@@ -39,14 +39,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="@string/cen25" />
+            android:text="@string/cen25"
+            android:visibility="gone" />
 
         <EditText
             android:id="@+id/cen25"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:editable="false"
-            android:text="" />
+            android:text=""
+            android:visibility="gone" />
 
         <!--<io.blackbox_vision.datetimepickeredittext.view.DatePickerInputEditText
             android:id="@+id/cen25"

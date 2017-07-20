@@ -6,11 +6,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.text.format.DateFormat;
 import android.util.Log;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -22,7 +19,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -30,11 +26,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import edu.aku.hassannaqvi.codi.R;
-import edu.aku.hassannaqvi.codi.contracts.ChildrenContract;
 import edu.aku.hassannaqvi.codi.contracts.FormsContract;
 import edu.aku.hassannaqvi.codi.core.AppMain;
 import edu.aku.hassannaqvi.codi.core.DatabaseHelper;
-import io.blackbox_vision.datetimepickeredittext.view.DatePickerInputEditText;
 
 public class EnrollmentInfoActivity extends AppCompatActivity {
 
@@ -42,11 +36,11 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
     final SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 
     @BindView(R.id.dssid)
-    EditText dssid;
+    TextView dssid;
     @BindView(R.id.studyId)
-    EditText studyId;
+    TextView studyId;
     @BindView(R.id.cen01)
-    DatePickerInputEditText cen01;
+    TextView cen01;
     @BindView(R.id.cen02)
     RadioGroup cen02;
     @BindView(R.id.cen02a)
@@ -60,11 +54,11 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
     @BindView(R.id.cen03b)
     RadioButton cen03b;
     @BindView(R.id.cen04)
-    EditText cen04;
+    TextView cen04;
     @BindView(R.id.cen05)
-    EditText cen05;
+    TextView cen05;
     @BindView(R.id.cen06)
-    DatePickerInputEditText cen06;
+    TextView cen06;
     @BindView(R.id.cen07w)
     EditText cen07w;
     @BindView(R.id.cen07m)
@@ -170,16 +164,25 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enrollment_info);
         ButterKnife.bind(this);
+
         dateToday = new SimpleDateFormat("dd/MM/yyyy").format(System.currentTimeMillis());
 
-        cen01.setManager(getSupportFragmentManager());
-        cen01.setMaxDate(dateToday);
-        cen06.setManager(getSupportFragmentManager());
-        cen06.setMaxDate(dateToday);
+        dssid.setText(AppMain.elc.getDSSID());
+        studyId.setText(AppMain.elc.getStudyID());
+        cen01.setText(new SimpleDateFormat("dd-MM-yyyy").format(System.currentTimeMillis()));
+        cen04.setText(AppMain.elc.getChildName());
+        cen05.setText(AppMain.elc.getMotherName());
+        cen06.setText(AppMain.elc.getDob());
+
+        //cen01.setManager(getSupportFragmentManager());
+        //cen01.setMaxDate(dateToday);
+        //cen06.setManager(getSupportFragmentManager());
+
+        //cen06.setMaxDate(dateToday);
 
         //double ageInDays = AppMain.ageInDays(cen06.); //
 
-        db = new DatabaseHelper(this);
+        /*db = new DatabaseHelper(this);
 
         dssid.addTextChangedListener(new TextWatcher() {
             @Override
@@ -199,11 +202,11 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
             public void afterTextChanged(Editable editable) {
 
             }
-        });
+        });*/
 
     }
 
-    @OnClick(R.id.btn_Check) void onBtnCheckClick() {
+    /*@OnClick(R.id.btn_Check) void onBtnCheckClick() {
         //TODO implement
 
         AppMain.getEnrollmentChild = db.getChildByDSS(dssid.getText().toString().toUpperCase());
@@ -226,7 +229,7 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
             flag = false;
         }
     }
-
+*/
 //    @OnClick(R.id.btn_End)
 //    void onBtnEndClick() {
 //        Toast.makeText(this, "Processing This Section", Toast.LENGTH_SHORT).show();
@@ -254,7 +257,7 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
     @OnClick(R.id.btn_Continue)
     void onBtnContinueClick() {
 
-        if (flag) {
+        //if (flag) {
             if (ValidateForm()) {
                 try {
                     SaveDraft();
@@ -266,15 +269,23 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
 
                     finish();
 
-                    startActivity(new Intent(this, BloodSamplingActivity.class));
+                    /*if(AppMain.formType.equals("V3") && AppMain.arm.equals("AB"))
+                    {
+                        startActivity(new Intent(this, VaccineActivity.class));
+                    }else {
+                        startActivity(new Intent(this, BloodSamplingActivity.class));
+                    }
+*/
+                    startActivity(new Intent(this, ChildHealthAndBreastFeedActivity.class));
+
 
                 } else {
                     Toast.makeText(this, "Failed to Update Database!", Toast.LENGTH_SHORT).show();
                 }
             }
-        }else {
+        /*}else {
             Toast.makeText(getApplicationContext(),"Click on CHECK button to check.",Toast.LENGTH_LONG).show();
-        }
+        }*/
     }
 
 
@@ -288,25 +299,28 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
         AppMain.fc.setDevicetagID(sharedPref.getString("tagName", null));
         AppMain.fc.setDeviceID(Settings.Secure.getString(getApplicationContext().getContentResolver(),
                 Settings.Secure.ANDROID_ID));
+
         AppMain.fc.setFormDate((DateFormat.format("dd-MM-yyyy HH:mm", new Date())).toString());
         AppMain.fc.setUser(AppMain.userName);
+        AppMain.fc.setDSSID(AppMain.elc.getDSSID());
+        AppMain.fc.setChildName(AppMain.elc.getChildName());
+        AppMain.fc.setStudyID(AppMain.elc.getStudyID());
+        AppMain.fc.setFormType("EN");
 
-        AppMain.enrollDate = cen01.getText().toString();
+
         Calendar cal = AppMain.getCalendarDate(AppMain.enrollDate);
         cal.add(Calendar.DAY_OF_MONTH, 28);
         AppMain.fc.setNextApp((new SimpleDateFormat("dd-MM-yyyy").format(cal.getTime()) + " " + new SimpleDateFormat("HH:mm").format(System.currentTimeMillis())));
 
         JSONObject sInfo = new JSONObject();
 
-        sInfo.put("dssid", dssid.getText().toString());
-        sInfo.put("studyId", studyId.getText().toString());
+        //sInfo.put("dssid", AppMain.elc.getDSSID());
+        //sInfo.put("studyId", AppMain.elc.getStudyID());
         sInfo.put("cen01", cen01.getText().toString());
-
-        sInfo.put("cen02", cen02a.isChecked() ? "1" : cen02b.isChecked() ? "2" : "0");
-        sInfo.put("cen03", cen03a.isChecked() ? "1" : cen03b.isChecked() ? "2" : "0");
-        sInfo.put("cen04", cen04.getText().toString());
-        sInfo.put("cen05", cen05.getText().toString());
-        sInfo.put("cen06", cen06.getText().toString());
+        sInfo.put("cen02", "1");
+        sInfo.put("cen03", "1");
+        sInfo.put("cen05", AppMain.elc.getMotherName());
+        sInfo.put("cen06", AppMain.elc.getDob());
         sInfo.put("cen07w", cen07w.getText().toString());
         sInfo.put("cen07m", cen07m.getText().toString());
         sInfo.put("cen08", cen08a.isChecked() ? "1" : cen08b.isChecked() ? "2" : "0");
@@ -322,7 +336,7 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
 
 
         AppMain.fc.setsInfo(String.valueOf(sInfo));
-        AppMain.fc.setFormType("EN");
+
 
         setGPS();
 
@@ -352,7 +366,7 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
     public boolean ValidateForm() {
 
 
-        if (cen01.getText().toString().isEmpty()) {
+        /*if (cen01.getText().toString().isEmpty()) {
             Toast.makeText(this, "ERROR(Empty)" + getString(R.string.cen01), Toast.LENGTH_SHORT).show();
             cen01.setError("This data is Required!");
 
@@ -411,7 +425,7 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
         } else {
             cen06.setError(null);
         }
-
+*/
         if (cen07w.getText().toString().isEmpty()) {
             Toast.makeText(this, "ERROR(Empty)" + getString(R.string.cen07a), Toast.LENGTH_SHORT).show();
             cen07w.setError("This data is Required!");

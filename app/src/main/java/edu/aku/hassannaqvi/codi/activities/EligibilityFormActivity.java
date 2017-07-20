@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
@@ -39,8 +41,8 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
 
     private static final String TAG = EligibilityFormActivity.class.getSimpleName();
 
-    @BindView(R.id.dca03)
-    EditText dca03;
+    @BindView(R.id.dssID)
+    EditText dssID;
     @BindView(R.id.celcn)
     EditText celcn;
     @BindView(R.id.celdob)
@@ -122,6 +124,11 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
     String date9Months;
     Boolean flag = false;
 
+    DatabaseHelper db;
+    Boolean check = false;
+    @BindView(R.id.fldGrpChild)
+    LinearLayout fldGrpChild;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -165,7 +172,52 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
             }
         });
 
+        db = new DatabaseHelper(this);
+        dssID.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                flag = false;
+                fldGrpChild.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+
+    }
+
+    @OnClick(R.id.btn_check)
+    void onBtnCheckClick() {
+
+
+        AppMain.getEnrollmentChild = db.getChildByDSS(dssID.getText().toString().toUpperCase());
+
+        if (AppMain.getEnrollmentChild.size() != 0) {
+
+            if (AppMain.getEnrollmentChild.get(0).getArmSlc().equals("null")) {
+
+                Toast.makeText(getApplicationContext(), "Children found", Toast.LENGTH_LONG).show();
+
+                fldGrpChild.setVisibility(View.VISIBLE);
+
+                check = true;
+            } else {
+                Toast.makeText(getApplicationContext(), "Children Already Randomized!", Toast.LENGTH_LONG).show();
+            }
+        } else {
+            Toast.makeText(getApplicationContext(), "Children Not found", Toast.LENGTH_LONG).show();
+
+            check = false;
+        }
     }
 
 
@@ -203,7 +255,7 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
     private boolean UpdateDB() {
         DatabaseHelper db = new DatabaseHelper(this);
 
-       /* long updcount = db.addEligibility(AppMain.elc);
+        long updcount = db.addEligibility(AppMain.elc);
 
         AppMain.elc.set_ID(String.valueOf(updcount));
 
@@ -215,7 +267,7 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
             db.updateELC();
         } else {
             Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
-        }*/
+        }
         return true;
     }
 
@@ -231,12 +283,21 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
         AppMain.elc.setUser(AppMain.userName);
         AppMain.elc.setDeviceID(Settings.Secure.getString(getApplicationContext().getContentResolver(),
                 Settings.Secure.ANDROID_ID));
+        AppMain.child_name = celcn.getText().toString();
+        AppMain.elc.setChildName(AppMain.child_name);
+        AppMain.elc.setMotherName(celmn.getText().toString());
+        AppMain.dob = celdob.getText().toString();
+        AppMain.elc.setDob(AppMain.dob);
+        AppMain.elc.setStudyID(celstdid.getText().toString());
+        AppMain.elc.setDSSID(dssID.getText().toString());
+        AppMain.enrollDate = celdoe.getText().toString();
 
         JSONObject sel = new JSONObject();
 
-        sel.put("celcn", celcn.getText().toString());
-        sel.put("celdob", celdob.getText().toString());
-        sel.put("celmn", celmn.getText().toString());
+
+        //sel.put("celcn", celcn.getText().toString());
+        //sel.put("celdob", celdob.getText().toString());
+        //sel.put("celmn", celmn.getText().toString());
         sel.put("cel01", cel01a.isChecked() ? "1" : cel01b.isChecked() ? "2" : "0");
         sel.put("cel02", cel02a.isChecked() ? "1" : cel02b.isChecked() ? "2" : "0");
         sel.put("cel03", cel03a.isChecked() ? "1" : cel03b.isChecked() ? "2" : "0");
@@ -245,14 +306,14 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
         sel.put("cel06", cel06a.isChecked() ? "1" : cel06b.isChecked() ? "2" : "0");
         sel.put("cel07", cel07a.isChecked() ? "1" : cel07b.isChecked() ? "2" : "0");
         sel.put("celee", isYes() ? "1" : "2");
-        sel.put("celstdid", celstdid.getText().toString());
+        //sel.put("celstdid", celstdid.getText().toString());
         sel.put("celdoe", celdoe.getText().toString());
         sel.put("celner", celner.getText().toString());
 
-        AppMain.dob = celdob.getText().toString();
 
         AppMain.elc.setsEl(String.valueOf(sel));
         AppMain.formType = "EL";
+
         setGPS();
 
         Toast.makeText(this, "Validation Successful! - Saving Draft...", Toast.LENGTH_SHORT).show();
@@ -387,6 +448,55 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
                 } else {
                     celstdid.setError(null);
                 }
+
+                if (celstdid.getText().length() < 11 && !celstdid.getText().toString().contains("-")) {
+                    Toast.makeText(this, "ERROR(invalid)" + getString(R.string.celstdid), Toast.LENGTH_SHORT).show();
+                    celstdid.setError("Wrong Study ID.. Please correct");
+                    Log.d(TAG, "celstdid:invalid ");
+                    return false;
+                } else {
+                    celstdid.setError(null);
+                }
+
+                if (cel02a.isChecked() && (!celstdid.getText().toString().contains("14W"))) {
+                    Toast.makeText(this, "ERROR(invalid)" + getString(R.string.celstdid) + " - " + getString(R.string.cel02), Toast.LENGTH_SHORT).show();
+                    celstdid.setError("Please check age and study id again ");
+                    cel02a.setError("Please check age and study id again");
+                    Log.d(TAG, "celstdid:invalid ");
+                    return false;
+                } else if ((cel02a.isChecked() && celstdid.getText().toString().contains("14W")) && (Integer.valueOf(celstdid.getText().toString().substring(8)) > 300)) {
+                    Toast.makeText(this, "ERROR(invalid)" + getString(R.string.celstdid) + " - " + getString(R.string.cel02), Toast.LENGTH_SHORT).show();
+                    celstdid.setError("Please check age and study id again ");
+                    cel02a.setError("Please check age and study id again");
+                    Log.d(TAG, "celstdid:invalid ");
+                    return false;
+                } else {
+                    celstdid.setError(null);
+                    cel02a.setError(null);
+                }
+
+                if (cel02b.isChecked() && (!celstdid.getText().toString().contains("9M"))) {
+                    Toast.makeText(this, "ERROR(invalid)" + getString(R.string.celstdid) + " - " + getString(R.string.cel02), Toast.LENGTH_SHORT).show();
+                    celstdid.setError("Please check age and study id again ");
+                    cel02a.setError("Please check age and study id again");
+                    Log.d(TAG, "celstdid:invalid ");
+                    return false;
+                } else if ((cel02a.isChecked() && celstdid.getText().toString().contains("9M")) && (Integer.valueOf(celstdid.getText().toString().substring(8)) < 300)) {
+                    Toast.makeText(this, "ERROR(invalid)" + getString(R.string.celstdid) + " - " + getString(R.string.cel02), Toast.LENGTH_SHORT).show();
+                    celstdid.setError("Please check age and study id again ");
+                    cel02a.setError("Please check age and study id again");
+                    Log.d(TAG, "celstdid:invalid ");
+                    return false;
+                } else {
+                    celstdid.setError(null);
+                    cel02a.setError(null);
+                }
+
+
+
+
+
+
 
                 // =================== doe ====================
                 if (celdoe.getText().toString().isEmpty()) {

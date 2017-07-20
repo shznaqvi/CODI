@@ -59,6 +59,7 @@ public class AppMain extends Application {
     public static final long MILLISECONDS_IN_14_WEEKS = MILLIS_IN_SECOND * SECONDS_IN_MINUTE * MINUTES_IN_HOUR * HOURS_IN_DAY * DAYS_IN_14_WEEKS;
     private static final long DAYS_IN_9_MONTHS = (30 * 9) + 29;
     public static final long MILLISECONDS_IN_9_MONTH = MILLIS_IN_SECOND * SECONDS_IN_MINUTE * MINUTES_IN_HOUR * HOURS_IN_DAY * DAYS_IN_9_MONTHS;
+
     public static String deviceId;
 
     public static Boolean admin = false;
@@ -67,6 +68,7 @@ public class AppMain extends Application {
     public static String child_name = "TEST";
     public static EligibilityContract elc;
     public static String userName = "0000";
+    public static String dssID = "";
     public static String areaCode;
     public static String enrollDate;
     public static String arm;

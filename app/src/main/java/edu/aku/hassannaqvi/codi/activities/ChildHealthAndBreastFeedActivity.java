@@ -155,8 +155,14 @@ public class ChildHealthAndBreastFeedActivity extends Activity {
 
                 finish();
 
+                if (AppMain.formType.equals("V3") && AppMain.arm.equals("AB")) {
+                    startActivity(new Intent(this, VaccineActivity.class));
+                } else {
+                    startActivity(new Intent(this, BloodSamplingActivity.class));
+                }
 
-                startActivity(new Intent(this, BloodSamplingActivity.class));
+
+                //startActivity(new Intent(this, BloodSamplingActivity.class));
 
             } else {
                 Toast.makeText(this, "Failed to Update Database!", Toast.LENGTH_SHORT).show();
@@ -189,22 +195,17 @@ public class ChildHealthAndBreastFeedActivity extends Activity {
     private boolean UpdateDB() {
         DatabaseHelper db = new DatabaseHelper(this);
 
-       /* Long updcount = db.addEnrollment(MainApp.enc);
-        MainApp.enc.set_ID(String.valueOf(updcount));
+        int updcount = db.updateSCHBF();
 
         if (updcount != 0) {
             Toast.makeText(this, "Updating Database... Successful!", Toast.LENGTH_SHORT).show();
-
-            MainApp.enc.set_UID(
-                    (MainApp.enc.getDeviceID() + MainApp.enc.get_ID()));
 
             return true;
         } else {
             Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
             return false;
         }
-*/
-        return true;
+
     }
 
     public boolean ValidateForm() {

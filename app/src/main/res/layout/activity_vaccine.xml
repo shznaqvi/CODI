@@ -114,7 +114,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/cen30" />
+                android:text="@string/cen30"
+                android:visibility="gone" />
 
             <io.blackbox_vision.datetimepickeredittext.view.DatePickerInputEditText
                 android:id="@+id/cen30"
@@ -124,6 +125,7 @@
                 android:focusable="false"
                 android:hint="@string/cen30"
                 android:textColor="@android:color/black"
+                android:visibility="gone"
                 app:dateFormat="dd-MM-yyyy" />
 
 
@@ -131,7 +133,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/cen31" />
+                android:text="@string/cen31"
+                android:visibility="gone" />
 
             <io.blackbox_vision.datetimepickeredittext.view.TimePickerInputEditText
                 android:id="@+id/cen31"
@@ -141,6 +144,7 @@
                 android:focusable="false"
                 android:hint="@string/cen31"
                 android:textColor="@android:color/black"
+                android:visibility="gone"
                 app:timeFormat="HH:mm" />
 
 
@@ -177,6 +181,37 @@
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:background="@color/colorPrimary" />
+
+            <LinearLayout
+                android:id="@+id/fldGrpcen34"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/cen34" />
+
+                <EditText
+                    android:id="@+id/cen34a"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                    android:hint="@string/cen34"
+                    android:inputType="textCapWords" />
+
+                <EditText
+                    android:id="@+id/cen34b"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                    android:hint="@string/cen34"
+                    android:inputType="textCapWords" />
+
+            </LinearLayout>
+
 
             <TextView
                 android:layout_width="match_parent"

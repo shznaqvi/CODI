@@ -1,9 +1,12 @@
 package edu.aku.hassannaqvi.codi.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -31,6 +34,7 @@ import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import edu.aku.hassannaqvi.codi.R;
+import edu.aku.hassannaqvi.codi.contracts.FormsContract;
 import edu.aku.hassannaqvi.codi.core.AppMain;
 import edu.aku.hassannaqvi.codi.core.DatabaseHelper;
 import io.blackbox_vision.datetimepickeredittext.view.DatePickerInputEditText;
@@ -41,8 +45,8 @@ public class EnrollmentFormActivity extends AppCompatActivity {
     private static final String TAG = EnrollmentFormActivity.class.getSimpleName();
     final SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 
-    @BindView(R.id.dssid)
-    TextView dssid;
+    /*@BindView(R.id.dssid)
+    TextView dssid;*/
     @BindView(R.id.studyId)
     TextView studyId;
     @BindView(R.id.cen01)
@@ -410,77 +414,85 @@ public class EnrollmentFormActivity extends AppCompatActivity {
     private void SaveDraft() throws JSONException {
         Toast.makeText(this, "Saving Draft for this Section", Toast.LENGTH_SHORT).show();
 
-        JSONObject sen = new JSONObject();
+        SharedPreferences sharedPref = getSharedPreferences("tagName", MODE_PRIVATE);
 
-        sen.put("dssid", dssid.getText().toString());
-        sen.put("studyId", studyId.getText().toString());
-        sen.put("cen01", cen01.getText().toString());
-        sen.put("cen02", cen02a.isChecked() ? "1" : cen02b.isChecked() ? "2" : "0");
-        sen.put("cen03", cen03a.isChecked() ? "1" : cen03b.isChecked() ? "2" : "0");
-        sen.put("cen04", cen04.getText().toString());
-        sen.put("cen05", cen05.getText().toString());
-        sen.put("cen06", cen06.getText().toString());
-        sen.put("cen07w", cen07w.getText().toString());
-        sen.put("cen07m", cen07m.getText().toString());
-        sen.put("cen08", cen08a.isChecked() ? "1" : cen08b.isChecked() ? "2" : "0");
-        sen.put("cen09", cen09.getText().toString());
-        sen.put("cenfp", cenfp.getText().toString());
-        sen.put("cenmp", cenmp.getText().toString());
-        sen.put("cenac", cenac.getText().toString());
-        sen.put("cen10", cen10a.isChecked() ? "1" : cen10b.isChecked() ? "2" : cen10c.isChecked() ? "3" : cen10d.isChecked() ? "4" : cen10e.isChecked() ? "5" : cen10f.isChecked() ? "6" : cen1099.isChecked() ? "99" : "0");
-        sen.put("cen11", cen11a.isChecked() ? "1" : cen11b.isChecked() ? "2" : cen11c.isChecked() ? "3" : cen11d.isChecked() ? "4" : cen11e.isChecked() ? "5" : cen11f.isChecked() ? "6" : "0");
-        sen.put("cen12", cen12a.isChecked() ? "1" : cen12b.isChecked() ? "2" : cen12c.isChecked() ? "3" : cen12d.isChecked() ? "4" : "0");
-        sen.put("cen13", cen13.getText().toString());
-        sen.put("cen14", cen14.getText().toString());
-        sen.put("cen15", cen15a.isChecked() ? "1" : cen15b.isChecked() ? "2" : "0");
-        sen.put("cen16", cen16a.isChecked() ? "1" : cen16b.isChecked() ? "2" : cen16c.isChecked() ? "3" : "0");
-        sen.put("cen17", cen17a.isChecked() ? "1" : cen17b.isChecked() ? "2" : cen1788.isChecked() ? "3" : "0");
-        sen.put("cen1788x", cen1788x.getText().toString());
-        sen.put("cen18", cen18a.isChecked() ? "1" : cen18b.isChecked() ? "2" : "0");
-        sen.put("cen19", cen19a.isChecked() ? "1" : cen19b.isChecked() ? "2" : "0");
-        sen.put("cen20", cen20.getText().toString());
-        sen.put("cen21", cen21.getText().toString());
-        sen.put("cen22", cen22a.isChecked() ? "1" : cen22b.isChecked() ? "2" : "0");
-        sen.put("cen23", cen23a.isChecked() ? "1" : cen23b.isChecked() ? "2" : "0");
+        AppMain.fc = new FormsContract();
+
+
+        JSONObject sinfo = new JSONObject();
+
+        //sen.put("dssid", dssid.getText().toString());
+        sinfo.put("studyId", studyId.getText().toString());
+        sinfo.put("cen01", cen01.getText().toString());
+        sinfo.put("cen02", cen02a.isChecked() ? "1" : cen02b.isChecked() ? "2" : "0");
+        sinfo.put("cen03", cen03a.isChecked() ? "1" : cen03b.isChecked() ? "2" : "0");
+        sinfo.put("cen04", cen04.getText().toString());
+        sinfo.put("cen05", cen05.getText().toString());
+        sinfo.put("cen06", cen06.getText().toString());
+        sinfo.put("cen07w", cen07w.getText().toString());
+        sinfo.put("cen07m", cen07m.getText().toString());
+        sinfo.put("cen08", cen08a.isChecked() ? "1" : cen08b.isChecked() ? "2" : "0");
+        sinfo.put("cen09", cen09.getText().toString());
+        sinfo.put("cenfp", cenfp.getText().toString());
+        sinfo.put("cenmp", cenmp.getText().toString());
+        sinfo.put("cenac", cenac.getText().toString());
+        sinfo.put("cen10", cen10a.isChecked() ? "1" : cen10b.isChecked() ? "2" : cen10c.isChecked() ? "3" : cen10d.isChecked() ? "4" : cen10e.isChecked() ? "5" : cen10f.isChecked() ? "6" : cen1099.isChecked() ? "99" : "0");
+        sinfo.put("cen11", cen11a.isChecked() ? "1" : cen11b.isChecked() ? "2" : cen11c.isChecked() ? "3" : cen11d.isChecked() ? "4" : cen11e.isChecked() ? "5" : cen11f.isChecked() ? "6" : "0");
+        sinfo.put("cen12", cen12a.isChecked() ? "1" : cen12b.isChecked() ? "2" : cen12c.isChecked() ? "3" : cen12d.isChecked() ? "4" : "0");
+        sinfo.put("cen13", cen13.getText().toString());
+        sinfo.put("cen14", cen14.getText().toString());
+        sinfo.put("cen15", cen15a.isChecked() ? "1" : cen15b.isChecked() ? "2" : "0");
+        sinfo.put("cen16", cen16a.isChecked() ? "1" : cen16b.isChecked() ? "2" : cen16c.isChecked() ? "3" : "0");
+        sinfo.put("cen17", cen17a.isChecked() ? "1" : cen17b.isChecked() ? "2" : cen1788.isChecked() ? "3" : "0");
+        sinfo.put("cen1788x", cen1788x.getText().toString());
+        sinfo.put("cen18", cen18a.isChecked() ? "1" : cen18b.isChecked() ? "2" : "0");
+        sinfo.put("cen19", cen19a.isChecked() ? "1" : cen19b.isChecked() ? "2" : "0");
+        sinfo.put("cen20", cen20.getText().toString());
+        sinfo.put("cen21", cen21.getText().toString());
+        sinfo.put("cen22", cen22a.isChecked() ? "1" : cen22b.isChecked() ? "2" : "0");
+        sinfo.put("cen23", cen23a.isChecked() ? "1" : cen23b.isChecked() ? "2" : "0");
         if (cen24.getText().toString().equals("Sticker")) {
-            sen.put("cen24", "");
+            sinfo.put("cen24", "");
         } else {
-            sen.put("cen24", cen24.getText().toString());
+            sinfo.put("cen24", cen24.getText().toString());
         }
-        sen.put("cen25", cen25.getText().toString());
-        sen.put("cen26", cen26.getText().toString());
-        sen.put("cen27", cen27a.isChecked() ? "1" : cen27b.isChecked() ? "2" : cen27c.isChecked() ? "3" : cen27d.isChecked() ? "4" : "0");
-        sen.put("cen28", cen28a.isChecked() ? "1" : cen28b.isChecked() ? "2" : "0");
-        sen.put("cen29", cen29a.isChecked() ? "1" : cen29b.isChecked() ? "2" : "0");
-        sen.put("cen30", cen30.getText().toString());
-        sen.put("cen31", cen31.getText().toString());
-        sen.put("cen32", cen32a.isChecked() ? "1" : cen32b.isChecked() ? "2" : "0");
-        sen.put("cen33a", cen33a.getText().toString());
-        sen.put("cen33b", cen33b.getText().toString());
+        sinfo.put("cen25", cen25.getText().toString());
+        sinfo.put("cen26", cen26.getText().toString());
+        sinfo.put("cen27", cen27a.isChecked() ? "1" : cen27b.isChecked() ? "2" : cen27c.isChecked() ? "3" : cen27d.isChecked() ? "4" : "0");
+        sinfo.put("cen28", cen28a.isChecked() ? "1" : cen28b.isChecked() ? "2" : "0");
+        sinfo.put("cen29", cen29a.isChecked() ? "1" : cen29b.isChecked() ? "2" : "0");
+        sinfo.put("cen30", cen30.getText().toString());
+        sinfo.put("cen31", cen31.getText().toString());
+        sinfo.put("cen32", cen32a.isChecked() ? "1" : cen32b.isChecked() ? "2" : "0");
+        sinfo.put("cen33a", cen33a.getText().toString());
+        sinfo.put("cen33b", cen33b.getText().toString());
+        sinfo.put("cendt", cendt.getText().toString());
+        sinfo.put("centime", centime.getText().toString());
 
 
-        sen.put("cendt", cendt.getText().toString());
-        sen.put("centime", centime.getText().toString());
+        AppMain.fc.setsInfo(String.valueOf(sinfo));
+        setGPS();
 
         Toast.makeText(this, "Validation Successful! - Saving Draft...", Toast.LENGTH_SHORT).show();
     }
 
     private boolean UpdateDB() {
+
         DatabaseHelper db = new DatabaseHelper(this);
 
-      /* long updcount = db.addForm(AppMain.elc);
-
-        AppMain.elc.setID(String.valueOf(updcount));
+        long updcount = db.addEnrollment(AppMain.fc);
+        AppMain.fc.set_ID(String.valueOf(updcount));
 
         if (updcount != 0) {
             Toast.makeText(this, "Updating Database... Successful!", Toast.LENGTH_SHORT).show();
 
-            AppMain.elc.setUID(
-                    (AppMain.elc.getDeviceID() + AppMain.elc.getID()));
+            AppMain.fc.set_UID(
+                    (AppMain.fc.getDeviceID() + AppMain.fc.get_ID()));
             db.updateFormID();
+
         } else {
             Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
-        }*/
+        }
         return true;
     }
 
@@ -864,6 +876,37 @@ public class EnrollmentFormActivity extends AppCompatActivity {
         return calendar;
     }
 
+    public void setGPS() {
+        SharedPreferences GPSPref = getSharedPreferences("GPSCoordinates", Context.MODE_PRIVATE);
 
+//        String date = DateFormat.format("dd-MM-yyyy HH:mm", Long.parseLong(GPSPref.getString("Time", "0"))).toString();
+
+        try {
+            String lat = GPSPref.getString("Latitude", "0");
+            String lang = GPSPref.getString("Longitude", "0");
+            String acc = GPSPref.getString("Accuracy", "0");
+            String dt = GPSPref.getString("Time", "0");
+
+            if (lat == "0" && lang == "0") {
+                Toast.makeText(this, "Could not obtained GPS points", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "GPS set", Toast.LENGTH_SHORT).show();
+            }
+
+            String date = DateFormat.format("dd-MM-yyyy HH:mm", Long.parseLong(GPSPref.getString("Time", "0"))).toString();
+
+            AppMain.fc.setGpsLat(GPSPref.getString("Latitude", "0"));
+            AppMain.fc.setGpsLng(GPSPref.getString("Longitude", "0"));
+            AppMain.fc.setGpsAcc(GPSPref.getString("Accuracy", "0"));
+//            AppMain.fc.setGpsTime(GPSPref.getString(date, "0")); // Timestamp is converted to date above
+            AppMain.fc.setGpsDT(date); // Timestamp is converted to date above
+
+            Toast.makeText(this, "GPS set", Toast.LENGTH_SHORT).show();
+
+        } catch (Exception e) {
+            Log.e(TAG, "setGPS: " + e.getMessage());
+        }
+
+    }
 
 }

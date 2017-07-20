@@ -70,6 +70,46 @@
             android:onClick="openForm1"
             android:text="Enrollment Form" />
 
+        <Button
+            android:id="@+id/openV2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="16dp"
+            android:onClick="openV2"
+            android:text="Second Visit Form"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/openV3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="16dp"
+            android:onClick="openV3"
+            android:text="Third Visit Form"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/openV4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="16dp"
+            android:onClick="openV4"
+            android:text="Fourth Visit Form"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/openV5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="16dp"
+            android:onClick="openV5"
+            android:text="Fifth Visit Form"
+            android:visibility="gone" />
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -99,13 +139,15 @@
             android:layout_marginBottom="8dp"
             android:layout_marginTop="16dp"
             android:onClick="syncDevice"
-            android:text="Download Data" />
+            android:text="Download Data"
+            android:visibility="gone" />
 
         <LinearLayout
             android:id="@+id/adminsec"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="visible">
 
 
             <Button
@@ -124,7 +166,8 @@
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="16dp"
                 android:onClick="openA"
-                android:text="Section A" />
+                android:text="Section A"
+                android:visibility="gone" />
 
             <Button
                 android:id="@+id/openB"
