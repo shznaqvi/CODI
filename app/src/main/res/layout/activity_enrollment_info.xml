@@ -34,41 +34,164 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:visibility="visible">
-
-            <TextView
-                android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginTop="16dp"
-                android:layout_weight="1"
-            android:text="@string/DSSID"
-                android:visibility="visible" />
-
+            android:background="@drawable/bacground_border"
+            android:orientation="horizontal"
+            android:weightSum="100">
 
             <TextView
-                android:id="@+id/dssid"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="3dp"
-                android:layout_marginTop="16dp"
-                android:layout_weight="1"
-                android:background="@color/pink_100"
-                android:gravity="center"
-                android:textColor="@color/colorPrimaryDark" />
-
-            <!--<Button
-                android:id="@+id/btn_Check"
+                android:id="@+id/cen04"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="20"
-                android:text="CHECK"
-                android:textColor="@color/red"
-                android:textSize="15dp" />-->
-        </LinearLayout>
+                android:layout_height="match_parent"
+                android:layout_weight="50"
+                android:background="@drawable/bacground_border"
+                android:gravity="center"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                tools:text="Name of Child" />
 
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="50"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bacground_border"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:text="@string/DSSID"
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/dssid"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#d6d6d6"
+                        android:gravity="center_vertical"
+                        android:textColor="@color/colorPrimaryDark"
+                        tools:text="AGA01010101" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bacground_border"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="top"
+                        android:text="@string/studyID"
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/studyId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#d6d6d6"
+                        android:gravity="top"
+                        android:textColor="@color/colorPrimaryDark"
+                        tools:text="CODI14EW-01234" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bacground_border"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="top"
+                        android:text="@string/cen05"
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/cen05"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#d6d6d6"
+                        android:gravity="top"
+                        android:textColor="@color/colorPrimaryDark"
+                        tools:text="Safia" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bacground_border"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="top"
+                        android:text="@string/cen01"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
+                        android:visibility="visible" />
+
+
+                    <TextView
+                        android:id="@+id/cen01"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#d6d6d6"
+                        android:gravity="top"
+                        android:textColor="@color/colorPrimaryDark"
+                        tools:text="20-07-2017" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bacground_border"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="top"
+                        android:text="@string/cen06"
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/cen06"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#d6d6d6"
+                        android:gravity="top"
+                        android:textColor="@color/colorPrimaryDark"
+                        tools:text="19-01-2017" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/fldGrpCheckChild"
@@ -77,66 +200,6 @@
             android:orientation="vertical"
             android:visibility="visible">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                    android:layout_weight="1"
-                    android:text="@string/studyID" />
-
-                <TextView
-                android:id="@+id/studyId"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_weight="1"
-                    android:background="@color/pink_100"
-                    android:gravity="center"
-                    android:textColor="@color/colorPrimaryDark" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-
-                <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                    android:layout_weight="1"
-                    android:text="@string/cen01"
-                    android:visibility="visible" />
-
-
-                <!--<io.blackbox_vision.datetimepickeredittext.view.DatePickerInputEditText
-                    android:id="@+id/cen01"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="1dp"
-                    android:focusable="true"
-                    android:hint="@string/cen01"
-                    android:textColor="@android:color/black"
-                    app:dateFormat="dd-MM-yyyy" />
-    -->
-                <TextView
-                    android:id="@+id/cen01"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_weight="1"
-                    android:background="@color/pink_100"
-                    android:gravity="center"
-                    android:textColor="@color/colorPrimaryDark" />
-            </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"
@@ -206,79 +269,6 @@
                     android:text="@string/no" />
             </RadioGroup>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_weight="1"
-                android:text="@string/cen04" />
-
-            <TextView
-                android:id="@+id/cen04"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_weight="1"
-                android:background="@color/pink_100"
-                android:gravity="center"
-                android:textColor="@color/colorPrimaryDark" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_weight="1"
-                android:text="@string/cen05" />
-
-                <TextView
-                android:id="@+id/cen05"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_weight="1"
-                    android:background="@color/pink_100"
-                    android:gravity="center"
-                    android:textColor="@color/colorPrimaryDark" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-
-                <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                    android:layout_weight="1"
-                    android:text="@string/cen06" />
-
-                <TextView
-                android:id="@+id/cen06"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                android:layout_weight="1"
-                    android:background="@color/pink_100"
-                android:focusable="true"
-                    android:gravity="center"
-                android:textColor="@android:color/black" />
-
-            </LinearLayout>
 
 
             <TextView
@@ -287,28 +277,45 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/cen07" />
 
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/cen07w"
+                    android:id="@+id/cen07"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:hint="@string/cen07a"
+                    android:layout_weight="2"
+                    android:hint="@string/cen07"
                     android:inputType="number"
                     android:maxLength="2" />
 
-                <EditText
-                    android:id="@+id/cen07m"
+                <RadioGroup
+                    android:id="@+id/cen07a"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:hint="@string/cen07b"
-                    android:inputType="number"
-                    android:maxLength="2" />
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/cen07w"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/cen07a" />
+
+                    <RadioButton
+                        android:id="@+id/cen07m"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/cen07b" />
+
+
+                </RadioGroup>
+
 
             </LinearLayout>
 
@@ -326,7 +333,7 @@
                 android:orientation="horizontal">
 
                 <RadioButton
-                    android:id="@+id/cen08a"
+                    android:id="@+id/cen08b"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="1dp"
@@ -334,7 +341,7 @@
                     android:text="@string/female" />
 
                 <RadioButton
-                    android:id="@+id/cen08b"
+                    android:id="@+id/cen08a"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="1dp"

@@ -101,7 +101,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="1dp"
             android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-            android:hint="@string/celcn" />
+            android:hint="@string/celcn"
+            android:inputType="textCapWords" />
 
 
         <TextView
@@ -133,7 +134,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="1dp"
             android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-            android:hint="@string/celmn" />
+            android:hint="@string/celmn"
+            android:inputType="textCapWords" />
 
 
         <LinearLayout

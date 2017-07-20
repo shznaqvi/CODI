@@ -38,8 +38,7 @@ public class EndingActivity extends Activity {
     RadioButton iStatuse;
     @BindView(R.id.iStatusf)
     RadioButton iStatusf;
-    @BindView(R.id.iStatusg)
-    RadioButton iStatusg;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +55,7 @@ public class EndingActivity extends Activity {
             iStatusd.setEnabled(false);
             iStatuse.setEnabled(false);
             iStatusf.setEnabled(false);
-            iStatusg.setEnabled(false);
+
 
         } else {
             //fldGrpmn0823Reason.setVisibility(View.GONE);
@@ -66,8 +65,6 @@ public class EndingActivity extends Activity {
             iStatusd.setEnabled(true);
             iStatuse.setEnabled(true);
             iStatusf.setEnabled(true);
-            iStatusg.setEnabled(true);
-
 
 
         }
@@ -86,8 +83,7 @@ public class EndingActivity extends Activity {
         Toast.makeText(this, "Saving Draft for  This Section", Toast.LENGTH_SHORT).show();
 
         AppMain.fc.setIstatus(iStatusa.isChecked() ? "1" : iStatusb.isChecked() ? "2" : iStatusc.isChecked() ? "3"
-                : iStatusd.isChecked() ? "4" : iStatuse.isChecked() ? "5" : iStatusf.isChecked() ? "6"
-                : iStatusg.isChecked() ? "7" : "0");
+                : iStatusd.isChecked() ? "4" : iStatuse.isChecked() ? "5" : iStatusf.isChecked() ? "6" : "0");
 
         Toast.makeText(this, "Validation Successful! - Saving Draft...", Toast.LENGTH_SHORT).show();
     }
