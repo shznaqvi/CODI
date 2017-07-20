@@ -31,8 +31,6 @@ public class FormsContract {
     private String sBloodSample = "";
     private String sRandomization = "";
     private String sVaccine = "";
-    private String sEN = "";
-
 
 
     private String gpsLat = "";
@@ -55,7 +53,6 @@ public class FormsContract {
         this.DSSID = jsonObject.getString(FormsTable.COLUMN_DSSID);
         this.studyID = jsonObject.getString(FormsTable.COLUMN_STUDYID);
         this.childName = jsonObject.getString(FormsTable.COLUMN_CHILDNAME);
-        this.sEN = jsonObject.getString(FormsTable.COLUMN_SEN);
         this.formDate = jsonObject.getString(FormsTable.COLUMN_FORMDATE);
         this.formType = jsonObject.getString(FormsTable.COLUMN_FORMTYPE);
         this.user = jsonObject.getString(FormsTable.COLUMN_USER);
@@ -87,7 +84,6 @@ public class FormsContract {
         this.formDate = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_FORMDATE));
         this.formType = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_FORMTYPE));
         this.user = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_USER));
-        this.sEN = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_SEN));
         this.istatus = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_ISTATUS));
         this.nextApp = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_NEXTAPP));
         this.sInfo = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_SINFO));
@@ -121,7 +117,6 @@ public class FormsContract {
         json.put(FormsTable.COLUMN_FORMDATE, this.formDate == null ? JSONObject.NULL : this.formDate);
         json.put(FormsTable.COLUMN_FORMTYPE, this.formType == null ? JSONObject.NULL : this.formType);
         json.put(FormsTable.COLUMN_USER, this.user == null ? JSONObject.NULL : this.user);
-        json.put(FormsTable.COLUMN_SEN, this.sEN == null ? JSONObject.NULL : this.sEN);
         json.put(FormsTable.COLUMN_ISTATUS, this.istatus == null ? JSONObject.NULL : this.istatus);
         json.put(FormsTable.COLUMN_NEXTAPP, this.nextApp == null ? JSONObject.NULL : this.nextApp);
         json.put(FormsTable.COLUMN_SINFO, this.sInfo == null ? JSONObject.NULL : new JSONObject(this.sInfo));
@@ -174,14 +169,6 @@ public class FormsContract {
 
     public void setStudyID(String studyID) {
         this.studyID = studyID;
-    }
-
-    public String getsEN() {
-        return sEN;
-    }
-
-    public void setsEN(String sEN) {
-        this.sEN = sEN;
     }
 
     public String getChildName() {
@@ -354,7 +341,6 @@ public class FormsContract {
         public static final String COLUMN_DSSID = "dssid";
         public static final String COLUMN_STUDYID = "studyid";
         public static final String COLUMN_CHILDNAME = "childname";
-        public static final String COLUMN_SEN = "sen";
         public static final String COLUMN_FORMDATE = "formdate";
         public static final String COLUMN_FORMTYPE = "formtype";
         public static final String COLUMN_USER = "user";
