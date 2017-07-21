@@ -59,16 +59,20 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
     TextView cen05;
     @BindView(R.id.cen06)
     TextView cen06;
+    @BindView(R.id.cen07)
+    EditText cen07;
+    @BindView(R.id.cen07a)
+    RadioGroup cen07a;
     @BindView(R.id.cen07w)
-    EditText cen07w;
+    RadioButton cen07w;
     @BindView(R.id.cen07m)
-    EditText cen07m;
+    RadioButton cen07m;
     @BindView(R.id.cen08)
     RadioGroup cen08;
-    @BindView(R.id.cen08a)
-    RadioButton cen08a;
     @BindView(R.id.cen08b)
     RadioButton cen08b;
+    @BindView(R.id.cen08a)
+    RadioButton cen08a;
     @BindView(R.id.cen09)
     EditText cen09;
     @BindView(R.id.cenfp)
@@ -169,7 +173,7 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
 
         dssid.setText(AppMain.elc.getDSSID());
         studyId.setText(AppMain.elc.getStudyID());
-        cen01.setText(new SimpleDateFormat("dd-MM-yyyy").format(System.currentTimeMillis()));
+        cen01.setText(AppMain.enrollDate);
         cen04.setText(AppMain.elc.getChildName());
         cen05.setText(AppMain.elc.getMotherName());
         cen06.setText(AppMain.elc.getDob());
@@ -316,21 +320,25 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
 
         //sInfo.put("dssid", AppMain.elc.getDSSID());
         //sInfo.put("studyId", AppMain.elc.getStudyID());
-        sInfo.put("cen01", cen01.getText().toString());
+        sInfo.put("cen01", AppMain.enrollDate);
         sInfo.put("cen02", "1");
         sInfo.put("cen03", "1");
         sInfo.put("cen05", AppMain.elc.getMotherName());
         sInfo.put("cen06", AppMain.elc.getDob());
-        sInfo.put("cen07w", cen07w.getText().toString());
-        sInfo.put("cen07m", cen07m.getText().toString());
+        sInfo.put("cen07", cen07.getText().toString());
+        sInfo.put("cen07a", cen07w.isChecked() ? "1" : cen07m.isChecked() ? "2" : "0");
         sInfo.put("cen08", cen08a.isChecked() ? "1" : cen08b.isChecked() ? "2" : "0");
         sInfo.put("cen09", cen09.getText().toString());
         sInfo.put("cenfp", cenfp.getText().toString());
         sInfo.put("cenmp", cenmp.getText().toString());
         sInfo.put("cenac", cenac.getText().toString());
-        sInfo.put("cen10", cen10a.isChecked() ? "1" : cen10b.isChecked() ? "2" : cen10c.isChecked() ? "3" : cen10d.isChecked() ? "4" : cen10e.isChecked() ? "5" : cen10f.isChecked() ? "6" : cen1099.isChecked() ? "99" : "0");
-        sInfo.put("cen11", cen11a.isChecked() ? "1" : cen11b.isChecked() ? "2" : cen11c.isChecked() ? "3" : cen11d.isChecked() ? "4" : cen11e.isChecked() ? "5" : cen11f.isChecked() ? "6" : "0");
-        sInfo.put("cen12", cen12a.isChecked() ? "1" : cen12b.isChecked() ? "2" : cen12c.isChecked() ? "3" : cen12d.isChecked() ? "4" : "0");
+        sInfo.put("cen10", cen10a.isChecked() ? "1" : cen10b.isChecked() ? "2" : cen10c.isChecked() ? "3"
+                : cen10d.isChecked() ? "4" : cen10e.isChecked() ? "5" : cen10f.isChecked() ? "6"
+                : cen1099.isChecked() ? "99" : "0");
+        sInfo.put("cen11", cen11a.isChecked() ? "1" : cen11b.isChecked() ? "2" : cen11c.isChecked() ? "3"
+                : cen11d.isChecked() ? "4" : cen11e.isChecked() ? "5" : cen11f.isChecked() ? "6" : "0");
+        sInfo.put("cen12", cen12a.isChecked() ? "1" : cen12b.isChecked() ? "2" : cen12c.isChecked() ? "3"
+                : cen12d.isChecked() ? "4" : "0");
         sInfo.put("cen13", cen13.getText().toString());
         sInfo.put("cen14", cen14.getText().toString());
 
@@ -426,24 +434,24 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
             cen06.setError(null);
         }
 */
-        if (cen07w.getText().toString().isEmpty()) {
-            Toast.makeText(this, "ERROR(Empty)" + getString(R.string.cen07a), Toast.LENGTH_SHORT).show();
+        if (cen07.getText().toString().isEmpty()) {
+            Toast.makeText(this, "ERROR(Empty)" + getString(R.string.cen07), Toast.LENGTH_SHORT).show();
+            cen07.setError("This data is Required!");
+
+            Log.i(TAG, "cen07: This Data is Required!");
+            return false;
+        } else {
+            cen07.setError(null);
+        }
+
+        if (cen07a.getCheckedRadioButtonId() == -1) {
+            Toast.makeText(this, "ERROR(Empty)" + getString(R.string.cen07), Toast.LENGTH_SHORT).show();
             cen07w.setError("This data is Required!");
 
-            Log.i(TAG, "cen07w: This Data is Required!");
+            Log.i(TAG, "cen07a: This Data is Required!");
             return false;
         } else {
             cen07w.setError(null);
-        }
-
-        if (cen07m.getText().toString().isEmpty()) {
-            Toast.makeText(this, "ERROR(Empty)" + getString(R.string.cen07b), Toast.LENGTH_SHORT).show();
-            cen07m.setError("This data is Required!");
-
-            Log.i(TAG, "cen07m: This Data is Required!");
-            return false;
-        } else {
-            cen07m.setError(null);
         }
 
 
@@ -507,6 +515,16 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
             cen13.setError(null);
         }
 
+        if (Integer.valueOf(cen13.getText().toString()) < 1) {
+            Toast.makeText(this, "ERROR(invalid)" + getString(R.string.cen13), Toast.LENGTH_SHORT).show();
+            cen13.setError("Zero not allowed");
+
+            Log.i(TAG, "cen13: zero not allowed");
+            return false;
+        } else {
+            cen13.setError(null);
+        }
+
         if (cen14.getText().toString().isEmpty()) {
             Toast.makeText(this, "ERROR(Empty)" + getString(R.string.cen14), Toast.LENGTH_SHORT).show();
             cen14.setError("This data is Required!");
@@ -517,7 +535,15 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
             cen14.setError(null);
         }
 
+        if (Integer.valueOf(cen14.getText().toString()) >= Integer.valueOf(cen13.getText().toString())) {
+            Toast.makeText(this, "ERROR(invalid)" + getString(R.string.cen14), Toast.LENGTH_SHORT).show();
+            cen14.setError("Can not be greater than total members of house!");
 
+            Log.i(TAG, "cen14: Can not be greater than total members of house!");
+            return false;
+        } else {
+            cen14.setError(null);
+        }
 
 
         return true;

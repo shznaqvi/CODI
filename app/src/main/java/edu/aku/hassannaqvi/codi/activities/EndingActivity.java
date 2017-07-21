@@ -38,8 +38,7 @@ public class EndingActivity extends Activity {
     RadioButton iStatuse;
     @BindView(R.id.iStatusf)
     RadioButton iStatusf;
-    @BindView(R.id.iStatusg)
-    RadioButton iStatusg;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +55,7 @@ public class EndingActivity extends Activity {
             iStatusd.setEnabled(false);
             iStatuse.setEnabled(false);
             iStatusf.setEnabled(false);
-            iStatusg.setEnabled(false);
+
 
         } else {
             //fldGrpmn0823Reason.setVisibility(View.GONE);
@@ -66,8 +65,6 @@ public class EndingActivity extends Activity {
             iStatusd.setEnabled(true);
             iStatuse.setEnabled(true);
             iStatusf.setEnabled(true);
-            iStatusg.setEnabled(true);
-
 
 
         }
@@ -77,17 +74,31 @@ public class EndingActivity extends Activity {
     @OnClick(R.id.btn_End)
     void onBtnEndClick() {
 
-        Intent endSec = new Intent(this, MainActivity.class);
-        endSec.putExtra("complete", false);
-        startActivity(endSec);
+        Toast.makeText(this, "Processing Closing Section", Toast.LENGTH_SHORT).show();
+        if (formValidation()) {
+            try {
+                SaveDraft();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            if (UpdateDB()) {
+                finish();
+                Toast.makeText(this, "Closing Form!", Toast.LENGTH_SHORT).show();
+                Intent endSec = new Intent(this, MainActivity.class);
+                //AppMain.mnb1 = "TEST";
+                startActivity(endSec);
+            } else {
+                Toast.makeText(this, "Failed to Update Database!", Toast.LENGTH_SHORT).show();
+            }
+            //}
+        }
     }
 
     private void SaveDraft() throws JSONException {
         Toast.makeText(this, "Saving Draft for  This Section", Toast.LENGTH_SHORT).show();
 
         AppMain.fc.setIstatus(iStatusa.isChecked() ? "1" : iStatusb.isChecked() ? "2" : iStatusc.isChecked() ? "3"
-                : iStatusd.isChecked() ? "4" : iStatuse.isChecked() ? "5" : iStatusf.isChecked() ? "6"
-                : iStatusg.isChecked() ? "7" : "0");
+                : iStatusd.isChecked() ? "4" : iStatuse.isChecked() ? "5" : iStatusf.isChecked() ? "6" : "0");
 
         Toast.makeText(this, "Validation Successful! - Saving Draft...", Toast.LENGTH_SHORT).show();
     }
@@ -112,7 +123,7 @@ public class EndingActivity extends Activity {
     private boolean UpdateDB() {
         DatabaseHelper db = new DatabaseHelper(this);
 
-       /* int updcount = db.updateEnding();
+        int updcount = db.updateEnEnding();
 
         if (updcount == 1) {
             Toast.makeText(this, "Updating Database... Successful!", Toast.LENGTH_SHORT).show();
@@ -120,8 +131,8 @@ public class EndingActivity extends Activity {
         } else {
             Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
             return false;
-        }*/
-        return true;
+        }
+
 
     }
 

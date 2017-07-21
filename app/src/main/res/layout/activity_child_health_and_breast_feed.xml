@@ -267,17 +267,6 @@
             android:layout_gravity="end"
             android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/btn_End"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:backgroundTint="@color/red"
-                android:enabled="false"
-                android:onClick="endInterview"
-                android:text="@string/end_interview"
-                android:textColor="#ff1e1e" />
-
             <!--'onClick' for btn_End will NOT change and always call 'endInterview'-->
 
             <Button
@@ -290,6 +279,15 @@
                 android:text="@string/start_interview"
                 android:textColor="#1ed61e" />
             <!--'onClick' for btn_Continue will call next section form e.g.: openSection2-->
+
+            <Button
+                android:id="@+id/btn_End"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="@color/red"
+                android:text="@string/end_interview"
+                android:textColor="#ff1e1e" />
         </LinearLayout>
 
 
