@@ -55,10 +55,14 @@ public class AppMain extends Application {
     public static final long MILLISECONDS_IN_YEAR = MILLIS_IN_SECOND * SECONDS_IN_MINUTE * MINUTES_IN_HOUR * HOURS_IN_DAY * DAYS_IN_YEAR;
     private static final long DAYS_IN_MONTH = 30;
     public static final long MILLISECONDS_IN_MONTH = MILLIS_IN_SECOND * SECONDS_IN_MINUTE * MINUTES_IN_HOUR * HOURS_IN_DAY * DAYS_IN_MONTH;
-    private static final long DAYS_IN_14_WEEKS = 7 * 14;
+    private static final long DAYS_IN_14_WEEKS = (7 * 14);
     public static final long MILLISECONDS_IN_14_WEEKS = MILLIS_IN_SECOND * SECONDS_IN_MINUTE * MINUTES_IN_HOUR * HOURS_IN_DAY * DAYS_IN_14_WEEKS;
-    private static final long DAYS_IN_9_MONTHS = (30 * 9) + 29;
-    public static final long MILLISECONDS_IN_9_MONTH = MILLIS_IN_SECOND * SECONDS_IN_MINUTE * MINUTES_IN_HOUR * HOURS_IN_DAY * DAYS_IN_9_MONTHS;
+    private static final long DAYS_IN_14_WEEKS1 = (7 * 14) + 6;
+    public static final long MILLISECONDS_IN_14_WEEKS1 = MILLIS_IN_SECOND * SECONDS_IN_MINUTE * MINUTES_IN_HOUR * HOURS_IN_DAY * DAYS_IN_14_WEEKS1;
+    private static final double DAYS_IN_9_MONTHS = 302;
+    public static final double MILLISECONDS_IN_9_MONTH = MILLIS_IN_SECOND * SECONDS_IN_MINUTE * MINUTES_IN_HOUR * HOURS_IN_DAY * DAYS_IN_9_MONTHS;
+    private static final double DAYS_IN_9_MONTHS1 = (30.4 * 9);
+    public static final double MILLISECONDS_IN_9_MONTH1 = MILLIS_IN_SECOND * SECONDS_IN_MINUTE * MINUTES_IN_HOUR * HOURS_IN_DAY * DAYS_IN_9_MONTHS1;
 
     public static String deviceId;
 
@@ -74,6 +78,7 @@ public class AppMain extends Application {
     public static String arm;
     public static String formType;
     public static String dob;
+    public static int selectecAgeGrp;
 
 
     //    Total No of members got from Section A
