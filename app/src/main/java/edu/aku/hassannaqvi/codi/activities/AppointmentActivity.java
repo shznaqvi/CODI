@@ -36,7 +36,7 @@ public class AppointmentActivity extends Activity {
 
         Calendar cal = AppMain.getCalendarDate(AppMain.enrollDate);
         cal.add(Calendar.DAY_OF_MONTH, 28);
-        cendt.setText("Date: " + sdf.format(AppMain.fc.getNextApp()) + "\n\nTime : " + new SimpleDateFormat("HH:mm").format(AppMain.fc.getNextApp()));
+        cendt.setText("Date: " + sdf.format(cal.getTime()) + "\n\nTime : " + new SimpleDateFormat("HH:mm").format(System.currentTimeMillis()));
         //centime.setText(new SimpleDateFormat("hh:mm").format(System.currentTimeMillis()));
 
 
