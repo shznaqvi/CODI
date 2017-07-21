@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -108,13 +109,13 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
     @BindView(R.id.celstdid)
     EditText celstdid;
     @BindView(R.id.celdoe)
-    DatePickerInputEditText celdoe;
+    TextView celdoe;
     @BindView(R.id.celner)
     EditText celner;
     @BindView(R.id.fldGrprsn)
     LinearLayout fldGrprsn;
 
-    @BindViews({R.id.celdob, R.id.celdoe})
+    @BindViews({R.id.celdob})
     List<DatePickerInputEditText> dates;
     @BindViews({R.id.cel03, R.id.cel04, R.id.cel05, R.id.cel06, R.id.cel07, R.id.cel01})
     List<RadioGroup> celEligible;
@@ -143,11 +144,14 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
         for (DatePickerInputEditText de : dates) {
             de.setManager(getSupportFragmentManager());
         }
-        celdoe.setMaxDate(dateToday);
+
 
         celdob.setMaxDate(date14Weeks);
         celdob.setMinDate(date9Months);
 
+        //celdoe.setText(new SimpleDateFormat("dd-MM-yyyy").format(System.currentTimeMillis()));
+
+        AppMain.enrollDate = new SimpleDateFormat("dd-MM-yyyy HH:mm").format(System.currentTimeMillis());
 
 
         //================== Q7 Skip Pattern ===========
@@ -290,7 +294,6 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
         AppMain.elc.setDob(AppMain.dob);
         AppMain.elc.setStudyID(celstdid.getText().toString());
         AppMain.elc.setDSSID(dssID.getText().toString());
-        AppMain.enrollDate = celdoe.getText().toString();
 
         JSONObject sel = new JSONObject();
 
@@ -307,7 +310,7 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
         sel.put("cel07", cel07a.isChecked() ? "1" : cel07b.isChecked() ? "2" : "0");
         sel.put("celee", isYes() ? "1" : "2");
         //sel.put("celstdid", celstdid.getText().toString());
-        sel.put("celdoe", celdoe.getText().toString());
+        sel.put("celdoe", AppMain.enrollDate);
         sel.put("celner", celner.getText().toString());
 
 
@@ -492,21 +495,15 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
                     cel02a.setError(null);
                 }
 
-
-
-
-
-
-
                 // =================== doe ====================
-                if (celdoe.getText().toString().isEmpty()) {
+                /*if (celdoe.getText().toString().isEmpty()) {
                     Toast.makeText(this, "ERROR(Empty)" + getString(R.string.celdoe), Toast.LENGTH_SHORT).show();
                     celdoe.setError("This data is required");
                     Log.d(TAG, "celdoe:empty ");
                     return false;
                 } else {
                     celdoe.setError(null);
-                }
+                }*/
             } else {
                 // =================== celner ====================
                 if (celner.getText().toString().isEmpty()) {

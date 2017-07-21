@@ -173,7 +173,7 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
 
         dssid.setText(AppMain.elc.getDSSID());
         studyId.setText(AppMain.elc.getStudyID());
-        cen01.setText(new SimpleDateFormat("dd-MM-yyyy").format(System.currentTimeMillis()));
+        cen01.setText(AppMain.enrollDate);
         cen04.setText(AppMain.elc.getChildName());
         cen05.setText(AppMain.elc.getMotherName());
         cen06.setText(AppMain.elc.getDob());
@@ -320,7 +320,7 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
 
         //sInfo.put("dssid", AppMain.elc.getDSSID());
         //sInfo.put("studyId", AppMain.elc.getStudyID());
-        sInfo.put("cen01", cen01.getText().toString());
+        sInfo.put("cen01", AppMain.enrollDate);
         sInfo.put("cen02", "1");
         sInfo.put("cen03", "1");
         sInfo.put("cen05", AppMain.elc.getMotherName());
@@ -515,6 +515,16 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
             cen13.setError(null);
         }
 
+        if (Integer.valueOf(cen13.getText().toString()) < 1) {
+            Toast.makeText(this, "ERROR(invalid)" + getString(R.string.cen13), Toast.LENGTH_SHORT).show();
+            cen13.setError("Zero not allowed");
+
+            Log.i(TAG, "cen13: zero not allowed");
+            return false;
+        } else {
+            cen13.setError(null);
+        }
+
         if (cen14.getText().toString().isEmpty()) {
             Toast.makeText(this, "ERROR(Empty)" + getString(R.string.cen14), Toast.LENGTH_SHORT).show();
             cen14.setError("This data is Required!");
@@ -525,7 +535,15 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
             cen14.setError(null);
         }
 
+        if (Integer.valueOf(cen14.getText().toString()) >= Integer.valueOf(cen13.getText().toString())) {
+            Toast.makeText(this, "ERROR(invalid)" + getString(R.string.cen14), Toast.LENGTH_SHORT).show();
+            cen14.setError("Can not be greater than total members of house!");
 
+            Log.i(TAG, "cen14: Can not be greater than total members of house!");
+            return false;
+        } else {
+            cen14.setError(null);
+        }
 
 
         return true;

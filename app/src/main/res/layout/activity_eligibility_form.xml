@@ -426,22 +426,26 @@
             />
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/celdoe" />
-
-        <io.blackbox_vision.datetimepickeredittext.view.DatePickerInputEditText
             android:id="@+id/celdoe"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="1dp"
-            android:focusable="true"
-            android:hint="@string/celdoe"
-            android:textColor="@android:color/black"
-            app:dateFormat="dd-MM-yyyy" />
+            android:layout_marginTop="8dp"
+            android:text="@string/celdoe"
+            android:visibility="gone" />
 
-        </LinearLayout>
+                <!--<io.blackbox_vision.datetimepickeredittext.view.DatePickerInputEditText
+                    android:id="@+id/celdoe"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="1dp"
+                    android:focusable="true"
+                    android:hint="@string/celdoe"
+                    android:textColor="@android:color/black"
+                    app:dateFormat="dd-MM-yyyy" />
+        -->
+
+
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/fldGrprsn"
