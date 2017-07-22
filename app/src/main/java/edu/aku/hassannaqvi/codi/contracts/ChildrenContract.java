@@ -122,7 +122,7 @@ public class ChildrenContract {
     public static abstract class ChildrenTable implements BaseColumns {
 
         public static final String TABLE_NAME = "children";
-        public static final String _URI = "getchildren.php";
+        public static final String _URI = "children.php";
         public static final String _ID = "id";
 
         public static final String COLUMN_DSSID = "dssid";

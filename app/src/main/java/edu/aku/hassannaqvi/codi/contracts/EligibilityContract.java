@@ -77,7 +77,7 @@ public class EligibilityContract {
         this.dob = cursor.getString(cursor.getColumnIndex(EligibilityTable.COLUMN_DOB));
         this.formDate = cursor.getString(cursor.getColumnIndex(EligibilityTable.COLUMN_FORMDATE));
         this.user = cursor.getString(cursor.getColumnIndex(EligibilityTable.COLUMN_USER));
-        this.istatus = cursor.getString(cursor.getColumnIndex(EligibilityTable.COLUMN_ISTATUS));
+//        this.istatus = cursor.getString(cursor.getColumnIndex(EligibilityTable.COLUMN_ISTATUS));
         this.sEl = cursor.getString(cursor.getColumnIndex(EligibilityTable.COLUMN_SEN));
         this.gpsLat = cursor.getString(cursor.getColumnIndex(EligibilityTable.COLUMN_GPSLAT));
         this.gpsLng = cursor.getString(cursor.getColumnIndex(EligibilityTable.COLUMN_GPSLNG));

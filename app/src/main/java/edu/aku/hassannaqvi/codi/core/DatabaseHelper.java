@@ -632,7 +632,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = null;
         String[] columns = {
-                FormsTable.COLUMN_PROJECTNAME,
                 FormsTable._ID,
                 FormsTable.COLUMN__UID,
                 FormsTable.COLUMN_DSSID,
@@ -757,7 +756,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 ChildrenTable.COLUMN_ARMSLC,
                 ChildrenTable.COLUMN_RANDOMIZATION_DATE
         };
-        String whereClause = ChildrenTable.COLUMN_SYNCED + " is null and " + ChildrenTable.COLUMN_ARMSLC + " is not null";
+        String whereClause = ChildrenTable.COLUMN_SYNCED + " is null and " + ChildrenTable.COLUMN_ARMSLC + " <> 'null'";
         String[] whereArgs = null;
         String groupBy = null;
         String having = null;
