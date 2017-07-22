@@ -457,17 +457,19 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
 
 
         if (AppMain.selectecAgeGrp == 1) {
-            if (Integer.valueOf(cen07w.getText().toString()) != 14)
-
+            if (Integer.valueOf(cen07w.getText().toString()) != 14
+                    || Integer.valueOf(cen07m.getText().toString()) > 0)
             {
 
                 Toast.makeText(this, "ERROR(invalid)" + getString(R.string.cen07a), Toast.LENGTH_SHORT).show();
                 cen07w.setError("Age should be 14 weeks");
+                cen07m.setError("Check weeks again");
 
                 Log.i(TAG, "cen07w: Age should be 14 weeks");
                 return false;
             } else {
                 cen07w.setError(null);
+                cen07m.setError(null);
             }
         }
 
