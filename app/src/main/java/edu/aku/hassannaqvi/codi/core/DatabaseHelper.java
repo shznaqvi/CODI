@@ -621,6 +621,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 FormsTable.COLUMN_NEXTAPP,
                 FormsTable.COLUMN_ISTATUS,
                 FormsTable.COLUMN_SINFO,
+                FormsTable.COLUMN_SELIGIBLE,
                 FormsTable.COLUMN_SCHBF,
                 FormsTable.COLUMN_SBLOODSAMPLE,
                 FormsTable.COLUMN_SRANDOMIZATION,
@@ -681,6 +682,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 FormsTable.COLUMN_FORMDATE,
                 FormsTable.COLUMN_FORMTYPE,
                 FormsTable.COLUMN_USER,
+                FormsTable.COLUMN_SELIGIBLE,
                 FormsTable.COLUMN_NEXTAPP,
                 FormsTable.COLUMN_ISTATUS,
                 FormsTable.COLUMN_SINFO,
@@ -797,8 +799,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 ChildrenTable.COLUMN_ARMSLC,
                 ChildrenTable.COLUMN_RANDOMIZATION_DATE
         };
-        String whereClause = ChildrenTable.COLUMN_SYNCED + " is null and " + ChildrenTable.COLUMN_ARMSLC + " <> 'null'";
-        String[] whereArgs = null;
+        String whereClause = ChildrenTable.COLUMN_SYNCED + " is null and " + ChildrenTable.COLUMN_ARMSLC + " != ?";
+        String[] whereArgs = new String[]{"null"};
         String groupBy = null;
         String having = null;
 

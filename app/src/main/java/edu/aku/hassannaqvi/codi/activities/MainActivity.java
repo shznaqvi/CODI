@@ -345,8 +345,8 @@ public class MainActivity extends Activity {
             Toast.makeText(getApplicationContext(), "Syncing Forms", Toast.LENGTH_SHORT).show();
             new SyncForms(this).execute();
 
-            Toast.makeText(getApplicationContext(), "Syncing Eligiblity", Toast.LENGTH_SHORT).show();
-            new SyncEligibilities(this).execute();
+/*            Toast.makeText(getApplicationContext(), "Syncing Eligiblity", Toast.LENGTH_SHORT).show();
+            new SyncEligibilities(this).execute();*/
 
             Toast.makeText(getApplicationContext(), "Syncing Children", Toast.LENGTH_SHORT).show();
             new SyncChildren(this).execute();
