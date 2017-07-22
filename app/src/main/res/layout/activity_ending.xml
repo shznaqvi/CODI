@@ -55,22 +55,16 @@
                     android:id="@+id/iStatusd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/iStatusd" />
+                    android:text="@string/iStatuse" />
 
                 <RadioButton
                     android:id="@+id/iStatuse"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/iStatuse" />
-
-                <RadioButton
-                    android:id="@+id/iStatusf"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:text="@string/iStatusf" />
 
                 <RadioButton
-                    android:id="@+id/iStatusg"
+                    android:id="@+id/iStatusf"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/iStatusg" />

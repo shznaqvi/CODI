@@ -909,13 +909,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 // New value for one column
         ContentValues values = new ContentValues();
-        values.put(EligibilityTable.COLUMN_ISTATUS, AppMain.elc.getIstatus());
+        values.put(FormsTable.COLUMN_ISTATUS, AppMain.fc.getIstatus());
 
 // Which row to update, based on the ID
-        String selection = " _ID = " + AppMain.elc.get_ID();
-        String[] selectionArgs = {String.valueOf(AppMain.elc.get_ID())};
+        String selection = " _ID = " + AppMain.fc.get_ID();
+        String[] selectionArgs = {String.valueOf(AppMain.fc.get_ID())};
 
-        int count = db.update(EligibilityTable.TABLE_NAME,
+        int count = db.update(FormsTable.TABLE_NAME,
                 values,
                 selection,
                 null);

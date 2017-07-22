@@ -115,7 +115,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/cen30"
-                android:visibility="gone" />
+                android:visibility="visible" />
 
             <io.blackbox_vision.datetimepickeredittext.view.DatePickerInputEditText
                 android:id="@+id/cen30"
@@ -125,7 +125,7 @@
                 android:focusable="false"
                 android:hint="@string/cen30"
                 android:textColor="@android:color/black"
-                android:visibility="gone"
+                android:visibility="visible"
                 app:dateFormat="dd-MM-yyyy" />
 
 
@@ -134,7 +134,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/cen31"
-                android:visibility="gone" />
+                android:visibility="visible" />
 
             <io.blackbox_vision.datetimepickeredittext.view.TimePickerInputEditText
                 android:id="@+id/cen31"
@@ -144,7 +144,7 @@
                 android:focusable="false"
                 android:hint="@string/cen31"
                 android:textColor="@android:color/black"
-                android:visibility="gone"
+                android:visibility="visible"
                 app:timeFormat="HH:mm" />
 
 

@@ -9,10 +9,8 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -36,7 +34,7 @@ public class AppointmentActivity extends Activity {
         setContentView(R.layout.activity_appointment);
         ButterKnife.bind(this);
 
-        Calendar cal = getCalendarDate(AppMain.enrollDate);
+        Calendar cal = AppMain.getCalendarDate(AppMain.enrollDate);
         cal.add(Calendar.DAY_OF_MONTH, 28);
         cendt.setText("Date: " + sdf.format(cal.getTime()) + "\n\nTime : " + new SimpleDateFormat("HH:mm").format(System.currentTimeMillis()));
         //centime.setText(new SimpleDateFormat("hh:mm").format(System.currentTimeMillis()));
@@ -103,19 +101,7 @@ public class AppointmentActivity extends Activity {
     }
 
 
-    public Calendar getCalendarDate(String value) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-        Calendar calendar = Calendar.getInstance();
-        try {
-            Date date = sdf.parse(value);
-            calendar.setTime(date);
-            return calendar;
 
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return calendar;
-    }
 
     @Override
     public void onBackPressed() {

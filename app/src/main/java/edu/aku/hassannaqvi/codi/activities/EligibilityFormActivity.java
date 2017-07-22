@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -108,20 +109,22 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
     @BindView(R.id.celstdid)
     EditText celstdid;
     @BindView(R.id.celdoe)
-    DatePickerInputEditText celdoe;
+    TextView celdoe;
     @BindView(R.id.celner)
     EditText celner;
     @BindView(R.id.fldGrprsn)
     LinearLayout fldGrprsn;
 
-    @BindViews({R.id.celdob, R.id.celdoe})
+    @BindViews({R.id.celdob})
     List<DatePickerInputEditText> dates;
     @BindViews({R.id.cel03, R.id.cel04, R.id.cel05, R.id.cel06, R.id.cel07, R.id.cel01})
     List<RadioGroup> celEligible;
     @BindViews({R.id.cel05a, R.id.cel06a, R.id.cel07a, R.id.cel01a})
     List<RadioButton> celEligibleYes;
     String date14Weeks;
+    String date14Weeks1;
     String date9Months;
+    String date9Months1;
     Boolean flag = false;
 
     DatabaseHelper db;
@@ -138,16 +141,20 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
 
         String dateToday = new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime());
         date14Weeks = new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTimeInMillis() - ((AppMain.MILLISECONDS_IN_14_WEEKS)));
-        date9Months = new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTimeInMillis() - ((AppMain.MILLISECONDS_IN_9_MONTH) + (AppMain.MILLISECONDS_IN_DAY)));
+        date9Months = new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTimeInMillis() - ((AppMain.MILLISECONDS_IN_9_MONTH)));
+
 
         for (DatePickerInputEditText de : dates) {
             de.setManager(getSupportFragmentManager());
         }
-        celdoe.setMaxDate(dateToday);
+
 
         celdob.setMaxDate(date14Weeks);
         celdob.setMinDate(date9Months);
 
+        //celdoe.setText(new SimpleDateFormat("dd-MM-yyyy").format(System.currentTimeMillis()));
+
+        AppMain.enrollDate = new SimpleDateFormat("dd-MM-yyyy HH:mm").format(System.currentTimeMillis());
 
 
         //================== Q7 Skip Pattern ===========
@@ -290,7 +297,6 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
         AppMain.elc.setDob(AppMain.dob);
         AppMain.elc.setStudyID(celstdid.getText().toString());
         AppMain.elc.setDSSID(dssID.getText().toString());
-        AppMain.enrollDate = celdoe.getText().toString();
 
         JSONObject sel = new JSONObject();
 
@@ -307,8 +313,10 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
         sel.put("cel07", cel07a.isChecked() ? "1" : cel07b.isChecked() ? "2" : "0");
         sel.put("celee", isYes() ? "1" : "2");
         //sel.put("celstdid", celstdid.getText().toString());
-        sel.put("celdoe", celdoe.getText().toString());
+        sel.put("celdoe", AppMain.enrollDate);
         sel.put("celner", celner.getText().toString());
+
+        AppMain.selectecAgeGrp = cel02.indexOfChild(findViewById(cel02.getCheckedRadioButtonId())) + 1;
 
 
         AppMain.elc.setsEl(String.valueOf(sel));
@@ -342,6 +350,7 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
             celdob.setError(null);
         }
 
+
         // =================== celmn ====================
         if (celmn.getText().toString().isEmpty()) {
             Toast.makeText(this, "ERROR(Empty)" + getString(R.string.celmn), Toast.LENGTH_SHORT).show();
@@ -373,7 +382,22 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
                 cel02b.setError(null);
             }
 
-            if (cel02a.isChecked()) {
+
+        if (cel02a.isChecked()) {
+            Calendar selectedDate = AppMain.getCalendarDate(celdob.getText().toString());
+            Calendar minDate = Calendar.getInstance();
+            minDate.add(Calendar.DAY_OF_YEAR, -105);
+
+            if (selectedDate.before(minDate)) {
+                Toast.makeText(this, "ERROR(invalid)" + getString(R.string.cel02) + " " + getString(R.string.celdob), Toast.LENGTH_SHORT).show();
+                celdob.setError("Wrong date of Birth... please check again");
+                cel02a.setError("Check age and date of birth");
+                Log.i(TAG, "cel02: invalid date of birth");
+                return false;
+            } else {
+                celdob.setError(null);
+                cel02a.setError(null);
+            }
 
                 // =================== cel03 ====================
                 if (cel03.getCheckedRadioButtonId() == -1) {
@@ -387,6 +411,21 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
             }
 
             if (cel02b.isChecked()) {
+                Calendar selectedDate = AppMain.getCalendarDate(celdob.getText().toString());
+                Calendar minDate = Calendar.getInstance();
+                minDate.add(Calendar.DAY_OF_YEAR, -273);
+
+                if (selectedDate.after(minDate)) {
+                    Toast.makeText(this, "ERROR(invalid)" + getString(R.string.cel02) + " " + getString(R.string.celdob), Toast.LENGTH_SHORT).show();
+                    celdob.setError("Wrong date of Birth.. Please check again");
+                    cel02b.setError("Check age and date of birth");
+                    Log.i(TAG, "cel02: invalid date of birth");
+                    return false;
+                } else {
+                    celdob.setError(null);
+                    cel02a.setError(null);
+                }
+
                 // =================== cel04 ====================
                 if (cel04.getCheckedRadioButtonId() == -1) {
                     Toast.makeText(this, "ERROR(Empty)" + getString(R.string.cel04), Toast.LENGTH_SHORT).show();
@@ -492,21 +531,15 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
                     cel02a.setError(null);
                 }
 
-
-
-
-
-
-
                 // =================== doe ====================
-                if (celdoe.getText().toString().isEmpty()) {
+                /*if (celdoe.getText().toString().isEmpty()) {
                     Toast.makeText(this, "ERROR(Empty)" + getString(R.string.celdoe), Toast.LENGTH_SHORT).show();
                     celdoe.setError("This data is required");
                     Log.d(TAG, "celdoe:empty ");
                     return false;
                 } else {
                     celdoe.setError(null);
-                }
+                }*/
             } else {
                 // =================== celner ====================
                 if (celner.getText().toString().isEmpty()) {

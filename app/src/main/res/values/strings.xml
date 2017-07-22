@@ -165,7 +165,7 @@
     <string name="iStatusd">No-one present to respond after 2 visits</string>
     <string name="iStatuse">Out-migrated</string>
     <string name="iStatusf">Lock</string>
-    <string name="iStatusg">Death</string>
+    <string name="iStatusg">Child Expired</string>
     <string name="csvheading"> Second Visit Form
   (28 days after Enrolment ) </string>
     <string name="csvstdno"> Study Number </string>
