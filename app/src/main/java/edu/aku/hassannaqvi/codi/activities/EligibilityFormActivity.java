@@ -302,7 +302,7 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
         JSONObject sel = new JSONObject();
 
 
-        sel.put("celcn", celcn.getText().toString());
+        //sel.put("celcn", celcn.getText().toString());
         sel.put("celdob", celdob.getText().toString());
         sel.put("celmn", celmn.getText().toString());
         sel.put("cel01", cel01a.isChecked() ? "1" : cel01b.isChecked() ? "2" : "0");
@@ -313,7 +313,7 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
         sel.put("cel06", cel06a.isChecked() ? "1" : cel06b.isChecked() ? "2" : "0");
         sel.put("cel07", cel07a.isChecked() ? "1" : cel07b.isChecked() ? "2" : "0");
         sel.put("celee", isYes() ? "1" : "2");
-        sel.put("celstdid", celstdid.getText().toString());
+        //sel.put("celstdid", celstdid.getText().toString());
         sel.put("celdoe", AppMain.enrollDate);
         sel.put("celner", celner.getText().toString());
 
