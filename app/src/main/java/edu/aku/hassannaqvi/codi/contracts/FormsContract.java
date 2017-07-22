@@ -361,6 +361,6 @@ public class FormsContract {
         public static final String COLUMN_SYNCED_DATE = "synced_date";
 
 
-        public static String _URL = "enrollment.php";
+        public static String _URL = "forms.php";
     }
 }

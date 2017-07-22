@@ -29,6 +29,8 @@ import butterknife.ButterKnife;
 import edu.aku.hassannaqvi.codi.R;
 import edu.aku.hassannaqvi.codi.core.AndroidDatabaseManager;
 import edu.aku.hassannaqvi.codi.core.AppMain;
+import edu.aku.hassannaqvi.codi.sync.SyncChildren;
+import edu.aku.hassannaqvi.codi.sync.SyncEligibilities;
 import edu.aku.hassannaqvi.codi.sync.SyncForms;
 
 public class MainActivity extends Activity {
@@ -343,13 +345,13 @@ public class MainActivity extends Activity {
             Toast.makeText(getApplicationContext(), "Syncing Forms", Toast.LENGTH_SHORT).show();
             new SyncForms(this).execute();
 
-            /*Toast.makeText(getApplicationContext(), "Syncing Census", Toast.LENGTH_SHORT).show();
-            new SyncCensus(this).execute();
+            Toast.makeText(getApplicationContext(), "Syncing Eligiblity", Toast.LENGTH_SHORT).show();
+            new SyncEligibilities(this).execute();
 
-            Toast.makeText(getApplicationContext(), "Syncing Deceased", Toast.LENGTH_SHORT).show();
-            new SyncDeceased(this).execute();
+            Toast.makeText(getApplicationContext(), "Syncing Children", Toast.LENGTH_SHORT).show();
+            new SyncChildren(this).execute();
 
-            Toast.makeText(getApplicationContext(), "Syncing Mother", Toast.LENGTH_SHORT).show();
+            /*Toast.makeText(getApplicationContext(), "Syncing Mother", Toast.LENGTH_SHORT).show();
             new SyncMother(this).execute();
 
             Toast.makeText(getApplicationContext(), "Syncing IM", Toast.LENGTH_SHORT).show();
