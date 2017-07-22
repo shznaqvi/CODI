@@ -79,6 +79,8 @@ public class AppMain extends Application {
     public static String formType;
     public static String dob;
     public static int selectecAgeGrp;
+    public static String motherName = "";
+    public static String studyID;
 
 
     //    Total No of members got from Section A

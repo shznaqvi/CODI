@@ -180,7 +180,7 @@ public class BloodSamplingActivity extends AppCompatActivity {
 
                 finish();
 
-                if (AppMain.fc.getFormType().equals("EN")) {
+                if (AppMain.fc.getFormType().equals("V1")) {
 
                     startActivity(new Intent(this, RandomizationActivity.class));
                 } else {

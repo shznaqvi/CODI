@@ -97,8 +97,10 @@ public class EndingActivity extends Activity {
     private void SaveDraft() throws JSONException {
         Toast.makeText(this, "Saving Draft for  This Section", Toast.LENGTH_SHORT).show();
 
+
         AppMain.fc.setIstatus(iStatusa.isChecked() ? "1" : iStatusb.isChecked() ? "2" : iStatusc.isChecked() ? "3"
                 : iStatusd.isChecked() ? "4" : iStatuse.isChecked() ? "5" : iStatusf.isChecked() ? "6" : "0");
+
 
         Toast.makeText(this, "Validation Successful! - Saving Draft...", Toast.LENGTH_SHORT).show();
     }
@@ -124,6 +126,7 @@ public class EndingActivity extends Activity {
         DatabaseHelper db = new DatabaseHelper(this);
 
         int updcount = db.updateEnEnding();
+
 
         if (updcount == 1) {
             Toast.makeText(this, "Updating Database... Successful!", Toast.LENGTH_SHORT).show();

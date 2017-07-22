@@ -25,7 +25,9 @@ public class FormsContract {
     private String nextApp = ""; // Next Appointment Date Time
 
 
+
     private String istatus = ""; // Interview Status
+    private String sEl = "";
     private String sInfo = "";
     private String sCHBF = "";
     private String sBloodSample = "";
@@ -59,6 +61,7 @@ public class FormsContract {
         this.istatus = jsonObject.getString(FormsTable.COLUMN_ISTATUS);
         this.nextApp = jsonObject.getString(FormsTable.COLUMN_NEXTAPP);
         this.sInfo = jsonObject.getString(FormsTable.COLUMN_SINFO);
+        this.sEl = jsonObject.getString(FormsTable.COLUMN_SELIGIBLE);
         this.sCHBF = jsonObject.getString(FormsTable.COLUMN_SCHBF);
         this.sBloodSample = jsonObject.getString(FormsTable.COLUMN_SBLOODSAMPLE);
         this.sRandomization = jsonObject.getString(FormsTable.COLUMN_SRANDOMIZATION);
@@ -87,6 +90,7 @@ public class FormsContract {
         this.istatus = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_ISTATUS));
         this.nextApp = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_NEXTAPP));
         this.sInfo = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_SINFO));
+        this.sEl = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_SELIGIBLE));
         this.sCHBF = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_SCHBF));
         this.sBloodSample = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_SBLOODSAMPLE));
         this.sRandomization = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_SRANDOMIZATION));
@@ -103,6 +107,14 @@ public class FormsContract {
 
     }
 
+    public String getsEl() {
+
+        return sEl;
+    }
+
+    public void setsEl(String sEl) {
+        this.sEl = sEl;
+    }
 
     public JSONObject toJSONObject() throws JSONException {
 
@@ -119,6 +131,7 @@ public class FormsContract {
         json.put(FormsTable.COLUMN_USER, this.user == null ? JSONObject.NULL : this.user);
         json.put(FormsTable.COLUMN_ISTATUS, this.istatus == null ? JSONObject.NULL : this.istatus);
         json.put(FormsTable.COLUMN_NEXTAPP, this.nextApp == null ? JSONObject.NULL : this.nextApp);
+        json.put(FormsTable.COLUMN_SELIGIBLE, this.sEl == null ? JSONObject.NULL : new JSONObject(this.sEl));
         json.put(FormsTable.COLUMN_SINFO, this.sInfo == null ? JSONObject.NULL : new JSONObject(this.sInfo));
         json.put(FormsTable.COLUMN_SCHBF, this.sCHBF == null ? JSONObject.NULL : new JSONObject(this.sCHBF));
         json.put(FormsTable.COLUMN_SBLOODSAMPLE, this.sBloodSample == null ? JSONObject.NULL : new JSONObject(this.sBloodSample));
@@ -331,7 +344,7 @@ public class FormsContract {
 
     public static abstract class FormsTable implements BaseColumns {
 
-        public static final String TABLE_NAME = "enrollment";
+        public static final String TABLE_NAME = "forms";
         public static final String COLUMN_NAME_NULLABLE = "NULLHACK";
 
 
@@ -346,6 +359,7 @@ public class FormsContract {
         public static final String COLUMN_USER = "user";
         public static final String COLUMN_NEXTAPP = "nextapp";
         public static final String COLUMN_ISTATUS = "istatus";
+        public static final String COLUMN_SELIGIBLE = "seligible";
         public static final String COLUMN_SINFO = "sinfo";
         public static final String COLUMN_SCHBF = "schbf";
         public static final String COLUMN_SBLOODSAMPLE = "sbloodsample";

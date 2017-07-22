@@ -32,7 +32,7 @@ import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import edu.aku.hassannaqvi.codi.R;
-import edu.aku.hassannaqvi.codi.contracts.EligibilityContract;
+import edu.aku.hassannaqvi.codi.contracts.FormsContract;
 import edu.aku.hassannaqvi.codi.core.AppMain;
 import edu.aku.hassannaqvi.codi.core.DatabaseHelper;
 import io.blackbox_vision.datetimepickeredittext.view.DatePickerInputEditText;
@@ -189,7 +189,7 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                flag = false;
+                check = false;
                 fldGrpChild.setVisibility(View.GONE);
             }
 
@@ -239,12 +239,14 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
             if (UpdateDB()) {
                 Toast.makeText(this, "Starting Next Section", Toast.LENGTH_SHORT).show();
 
-                finish();
+                //finish();
 
                 if (flag) {
                     startActivity(new Intent(this, EnrollmentInfoActivity.class));
                 } else {
-                    AppMain.endActivity(this, this);
+                    Intent intent = new Intent(this, EndingActivity.class);
+                    intent.putExtra("complete", true);
+                    startActivity(intent);
 
                 }
 
@@ -262,16 +264,16 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
     private boolean UpdateDB() {
         DatabaseHelper db = new DatabaseHelper(this);
 
-        long updcount = db.addEligibility(AppMain.elc);
+        long updcount = db.addEnrollment(AppMain.fc);
 
-        AppMain.elc.set_ID(String.valueOf(updcount));
+        AppMain.fc.set_ID(String.valueOf(updcount));
 
         if (updcount != 0) {
             Toast.makeText(this, "Updating Database... Successful!", Toast.LENGTH_SHORT).show();
 
-            AppMain.elc.set_UID(
-                    (AppMain.elc.getDeviceID() + AppMain.elc.get_ID()));
-            db.updateELC();
+            AppMain.fc.set_UID(
+                    (AppMain.fc.getDeviceID() + AppMain.fc.get_ID()));
+            db.updateFormID();
         } else {
             Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
         }
@@ -283,27 +285,26 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
 
         SharedPreferences sharedPref = getSharedPreferences("tagName", MODE_PRIVATE);
 
-        AppMain.elc = new EligibilityContract();
+        AppMain.fc = new FormsContract();
 
-        AppMain.elc.setDevicetagID(sharedPref.getString("tagName", null));
-        AppMain.elc.setFormDate(new Date().toString());
-        AppMain.elc.setUser(AppMain.userName);
-        AppMain.elc.setDeviceID(Settings.Secure.getString(getApplicationContext().getContentResolver(),
+        AppMain.fc.setDevicetagID(sharedPref.getString("tagName", null));
+        AppMain.fc.setFormDate(new Date().toString());
+        AppMain.fc.setUser(AppMain.userName);
+        AppMain.fc.setDeviceID(Settings.Secure.getString(getApplicationContext().getContentResolver(),
                 Settings.Secure.ANDROID_ID));
-        AppMain.child_name = celcn.getText().toString();
-        AppMain.elc.setChildName(AppMain.child_name);
-        AppMain.elc.setMotherName(celmn.getText().toString());
+        AppMain.fc.setDSSID(dssID.getText().toString());
+        AppMain.fc.setChildName(celcn.getText().toString());
+        AppMain.fc.setStudyID(celstdid.getText().toString());
+        AppMain.motherName = celmn.getText().toString();
         AppMain.dob = celdob.getText().toString();
-        AppMain.elc.setDob(AppMain.dob);
-        AppMain.elc.setStudyID(celstdid.getText().toString());
-        AppMain.elc.setDSSID(dssID.getText().toString());
+        AppMain.fc.setFormType("V1");
 
         JSONObject sel = new JSONObject();
 
 
-        //sel.put("celcn", celcn.getText().toString());
-        //sel.put("celdob", celdob.getText().toString());
-        //sel.put("celmn", celmn.getText().toString());
+        sel.put("celcn", celcn.getText().toString());
+        sel.put("celdob", celdob.getText().toString());
+        sel.put("celmn", celmn.getText().toString());
         sel.put("cel01", cel01a.isChecked() ? "1" : cel01b.isChecked() ? "2" : "0");
         sel.put("cel02", cel02a.isChecked() ? "1" : cel02b.isChecked() ? "2" : "0");
         sel.put("cel03", cel03a.isChecked() ? "1" : cel03b.isChecked() ? "2" : "0");
@@ -312,15 +313,15 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
         sel.put("cel06", cel06a.isChecked() ? "1" : cel06b.isChecked() ? "2" : "0");
         sel.put("cel07", cel07a.isChecked() ? "1" : cel07b.isChecked() ? "2" : "0");
         sel.put("celee", isYes() ? "1" : "2");
-        //sel.put("celstdid", celstdid.getText().toString());
+        sel.put("celstdid", celstdid.getText().toString());
         sel.put("celdoe", AppMain.enrollDate);
         sel.put("celner", celner.getText().toString());
 
         AppMain.selectecAgeGrp = cel02.indexOfChild(findViewById(cel02.getCheckedRadioButtonId())) + 1;
 
 
-        AppMain.elc.setsEl(String.valueOf(sel));
-        AppMain.formType = "EL";
+        AppMain.fc.setsEl(String.valueOf(sel));
+
 
         setGPS();
 
@@ -623,11 +624,11 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
 
             String date = DateFormat.format("dd-MM-yyyy HH:mm", Long.parseLong(GPSPref.getString("Time", "0"))).toString();
 
-            AppMain.elc.setGpsLat(GPSPref.getString("Latitude", "0"));
-            AppMain.elc.setGpsLng(GPSPref.getString("Longitude", "0"));
-            AppMain.elc.setGpsAcc(GPSPref.getString("Accuracy", "0"));
+            AppMain.fc.setGpsLat(GPSPref.getString("Latitude", "0"));
+            AppMain.fc.setGpsLng(GPSPref.getString("Longitude", "0"));
+            AppMain.fc.setGpsAcc(GPSPref.getString("Accuracy", "0"));
 //            AppMain.fc.setGpsTime(GPSPref.getString(date, "0")); // Timestamp is converted to date above
-            AppMain.elc.setGpsDT(date); // Timestamp is converted to date above
+            AppMain.fc.setGpsDT(date); // Timestamp is converted to date above
 
             Toast.makeText(this, "GPS set", Toast.LENGTH_SHORT).show();
 

@@ -79,7 +79,7 @@ public class ChildHealthAndBreastFeedActivity extends Activity {
         setContentView(R.layout.activity_child_health_and_breast_feed);
         ButterKnife.bind(this);
 
-        if (AppMain.fc.getFormType().equals("EN")) {
+        if (AppMain.fc.getFormType().equals("V1")) {
             fldGrpcsv.setVisibility(View.GONE);
             csv04.clearCheck();
             csv05.clearCheck();
@@ -195,7 +195,7 @@ public class ChildHealthAndBreastFeedActivity extends Activity {
 
     public boolean ValidateForm() {
 
-        if (!AppMain.fc.getFormType().equals("EN")) {
+        if (!AppMain.fc.getFormType().equals("V1")) {
             if (csv04.getCheckedRadioButtonId() == -1) {
                 Toast.makeText(this, "ERROR(Empty)" + getString(R.string.csv04), Toast.LENGTH_SHORT).show();
                 csv04a.setError("This data is Required!");

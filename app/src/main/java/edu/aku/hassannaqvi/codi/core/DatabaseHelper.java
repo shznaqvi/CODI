@@ -92,13 +92,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + FormsTable.COLUMN_FORMDATE + " TEXT,"
             + FormsTable.COLUMN_FORMTYPE + " TEXT,"
             + FormsTable.COLUMN_USER + " TEXT,"
-            + FormsTable.COLUMN_NEXTAPP + " TEXT,"
             + FormsTable.COLUMN_ISTATUS + " TEXT,"
+            + FormsTable.COLUMN_SELIGIBLE + " TEXT,"
             + FormsTable.COLUMN_SINFO + " TEXT,"
             + FormsTable.COLUMN_SCHBF + " TEXT,"
             + FormsTable.COLUMN_SBLOODSAMPLE + " TEXT,"
             + FormsTable.COLUMN_SRANDOMIZATION + " TEXT,"
             + FormsTable.COLUMN_SVACCINE + " TEXT,"
+            + FormsTable.COLUMN_NEXTAPP + " TEXT,"
             + FormsTable.COLUMN_GPSLAT + " TEXT,"
             + FormsTable.COLUMN_GPSLNG + " TEXT,"
             + FormsTable.COLUMN_GPSDT + " TEXT,"
@@ -284,13 +285,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(FormsTable.COLUMN_FORMDATE, enc.getFormDate());
         values.put(FormsTable.COLUMN_FORMTYPE, enc.getFormType());
         values.put(FormsTable.COLUMN_USER, enc.getUser());
-        values.put(FormsTable.COLUMN_NEXTAPP, enc.getNextApp());
         values.put(FormsTable.COLUMN_ISTATUS, enc.getIstatus());
+        values.put(FormsTable.COLUMN_SELIGIBLE, enc.getsEl());
         values.put(FormsTable.COLUMN_SINFO, enc.getsInfo());
         values.put(FormsTable.COLUMN_SCHBF, enc.getsCHBF());
         values.put(FormsTable.COLUMN_SBLOODSAMPLE, enc.getsBloodSample());
         values.put(FormsTable.COLUMN_SRANDOMIZATION, enc.getsRandomization());
         values.put(FormsTable.COLUMN_SVACCINE, enc.getsVaccine());
+        values.put(FormsTable.COLUMN_NEXTAPP, enc.getNextApp());
         values.put(FormsTable.COLUMN_GPSLAT, enc.getGpsLat());
         values.put(FormsTable.COLUMN_GPSLNG, enc.getGpsLng());
         values.put(FormsTable.COLUMN_GPSDT, enc.getGpsDT());
@@ -307,6 +309,45 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 values);
         return newRowId;
     }
+
+    public int updateSInfo() {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+// New value for one column
+        ContentValues values = new ContentValues();
+        values.put(FormsTable.COLUMN_SINFO, AppMain.fc.getsInfo());
+        //values.put(FormsTable.COLUMN__UID, AppMain.fc.get_UID());
+
+// Which row to update, based on the ID
+        String selection = FormsTable._ID + " = ?";
+        String[] selectionArgs = {String.valueOf(AppMain.fc.get_ID())};
+
+        int count = db.update(FormsTable.TABLE_NAME,
+                values,
+                selection,
+                selectionArgs);
+        return count;
+    }
+
+    public int updateNextApp() {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+// New value for one column
+        ContentValues values = new ContentValues();
+        values.put(FormsTable.COLUMN_NEXTAPP, AppMain.fc.getNextApp());
+        //values.put(FormsTable.COLUMN__UID, AppMain.fc.get_UID());
+
+// Which row to update, based on the ID
+        String selection = FormsTable._ID + " = ?";
+        String[] selectionArgs = {String.valueOf(AppMain.fc.get_ID())};
+
+        int count = db.update(FormsTable.TABLE_NAME,
+                values,
+                selection,
+                selectionArgs);
+        return count;
+    }
+
 
     public int updateSBloodSample() {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -920,5 +961,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 null);
         return count;
     }
+
 
 }

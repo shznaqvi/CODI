@@ -17,6 +17,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import edu.aku.hassannaqvi.codi.R;
 import edu.aku.hassannaqvi.codi.core.AppMain;
+import edu.aku.hassannaqvi.codi.core.DatabaseHelper;
 
 public class AppointmentActivity extends Activity {
 
@@ -37,7 +38,7 @@ public class AppointmentActivity extends Activity {
         Calendar cal = AppMain.getCalendarDate(AppMain.enrollDate);
         cal.add(Calendar.DAY_OF_MONTH, 28);
         cendt.setText("Date: " + sdf.format(cal.getTime()) + "\n\nTime : " + new SimpleDateFormat("HH:mm").format(System.currentTimeMillis()));
-        //centime.setText(new SimpleDateFormat("hh:mm").format(System.currentTimeMillis()));
+
 
 
     }
@@ -64,19 +65,34 @@ public class AppointmentActivity extends Activity {
 
         Toast.makeText(this, "Starting Next Section", Toast.LENGTH_SHORT).show();
 
-        finish();
-        Intent endSec = new Intent(this, EndingActivity.class);
-        endSec.putExtra("complete", true);
-        startActivity(endSec);
+        //if (()) {
+        try {
+            SaveDraft();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        if (UpdateDB()) {
+            Toast.makeText(this, "Starting Next Section", Toast.LENGTH_SHORT).show();
+
+            finish();
+            Intent endSec = new Intent(this, EndingActivity.class);
+            endSec.putExtra("complete", true);
+            startActivity(endSec);
+
+        } else {
+            Toast.makeText(this, "Failed to Update Database!", Toast.LENGTH_SHORT).show();
+        }
+        // }
+
 
 
     }
 
-    /*private boolean UpdateDB() {
+    private boolean UpdateDB() {
 
         DatabaseHelper db = new DatabaseHelper(this);
 
-        int updcount = db.
+        int updcount = db.updateNextApp();
 
         if (updcount == 1) {
             Toast.makeText(this, "Updating Database... Successful!", Toast.LENGTH_SHORT).show();
@@ -85,14 +101,16 @@ public class AppointmentActivity extends Activity {
             Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
             return false;
         }
-    }*/
+    }
 
     private void SaveDraft() throws JSONException {
         Toast.makeText(this, "Saving Draft for this Section", Toast.LENGTH_SHORT).show();
 
         JSONObject nextApp = new JSONObject();
 
-        nextApp.put("cendt", cendt.getText().toString());
+        Calendar cal = AppMain.getCalendarDate(AppMain.enrollDate);
+        cal.add(Calendar.DAY_OF_MONTH, 28);
+        nextApp.put("cendt", new SimpleDateFormat("dd-MM-yyyy HH:mm").format(cal.getTime()));
 
 
         AppMain.fc.setNextApp(String.valueOf(nextApp));

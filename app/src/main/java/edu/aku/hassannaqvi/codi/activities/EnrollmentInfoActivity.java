@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateFormat;
 import android.util.Log;
@@ -19,14 +18,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import edu.aku.hassannaqvi.codi.R;
-import edu.aku.hassannaqvi.codi.contracts.FormsContract;
 import edu.aku.hassannaqvi.codi.core.AppMain;
 import edu.aku.hassannaqvi.codi.core.DatabaseHelper;
 
@@ -161,7 +157,7 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
 
     DatabaseHelper db;
 
-    Boolean flag = false;
+    //Boolean flag = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -171,12 +167,12 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
 
         dateToday = new SimpleDateFormat("dd/MM/yyyy").format(System.currentTimeMillis());
 
-        dssid.setText(AppMain.elc.getDSSID());
-        studyId.setText(AppMain.elc.getStudyID());
+        dssid.setText(AppMain.fc.getDSSID());
+        studyId.setText(AppMain.fc.getStudyID());
         cen01.setText(AppMain.enrollDate);
-        cen04.setText(AppMain.elc.getChildName());
-        cen05.setText(AppMain.elc.getMotherName());
-        cen06.setText(AppMain.elc.getDob());
+        cen04.setText(AppMain.fc.getChildName());
+        cen05.setText(AppMain.motherName);
+        cen06.setText(AppMain.dob);
 
         //cen01.setManager(getSupportFragmentManager());
         //cen01.setMaxDate(dateToday);
@@ -298,24 +294,22 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
 
         SharedPreferences sharedPref = getSharedPreferences("tagName", MODE_PRIVATE);
 
-        AppMain.fc = new FormsContract();
+        //AppMain.fc = new FormsContract();
 
-        AppMain.fc.setDevicetagID(sharedPref.getString("tagName", null));
-        AppMain.fc.setDeviceID(Settings.Secure.getString(getApplicationContext().getContentResolver(),
-                Settings.Secure.ANDROID_ID));
+        //AppMain.fc.setDevicetagID(sharedPref.getString("tagName", null));
+        //AppMain.fc.setDeviceID(Settings.Secure.getString(getApplicationContext().getContentResolver(),
+        //      Settings.Secure.ANDROID_ID));
 
-        AppMain.fc.setFormDate((DateFormat.format("dd-MM-yyyy HH:mm", new Date())).toString());
-        AppMain.fc.setUser(AppMain.userName);
-        AppMain.fc.setDSSID(AppMain.elc.getDSSID());
-        AppMain.fc.setChildName(AppMain.elc.getChildName());
-        AppMain.fc.setStudyID(AppMain.elc.getStudyID());
-        AppMain.fc.setFormType("EN");
+        //AppMain.fc.setFormDate((DateFormat.format("dd-MM-yyyy HH:mm", new Date())).toString());
+        //AppMain.fc.setUser(AppMain.userName);
 
 
-        Calendar cal = AppMain.getCalendarDate(AppMain.enrollDate);
+
+
+        /*Calendar cal = AppMain.getCalendarDate(AppMain.enrollDate);
         cal.add(Calendar.DAY_OF_MONTH, 28);
         AppMain.fc.setNextApp((new SimpleDateFormat("dd-MM-yyyy").format(cal.getTime()) + " " + new SimpleDateFormat("HH:mm").format(System.currentTimeMillis())));
-
+*/
         JSONObject sInfo = new JSONObject();
 
         //sInfo.put("dssid", AppMain.elc.getDSSID());
@@ -323,8 +317,8 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
         sInfo.put("cen01", AppMain.enrollDate);
         sInfo.put("cen02", "1");
         sInfo.put("cen03", "1");
-        sInfo.put("cen05", AppMain.elc.getMotherName());
-        sInfo.put("cen06", AppMain.elc.getDob());
+        // sInfo.put("cen05", AppMain.motherName);
+        //sInfo.put("cen06", AppMain.dob);
         sInfo.put("cen07w", cen07w.getText().toString());
         sInfo.put("cen07m", cen07m.getText().toString());
         //sInfo.put("cen07a", cen07w.isChecked() ? "1" : cen07m.isChecked() ? "2" : "0");
@@ -347,7 +341,7 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
         AppMain.fc.setsInfo(String.valueOf(sInfo));
 
 
-        setGPS();
+        //setGPS();
 
         Toast.makeText(this, "Validation Successful! - Saving Draft...", Toast.LENGTH_SHORT).show();
     }
@@ -355,15 +349,15 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
     private boolean UpdateDB() {
         DatabaseHelper db = new DatabaseHelper(this);
 
-        Long updcount = db.addEnrollment(AppMain.fc);
-        AppMain.fc.set_ID(String.valueOf(updcount));
+        int updcount = db.updateSInfo();
+        //AppMain.fc.set_ID(String.valueOf(updcount));
 
-        if (updcount != 0) {
+        if (updcount == 1) {
             Toast.makeText(this, "Updating Database... Successful!", Toast.LENGTH_SHORT).show();
 
-            AppMain.fc.set_UID(
+            /*AppMain.fc.set_UID(
                     (AppMain.fc.getDeviceID() + AppMain.fc.get_ID()));
-            db.updateFormID();
+            db.updateFormID();*/
             return true;
         } else {
             Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
