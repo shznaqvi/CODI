@@ -489,7 +489,20 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
                     celstdid.setError(null);
                 }
 
-                if (celstdid.getText().length() < 11 && !celstdid.getText().toString().contains("-")) {
+
+
+
+
+                /*if(AppMain.duplicateStudyID.get(0).getStudyID().equals(celstdid.getText().toString().toUpperCase()))
+
+                {
+                    celstdid.setError("Duplicate Study ID");
+                    return false;
+                }else{
+                    celstdid.setError(null);
+                }*/
+
+                if (celstdid.getText().length() < 12 && !celstdid.getText().toString().contains("-")) {
                     Toast.makeText(this, "ERROR(invalid)" + getString(R.string.celstdid), Toast.LENGTH_SHORT).show();
                     celstdid.setError("Wrong Study ID.. Please correct");
                     Log.d(TAG, "celstdid:invalid ");

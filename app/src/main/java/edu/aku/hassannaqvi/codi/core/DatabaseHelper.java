@@ -26,6 +26,7 @@ import edu.aku.hassannaqvi.codi.contracts.FormsContract;
 import edu.aku.hassannaqvi.codi.contracts.FormsContract.FormsTable;
 import edu.aku.hassannaqvi.codi.contracts.UsersContract;
 import edu.aku.hassannaqvi.codi.contracts.UsersContract.singleUser;
+import edu.aku.hassannaqvi.codi.contracts.VisitContract;
 
 
 /**
@@ -112,6 +113,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
             + " );";
 
+    private static final String SQL_CREATE_FOLLOWUPS = "CREATE TABLE "
+            + VisitContract.singleFollowUps.TABLE_NAME + "(" +
+            VisitContract.singleFollowUps._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+            VisitContract.singleFollowUps.COLUMN_STUDYID + " TEXT," +
+            VisitContract.singleFollowUps.COLUMN_CHILDNAME + " TEXT," +
+            VisitContract.singleFollowUps.COLUMN_MOTHERNAME + " TEXT," +
+            VisitContract.singleFollowUps.COLUMN_EXPECTEDDT + " TEXT," +
+            VisitContract.singleFollowUps.COLUMN_VISITNUM + " TEXT" +
+            " );";
+
 
     private static final String SQL_DELETE_USERS =
             "DROP TABLE IF EXISTS " + singleUser.TABLE_NAME;
@@ -121,6 +132,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             "DROP TABLE IF EXISTS " + FormsTable.TABLE_NAME;
     private static final String SQL_DELETE_CHILDREN =
             "DROP TABLE IF EXISTS " + ChildrenTable.TABLE_NAME;
+    private static final String SQL_DELETE_FOLLOWUPS =
+            "DROP TABLE IF EXISTS " + VisitContract.singleFollowUps.TABLE_NAME;
 
 
     private static final String SQL_SELECT_MOTHER_BY_CHILD =
@@ -148,6 +161,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_CREATE_ELIGIBILITY);
         db.execSQL(SQL_CREATE_FORMS);
         db.execSQL(SQL_CREATE_CHILDREN);
+        db.execSQL(SQL_CREATE_FOLLOWUPS);
 
 
     }
@@ -158,6 +172,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_DELETE_ELIGIBILITY);
         db.execSQL(SQL_DELETE_FORMS);
         db.execSQL(SQL_DELETE_CHILDREN);
+        db.execSQL(SQL_DELETE_FOLLOWUPS);
 
     }
 
@@ -234,6 +249,85 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         return false;
     }
+
+    public void syncVisits(JSONArray Followupslist) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(VisitContract.singleFollowUps.TABLE_NAME, null, null);
+        try {
+            JSONArray jsonArray = Followupslist;
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonObjectCC = jsonArray.getJSONObject(i);
+
+                VisitContract vc = new VisitContract();
+                vc.Sync(jsonObjectCC);
+
+                ContentValues values = new ContentValues();
+
+                values.put(VisitContract.singleFollowUps.COLUMN_CHILDNAME, vc.getCHILDNAME());
+                values.put(VisitContract.singleFollowUps.COLUMN_STUDYID, vc.getSTUDYID());
+                values.put(VisitContract.singleFollowUps.COLUMN_EXPECTEDDT, vc.getEXPECTEDDT());
+                values.put(VisitContract.singleFollowUps.COLUMN_VISITNUM, vc.getVISITNUM());
+                values.put(VisitContract.singleFollowUps.COLUMN_MOTHERNAME, vc.getMOTHERNAME());
+
+
+                db.insert(VisitContract.singleFollowUps.TABLE_NAME, null, values);
+            }
+
+
+        } catch (Exception e) {
+        } finally {
+            db.close();
+        }
+    }
+
+    public List<VisitContract> getVisitsbyStudyID(String studyID) {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = null;
+        String[] columns = {
+                VisitContract.singleFollowUps.COLUMN_CHILDNAME,
+                VisitContract.singleFollowUps.COLUMN_STUDYID,
+                VisitContract.singleFollowUps.COLUMN_EXPECTEDDT,
+                VisitContract.singleFollowUps.COLUMN_VISITNUM,
+                VisitContract.singleFollowUps.COLUMN_MOTHERNAME
+
+        };
+
+        String whereClause = VisitContract.singleFollowUps.COLUMN_STUDYID + " = ?";
+        String[] whereArgs = new String[]{studyID};
+        String groupBy = null;
+        String having = null;
+
+        String orderBy =
+                VisitContract.singleFollowUps.COLUMN_STUDYID + " ASC";
+
+        List<VisitContract> visitList = new ArrayList<>();
+        try {
+            c = db.query(
+                    VisitContract.singleFollowUps.TABLE_NAME,  // The table to query
+                    columns,                   // The columns to return
+                    whereClause,               // The columns for the WHERE clause
+                    whereArgs,                 // The values for the WHERE clause
+                    groupBy,                   // don't group the rows
+                    having,                    // don't filter by row groups
+                    orderBy                    // The sort order
+            );
+            while (c.moveToNext()) {
+                VisitContract vc = new VisitContract();
+                visitList.add(vc.Hydrate(c));
+            }
+        } finally {
+            if (c != null) {
+                c.close();
+            }
+            if (db != null) {
+                db.close();
+            }
+        }
+        return visitList;
+    }
+
+
 
     public Long addEligibility(EligibilityContract elc) {
 
@@ -464,6 +558,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         // return contact list
         return childrenList;
+    }
+
+    public List<FormsContract> getChildByStudyID(String studyID) {
+        List<FormsContract> formsList = new ArrayList<>();
+        // Select All Query
+        String selectQuery = "SELECT * FROM " + FormsTable.TABLE_NAME + " where " + FormsTable.COLUMN_STUDYID + " = '" + studyID + "';";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (c.moveToFirst()) {
+            do {
+                FormsContract cc = new FormsContract();
+                formsList.add(cc.Hydrate(c));
+            } while (c.moveToNext());
+        }
+
+        // return contact list
+        return formsList;
     }
 
 

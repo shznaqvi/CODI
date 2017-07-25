@@ -71,6 +71,7 @@ public class RandomizationActivity extends AppCompatActivity {
 
         String arms = AppMain.getEnrollmentChild.get(0).getArmGrp();
 
+
         Log.d("ArmsGrp",arms);
 
         if (arms.equals("AB") && AppMain.fc.getStudyID().contains("14W")) {

@@ -115,6 +115,8 @@ public class AppMain extends Application {
     public static FormsContract fc;
     public static ChildrenContract cc;
     public static List<ChildrenContract> getEnrollmentChild;
+    public static List<FormsContract> getVisitChild;
+    public static List<FormsContract> duplicateStudyID;
     protected static LocationManager locationManager;
 
 
@@ -267,10 +269,10 @@ public class AppMain extends Application {
     }
 
     public static String convertDateFormat(String dateStr) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
         try {
             Date d = sdf.parse(dateStr);
-            return new SimpleDateFormat("dd/MM/yyyy").format(d);
+            return new SimpleDateFormat("dd-MM-yyyy").format(d);
         } catch (ParseException ex) {
             ex.printStackTrace();
         }
