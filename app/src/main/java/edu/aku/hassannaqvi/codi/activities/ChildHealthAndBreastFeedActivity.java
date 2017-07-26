@@ -162,14 +162,13 @@ public class ChildHealthAndBreastFeedActivity extends Activity {
 
         JSONObject sChbf = new JSONObject();
 
-        sChbf.put("csv04", csv04a.isChecked() ? "1" : csv04b.isChecked() ? "2" : "0");
-        sChbf.put("csv05", csv05a.isChecked() ? "1" : csv05b.isChecked() ? "2" : "0");
-        sChbf.put("csv06", csv06a.isChecked() ? "1" : csv06b.isChecked() ? "2" : "0");
-
-        sChbf.put("cen15", cen15a.isChecked() ? "1" : cen15b.isChecked() ? "2" : "0");
-        sChbf.put("cen16", cen16a.isChecked() ? "1" : cen16b.isChecked() ? "2" : cen16c.isChecked() ? "3" : "0");
-        sChbf.put("cen17", cen17a.isChecked() ? "1" : cen17b.isChecked() ? "2" : cen1788.isChecked() ? "3" : "0");
-        sChbf.put("cen1788x", cen1788x.getText().toString());
+        sChbf.put("hb01", csv04a.isChecked() ? "1" : csv04b.isChecked() ? "2" : "0");
+        sChbf.put("hb02", csv05a.isChecked() ? "1" : csv05b.isChecked() ? "2" : "0");
+        sChbf.put("hb03", csv06a.isChecked() ? "1" : csv06b.isChecked() ? "2" : "0");
+        sChbf.put("hb04", cen15a.isChecked() ? "1" : cen15b.isChecked() ? "2" : "0");
+        sChbf.put("hb05", cen16a.isChecked() ? "1" : cen16b.isChecked() ? "2" : cen16c.isChecked() ? "3" : "0");
+        sChbf.put("hb06", cen17a.isChecked() ? "1" : cen17b.isChecked() ? "2" : cen1788.isChecked() ? "3" : "0");
+        sChbf.put("hb0688x", cen1788x.getText().toString());
 
 
         AppMain.fc.setsCHBF(String.valueOf(sChbf));

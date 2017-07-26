@@ -198,16 +198,16 @@ public class BloodSamplingActivity extends AppCompatActivity {
 
         JSONObject sEnBloodSample = new JSONObject();
 
-        sEnBloodSample.put("cen18", cen18a.isChecked() ? "1" : cen18b.isChecked() ? "2" : "0");
-        sEnBloodSample.put("cen19", cen19a.isChecked() ? "1" : cen19b.isChecked() ? "2" : "0");
-        sEnBloodSample.put("cen20", cen20.getText().toString());
-        sEnBloodSample.put("cen21", cen21.getText().toString());
-        sEnBloodSample.put("cen22", cen22a.isChecked() ? "1" : cen22b.isChecked() ? "2" : "0");
-        sEnBloodSample.put("cen23", cen23a.isChecked() ? "1" : cen23b.isChecked() ? "2" : "0");
+        sEnBloodSample.put("bl01", cen18a.isChecked() ? "1" : cen18b.isChecked() ? "2" : "0");
+        sEnBloodSample.put("bl02", cen19a.isChecked() ? "1" : cen19b.isChecked() ? "2" : "0");
+        sEnBloodSample.put("bl03", cen20.getText().toString());
+        sEnBloodSample.put("bl04", cen21.getText().toString());
+        sEnBloodSample.put("bl05", cen22a.isChecked() ? "1" : cen22b.isChecked() ? "2" : "0");
+        sEnBloodSample.put("bl06", cen23a.isChecked() ? "1" : cen23b.isChecked() ? "2" : "0");
         if (cen24.getText().toString().equals("Sticker")) {
-            sEnBloodSample.put("cen24", "");
+            sEnBloodSample.put("bl07", "");
         } else {
-            sEnBloodSample.put("cen24", cen24.getText().toString());
+            sEnBloodSample.put("bl08", cen24.getText().toString());
         }
 
         AppMain.fc.setsBloodSample(String.valueOf(sEnBloodSample));

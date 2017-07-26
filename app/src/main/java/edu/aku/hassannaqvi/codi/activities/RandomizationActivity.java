@@ -123,8 +123,8 @@ public class RandomizationActivity extends AppCompatActivity {
 
         JSONObject sRandomization = new JSONObject();
 
-        sRandomization.put("cen25", new SimpleDateFormat("dd-MM-yyyy HH:mm").format(System.currentTimeMillis()));
-        sRandomization.put("cen27", cen27a.isChecked() ? "A" : cen27b.isChecked() ? "B" : cen27c.isChecked() ? "C"
+        sRandomization.put("rn01", new SimpleDateFormat("dd-MM-yyyy HH:mm").format(System.currentTimeMillis()));
+        sRandomization.put("rn02", cen27a.isChecked() ? "A" : cen27b.isChecked() ? "B" : cen27c.isChecked() ? "C"
                 : cen27d.isChecked() ? "D" : "0");
         AppMain.fc.setsRandomization(String.valueOf(sRandomization));
 
