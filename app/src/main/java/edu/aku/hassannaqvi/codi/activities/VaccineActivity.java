@@ -56,12 +56,10 @@ public class VaccineActivity extends AppCompatActivity {
     RadioButton cen32b;
     @BindView(R.id.cen33a)
     EditText cen33a;
-    @BindView(R.id.cen33b)
-    EditText cen33b;
+
     @BindView(R.id.cen34a)
     EditText cen34a;
-    @BindView(R.id.cen34b)
-    EditText cen34b;
+
     @BindView(R.id.fldGrpcen34)
     LinearLayout fldGrpcen34;
 
@@ -94,9 +92,7 @@ public class VaccineActivity extends AppCompatActivity {
                     cen31.setText(null);
                     cen32.clearCheck();
                     cen33a.setText(null);
-                    cen33b.setText(null);
                     cen34a.setText(null);
-                    cen34b.setText(null);
                 }
             }
         });
@@ -115,7 +111,6 @@ public class VaccineActivity extends AppCompatActivity {
                 if (cen32a.isChecked()) {
                     fldGrpcen34.setVisibility(View.GONE);
                     cen34a.setText(null);
-                    cen34b.setText(null);
                 } else {
                     fldGrpcen34.setVisibility(View.VISIBLE);
                 }
@@ -182,10 +177,8 @@ public class VaccineActivity extends AppCompatActivity {
         sVaccine.put("vc03", cen30.getText().toString());
         sVaccine.put("vc04", cen31.getText().toString());
         sVaccine.put("vc05", cen32a.isChecked() ? "1" : cen32b.isChecked() ? "2" : "0");
-        sVaccine.put("vc06a", cen33a.getText().toString());
-        sVaccine.put("vc06b", cen33b.getText().toString());
-        sVaccine.put("vc07a", cen34a.getText().toString());
-        sVaccine.put("vc07b", cen34b.getText().toString());
+        sVaccine.put("vc06", cen33a.getText().toString());
+        sVaccine.put("vc07", cen34a.getText().toString());
 
         AppMain.fc.setsVaccine(String.valueOf(sVaccine));
 
@@ -262,7 +255,7 @@ public class VaccineActivity extends AppCompatActivity {
             }
 
             if (cen32b.isChecked()) {
-                if (cen34a.getText().toString().isEmpty() && cen34b.getText().toString().isEmpty()) {
+                if (cen34a.getText().toString().isEmpty()) {
                     Toast.makeText(this, "ERROR(Empty)" + getString(R.string.cen34), Toast.LENGTH_SHORT).show();
                     cen34a.setError("This data is Required!");
 
@@ -273,7 +266,7 @@ public class VaccineActivity extends AppCompatActivity {
                 }
             }
 
-            if (cen33a.getText().toString().isEmpty() && cen33b.getText().toString().isEmpty()) {
+            if (cen33a.getText().toString().isEmpty()) {
                 Toast.makeText(this, "ERROR(Empty)" + getString(R.string.cen33), Toast.LENGTH_SHORT).show();
                 cen33a.setError("This data is Required!");
 
@@ -282,12 +275,7 @@ public class VaccineActivity extends AppCompatActivity {
             } else {
                 cen33a.setError(null);
             }
-
-
-
         }
-
-
         return true;
     }
 
@@ -296,6 +284,4 @@ public class VaccineActivity extends AppCompatActivity {
     public void onBackPressed() {
         Toast.makeText(getApplicationContext(), "You Can't go back", Toast.LENGTH_LONG).show();
     }
-
-
 }
