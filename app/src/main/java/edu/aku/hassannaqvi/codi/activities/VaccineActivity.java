@@ -177,15 +177,15 @@ public class VaccineActivity extends AppCompatActivity {
 
         JSONObject sVaccine = new JSONObject();
 
-        sVaccine.put("cen28", cen28a.isChecked() ? "1" : cen28b.isChecked() ? "2" : "0");
-        sVaccine.put("cen29", cen29a.isChecked() ? "1" : cen29b.isChecked() ? "2" : "0");
-        sVaccine.put("cen30", cen30.getText().toString());
-        sVaccine.put("cen31", cen31.getText().toString());
-        sVaccine.put("cen32", cen32a.isChecked() ? "1" : cen32b.isChecked() ? "2" : "0");
-        sVaccine.put("cen33a", cen33a.getText().toString());
-        sVaccine.put("cen33b", cen33b.getText().toString());
-        sVaccine.put("cen34a", cen34a.getText().toString());
-        sVaccine.put("cen34b", cen34b.getText().toString());
+        sVaccine.put("vc01", cen28a.isChecked() ? "1" : cen28b.isChecked() ? "2" : "0");
+        sVaccine.put("vc02", cen29a.isChecked() ? "1" : cen29b.isChecked() ? "2" : "0");
+        sVaccine.put("vc03", cen30.getText().toString());
+        sVaccine.put("vc04", cen31.getText().toString());
+        sVaccine.put("vc05", cen32a.isChecked() ? "1" : cen32b.isChecked() ? "2" : "0");
+        sVaccine.put("vc06a", cen33a.getText().toString());
+        sVaccine.put("vc06b", cen33b.getText().toString());
+        sVaccine.put("vc07a", cen34a.getText().toString());
+        sVaccine.put("vc07b", cen34b.getText().toString());
 
         AppMain.fc.setsVaccine(String.valueOf(sVaccine));
 

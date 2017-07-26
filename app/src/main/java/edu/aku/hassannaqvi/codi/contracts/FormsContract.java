@@ -131,12 +131,24 @@ public class FormsContract {
         json.put(FormsTable.COLUMN_USER, this.user == null ? JSONObject.NULL : this.user);
         json.put(FormsTable.COLUMN_ISTATUS, this.istatus == null ? JSONObject.NULL : this.istatus);
         json.put(FormsTable.COLUMN_NEXTAPP, this.nextApp == null ? JSONObject.NULL : this.nextApp);
-        json.put(FormsTable.COLUMN_SELIGIBLE, this.sEl == null ? JSONObject.NULL : new JSONObject(this.sEl));
-        json.put(FormsTable.COLUMN_SINFO, this.sInfo == null ? JSONObject.NULL : new JSONObject(this.sInfo));
-        json.put(FormsTable.COLUMN_SCHBF, this.sCHBF == null ? JSONObject.NULL : new JSONObject(this.sCHBF));
-        json.put(FormsTable.COLUMN_SBLOODSAMPLE, this.sBloodSample == null ? JSONObject.NULL : new JSONObject(this.sBloodSample));
-        json.put(FormsTable.COLUMN_SRANDOMIZATION, this.sRandomization == null ? JSONObject.NULL : new JSONObject(this.sRandomization));
-        json.put(FormsTable.COLUMN_SVACCINE, this.sVaccine == null ? JSONObject.NULL : new JSONObject(this.sVaccine));
+        if (!this.sEl.equals("")) {
+            json.put(FormsTable.COLUMN_SELIGIBLE, new JSONObject(this.sEl));
+        }
+        if (!this.sInfo.equals("")) {
+            json.put(FormsTable.COLUMN_SINFO, new JSONObject(this.sInfo));
+        }
+        if (!this.sCHBF.equals("")) {
+            json.put(FormsTable.COLUMN_SCHBF, new JSONObject(this.sCHBF));
+        }
+        if (!this.sBloodSample.equals("")) {
+            json.put(FormsTable.COLUMN_SBLOODSAMPLE, new JSONObject(this.sBloodSample));
+        }
+        if (!this.sRandomization.equals("")) {
+            json.put(FormsTable.COLUMN_SRANDOMIZATION, new JSONObject(this.sRandomization));
+        }
+        if (!this.sVaccine.equals("")) {
+            json.put(FormsTable.COLUMN_SVACCINE, new JSONObject(this.sVaccine));
+        }
         json.put(FormsTable.COLUMN_GPSLAT, this.gpsLat == null ? JSONObject.NULL : this.gpsLat);
         json.put(FormsTable.COLUMN_GPSLNG, this.gpsLng == null ? JSONObject.NULL : this.gpsLng);
         json.put(FormsTable.COLUMN_GPSDT, this.gpsDT == null ? JSONObject.NULL : this.gpsDT);
