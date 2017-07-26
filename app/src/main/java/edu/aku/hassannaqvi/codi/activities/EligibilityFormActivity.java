@@ -302,7 +302,7 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
         JSONObject sel = new JSONObject();
 
 
-        sel.put("celcn", celcn.getText().toString());
+        //sel.put("celcn", celcn.getText().toString());
         sel.put("celdob", celdob.getText().toString());
         sel.put("celmn", celmn.getText().toString());
         sel.put("cel01", cel01a.isChecked() ? "1" : cel01b.isChecked() ? "2" : "0");
@@ -313,7 +313,7 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
         sel.put("cel06", cel06a.isChecked() ? "1" : cel06b.isChecked() ? "2" : "0");
         sel.put("cel07", cel07a.isChecked() ? "1" : cel07b.isChecked() ? "2" : "0");
         sel.put("celee", isYes() ? "1" : "2");
-        sel.put("celstdid", celstdid.getText().toString());
+        //sel.put("celstdid", celstdid.getText().toString());
         sel.put("celdoe", AppMain.enrollDate);
         sel.put("celner", celner.getText().toString());
 
@@ -489,7 +489,20 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
                     celstdid.setError(null);
                 }
 
-                if (celstdid.getText().length() < 11 && !celstdid.getText().toString().contains("-")) {
+
+
+
+
+                /*if(AppMain.duplicateStudyID.get(0).getStudyID().equals(celstdid.getText().toString().toUpperCase()))
+
+                {
+                    celstdid.setError("Duplicate Study ID");
+                    return false;
+                }else{
+                    celstdid.setError(null);
+                }*/
+
+                if (celstdid.getText().length() < 12 && !celstdid.getText().toString().contains("-")) {
                     Toast.makeText(this, "ERROR(invalid)" + getString(R.string.celstdid), Toast.LENGTH_SHORT).show();
                     celstdid.setError("Wrong Study ID.. Please correct");
                     Log.d(TAG, "celstdid:invalid ");

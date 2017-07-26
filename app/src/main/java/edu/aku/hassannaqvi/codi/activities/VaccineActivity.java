@@ -102,12 +102,12 @@ public class VaccineActivity extends AppCompatActivity {
         });
 
         //============== Vaccine based on Arm ========
-        if (AppMain.cc.getArmSlc().equals("C")) {
+        /*if (AppMain.cc.getArmSlc().equals("C")) {
             cen29b.setEnabled(false);
             cen29b.setChecked(false);
         } else {
             cen29b.setEnabled(true);
-        }
+        }*/
 
         cen32.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override

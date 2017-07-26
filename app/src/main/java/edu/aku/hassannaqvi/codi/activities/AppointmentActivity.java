@@ -35,9 +35,16 @@ public class AppointmentActivity extends Activity {
         setContentView(R.layout.activity_appointment);
         ButterKnife.bind(this);
 
-        Calendar cal = AppMain.getCalendarDate(AppMain.enrollDate);
-        cal.add(Calendar.DAY_OF_MONTH, 28);
-        cendt.setText("Date: " + sdf.format(cal.getTime()) + "\n\nTime : " + new SimpleDateFormat("HH:mm").format(System.currentTimeMillis()));
+        if (AppMain.fc.getFormType().equals("V1")) {
+
+            Calendar cal = AppMain.getCalendarDate(AppMain.enrollDate);
+            cal.add(Calendar.DAY_OF_MONTH, 28);
+            cendt.setText("Date: " + sdf.format(cal.getTime()) + "\n\nTime : " + new SimpleDateFormat("HH:mm").format(System.currentTimeMillis()));
+        } else if (AppMain.fc.getFormType().equals("V2")) {
+            Calendar cal = AppMain.getCalendarDate(AppMain.getVisitChild.get(0).getFormDate());
+            cal.add(Calendar.WEEK_OF_YEAR, 18);
+            cendt.setText("Date: " + sdf.format(cal.getTime()) + "\n\nTime : " + new SimpleDateFormat("HH:mm").format(System.currentTimeMillis()));
+        }
 
 
 
@@ -110,10 +117,12 @@ public class AppointmentActivity extends Activity {
 
         Calendar cal = AppMain.getCalendarDate(AppMain.enrollDate);
         cal.add(Calendar.DAY_OF_MONTH, 28);
-        nextApp.put("cendt", new SimpleDateFormat("dd-MM-yyyy").format(cal.getTime()) + " " + new SimpleDateFormat("HH:mm").format(System.currentTimeMillis()));
+
+        AppMain.fc.setNextApp(new SimpleDateFormat("dd-MM-yyyy").format(cal.getTime()) + " " + new SimpleDateFormat("HH:mm").format(System.currentTimeMillis()));
+        //nextApp.put("cendt", );
 
 
-        AppMain.fc.setNextApp(String.valueOf(nextApp));
+        //AppMain.fc.setNextApp(String.valueOf(nextApp));
 
         Toast.makeText(this, "Validation Successful! - Saving Draft...", Toast.LENGTH_SHORT).show();
     }

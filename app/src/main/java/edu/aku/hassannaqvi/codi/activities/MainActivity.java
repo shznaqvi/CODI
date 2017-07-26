@@ -30,7 +30,6 @@ import edu.aku.hassannaqvi.codi.R;
 import edu.aku.hassannaqvi.codi.core.AndroidDatabaseManager;
 import edu.aku.hassannaqvi.codi.core.AppMain;
 import edu.aku.hassannaqvi.codi.sync.SyncChildren;
-import edu.aku.hassannaqvi.codi.sync.SyncEligibilities;
 import edu.aku.hassannaqvi.codi.sync.SyncForms;
 
 public class MainActivity extends Activity {
@@ -219,27 +218,27 @@ public class MainActivity extends Activity {
     }
 
     public void openV2(View v) {
-        Intent v2 = new Intent(this, VisitInfoActivity.class);
+        /*Intent v2 = new Intent(this, VisitInfoActivity.class);
         startActivity(v2);
-        AppMain.formType = "V2";
+        AppMain.formType = "V2";*/
     }
 
     public void openV3(View v) {
-        Intent v3 = new Intent(this, VisitInfoActivity.class);
+        /*Intent v3 = new Intent(this, VisitInfoActivity.class);
         startActivity(v3);
-        AppMain.formType = "V3";
+        AppMain.formType = "V3";*/
     }
 
     public void openV4(View v) {
-        Intent v4 = new Intent(this, VisitInfoActivity.class);
+        /*Intent v4 = new Intent(this, VisitInfoActivity.class);
         startActivity(v4);
-        AppMain.formType = "V4";
+        AppMain.formType = "V4";*/
     }
 
     public void openV5(View v) {
-        Intent v5 = new Intent(this, VisitInfoActivity.class);
+        /*Intent v5 = new Intent(this, VisitInfoActivity.class);
         startActivity(v5);
-        AppMain.formType = "V5";
+        AppMain.formType = "V5";*/
     }
 
     public void openMembers(View v) {
