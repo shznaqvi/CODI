@@ -8,7 +8,6 @@ import android.provider.Settings;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
-import android.text.TextWatcher;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
@@ -31,6 +30,7 @@ import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnTextChanged;
 import edu.aku.hassannaqvi.codi.R;
 import edu.aku.hassannaqvi.codi.contracts.FormsContract;
 import edu.aku.hassannaqvi.codi.core.AppMain;
@@ -121,6 +121,8 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
     List<RadioGroup> celEligible;
     @BindViews({R.id.cel05a, R.id.cel06a, R.id.cel07a, R.id.cel01a})
     List<RadioButton> celEligibleYes;
+    @BindViews({R.id.cel05b, R.id.cel06b, R.id.cel07b, R.id.cel01b})
+    List<RadioButton> celEligibleNo;
     String date14Weeks;
     String mindate14Weeks;
     String date9Months;
@@ -156,8 +158,33 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
             rg.setOnCheckedChangeListener(this);
         }
 
+        /*cel03.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
+                if(cel03b.isChecked())
+                {
+                    cel03b.setBackgroundColor(getResources().getColor(R.color.pink_100));
+                }else{
+                    cel03b.setBackgroundColor(getResources().getColor(R.color.defaultRadio));
+                }
+            }
+        });
 
 
+
+        cel04.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
+                if(cel04b.isChecked())
+                {
+                    cel04b.setBackgroundColor(getResources().getColor(R.color.pink_100));
+                }else{
+                    cel04b.setBackgroundColor(getResources().getColor(R.color.defaultRadio));
+                }
+            }
+        });
+
+*/
         cel02.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
@@ -174,27 +201,18 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
         });
 
         db = new DatabaseHelper(this);
-        dssID.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                check = false;
-                fldGrpChild.setVisibility(View.GONE);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
 
 
     }
+
+
+    @OnTextChanged(value = R.id.dssID,
+            callback = OnTextChanged.Callback.TEXT_CHANGED)
+    void afterDssIDInput(Editable editable) {
+        check = false;
+        fldGrpChild.setVisibility(View.GONE);
+    }
+
 
     @OnClick(R.id.btn_check)
     void onBtnCheckClick() {
@@ -601,6 +619,7 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
 
 
         } else if (isYes() && (cel03b.isChecked() || cel04b.isChecked())) {
+
             flag = false;
             fldGrpcelEligible.setVisibility(View.GONE);
             //  celee.clearCheck();
@@ -624,9 +643,12 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
 
         int i = 0;
         for (RadioButton rg : celEligibleYes) {
-            if (rg.isChecked())
+            if (rg.isChecked()) {
                 i++;
+            }
+
         }
+
 
         // Show answer here
         return i == celEligibleYes.size();
