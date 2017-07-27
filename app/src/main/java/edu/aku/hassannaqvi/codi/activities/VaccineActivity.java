@@ -15,7 +15,9 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -76,7 +78,7 @@ public class VaccineActivity extends AppCompatActivity {
         cen30.setManager(getSupportFragmentManager());
         cen31.setManager(getSupportFragmentManager());
         cen30.setMaxDate(dateToday);
-        // cen30.setMinDate(AppMain.convertDateFormat(AppMain.enrollDate));
+        cen30.setMinDate(convertDateFormat(AppMain.enrollDate));
 
 
         //============== Vacccine after randomization skip pattern=========
@@ -284,4 +286,17 @@ public class VaccineActivity extends AppCompatActivity {
     public void onBackPressed() {
         Toast.makeText(getApplicationContext(), "You Can't go back", Toast.LENGTH_LONG).show();
     }
+
+    public String convertDateFormat(String dateStr) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        try {
+            Date d = sdf.parse(dateStr);
+            return new SimpleDateFormat("dd/MM/yyyy").format(d);
+        } catch (ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        return "";
+    }
+
 }

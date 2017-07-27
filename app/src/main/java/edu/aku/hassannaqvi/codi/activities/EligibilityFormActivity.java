@@ -122,9 +122,9 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
     @BindViews({R.id.cel05a, R.id.cel06a, R.id.cel07a, R.id.cel01a})
     List<RadioButton> celEligibleYes;
     String date14Weeks;
-    String date14Weeks1;
+    String mindate14Weeks;
     String date9Months;
-    String date9Months1;
+    String mindate9Months;
     Boolean flag = false;
 
     DatabaseHelper db;
@@ -139,21 +139,15 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
         setContentView(R.layout.activity_eligibility_form);
         ButterKnife.bind(this);
 
-        String dateToday = new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime());
         date14Weeks = new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTimeInMillis() - ((AppMain.MILLISECONDS_IN_14_WEEKS)));
+        mindate14Weeks = new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTimeInMillis() - ((AppMain.MILLISECONDS_IN_14_WEEKS1)));
         date9Months = new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTimeInMillis() - ((AppMain.MILLISECONDS_IN_9_MONTH)));
+        mindate9Months = new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTimeInMillis() - ((AppMain.MILLISECONDS_IN_9_MONTH1)));
 
 
         for (DatePickerInputEditText de : dates) {
             de.setManager(getSupportFragmentManager());
         }
-
-
-        celdob.setMaxDate(date14Weeks);
-        celdob.setMinDate(date9Months);
-
-        //celdoe.setText(new SimpleDateFormat("dd-MM-yyyy").format(System.currentTimeMillis()));
-
         AppMain.enrollDate = new SimpleDateFormat("dd-MM-yyyy HH:mm").format(System.currentTimeMillis());
 
 
@@ -217,6 +211,14 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
                 fldGrpChild.setVisibility(View.VISIBLE);
 
                 check = true;
+
+                if (AppMain.getEnrollmentChild.get(0).getArmGrp().equals("AB")) {
+                    celdob.setMinDate(mindate14Weeks);
+                    celdob.setMaxDate(date14Weeks);
+                } else {
+                    celdob.setMinDate(mindate9Months);
+                    celdob.setMaxDate(date9Months);
+                }
             } else {
                 Toast.makeText(getApplicationContext(), "Children Already Randomized!", Toast.LENGTH_LONG).show();
             }
@@ -511,39 +513,57 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
                     celstdid.setError(null);
                 }
 
-                if (cel02a.isChecked() && (!celstdid.getText().toString().contains("14W"))) {
-                    Toast.makeText(this, "ERROR(invalid)" + getString(R.string.celstdid) + " - " + getString(R.string.cel02), Toast.LENGTH_SHORT).show();
-                    celstdid.setError("Please check age and study id again ");
-                    cel02a.setError("Please check age and study id again");
-                    Log.d(TAG, "celstdid:invalid ");
-                    return false;
-                } else if ((cel02a.isChecked() && celstdid.getText().toString().contains("14W")) && (Integer.valueOf(celstdid.getText().toString().substring(8)) > 300)) {
-                    Toast.makeText(this, "ERROR(invalid)" + getString(R.string.celstdid) + " - " + getString(R.string.cel02), Toast.LENGTH_SHORT).show();
-                    celstdid.setError("Please check age and study id again ");
-                    cel02a.setError("Please check age and study id again");
-                    Log.d(TAG, "celstdid:invalid ");
-                    return false;
-                } else {
-                    celstdid.setError(null);
-                    cel02a.setError(null);
+                if (cel02a.isChecked()) {
+                    if (!celstdid.getText().toString().contains("14W")) {
+                        Toast.makeText(this, "ERROR(invalid)" + getString(R.string.celstdid) + " - " + getString(R.string.cel02), Toast.LENGTH_SHORT).show();
+                        celstdid.setError("Please check age and study id again ");
+                        cel02a.setError("Please check age and study id again");
+                        Log.d(TAG, "celstdid:invalid ");
+                        return false;
+                    } else {
+                        celstdid.setError(null);
+                        cel02a.setError(null);
+                    }
+
+                    if ((celstdid.getText().toString().contains("14W")) &&
+                            (Integer.valueOf(celstdid.getText().toString().substring(9)) > 300)) {
+                        Toast.makeText(this, "ERROR(invalid)" + getString(R.string.celstdid) + " - " + getString(R.string.cel02), Toast.LENGTH_SHORT).show();
+                        celstdid.setError("Please check age and study id again ");
+                        cel02a.setError("Please check age and study id again");
+                        Log.d(TAG, "celstdid:invalid ");
+                        return false;
+                    } else {
+                        celstdid.setError(null);
+                        cel02a.setError(null);
+                    }
+
                 }
 
-                if (cel02b.isChecked() && (!celstdid.getText().toString().contains("9M"))) {
-                    Toast.makeText(this, "ERROR(invalid)" + getString(R.string.celstdid) + " - " + getString(R.string.cel02), Toast.LENGTH_SHORT).show();
-                    celstdid.setError("Please check age and study id again ");
-                    cel02a.setError("Please check age and study id again");
-                    Log.d(TAG, "celstdid:invalid ");
-                    return false;
-                } else if ((cel02a.isChecked() && celstdid.getText().toString().contains("9M")) && (Integer.valueOf(celstdid.getText().toString().substring(8)) < 300)) {
-                    Toast.makeText(this, "ERROR(invalid)" + getString(R.string.celstdid) + " - " + getString(R.string.cel02), Toast.LENGTH_SHORT).show();
-                    celstdid.setError("Please check age and study id again ");
-                    cel02a.setError("Please check age and study id again");
-                    Log.d(TAG, "celstdid:invalid ");
-                    return false;
-                } else {
-                    celstdid.setError(null);
-                    cel02a.setError(null);
+                if (cel02b.isChecked()) {
+                    if (!celstdid.getText().toString().contains("9M")) {
+                        Toast.makeText(this, "ERROR(invalid)" + getString(R.string.celstdid) + " - " + getString(R.string.cel02), Toast.LENGTH_SHORT).show();
+                        celstdid.setError("Please check age and study id again ");
+                        cel02b.setError("Please check age and study id again");
+                        Log.d(TAG, "celstdid:invalid ");
+                        return false;
+                    } else {
+                        celstdid.setError(null);
+                        cel02b.setError(null);
+                    }
+
+                    if ((celstdid.getText().toString().contains("9M"))
+                            && (Integer.valueOf(celstdid.getText().toString().substring(9)) < 300)) {
+                        Toast.makeText(this, "ERROR(invalid)" + getString(R.string.celstdid) + " - " + getString(R.string.cel02), Toast.LENGTH_SHORT).show();
+                        celstdid.setError("Please check age and study id again ");
+                        cel02b.setError("Please check age and study id again");
+                        Log.d(TAG, "celstdid:invalid ");
+                        return false;
+                    } else {
+                        celstdid.setError(null);
+                        cel02b.setError(null);
+                    }
                 }
+
 
                 // =================== doe ====================
                 /*if (celdoe.getText().toString().isEmpty()) {
