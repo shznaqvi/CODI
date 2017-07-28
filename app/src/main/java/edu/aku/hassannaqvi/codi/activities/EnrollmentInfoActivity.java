@@ -449,6 +449,17 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
             cen07m.setError(null);
         }
 
+        if (Integer.valueOf(cen07m.getText().toString()) > 0 && Integer.valueOf(cen07w.getText().toString()) > 3) {
+            Toast.makeText(this, "ERROR(Invalid)" + getString(R.string.cen07b), Toast.LENGTH_SHORT).show();
+            cen07m.setError("This data is Invalid!");
+            cen07w.setError("This data is Invalid!");
+
+            Log.i(TAG, "cen07m: This Data is Required!");
+            return false;
+        } else {
+            cen07m.setError(null);
+            cen07w.setError(null);
+        }
 
         if (AppMain.selectecAgeGrp == 1) {
             if (Integer.valueOf(cen07w.getText().toString()) != 14
@@ -468,7 +479,7 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
         }
 
 
-        if (AppMain.selectecAgeGrp == 2 && Integer.valueOf(cen07m.getText().toString()) != 9) {
+        if (AppMain.selectecAgeGrp == 2 && Integer.valueOf(cen07m.getText().toString()) > 9) {
             Toast.makeText(this, "ERROR(invalid)" + getString(R.string.cen07b), Toast.LENGTH_SHORT).show();
             cen07m.setError("Age should be 9 months");
 
