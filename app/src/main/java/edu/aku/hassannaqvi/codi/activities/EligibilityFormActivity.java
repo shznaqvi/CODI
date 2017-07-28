@@ -31,6 +31,7 @@ import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnTextChanged;
 import edu.aku.hassannaqvi.codi.R;
 import edu.aku.hassannaqvi.codi.contracts.FormsContract;
 import edu.aku.hassannaqvi.codi.core.AppMain;
@@ -124,10 +125,12 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
     List<RadioGroup> celEligible;
     @BindViews({R.id.cel05a, R.id.cel06a, R.id.cel07a, R.id.cel01a})
     List<RadioButton> celEligibleYes;
+    @BindViews({R.id.cel05b, R.id.cel06b, R.id.cel07b, R.id.cel01b})
+    List<RadioButton> celEligibleNo;
     String date14Weeks;
-    String date14Weeks1;
+    String mindate14Weeks;
     String date9Months;
-    String date9Months1;
+    String mindate9Months;
     Boolean flag = false;
 
     DatabaseHelper db;
@@ -144,19 +147,14 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
 
         String dateToday = new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime());
         date14Weeks = new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTimeInMillis() - ((AppMain.MILLISECONDS_IN_14_WEEKS)));
+        mindate14Weeks = new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTimeInMillis() - ((AppMain.MILLISECONDS_IN_14_WEEKS1)));
         date9Months = new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTimeInMillis() - ((AppMain.MILLISECONDS_IN_9_MONTH)));
+        mindate9Months = new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTimeInMillis() - ((AppMain.MILLISECONDS_IN_9_MONTH1)));
 
 
         for (DatePickerInputEditText de : dates) {
             de.setManager(getSupportFragmentManager());
         }
-
-
-        celdob.setMaxDate(date14Weeks);
-        celdob.setMinDate(date9Months);
-
-        //celdoe.setText(new SimpleDateFormat("dd-MM-yyyy").format(System.currentTimeMillis()));
-
         AppMain.enrollDate = new SimpleDateFormat("dd-MM-yyyy HH:mm").format(System.currentTimeMillis());
 
 
@@ -183,27 +181,18 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
         });
 
         db = new DatabaseHelper(this);
-        dssID.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                check = false;
-                fldGrpChild.setVisibility(View.GONE);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
 
 
     }
+
+
+    @OnTextChanged(value = R.id.dssID,
+            callback = OnTextChanged.Callback.TEXT_CHANGED)
+    void afterDssIDInput(Editable editable) {
+        check = false;
+        fldGrpChild.setVisibility(View.GONE);
+    }
+
 
     @OnClick(R.id.btn_check)
     void onBtnCheckClick() {
@@ -220,6 +209,14 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
                 fldGrpChild.setVisibility(View.VISIBLE);
 
                 check = true;
+
+                if (AppMain.getEnrollmentChild.get(0).getArmGrp().equals("AB")) {
+                    celdob.setMinDate(mindate14Weeks);
+                    celdob.setMaxDate(date14Weeks);
+                } else {
+                    celdob.setMinDate(mindate9Months);
+                    celdob.setMaxDate(date9Months);
+                }
             } else {
                 Toast.makeText(getApplicationContext(), "Children Already Randomized!", Toast.LENGTH_LONG).show();
             }
@@ -609,6 +606,7 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
 
 
         } else if (isYes() && (cel03b.isChecked() || cel04b.isChecked())) {
+
             flag = false;
             fldGrpcelEligible.setVisibility(View.GONE);
             //  celee.clearCheck();
@@ -632,9 +630,12 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
 
         int i = 0;
         for (RadioButton rg : celEligibleYes) {
-            if (rg.isChecked())
+            if (rg.isChecked()) {
                 i++;
+            }
+
         }
+
 
         // Show answer here
         return i == celEligibleYes.size();
