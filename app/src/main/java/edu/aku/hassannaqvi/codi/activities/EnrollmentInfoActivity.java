@@ -505,6 +505,16 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
             cen09.setError(null);
         }
 
+        if (cenfp.getText().toString().isEmpty() && cenmp.getText().toString().isEmpty() && cenac.getText().toString().isEmpty()) {
+            Toast.makeText(this, "ERROR(Empty)" + getString(R.string.cenfp), Toast.LENGTH_SHORT).show();
+            cenfp.setError("This data is Required!");
+
+            Log.i(TAG, "cenfp: This Data is Required!");
+            return false;
+        } else {
+            cenfp.setError(null);
+        }
+
         if (cen10.getCheckedRadioButtonId() == -1) {
             Toast.makeText(this, "ERROR(Empty)" + getString(R.string.cen10), Toast.LENGTH_SHORT).show();
             cen10a.setError("This data is Required!");
