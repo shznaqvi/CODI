@@ -8,8 +8,10 @@ import android.provider.Settings;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
+import android.text.TextWatcher;
 import android.text.format.DateFormat;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -38,7 +40,7 @@ import edu.aku.hassannaqvi.codi.core.DatabaseHelper;
 import io.blackbox_vision.datetimepickeredittext.view.DatePickerInputEditText;
 
 
-public class EligibilityFormActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener {
+public class EligibilityFormActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener, View.OnKeyListener, TextWatcher {
 
     private static final String TAG = EligibilityFormActivity.class.getSimpleName();
 
@@ -168,6 +170,7 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
                 if (cel02b.isChecked()) {
+                    celstdid.setOnKeyListener(EligibilityFormActivity.this);
                     fldGrp9m.setVisibility(View.VISIBLE);
                     fldGrp14wks.setVisibility(View.GONE);
                     cel04.clearCheck();
@@ -183,6 +186,7 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
 
 
     }
+
 
 
     @OnTextChanged(value = R.id.dssID,
@@ -212,9 +216,11 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
                 if (AppMain.getEnrollmentChild.get(0).getArmGrp().equals("AB")) {
                     celdob.setMinDate(mindate14Weeks);
                     celdob.setMaxDate(date14Weeks);
+                    celstdid.setText("CODI14W-");
                 } else {
                     celdob.setMinDate(mindate9Months);
                     celdob.setMaxDate(date9Months);
+                    celstdid.setText("CODI09M-");
                 }
             } else {
                 Toast.makeText(getApplicationContext(), "Children Already Randomized!", Toast.LENGTH_LONG).show();
@@ -224,6 +230,8 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
 
             check = false;
         }
+
+
     }
 
 
@@ -585,14 +593,24 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
 
     @Override
     public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
-        if ((isYes() && cel03a.isChecked()) || (isYes() && cel04a.isChecked())) {
+        if ((isYes() && cel03a.isChecked())) {
             // Show answer here
             flag = true;
             fldGrpcelEligible.setVisibility(View.VISIBLE);
+            celstdid.setText("CODI14W-");
+            celstdid.setOnKeyListener(EligibilityFormActivity.this);
+            celstdid.addTextChangedListener(EligibilityFormActivity.this);
             fldGrprsn.setVisibility(View.GONE);
             celner.setText(null);
 
 
+        } else if (isYes() && cel04a.isChecked()) {
+            flag = true;
+            fldGrpcelEligible.setVisibility(View.VISIBLE);
+            celstdid.setText("CODI09M-");
+            celstdid.setOnKeyListener(EligibilityFormActivity.this);
+            fldGrprsn.setVisibility(View.GONE);
+            celner.setText(null);
         } else if (isYes() && (cel03b.isChecked() || cel04b.isChecked())) {
 
             flag = false;
@@ -668,6 +686,42 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
 
     }
 
+    @Override
+    public boolean onKey(View view, int keyCode, KeyEvent keyEvent) {
+
+        if (keyCode == KeyEvent.KEYCODE_DEL) {
+            //do nothing
+            if (view == celstdid) {
+                if (celstdid.getText().length() == 8) {
+
+                } else {
+                    return false;
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        if (celstdid.getText().length() < 12) {
+            celstdid.setOnKeyListener(this);
+        }
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable editable) {
+        if (celstdid.getText().length() < 12) {
+            celstdid.setOnKeyListener(this);
+        }
+    }
 }
 
 
