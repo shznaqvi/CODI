@@ -8,7 +8,6 @@ import android.provider.Settings;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
-import android.text.TextWatcher;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
@@ -489,19 +488,6 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
                     celstdid.setError(null);
                 }
 
-
-
-
-
-                /*if(AppMain.duplicateStudyID.get(0).getStudyID().equals(celstdid.getText().toString().toUpperCase()))
-
-                {
-                    celstdid.setError("Duplicate Study ID");
-                    return false;
-                }else{
-                    celstdid.setError(null);
-                }*/
-
                 if (!celstdid.getText().toString().substring(0, 4).contains("CODI")) {
                     Toast.makeText(this, "ERROR(invalid)" + getString(R.string.celstdid), Toast.LENGTH_SHORT).show();
                     celstdid.setError("Wrong Study ID.. Please correct \r\n\t - must contain word 'CODI'");
@@ -548,7 +534,8 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
 
                 String[] codiNo = celstdidtxt.split("-");
 
-                if (celstdidtxt.contains("14W") && (Integer.valueOf(codiNo[1]) > 300)) {
+                if (celstdidtxt.contains("14W") && ((Integer.valueOf(codiNo[1].substring(0, 1)) > 0)
+                        || (Integer.valueOf(codiNo[1].substring(1)) > 300))) {
                     Toast.makeText(this, "ERROR(invalid)" + getString(R.string.celstdid) + " - " + getString(R.string.cel02), Toast.LENGTH_SHORT).show();
                     celstdid.setError("Please check age and study id again ");
                     cel02a.setError("Please check age and study id again");
@@ -559,7 +546,8 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
                     cel02a.setError(null);
                 }
 
-                if (celstdidtxt.contains("09M") && (Integer.valueOf(codiNo[1]) < 300)) {
+                if (celstdidtxt.contains("09M") && ((Integer.valueOf(codiNo[0].substring(0, 1)) > 0)
+                        || (Integer.valueOf(codiNo[1].substring(1)) < 300))) {
                     Toast.makeText(this, "ERROR(invalid)" + getString(R.string.celstdid) + " - " + getString(R.string.cel02), Toast.LENGTH_SHORT).show();
                     celstdid.setError("Invalid Study ID");
                     cel02b.setError("Please check age and study id again");

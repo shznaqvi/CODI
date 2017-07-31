@@ -324,7 +324,7 @@ public class BloodSamplingActivity extends AppCompatActivity {
                 }
 
 
-                if (cen24.getText().length() < 12 && !cen24.getText().toString().contains("-")) {
+                /*if (cen24.getText().length() < 12 && !cen24.getText().toString().contains("-")) {
                     Toast.makeText(this, "ERROR(invalid)" + getString(R.string.cen24), Toast.LENGTH_SHORT).show();
                     cen24.setError("Invalid sample number..");
 
@@ -332,7 +332,7 @@ public class BloodSamplingActivity extends AppCompatActivity {
                     return false;
                 } else {
                     cen24.setError(null);
-                }
+                }*/
             }
         }
 
