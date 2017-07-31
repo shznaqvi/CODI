@@ -167,7 +167,7 @@ public class ChildHealthAndBreastFeedActivity extends Activity {
         sChbf.put("hb03", csv06a.isChecked() ? "1" : csv06b.isChecked() ? "2" : "0");
         sChbf.put("hb04", cen15a.isChecked() ? "1" : cen15b.isChecked() ? "2" : "0");
         sChbf.put("hb05", cen16a.isChecked() ? "1" : cen16b.isChecked() ? "2" : cen16c.isChecked() ? "3" : "0");
-        sChbf.put("hb06", cen17a.isChecked() ? "1" : cen17b.isChecked() ? "2" : cen1788.isChecked() ? "3" : "0");
+        sChbf.put("hb06", cen17a.isChecked() ? "1" : cen17b.isChecked() ? "2" : cen1788.isChecked() ? "88" : "0");
         sChbf.put("hb0688x", cen1788x.getText().toString());
 
 

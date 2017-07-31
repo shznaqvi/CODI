@@ -68,6 +68,8 @@ public class BloodSamplingActivity extends AppCompatActivity {
     RadioButton cen23b;
     @BindView(R.id.cen24)
     EditText cen24;
+    @BindView(R.id.fldGrpSerum)
+    LinearLayout fldGrpSerum;
 
     String dateToday;
 
@@ -83,7 +85,7 @@ public class BloodSamplingActivity extends AppCompatActivity {
         cen20.setManager(getSupportFragmentManager());
         cen21.setManager(getSupportFragmentManager());
         cen20.setMaxDate(dateToday);
-        //cen20.setMinDate(convertDateFormat(AppMain.enrollDate));
+        cen20.setMinDate(convertDateFormat(AppMain.enrollDate));
 
 
         //================ Blood Sampling Skip Pattern============
@@ -98,6 +100,21 @@ public class BloodSamplingActivity extends AppCompatActivity {
                     cen20.setText(null);
                     cen21.setText(null);
                     cen22.clearCheck();
+                    cen23.clearCheck();
+                    cen24.setText(null);
+                }
+            }
+        });
+
+        //============== Serum Sepration Skip pattern=============
+
+        cen22.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
+                if (cen22a.isChecked()) {
+                    fldGrpSerum.setVisibility(View.VISIBLE);
+                } else {
+                    fldGrpSerum.setVisibility(View.GONE);
                     cen23.clearCheck();
                     cen24.setText(null);
                 }
@@ -285,24 +302,37 @@ public class BloodSamplingActivity extends AppCompatActivity {
                 cen22a.setError(null);
             }
 
-            if (cen23.getCheckedRadioButtonId() == -1) {
-                Toast.makeText(this, "ERROR(Empty)" + getString(R.string.cen23), Toast.LENGTH_SHORT).show();
-                cen23a.setError("This data is Required!");
+            if (cen22a.isChecked()) {
+                if (cen23.getCheckedRadioButtonId() == -1) {
+                    Toast.makeText(this, "ERROR(Empty)" + getString(R.string.cen23), Toast.LENGTH_SHORT).show();
+                    cen23a.setError("This data is Required!");
 
-                Log.i(TAG, "cen23: This Data is Required!");
-                return false;
-            } else {
-                cen23a.setError(null);
-            }
+                    Log.i(TAG, "cen23: This Data is Required!");
+                    return false;
+                } else {
+                    cen23a.setError(null);
+                }
 
-            if (cen24.getText().toString().isEmpty()) {
-                Toast.makeText(this, "ERROR(Empty)" + getString(R.string.cen24), Toast.LENGTH_SHORT).show();
-                cen24.setError("This data is Required!");
+                if (cen24.getText().toString().isEmpty()) {
+                    Toast.makeText(this, "ERROR(Empty)" + getString(R.string.cen24), Toast.LENGTH_SHORT).show();
+                    cen24.setError("This data is Required!");
 
-                Log.i(TAG, "cen24: This Data is Required!");
-                return false;
-            } else {
-                cen24.setError(null);
+                    Log.i(TAG, "cen24: This Data is Required!");
+                    return false;
+                } else {
+                    cen24.setError(null);
+                }
+
+
+                /*if (cen24.getText().length() < 12 && !cen24.getText().toString().contains("-")) {
+                    Toast.makeText(this, "ERROR(invalid)" + getString(R.string.cen24), Toast.LENGTH_SHORT).show();
+                    cen24.setError("Invalid sample number..");
+
+                    Log.i(TAG, "cen24: Invalid sample number");
+                    return false;
+                } else {
+                    cen24.setError(null);
+                }*/
             }
         }
 

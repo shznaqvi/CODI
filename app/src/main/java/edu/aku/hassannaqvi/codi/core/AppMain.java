@@ -59,9 +59,9 @@ public class AppMain extends Application {
     public static final long MILLISECONDS_IN_14_WEEKS = MILLIS_IN_SECOND * SECONDS_IN_MINUTE * MINUTES_IN_HOUR * HOURS_IN_DAY * DAYS_IN_14_WEEKS;
     private static final long DAYS_IN_14_WEEKS1 = (7 * 14) + 6;
     public static final long MILLISECONDS_IN_14_WEEKS1 = MILLIS_IN_SECOND * SECONDS_IN_MINUTE * MINUTES_IN_HOUR * HOURS_IN_DAY * DAYS_IN_14_WEEKS1;
-    private static final double DAYS_IN_9_MONTHS = 302;
+    private static final double DAYS_IN_9_MONTHS = 273.75;
     public static final double MILLISECONDS_IN_9_MONTH = MILLIS_IN_SECOND * SECONDS_IN_MINUTE * MINUTES_IN_HOUR * HOURS_IN_DAY * DAYS_IN_9_MONTHS;
-    private static final double DAYS_IN_9_MONTHS1 = (30.4 * 9);
+    private static final double DAYS_IN_9_MONTHS1 = 302;
     public static final double MILLISECONDS_IN_9_MONTH1 = MILLIS_IN_SECOND * SECONDS_IN_MINUTE * MINUTES_IN_HOUR * HOURS_IN_DAY * DAYS_IN_9_MONTHS1;
 
     public static String deviceId;
@@ -252,6 +252,22 @@ public class AppMain extends Application {
 
         return ageindays;
 
+    }
+
+    private static String getAge(String dateStr) {
+        Calendar dob = getCalendarDate(dateStr);
+        Calendar today = Calendar.getInstance();
+
+        int age = today.get(Calendar.YEAR) - dob.get(Calendar.YEAR);
+
+        if (today.get(Calendar.DAY_OF_YEAR) < dob.get(Calendar.DAY_OF_YEAR)) {
+            age--;
+        }
+
+        Integer ageInt = new Integer(age);
+        String ageS = ageInt.toString();
+
+        return ageS;
     }
 
     public static Calendar getCalendarDate(String value) {

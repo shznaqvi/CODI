@@ -11,6 +11,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.format.DateFormat;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -31,6 +32,7 @@ import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnTextChanged;
 import edu.aku.hassannaqvi.codi.R;
 import edu.aku.hassannaqvi.codi.contracts.FormsContract;
 import edu.aku.hassannaqvi.codi.core.AppMain;
@@ -38,9 +40,12 @@ import edu.aku.hassannaqvi.codi.core.DatabaseHelper;
 import io.blackbox_vision.datetimepickeredittext.view.DatePickerInputEditText;
 
 
-public class EligibilityFormActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener {
+public class EligibilityFormActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener, View.OnKeyListener, TextWatcher {
 
     private static final String TAG = EligibilityFormActivity.class.getSimpleName();
+
+    String dtToday = new SimpleDateFormat("dd-MM-yy HH:mm").format(new Date().getTime());
+
 
     @BindView(R.id.dssID)
     EditText dssID;
@@ -121,10 +126,12 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
     List<RadioGroup> celEligible;
     @BindViews({R.id.cel05a, R.id.cel06a, R.id.cel07a, R.id.cel01a})
     List<RadioButton> celEligibleYes;
+    @BindViews({R.id.cel05b, R.id.cel06b, R.id.cel07b, R.id.cel01b})
+    List<RadioButton> celEligibleNo;
     String date14Weeks;
-    String date14Weeks1;
+    String mindate14Weeks;
     String date9Months;
-    String date9Months1;
+    String mindate9Months;
     Boolean flag = false;
 
     DatabaseHelper db;
@@ -141,19 +148,14 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
 
         String dateToday = new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime());
         date14Weeks = new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTimeInMillis() - ((AppMain.MILLISECONDS_IN_14_WEEKS)));
+        mindate14Weeks = new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTimeInMillis() - ((AppMain.MILLISECONDS_IN_14_WEEKS1)));
         date9Months = new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTimeInMillis() - ((AppMain.MILLISECONDS_IN_9_MONTH)));
+        mindate9Months = new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTimeInMillis() - ((AppMain.MILLISECONDS_IN_9_MONTH1)));
 
 
         for (DatePickerInputEditText de : dates) {
             de.setManager(getSupportFragmentManager());
         }
-
-
-        celdob.setMaxDate(date14Weeks);
-        celdob.setMinDate(date9Months);
-
-        //celdoe.setText(new SimpleDateFormat("dd-MM-yyyy").format(System.currentTimeMillis()));
-
         AppMain.enrollDate = new SimpleDateFormat("dd-MM-yyyy HH:mm").format(System.currentTimeMillis());
 
 
@@ -168,6 +170,7 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
                 if (cel02b.isChecked()) {
+                    celstdid.setOnKeyListener(EligibilityFormActivity.this);
                     fldGrp9m.setVisibility(View.VISIBLE);
                     fldGrp14wks.setVisibility(View.GONE);
                     cel04.clearCheck();
@@ -180,27 +183,19 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
         });
 
         db = new DatabaseHelper(this);
-        dssID.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                check = false;
-                fldGrpChild.setVisibility(View.GONE);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
 
 
     }
+
+
+
+    @OnTextChanged(value = R.id.dssID,
+            callback = OnTextChanged.Callback.TEXT_CHANGED)
+    void afterDssIDInput(Editable editable) {
+        check = false;
+        fldGrpChild.setVisibility(View.GONE);
+    }
+
 
     @OnClick(R.id.btn_check)
     void onBtnCheckClick() {
@@ -217,6 +212,16 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
                 fldGrpChild.setVisibility(View.VISIBLE);
 
                 check = true;
+
+                if (AppMain.getEnrollmentChild.get(0).getArmGrp().equals("AB")) {
+                    celdob.setMinDate(mindate14Weeks);
+                    celdob.setMaxDate(date14Weeks);
+                    celstdid.setText("CODI14W-");
+                } else {
+                    celdob.setMinDate(mindate9Months);
+                    celdob.setMaxDate(date9Months);
+                    celstdid.setText("CODI09M-");
+                }
             } else {
                 Toast.makeText(getApplicationContext(), "Children Already Randomized!", Toast.LENGTH_LONG).show();
             }
@@ -225,6 +230,8 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
 
             check = false;
         }
+
+
     }
 
 
@@ -288,7 +295,7 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
         AppMain.fc = new FormsContract();
 
         AppMain.fc.setDevicetagID(sharedPref.getString("tagName", null));
-        AppMain.fc.setFormDate(new Date().toString());
+        AppMain.fc.setFormDate(dtToday);
         AppMain.fc.setUser(AppMain.userName);
         AppMain.fc.setDeviceID(Settings.Secure.getString(getApplicationContext().getContentResolver(),
                 Settings.Secure.ANDROID_ID));
@@ -489,35 +496,54 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
                     celstdid.setError(null);
                 }
 
-
-
-
-
-                /*if(AppMain.duplicateStudyID.get(0).getStudyID().equals(celstdid.getText().toString().toUpperCase()))
-
-                {
-                    celstdid.setError("Duplicate Study ID");
-                    return false;
-                }else{
-                    celstdid.setError(null);
-                }*/
-
-                if (celstdid.getText().length() < 12 && !celstdid.getText().toString().contains("-")) {
+                if (!celstdid.getText().toString().substring(0, 4).contains("CODI")) {
                     Toast.makeText(this, "ERROR(invalid)" + getString(R.string.celstdid), Toast.LENGTH_SHORT).show();
-                    celstdid.setError("Wrong Study ID.. Please correct");
+                    celstdid.setError("Wrong Study ID.. Please correct \r\n\t - must contain word 'CODI'");
                     Log.d(TAG, "celstdid:invalid ");
                     return false;
                 } else {
                     celstdid.setError(null);
                 }
 
-                if (cel02a.isChecked() && (!celstdid.getText().toString().contains("14W"))) {
-                    Toast.makeText(this, "ERROR(invalid)" + getString(R.string.celstdid) + " - " + getString(R.string.cel02), Toast.LENGTH_SHORT).show();
-                    celstdid.setError("Please check age and study id again ");
-                    cel02a.setError("Please check age and study id again");
+
+                if (celstdid.getText().length() < 12 || !celstdid.getText().toString().contains("-")) {
+                    Toast.makeText(this, "ERROR(invalid)" + getString(R.string.celstdid), Toast.LENGTH_SHORT).show();
+                    celstdid.setError("Wrong Study ID.. Please correct \r\n\t - must be 12 characters \r\n\t - must contain '-'");
                     Log.d(TAG, "celstdid:invalid ");
                     return false;
-                } else if ((cel02a.isChecked() && celstdid.getText().toString().contains("14W")) && (Integer.valueOf(celstdid.getText().toString().substring(8)) > 300)) {
+                } else {
+                    celstdid.setError(null);
+                }
+
+                String celstdidtxt = celstdid.getText().toString().substring(4);
+
+                if (cel02a.isChecked() && (!celstdidtxt.contains("14W"))) {
+                    Toast.makeText(this, "ERROR(invalid)" + getString(R.string.celstdid) + " - " + getString(R.string.cel02), Toast.LENGTH_SHORT).show();
+                    celstdid.setError("Study ID does not match age of child");
+                    cel02a.setError("Study ID does not match age of child");
+                    Log.d(TAG, "celstdid:invalid ");
+                    return false;
+                } else {
+                    celstdid.setError(null);
+                    cel02a.setError(null);
+                }
+
+                if (cel02b.isChecked() && (!celstdidtxt.contains("09M"))) {
+                    Toast.makeText(this, "ERROR(invalid)" + getString(R.string.celstdid) + " - " + getString(R.string.cel02), Toast.LENGTH_SHORT).show();
+                    celstdid.setError("Study ID does not match age of child");
+                    cel02a.setError("Study ID does not match age of child");
+                    Log.d(TAG, "celstdid:invalid ");
+                    return false;
+                } else {
+                    celstdid.setError(null);
+                    cel02a.setError(null);
+
+                }
+
+                String[] codiNo = celstdidtxt.split("-");
+
+                if (celstdidtxt.contains("14W") && ((Integer.valueOf(codiNo[1].substring(0, 1)) > 0)
+                        || (Integer.valueOf(codiNo[1].substring(1)) > 300))) {
                     Toast.makeText(this, "ERROR(invalid)" + getString(R.string.celstdid) + " - " + getString(R.string.cel02), Toast.LENGTH_SHORT).show();
                     celstdid.setError("Please check age and study id again ");
                     cel02a.setError("Please check age and study id again");
@@ -528,21 +554,16 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
                     cel02a.setError(null);
                 }
 
-                if (cel02b.isChecked() && (!celstdid.getText().toString().contains("9M"))) {
+                if (celstdidtxt.contains("09M") && ((Integer.valueOf(codiNo[0].substring(0, 1)) > 0)
+                        || (Integer.valueOf(codiNo[1].substring(1)) < 300))) {
                     Toast.makeText(this, "ERROR(invalid)" + getString(R.string.celstdid) + " - " + getString(R.string.cel02), Toast.LENGTH_SHORT).show();
-                    celstdid.setError("Please check age and study id again ");
-                    cel02a.setError("Please check age and study id again");
-                    Log.d(TAG, "celstdid:invalid ");
-                    return false;
-                } else if ((cel02a.isChecked() && celstdid.getText().toString().contains("9M")) && (Integer.valueOf(celstdid.getText().toString().substring(8)) < 300)) {
-                    Toast.makeText(this, "ERROR(invalid)" + getString(R.string.celstdid) + " - " + getString(R.string.cel02), Toast.LENGTH_SHORT).show();
-                    celstdid.setError("Please check age and study id again ");
-                    cel02a.setError("Please check age and study id again");
+                    celstdid.setError("Invalid Study ID");
+                    cel02b.setError("Please check age and study id again");
                     Log.d(TAG, "celstdid:invalid ");
                     return false;
                 } else {
                     celstdid.setError(null);
-                    cel02a.setError(null);
+                    cel02b.setError(null);
                 }
 
                 // =================== doe ====================
@@ -572,15 +593,26 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
 
     @Override
     public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
-        if ((isYes() && cel03a.isChecked()) || (isYes() && cel04a.isChecked())) {
+        if ((isYes() && cel03a.isChecked())) {
             // Show answer here
             flag = true;
             fldGrpcelEligible.setVisibility(View.VISIBLE);
+            celstdid.setText("CODI14W-");
+            celstdid.setOnKeyListener(EligibilityFormActivity.this);
+            celstdid.addTextChangedListener(EligibilityFormActivity.this);
             fldGrprsn.setVisibility(View.GONE);
             celner.setText(null);
 
 
+        } else if (isYes() && cel04a.isChecked()) {
+            flag = true;
+            fldGrpcelEligible.setVisibility(View.VISIBLE);
+            celstdid.setText("CODI09M-");
+            celstdid.setOnKeyListener(EligibilityFormActivity.this);
+            fldGrprsn.setVisibility(View.GONE);
+            celner.setText(null);
         } else if (isYes() && (cel03b.isChecked() || cel04b.isChecked())) {
+
             flag = false;
             fldGrpcelEligible.setVisibility(View.GONE);
             //  celee.clearCheck();
@@ -604,9 +636,12 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
 
         int i = 0;
         for (RadioButton rg : celEligibleYes) {
-            if (rg.isChecked())
+            if (rg.isChecked()) {
                 i++;
+            }
+
         }
+
 
         // Show answer here
         return i == celEligibleYes.size();
@@ -651,6 +686,42 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
 
     }
 
+    @Override
+    public boolean onKey(View view, int keyCode, KeyEvent keyEvent) {
+
+        if (keyCode == KeyEvent.KEYCODE_DEL) {
+            //do nothing
+            if (view == celstdid) {
+                if (celstdid.getText().length() == 8) {
+
+                } else {
+                    return false;
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        if (celstdid.getText().length() < 12) {
+            celstdid.setOnKeyListener(this);
+        }
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable editable) {
+        if (celstdid.getText().length() < 12) {
+            celstdid.setOnKeyListener(this);
+        }
+    }
 }
 
 

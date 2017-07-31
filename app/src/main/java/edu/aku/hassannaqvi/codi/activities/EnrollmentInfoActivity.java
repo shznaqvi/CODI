@@ -449,6 +449,17 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
             cen07m.setError(null);
         }
 
+        if (Integer.valueOf(cen07m.getText().toString()) > 0 && Integer.valueOf(cen07w.getText().toString()) > 3) {
+            Toast.makeText(this, "ERROR(Invalid)" + getString(R.string.cen07b), Toast.LENGTH_SHORT).show();
+            cen07m.setError("This data is Invalid!");
+            cen07w.setError("This data is Invalid!");
+
+            Log.i(TAG, "cen07m: This Data is Required!");
+            return false;
+        } else {
+            cen07m.setError(null);
+            cen07w.setError(null);
+        }
 
         if (AppMain.selectecAgeGrp == 1) {
             if (Integer.valueOf(cen07w.getText().toString()) != 14
@@ -468,14 +479,19 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
         }
 
 
-        if (AppMain.selectecAgeGrp == 2 && Integer.valueOf(cen07m.getText().toString()) != 9) {
-            Toast.makeText(this, "ERROR(invalid)" + getString(R.string.cen07b), Toast.LENGTH_SHORT).show();
-            cen07m.setError("Age should be 9 months");
+        if (AppMain.selectecAgeGrp == 2) {
+            if (Integer.valueOf(cen07m.getText().toString()) != 9
+                    || Integer.valueOf(cen07w.getText().toString()) > 3) {
+                Toast.makeText(this, "ERROR(invalid)" + getString(R.string.cen07b), Toast.LENGTH_SHORT).show();
+                cen07m.setError("Age should be 9 months");
+                cen07w.setError("Check weeks again");
 
-            Log.i(TAG, "cen07m: Age should be 9 months");
-            return false;
-        } else {
-            cen07m.setError(null);
+                Log.i(TAG, "cen07m: Age should be 9 months");
+                return false;
+            } else {
+                cen07m.setError(null);
+                cen07w.setError(null);
+            }
         }
 
 
@@ -497,6 +513,16 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
             return false;
         } else {
             cen09.setError(null);
+        }
+
+        if (cenfp.getText().toString().isEmpty() && cenmp.getText().toString().isEmpty() && cenac.getText().toString().isEmpty()) {
+            Toast.makeText(this, "ERROR(Empty)" + getString(R.string.cenfp), Toast.LENGTH_SHORT).show();
+            cenfp.setError("This data is Required!");
+
+            Log.i(TAG, "cenfp: This Data is Required!");
+            return false;
+        } else {
+            cenfp.setError(null);
         }
 
         if (cen10.getCheckedRadioButtonId() == -1) {

@@ -148,7 +148,7 @@
                     android:drawablePadding="8dp"
                     android:drawableStart="@drawable/ic_cloud_download_black_24dp"
                     android:padding="16dp"
-                    android:text="Sync Users"
+                    android:text="Download Data"
 
                     android:textStyle="bold" />
 

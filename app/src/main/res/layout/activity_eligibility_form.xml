@@ -419,11 +419,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="1dp"
-            android:hint="@string/studyID"
-            android:inputType="textCapCharacters"
-            android:maxLength="12"
-
-            />
+            android:digits="CODIWMcodiwm1234567890-"
+            android:maxLength="12"></EditText>
 
         <TextView
             android:id="@+id/celdoe"
@@ -465,7 +462,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"
-                android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
                 android:hint="@string/celner" />
             </LinearLayout>
 
