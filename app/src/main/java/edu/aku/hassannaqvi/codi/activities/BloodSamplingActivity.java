@@ -207,7 +207,7 @@ public class BloodSamplingActivity extends AppCompatActivity {
         if (cen24.getText().toString().equals("Sticker")) {
             sEnBloodSample.put("bl07", "");
         } else {
-            sEnBloodSample.put("bl08", cen24.getText().toString());
+            sEnBloodSample.put("bl07", cen24.getText().toString());
         }
 
         AppMain.fc.setsBloodSample(String.valueOf(sEnBloodSample));
