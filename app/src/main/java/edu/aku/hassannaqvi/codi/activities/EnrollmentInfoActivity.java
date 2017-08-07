@@ -449,6 +449,17 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
             cen07m.setError(null);
         }
 
+        if (Integer.valueOf(cen07m.getText().toString()) > 0 && Integer.valueOf(cen07w.getText().toString()) > 3) {
+            Toast.makeText(this, "ERROR(Invalid)" + getString(R.string.cen07b), Toast.LENGTH_SHORT).show();
+            cen07m.setError("This data is Invalid!");
+            cen07w.setError("This data is Invalid!");
+
+            Log.i(TAG, "cen07m: This Data is Required!");
+            return false;
+        } else {
+            cen07m.setError(null);
+            cen07w.setError(null);
+        }
 
         if (AppMain.selectecAgeGrp == 1) {
             if (Integer.valueOf(cen07w.getText().toString()) != 14
@@ -460,7 +471,6 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
                 cen07m.setError("Check weeks again");
 
                 Log.i(TAG, "cen07w: Age should be 14 weeks");
-
                 return false;
             } else {
                 cen07w.setError(null);
@@ -503,6 +513,16 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
             return false;
         } else {
             cen09.setError(null);
+        }
+
+        if (cenfp.getText().toString().isEmpty() && cenmp.getText().toString().isEmpty() && cenac.getText().toString().isEmpty()) {
+            Toast.makeText(this, "ERROR(Empty)" + getString(R.string.cenfp), Toast.LENGTH_SHORT).show();
+            cenfp.setError("This data is Required!");
+
+            Log.i(TAG, "cenfp: This Data is Required!");
+            return false;
+        } else {
+            cenfp.setError(null);
         }
 
         if (cen10.getCheckedRadioButtonId() == -1) {
@@ -644,10 +664,8 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-//        Toast.makeText(getApplicationContext(), "You Can't go back", Toast.LENGTH_LONG).show();
-        super.onBackPressed();
+        Toast.makeText(getApplicationContext(), "You Can't go back", Toast.LENGTH_LONG).show();
     }
-
 
 
 

@@ -72,7 +72,7 @@ public class UsersContract {
         this.ROW_USERNAME = jsonObject.getString(singleUser.ROW_USERNAME);
         this.ROW_PASSWORD = jsonObject.getString(singleUser.ROW_PASSWORD);
         this.FULL_NAME = jsonObject.getString(singleUser.FULL_NAME);
-        this.REGION_DSS = jsonObject.getString(singleUser.REGION_DSS);
+//        this.REGION_DSS = jsonObject.getString(singleUser.REGION_DSS);
         return this;
 
     }

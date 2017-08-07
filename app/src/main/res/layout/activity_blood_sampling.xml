@@ -181,7 +181,13 @@
                 android:layout_height="2dp"
                 android:background="@color/colorPrimary" />
 
-            <TextView
+            <LinearLayout
+                android:id="@+id/fldGrpSerum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -231,9 +237,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-"
                     android:hint="@string/cen24sub"
                     android:inputType="textCapCharacters"
-                    android:maxLength="12" />
+                    android:maxLength="11" />
 
                 <Button
                     android:id="@+id/btnScan"
@@ -244,6 +251,8 @@
                     android:onClick="onBtnScanClick"
                     android:text="SCAN"
                     android:textColor="@color/colorPrimary" />
+
+            </LinearLayout>
 
             </LinearLayout>
 
