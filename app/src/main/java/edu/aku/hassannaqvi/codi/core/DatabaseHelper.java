@@ -58,7 +58,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + ChildrenTable.COLUMN_SYNCED_DATE + " TEXT"
             + " );";
 
-    private static final String SQL_CREATE_ELIGIBILITY = "CREATE TABLE"
+    private static final String SQL_CREATE_ELIGIBILITY = "CREATE TABLE "
             + EligibilityTable.TABLE_NAME + "("
             + EligibilityTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
             + EligibilityTable.COLUMN_PROJECTNAME + " TEXT,"

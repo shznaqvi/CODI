@@ -324,9 +324,9 @@ public class BloodSamplingActivity extends AppCompatActivity {
                 }
                 int scanChar;
                 if (cen24.getText().toString().contains("§")) {
-                    scanChar = 11;
-                } else {
                     scanChar = 10;
+                } else {
+                    scanChar = 9;
                 }
                 if (cen24.getText().length() != scanChar || !cen24.getText().toString().contains("-")) {
                     Toast.makeText(this, "ERROR(invalid)" + getString(R.string.cen24), Toast.LENGTH_SHORT).show();
