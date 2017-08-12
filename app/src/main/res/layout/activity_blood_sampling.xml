@@ -237,10 +237,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789-"
+                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-"
                     android:hint="@string/cen24sub"
                     android:inputType="textCapCharacters"
-                    android:maxLength="12" />
+                    android:maxLength="10" />
 
                 <Button
                     android:id="@+id/btnScan"
