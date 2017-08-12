@@ -74,7 +74,8 @@
             android:name=".activities.RandomizationActivity"
             android:theme="@style/AppTheme1"
             android:windowSoftInputMode="adjustResize|stateHidden" />
-        <activity android:name=".activities.ChildHealthAndBreastFeedActivity"></activity>
+        <activity android:name=".activities.ChildHealthAndBreastFeedActivity" />
+        <activity android:name=".activities.VaccineObservationActivity"></activity>
     </application>
 
 </manifest>

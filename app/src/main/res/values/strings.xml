@@ -47,7 +47,7 @@
     <string name="male">Male</string>
     <string name="female">Female</string>
     <string name="dkn">Dont Know</string>
-  <string name="dca03"> DSS ID </string>
+    <string name="dca03"> DSS ID </string>
 
     <string name="celheading"> Eligibility Form </string>
     <string name="yes"> Yes </string>
@@ -57,15 +57,15 @@
     <string name="celcn"> Name of the child </string>
     <string name="celdob"> Date of birth </string>
     <string name="celmn"> Name of the mother </string>
-  <string name="cel01">  Has informed consent of parent been obtained? </string>
-  <string name="cel02">  Age of the child is 14 weeks or 9 months? </string>
+    <string name="cel01">  Has informed consent of parent been obtained? </string>
+    <string name="cel02">  Age of the child is 14 weeks or 9 months? </string>
     <string name="cel02a"> 14 weeks </string>
     <string name="cel02b"> 9 months</string>
-  <string name="cel03">  If the child is 14 weeks, his IPV dose at 14 weeks of age is due? </string>
-  <string name="cel04">  If the child is 9 months, has he received IPV at 14 weeks of age during routine immunization as evidenced by vaccination card? </string>
-  <string name="cel05">  The family does not intend or plan to travel away or migrate out during the next one year of the study duration? </string>
-  <string name="cel06">  The child does not have any acute illness? </string>
-  <string name="cel07">  The child is not currently or previously enrolled in polio vaccine trials? </string>
+    <string name="cel03">  If the child is 14 weeks, his IPV dose at 14 weeks of age is due? </string>
+    <string name="cel04">  If the child is 9 months, has he received IPV at 14 weeks of age during routine immunization as evidenced by vaccination card? </string>
+    <string name="cel05">  The family does not intend or plan to travel away or migrate out during the next one year of the study duration? </string>
+    <string name="cel06">  The child does not have any acute illness? </string>
+    <string name="cel07">  The child is not currently or previously enrolled in polio vaccine trials? </string>
     <string name="celeesub"> (if answers to all of the above except #4 for 9 months old and #3 for 14 weeks old is YES, mark the child as eligible) </string>
     <string name="celee"> Child Eligible For Enrolment </string>
     <string name="celstdid"> Study ID </string>
