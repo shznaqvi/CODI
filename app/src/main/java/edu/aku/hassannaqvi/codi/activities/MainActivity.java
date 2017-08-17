@@ -218,9 +218,9 @@ public class MainActivity extends Activity {
     }
 
     public void openV2(View v) {
-        /*Intent v2 = new Intent(this, VisitInfoActivity.class);
+        Intent v2 = new Intent(this, VisitInfoActivity.class);
         startActivity(v2);
-        AppMain.formType = "V2";*/
+        AppMain.formType = "V2";
     }
 
     public void openV3(View v) {
@@ -349,6 +349,7 @@ public class MainActivity extends Activity {
 
             Toast.makeText(getApplicationContext(), "Syncing Children", Toast.LENGTH_SHORT).show();
             new SyncChildren(this).execute();
+
 
             /*Toast.makeText(getApplicationContext(), "Syncing Mother", Toast.LENGTH_SHORT).show();
             new SyncMother(this).execute();

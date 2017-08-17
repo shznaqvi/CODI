@@ -58,10 +58,10 @@ public class VisitInfoActivity extends Activity {
         } else if (AppMain.formType.equals("V3")) //&& AppMain.cc.getArmGrp().equals("AB"))
         {
             heading.setText(R.string.ctvheading);
-        }/*else if(AppMain.formType.equals("V3") && AppMain.cc.getArmGrp().equals("CD"))
+        } else if (AppMain.formType.equals("V3") && AppMain.cc.getArmGrp().equals("CD"))
         {
             heading.setText(R.string.ctvbheading);
-        }*/ else if (AppMain.formType.equals("V4")) {
+        } else if (AppMain.formType.equals("V4")) {
             heading.setText(R.string.cfvheading);
         } else if (AppMain.formType.equals("V5")) {
             heading.setText(R.string.cfivheading);
@@ -83,40 +83,44 @@ public class VisitInfoActivity extends Activity {
 
     @OnClick(R.id.btn_Continue)
     void onBtnContinueClick() {
+        Toast.makeText(this, "Processing thi section", Toast.LENGTH_SHORT).show();
         if (ValidateForm()) {
-            try {
-                SaveDraft();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            if (UpdateDB()) {
-                Toast.makeText(this, "Starting Next Section", Toast.LENGTH_SHORT).show();
 
-                finish();
+            if (check) {
+                try {
+                    SaveDraft();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
+                if (UpdateDB()) {
+                    Toast.makeText(this, "starting next section", Toast.LENGTH_SHORT).show();
 
-                startActivity(new Intent(this, ChildHealthAndBreastFeedActivity.class));
-
+                    finish();
+                    Intent secB = new Intent(this, ChildHealthAndBreastFeedActivity.class);
+                    startActivity(secB);
+                } else {
+                    Toast.makeText(this, "Failed to update Database", Toast.LENGTH_SHORT).show();
+                }
             } else {
-                Toast.makeText(this, "Failed to Update Database!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Click on Check Button", Toast.LENGTH_SHORT).show();
             }
         }
-
     }
 
     @OnClick(R.id.btnCheck)
     void onBtnCheckClick() {
 
 
-        AppMain.getVisitChild = db.getChildByStudyID(studyId.getText().toString().toUpperCase());
+        AppMain.visitList = db.getChildByStudyID(studyId.getText().toString().toUpperCase());
 
-        if (AppMain.getVisitChild.size() != 0) {
+        if (AppMain.visitList.size() != 0) {
 
-            if (getDays(AppMain.getVisitChild.get(0).getNextApp())) {
+            if (getDays(AppMain.visitList.get(0).getEXPECTEDDT())) {
 
                 Toast.makeText(getApplicationContext(), "Children found", Toast.LENGTH_LONG).show();
 
-                csv01.setText(AppMain.getVisitChild.get(0).getNextApp());
+                csv01.setText(AppMain.visitList.get(0).getEXPECTEDDT());
 
                 csv02.setText(new SimpleDateFormat("dd-MM-yyyy").format(System.currentTimeMillis()));
 
@@ -124,7 +128,7 @@ public class VisitInfoActivity extends Activity {
 
                 check = true;
             } else {
-                Toast.makeText(getApplicationContext(), "Children Already Randomized!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Children Already Visited!", Toast.LENGTH_LONG).show();
             }
         } else {
             Toast.makeText(getApplicationContext(), "Children Not found", Toast.LENGTH_LONG).show();
@@ -138,8 +142,8 @@ public class VisitInfoActivity extends Activity {
 
 
         try {
-            Date date1 = myFormat.parse(AppMain.convertDateFormat(date));
-            Date date2 = myFormat.parse("25-08-2017");
+            Date date1 = myFormat.parse(date);
+            Date date2 = new Date();
             long diff = date2.getTime() - date1.getTime();
 
             return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS) <= 7;
@@ -161,9 +165,9 @@ public class VisitInfoActivity extends Activity {
         AppMain.fc.setUser(AppMain.userName);
         AppMain.fc.setDeviceID(Settings.Secure.getString(getApplicationContext().getContentResolver(),
                 Settings.Secure.ANDROID_ID));
-        AppMain.fc.setDSSID(AppMain.getVisitChild.get(0).getDSSID());
-        AppMain.fc.setChildName(AppMain.getVisitChild.get(0).getChildName());
-        AppMain.fc.setStudyID(studyId.getText().toString());
+        //AppMain.fc.setDSSID(AppMain.visitList.get(0).get());
+        AppMain.fc.setChildName(AppMain.visitList.get(0).getCHILDNAME());
+        AppMain.fc.setStudyID(AppMain.visitList.get(0).getSTUDYID());
         //AppMain.motherName = celmn.getText().toString();
         //AppMain.dob = celdob.getText().toString();
         //AppMain.fc.setFormType("V1");

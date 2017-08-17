@@ -116,9 +116,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String SQL_CREATE_FOLLOWUPS = "CREATE TABLE "
             + VisitContract.singleFollowUps.TABLE_NAME + "(" +
             VisitContract.singleFollowUps._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+            //VisitContract.singleFollowUps.COLUMN_DSSID + " TEXT," +
             VisitContract.singleFollowUps.COLUMN_STUDYID + " TEXT," +
             VisitContract.singleFollowUps.COLUMN_CHILDNAME + " TEXT," +
             VisitContract.singleFollowUps.COLUMN_MOTHERNAME + " TEXT," +
+            //VisitContract.singleFollowUps.COLUMN_AGE + " TEXT," +
             VisitContract.singleFollowUps.COLUMN_EXPECTEDDT + " TEXT," +
             VisitContract.singleFollowUps.COLUMN_VISITNUM + " TEXT" +
             " );";
@@ -259,15 +261,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 JSONObject jsonObjectCC = jsonArray.getJSONObject(i);
 
                 VisitContract vc = new VisitContract();
-                vc.Sync(jsonObjectCC);
+                vc.Sync1(jsonObjectCC);
 
                 ContentValues values = new ContentValues();
-
+                //values.put(VisitContract.singleFollowUps.COLUMN_DSSID, vc.getDSSID());
                 values.put(VisitContract.singleFollowUps.COLUMN_CHILDNAME, vc.getCHILDNAME());
                 values.put(VisitContract.singleFollowUps.COLUMN_STUDYID, vc.getSTUDYID());
                 values.put(VisitContract.singleFollowUps.COLUMN_EXPECTEDDT, vc.getEXPECTEDDT());
                 values.put(VisitContract.singleFollowUps.COLUMN_VISITNUM, vc.getVISITNUM());
                 values.put(VisitContract.singleFollowUps.COLUMN_MOTHERNAME, vc.getMOTHERNAME());
+                //values.put(VisitContract.singleFollowUps.COLUMN_AGE, vc.getAGE());
 
 
                 db.insert(VisitContract.singleFollowUps.TABLE_NAME, null, values);
@@ -285,11 +288,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = null;
         String[] columns = {
-                VisitContract.singleFollowUps.COLUMN_CHILDNAME,
+                //VisitContract.singleFollowUps.COLUMN_DSSID,
                 VisitContract.singleFollowUps.COLUMN_STUDYID,
+                VisitContract.singleFollowUps.COLUMN_CHILDNAME,
+                VisitContract.singleFollowUps.COLUMN_MOTHERNAME,
+                //VisitContract.singleFollowUps.COLUMN_AGE,
                 VisitContract.singleFollowUps.COLUMN_EXPECTEDDT,
-                VisitContract.singleFollowUps.COLUMN_VISITNUM,
-                VisitContract.singleFollowUps.COLUMN_MOTHERNAME
+                VisitContract.singleFollowUps.COLUMN_VISITNUM
+
 
         };
 
@@ -560,10 +566,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return childrenList;
     }
 
-    public List<FormsContract> getChildByStudyID(String studyID) {
-        List<FormsContract> formsList = new ArrayList<>();
+    public List<VisitContract> getChildByStudyID(String studyID) {
+        List<VisitContract> formsList = new ArrayList<>();
         // Select All Query
-        String selectQuery = "SELECT * FROM " + FormsTable.TABLE_NAME + " where " + FormsTable.COLUMN_STUDYID + " = '" + studyID + "';";
+        String selectQuery = "SELECT * FROM " + VisitContract.singleFollowUps.TABLE_NAME + " where "
+                + VisitContract.singleFollowUps.COLUMN_STUDYID + " = '" + studyID + "';";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor c = db.rawQuery(selectQuery, null);
@@ -571,7 +578,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // looping through all rows and adding to list
         if (c.moveToFirst()) {
             do {
-                FormsContract cc = new FormsContract();
+                VisitContract cc = new VisitContract();
                 formsList.add(cc.Hydrate(c));
             } while (c.moveToNext());
         }
@@ -946,6 +953,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         return allFC;
     }
+
 
     public void updateSyncedChildren(String id) {
         SQLiteDatabase db = this.getReadableDatabase();

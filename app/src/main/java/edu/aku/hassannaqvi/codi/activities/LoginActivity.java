@@ -61,6 +61,7 @@ import edu.aku.hassannaqvi.codi.core.AppMain;
 import edu.aku.hassannaqvi.codi.core.DatabaseHelper;
 import edu.aku.hassannaqvi.codi.get.GetChildren;
 import edu.aku.hassannaqvi.codi.get.GetUsers;
+import edu.aku.hassannaqvi.codi.get.GetVisits;
 
 
 /**
@@ -130,10 +131,10 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         }
 
         // Set up the login form.
-        mEmailView = (EditText) findViewById(R.id.email);
+        mEmailView = findViewById(R.id.email);
         populateAutoComplete();
 
-        mPasswordView = (EditText) findViewById(R.id.password);
+        mPasswordView = findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -562,11 +563,17 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
                 @Override
                 public void run() {
+
+                    Toast.makeText(LoginActivity.this, "Sync Visits", Toast.LENGTH_LONG).show();
+                    new GetVisits(mContext).execute();
+
                     Toast.makeText(LoginActivity.this, "Sync User", Toast.LENGTH_LONG).show();
                     new GetUsers(mContext).execute();
 
                     Toast.makeText(LoginActivity.this, "Sync Childrens", Toast.LENGTH_LONG).show();
                     new GetChildren(mContext).execute();
+
+
                 }
             });
 
