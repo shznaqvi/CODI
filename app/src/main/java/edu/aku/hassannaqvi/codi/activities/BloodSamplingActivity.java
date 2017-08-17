@@ -85,7 +85,7 @@ public class BloodSamplingActivity extends AppCompatActivity {
         cen20.setManager(getSupportFragmentManager());
         cen21.setManager(getSupportFragmentManager());
         cen20.setMaxDate(dateToday);
-        cen20.setMinDate(convertDateFormat(AppMain.enrollDate));
+        cen20.setMinDate(dateToday);
 
 
         //================ Blood Sampling Skip Pattern============
@@ -200,8 +200,13 @@ public class BloodSamplingActivity extends AppCompatActivity {
                 if (AppMain.fc.getFormType().equals("V1")) {
 
                     startActivity(new Intent(this, RandomizationActivity.class));
-                } else {
+                } else if (AppMain.fc.getFormType().equals("V2") ||
+                        (AppMain.fc.getFormType().equals("V3") && AppMain.getEnrollmentChild.get(0).getArmGrp().equals("AB"))
+                        || AppMain.fc.getFormType().equals("V4")) {
                     startActivity(new Intent(this, AppointmentActivity.class));
+                } else if (AppMain.fc.getFormType().equals("V5") || (AppMain.fc.getFormType().equals("V3")
+                        && AppMain.getEnrollmentChild.get(0).getArmGrp().equals("CD"))) {
+                    startActivity(new Intent(this, EndingActivity.class));
                 }
 
             } else {

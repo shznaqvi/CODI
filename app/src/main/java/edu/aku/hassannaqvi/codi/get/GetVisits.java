@@ -39,7 +39,7 @@ public class GetVisits extends AsyncTask<String, String, String> {
     protected void onPreExecute() {
         super.onPreExecute();
         pd = new ProgressDialog(mContext);
-        pd.setTitle("Syncing FollowUps");
+        pd.setTitle("Syncing Visits");
         pd.setMessage("Getting connected to server...");
         pd.show();
 

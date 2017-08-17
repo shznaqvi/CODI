@@ -324,6 +324,7 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
         sel.put("celdoe", AppMain.enrollDate);
         sel.put("celner", celner.getText().toString());
 
+
         AppMain.selectecAgeGrp = cel02.indexOfChild(findViewById(cel02.getCheckedRadioButtonId())) + 1;
 
 

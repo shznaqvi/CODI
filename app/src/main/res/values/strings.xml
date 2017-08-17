@@ -193,8 +193,9 @@
     <string name="csv15"> Quantity of serum sufficient (Minimum 0.5 ml)? </string>
     <string name="csv16"> Number of serum sample on Cryotube: (Sample Number - S1) </string>
     <string name="csvatcsub"> Appointment for third contact visit:
-  (At Age 9 Months For Arms A and B )
-  (At Age 21 Months For Arms C and D) </string>
+  (At Age 9 Months For Arms A and B )</string>
+  <string name="csvatcsub1"> Appointment for third contact visit:
+  (At Age 21 Months For Arms C and D )</string>
     <string name="csvatcdt"> Date </string>
     <string name="csvatctime"> Time
   Hrs.(To be written in 24 hours and minutes ) </string>
