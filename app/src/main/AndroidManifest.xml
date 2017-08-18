@@ -48,45 +48,48 @@
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
             android:name=".activities.EligibilityFormActivity"
-            android:theme="@style/AppTheme1"
             android:screenOrientation="portrait"
+            android:theme="@style/AppTheme1"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
             android:name=".activities.EnrollmentFormActivity"
-            android:theme="@style/AppTheme1"
             android:screenOrientation="portrait"
+            android:theme="@style/AppTheme1"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
             android:name=".activities.EnrollmentInfoActivity"
-            android:theme="@style/AppTheme1"
             android:screenOrientation="portrait"
+            android:theme="@style/AppTheme1"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
             android:name=".activities.VisitInfoActivity"
-            android:theme="@style/AppTheme1"
             android:screenOrientation="portrait"
+            android:theme="@style/AppTheme1"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
             android:name=".activities.BloodSamplingActivity"
-            android:theme="@style/AppTheme1"
             android:screenOrientation="portrait"
+            android:theme="@style/AppTheme1"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
             android:name=".activities.VaccineActivity"
-            android:theme="@style/AppTheme1"
             android:screenOrientation="portrait"
+            android:theme="@style/AppTheme1"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
             android:name=".activities.AppointmentActivity"
-            android:theme="@style/AppTheme1"
             android:screenOrientation="portrait"
+            android:theme="@style/AppTheme1"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
             android:name=".activities.RandomizationActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme1"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name=".activities.ChildHealthAndBreastFeedActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateHidden" />
-        <activity android:name=".activities.ChildHealthAndBreastFeedActivity" />
     </application>
 
 </manifest>
