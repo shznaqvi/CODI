@@ -230,15 +230,15 @@ public class MainActivity extends Activity {
     }
 
     public void openV4(View v) {
-        Intent v4 = new Intent(this, VisitInfoActivity.class);
+        /*Intent v4 = new Intent(this, VisitInfoActivity.class);
         startActivity(v4);
-        AppMain.formType = "V4";
+        AppMain.formType = "V4";*/
     }
 
     public void openV5(View v) {
-        Intent v5 = new Intent(this, VisitInfoActivity.class);
+        /*Intent v5 = new Intent(this, VisitInfoActivity.class);
         startActivity(v5);
-        AppMain.formType = "V5";
+        AppMain.formType = "V5";*/
     }
 
     public void openMembers(View v) {
