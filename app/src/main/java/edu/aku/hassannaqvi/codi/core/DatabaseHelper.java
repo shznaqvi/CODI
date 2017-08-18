@@ -566,11 +566,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return childrenList;
     }
 
-    public List<VisitContract> getChildByStudyID(String studyID) {
+    public List<VisitContract> getChildByStudyID(String studyID, String formType) {
         List<VisitContract> formsList = new ArrayList<>();
         // Select All Query
         String selectQuery = "SELECT * FROM " + VisitContract.singleFollowUps.TABLE_NAME + " where "
-                + VisitContract.singleFollowUps.COLUMN_STUDYID + " = '" + studyID + "';";
+                + VisitContract.singleFollowUps.COLUMN_STUDYID + " = '" + studyID + "' AND "+
+                VisitContract.singleFollowUps.COLUMN_VISITNUM + " = '" + formType + "';";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor c = db.rawQuery(selectQuery, null);
