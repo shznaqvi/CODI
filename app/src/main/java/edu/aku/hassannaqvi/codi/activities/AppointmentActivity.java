@@ -15,7 +15,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import edu.aku.hassannaqvi.codi.R;
-import edu.aku.hassannaqvi.codi.contracts.ChildrenContract;
 import edu.aku.hassannaqvi.codi.core.AppMain;
 import edu.aku.hassannaqvi.codi.core.DatabaseHelper;
 
@@ -40,7 +39,6 @@ public class AppointmentActivity extends Activity {
         ButterKnife.bind(this);
         //Calendar cal = AppMain.getCalendarDate(AppMain.visitList.get(0).getEXPECTEDDT());
 
-        AppMain.cc = new ChildrenContract();
 
 
         if (AppMain.fc.getFormType().equals("V1")) {

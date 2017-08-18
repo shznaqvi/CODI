@@ -154,7 +154,7 @@ public class ChildHealthAndBreastFeedActivity extends Activity {
 
                 finish();
 
-                if (AppMain.formType.equals("V3") && AppMain.arm.equals("AB")) {
+                if (AppMain.formType.equals("V3") && AppMain.fc.getStudyID().contains("14W")) {
                     startActivity(new Intent(this, VaccineActivity.class));
                 } else {
                     startActivity(new Intent(this, BloodSamplingActivity.class));
