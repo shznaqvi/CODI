@@ -974,28 +974,28 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 whereArgs);
     }
 
-    public Collection<EligibilityContract> getTodayForms() {
+    public Collection<FormsContract> getTodayForms() {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = null;
         String[] columns = {
-                EligibilityTable._ID,
-                EligibilityTable.COLUMN_DSSID,
-                EligibilityTable.COLUMN_FORMDATE,
-                EligibilityTable.COLUMN_SYNCED,
+                FormsTable._ID,
+                FormsTable.COLUMN_DSSID,
+                FormsTable.COLUMN_FORMDATE,
+                FormsTable.COLUMN_SYNCED,
 
         };
-        String whereClause = EligibilityTable.COLUMN_FORMDATE + " Like ? ";
+        String whereClause = FormsTable.COLUMN_FORMDATE + " Like ? ";
         String[] whereArgs = new String[]{"%" + spDateT.substring(0, 8).trim() + "%"};
         String groupBy = null;
         String having = null;
 
         String orderBy =
-                EligibilityTable._ID + " ASC";
+                FormsTable._ID + " ASC";
 
-        Collection<EligibilityContract> allFC = new ArrayList<>();
+        Collection<FormsContract> allFC = new ArrayList<>();
         try {
             c = db.query(
-                    EligibilityTable.TABLE_NAME,  // The table to query
+                    FormsTable.TABLE_NAME,  // The table to query
                     columns,                   // The columns to return
                     whereClause,               // The columns for the WHERE clause
                     whereArgs,                 // The values for the WHERE clause
@@ -1004,11 +1004,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     orderBy                    // The sort order
             );
             while (c.moveToNext()) {
-                EligibilityContract fc = new EligibilityContract();
-                fc.set_ID(c.getString(c.getColumnIndex(EligibilityTable._ID)));
-                fc.setDSSID(c.getString(c.getColumnIndex(EligibilityTable.COLUMN_DSSID)));
-                fc.setFormDate(c.getString(c.getColumnIndex(EligibilityTable.COLUMN_FORMDATE)));
-                fc.setSynced(c.getString(c.getColumnIndex(EligibilityTable.COLUMN_SYNCED)));
+                FormsContract fc = new FormsContract();
+                fc.set_ID(c.getString(c.getColumnIndex(FormsTable._ID)));
+                fc.setDSSID(c.getString(c.getColumnIndex(FormsTable.COLUMN_DSSID)));
+                fc.setFormDate(c.getString(c.getColumnIndex(FormsTable.COLUMN_FORMDATE)));
+                fc.setSynced(c.getString(c.getColumnIndex(FormsTable.COLUMN_SYNCED)));
                 allFC.add(fc);
             }
         } finally {
