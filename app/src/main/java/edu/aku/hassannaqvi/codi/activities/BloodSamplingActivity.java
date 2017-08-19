@@ -88,12 +88,9 @@ public class BloodSamplingActivity extends AppCompatActivity {
         cen21.setManager(getSupportFragmentManager());
         cen20.setMaxDate(dateToday);
 
-        if (AppMain.fc.getFormType().equals("V1")) {
-            cen20.setMinDate(convertDateFormat(AppMain.enrollDate));
-        } else {
+        if (!AppMain.fc.getFormType().equals("V1")) {
             cen20.setMinDate(convertDateFormat(AppMain.visitList.get(0).getEXPECTEDDT()));
         }
-
 
 
         //================ Blood Sampling Skip Pattern============

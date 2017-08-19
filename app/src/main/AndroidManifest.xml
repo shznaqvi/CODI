@@ -89,6 +89,7 @@
         <activity
             android:name=".activities.ChildHealthAndBreastFeedActivity"
             android:screenOrientation="portrait"
+            android:theme="@style/AppTheme1"
             android:windowSoftInputMode="adjustResize|stateHidden" />
     </application>
 
