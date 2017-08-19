@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -72,7 +74,7 @@ public class BloodSamplingActivity extends AppCompatActivity {
     LinearLayout fldGrpSerum;
 
     String dateToday;
-
+    String scanned;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,7 +87,10 @@ public class BloodSamplingActivity extends AppCompatActivity {
         cen20.setManager(getSupportFragmentManager());
         cen21.setManager(getSupportFragmentManager());
         cen20.setMaxDate(dateToday);
-        cen20.setMinDate(convertDateFormat(AppMain.enrollDate));
+
+        if (!AppMain.fc.getFormType().equals("V1")) {
+            cen20.setMinDate(convertDateFormat(AppMain.visitList.get(0).getEXPECTEDDT()));
+        }
 
 
         //================ Blood Sampling Skip Pattern============
@@ -121,7 +126,43 @@ public class BloodSamplingActivity extends AppCompatActivity {
             }
         });
 
+        cen24.addTextChangedListener(new TextWatcher() {
 
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                Toast.makeText(BloodSamplingActivity.this,
+                        "before: " + charSequence + "|" +
+                                i + "|" +
+                                i1 + "|" +
+                                i2
+                        , Toast.LENGTH_SHORT).show();
+                scanned = charSequence.toString();
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                Toast.makeText(BloodSamplingActivity.this,
+                        "onText: " + charSequence + "|" +
+                                i + "|" +
+                                i1 + "|" +
+                                i2
+                        , Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                Toast.makeText(BloodSamplingActivity.this,
+                        "after: " + editable
+                        , Toast.LENGTH_SHORT).show();
+                if (scanned.contains("§") && editable.toString().contains("§") && !scanned.equals(editable)) {
+
+                    cen24.setText(editable.toString().replace("§", ""));
+                    Toast.makeText(BloodSamplingActivity.this, "Text Changed!", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
     }
 
     @OnClick(R.id.btnScan)
@@ -148,7 +189,7 @@ public class BloodSamplingActivity extends AppCompatActivity {
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
             } else {
                 Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
-                cen24.setText("§" + result.getContents());
+                cen24.setText("§" + result.getContents().trim());
                 //mngsticker.setEnabled(false);
             }
         } else {
@@ -200,8 +241,13 @@ public class BloodSamplingActivity extends AppCompatActivity {
                 if (AppMain.fc.getFormType().equals("V1")) {
 
                     startActivity(new Intent(this, RandomizationActivity.class));
-                } else {
+                } else if (AppMain.fc.getFormType().equals("V2") ||
+                        (AppMain.fc.getFormType().equals("V3") && AppMain.getEnrollmentChild.get(0).getArmGrp().equals("AB"))
+                        || AppMain.fc.getFormType().equals("V4")) {
                     startActivity(new Intent(this, AppointmentActivity.class));
+                } else if (AppMain.fc.getFormType().equals("V5") || (AppMain.fc.getFormType().equals("V3")
+                        && AppMain.getEnrollmentChild.get(0).getArmGrp().equals("CD"))) {
+                    startActivity(new Intent(this, EndingActivity.class));
                 }
 
             } else {
@@ -324,9 +370,9 @@ public class BloodSamplingActivity extends AppCompatActivity {
                 }
                 int scanChar;
                 if (cen24.getText().toString().contains("§")) {
-                    scanChar = 11;
-                } else {
                     scanChar = 10;
+                } else {
+                    scanChar = 9;
                 }
                 if (cen24.getText().length() != scanChar || !cen24.getText().toString().contains("-")) {
                     Toast.makeText(this, "ERROR(invalid)" + getString(R.string.cen24), Toast.LENGTH_SHORT).show();

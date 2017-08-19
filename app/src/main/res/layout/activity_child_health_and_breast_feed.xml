@@ -11,7 +11,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layoutDirection="ltr"
         android:orientation="vertical">
 
         <View
@@ -68,6 +67,8 @@
                     android:layout_marginBottom="1dp"
                     android:layout_weight="1"
                     android:text="@string/no" />
+
+
             </RadioGroup>
 
             <TextView
@@ -99,8 +100,14 @@
                     android:text="@string/no" />
             </RadioGroup>
 
-            <TextView
+            <LinearLayout
+                android:id="@+id/fldGrpcsv06"
                 android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/csv06" />
@@ -127,6 +134,8 @@
                     android:layout_weight="1"
                     android:text="@string/no" />
             </RadioGroup>
+
+            </LinearLayout>
 
         </LinearLayout>
 

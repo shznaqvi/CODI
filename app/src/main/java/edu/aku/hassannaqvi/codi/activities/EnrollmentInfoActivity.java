@@ -294,22 +294,6 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
 
         SharedPreferences sharedPref = getSharedPreferences("tagName", MODE_PRIVATE);
 
-        //AppMain.fc = new FormsContract();
-
-        //AppMain.fc.setDevicetagID(sharedPref.getString("tagName", null));
-        //AppMain.fc.setDeviceID(Settings.Secure.getString(getApplicationContext().getContentResolver(),
-        //      Settings.Secure.ANDROID_ID));
-
-        //AppMain.fc.setFormDate((DateFormat.format("dd-MM-yyyy HH:mm", new Date())).toString());
-        //AppMain.fc.setUser(AppMain.userName);
-
-
-
-
-        /*Calendar cal = AppMain.getCalendarDate(AppMain.enrollDate);
-        cal.add(Calendar.DAY_OF_MONTH, 28);
-        AppMain.fc.setNextApp((new SimpleDateFormat("dd-MM-yyyy").format(cal.getTime()) + " " + new SimpleDateFormat("HH:mm").format(System.currentTimeMillis())));
-*/
         JSONObject sInfo = new JSONObject();
 
         //sInfo.put("dssid", AppMain.elc.getDSSID());

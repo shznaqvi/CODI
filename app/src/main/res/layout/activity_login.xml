@@ -79,7 +79,11 @@
                 android:singleLine="true"
                 android:textSize="14sp"
 
-                />
+                >
+
+                <requestFocus/>
+
+            </EditText>
 
             <!--android:text="dmu@aku"-->
 

@@ -72,6 +72,8 @@ public class ChildHealthAndBreastFeedActivity extends Activity {
     RadioButton cen1788;
     @BindView(R.id.cen1788x)
     EditText cen1788x;
+    @BindView(R.id.fldGrpcsv06)
+    LinearLayout fldGrpcsv06;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,6 +117,18 @@ public class ChildHealthAndBreastFeedActivity extends Activity {
             }
         });
 
+        csv05.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
+                if (csv05a.isChecked()) {
+                    fldGrpcsv06.setVisibility(View.VISIBLE);
+                } else {
+                    fldGrpcsv06.setVisibility(View.GONE);
+                    csv06.clearCheck();
+                }
+            }
+        });
+
 
     }
 
@@ -140,8 +154,9 @@ public class ChildHealthAndBreastFeedActivity extends Activity {
 
                 finish();
 
-                if (AppMain.formType.equals("V3") && AppMain.arm.equals("AB")) {
+                if (AppMain.formType.equals("V3") && AppMain.fc.getStudyID().contains("14W")) {
                     startActivity(new Intent(this, VaccineActivity.class));
+
                 } else {
                     startActivity(new Intent(this, BloodSamplingActivity.class));
                 }
@@ -215,14 +230,16 @@ public class ChildHealthAndBreastFeedActivity extends Activity {
                 csv05a.setError(null);
             }
 
-            if (csv06.getCheckedRadioButtonId() == -1) {
-                Toast.makeText(this, "ERROR(Empty)" + getString(R.string.csv06), Toast.LENGTH_SHORT).show();
-                csv06a.setError("This data is Required!");
+            if (csv05a.isChecked()) {
+                if (csv06.getCheckedRadioButtonId() == -1) {
+                    Toast.makeText(this, "ERROR(Empty)" + getString(R.string.csv06), Toast.LENGTH_SHORT).show();
+                    csv06a.setError("This data is Required!");
 
-                Log.i(TAG, "csv06: This Data is Required!");
-                return false;
-            } else {
-                csv06a.setError(null);
+                    Log.i(TAG, "csv06: This Data is Required!");
+                    return false;
+                } else {
+                    csv06a.setError(null);
+                }
             }
         }
 

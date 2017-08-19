@@ -25,6 +25,7 @@ import edu.aku.hassannaqvi.codi.activities.EndingActivity;
 import edu.aku.hassannaqvi.codi.contracts.ChildrenContract;
 import edu.aku.hassannaqvi.codi.contracts.EligibilityContract;
 import edu.aku.hassannaqvi.codi.contracts.FormsContract;
+import edu.aku.hassannaqvi.codi.contracts.VisitContract;
 
 /**
  * Created by hassan.naqvi on 11/30/2016.
@@ -80,6 +81,7 @@ public class AppMain extends Application {
     public static String dob;
     public static int selectecAgeGrp;
     public static String motherName = "";
+    public static List<VisitContract> visitList;
     public static String studyID;
 
 

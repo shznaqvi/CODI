@@ -108,7 +108,7 @@ public class MainActivity extends Activity {
             builder.show();
         }
 
-
+/*
         DatabaseHelper db = new DatabaseHelper(this);
         Collection<FormsContract> todayForms = db.getTodayForms();
         Collection<FormsContract> unsyncedForms = db.getUnsyncedForms();
@@ -122,16 +122,17 @@ public class MainActivity extends Activity {
 
         rSumText += "=======================\r\n";
         rSumText += "\r\n";
-        rSumText += "Total Forms Today: " + todayForms.size() + "\r\n";
+        rSumText += "Total Forms Today: " + todaysForms.size() + "\r\n";
         rSumText += "\r\n";
-        if (todayForms.size() > 0) {
+        if (todaysForms.size() > 0) {
             rSumText += "\tFORMS' LIST: \r\n";
             String iStatus;
             rSumText += "--------------------------------------------------\r\n";
-            rSumText += "[ FORM_ID ] \t[Form Status] \t[Sync Status]----------\r\n";
+            rSumText += "[ DSS_ID ] \t[Form Status] \t[Sync Status]----------\r\n";
             rSumText += "--------------------------------------------------\r\n";
 
             for (FormsContract fc : todayForms) {
+            for (FormsContract fc : todaysForms) {
                 if (fc.getIstatus() != null) {
                     switch (fc.getIstatus()) {
                         case "1":
@@ -186,6 +187,7 @@ public class MainActivity extends Activity {
         recordSummary.setText(rSumText);
 
 
+    }*/
     }
 
     public void openForm(View v) {
@@ -233,15 +235,15 @@ public class MainActivity extends Activity {
     }
 
     public void openV2(View v) {
-        /*Intent v2 = new Intent(this, VisitInfoActivity.class);
+        Intent v2 = new Intent(this, VisitInfoActivity.class);
         startActivity(v2);
-        AppMain.formType = "V2";*/
+        AppMain.formType = "V2";
     }
 
     public void openV3(View v) {
-        /*Intent v3 = new Intent(this, VisitInfoActivity.class);
+        Intent v3 = new Intent(this, VisitInfoActivity.class);
         startActivity(v3);
-        AppMain.formType = "V3";*/
+        AppMain.formType = "V3";
     }
 
     public void openV4(View v) {
