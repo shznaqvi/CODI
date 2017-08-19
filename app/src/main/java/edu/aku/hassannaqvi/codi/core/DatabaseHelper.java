@@ -58,7 +58,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + ChildrenTable.COLUMN_SYNCED_DATE + " TEXT"
             + " );";
 
-    private static final String SQL_CREATE_ELIGIBILITY = "CREATE TABLE"
+    private static final String SQL_CREATE_ELIGIBILITY = "CREATE TABLE "
             + EligibilityTable.TABLE_NAME + "("
             + EligibilityTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
             + EligibilityTable.COLUMN_PROJECTNAME + " TEXT,"
@@ -847,6 +847,278 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return allFC;
     }
 
+    public Collection<FormsContract> getUnsyncedFormsV2() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = null;
+        String[] columns = {
+                FormsTable._ID,
+                FormsTable.COLUMN__UID,
+                FormsTable.COLUMN_DSSID,
+                FormsTable.COLUMN_STUDYID,
+                FormsTable.COLUMN_CHILDNAME,
+                FormsTable.COLUMN_FORMDATE,
+                FormsTable.COLUMN_FORMTYPE,
+                FormsTable.COLUMN_USER,
+                FormsTable.COLUMN_SELIGIBLE,
+                FormsTable.COLUMN_NEXTAPP,
+                FormsTable.COLUMN_ISTATUS,
+                FormsTable.COLUMN_SINFO,
+                FormsTable.COLUMN_SCHBF,
+                FormsTable.COLUMN_SBLOODSAMPLE,
+                FormsTable.COLUMN_SRANDOMIZATION,
+                FormsTable.COLUMN_SVACCINE,
+                FormsTable.COLUMN_GPSLAT,
+                FormsTable.COLUMN_GPSLNG,
+                FormsTable.COLUMN_GPSDT,
+                FormsTable.COLUMN_GPSACC,
+                FormsTable.COLUMN_DEVICEID,
+                FormsTable.COLUMN_DEVICETAGID
+
+
+        };
+        String whereClause = FormsTable.COLUMN_SYNCED + " is null AND " + FormsTable.COLUMN_FORMTYPE + " =?";
+        String[] whereArgs = new String[]{"V2"};
+        String groupBy = null;
+        String having = null;
+
+        String orderBy =
+                FormsTable._ID + " ASC";
+
+        Collection<FormsContract> allFC = new ArrayList<FormsContract>();
+        try {
+            c = db.query(
+                    FormsTable.TABLE_NAME,  // The table to query
+                    columns,                   // The columns to return
+                    whereClause,               // The columns for the WHERE clause
+                    whereArgs,                 // The values for the WHERE clause
+                    groupBy,                   // don't group the rows
+                    having,                    // don't filter by row groups
+                    orderBy                    // The sort order
+            );
+            while (c.moveToNext()) {
+                FormsContract fc = new FormsContract();
+                allFC.add(fc.Hydrate(c));
+            }
+        } finally {
+            if (c != null) {
+                c.close();
+            }
+            if (db != null) {
+                db.close();
+            }
+        }
+        return allFC;
+    }
+
+    public Collection<FormsContract> getUnsyncedFormsV3() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = null;
+        String[] columns = {
+                FormsTable._ID,
+                FormsTable.COLUMN__UID,
+                FormsTable.COLUMN_DSSID,
+                FormsTable.COLUMN_STUDYID,
+                FormsTable.COLUMN_CHILDNAME,
+                FormsTable.COLUMN_FORMDATE,
+                FormsTable.COLUMN_FORMTYPE,
+                FormsTable.COLUMN_USER,
+                FormsTable.COLUMN_SELIGIBLE,
+                FormsTable.COLUMN_NEXTAPP,
+                FormsTable.COLUMN_ISTATUS,
+                FormsTable.COLUMN_SINFO,
+                FormsTable.COLUMN_SCHBF,
+                FormsTable.COLUMN_SBLOODSAMPLE,
+                FormsTable.COLUMN_SRANDOMIZATION,
+                FormsTable.COLUMN_SVACCINE,
+                FormsTable.COLUMN_GPSLAT,
+                FormsTable.COLUMN_GPSLNG,
+                FormsTable.COLUMN_GPSDT,
+                FormsTable.COLUMN_GPSACC,
+                FormsTable.COLUMN_DEVICEID,
+                FormsTable.COLUMN_DEVICETAGID
+
+
+        };
+        String whereClause = FormsTable.COLUMN_SYNCED + " is null AND " + FormsTable.COLUMN_FORMTYPE + " =?";
+        String[] whereArgs = new String[]{"V3"};
+        String groupBy = null;
+        String having = null;
+
+        String orderBy =
+                FormsTable._ID + " ASC";
+
+        Collection<FormsContract> allFC = new ArrayList<FormsContract>();
+        try {
+            c = db.query(
+                    FormsTable.TABLE_NAME,  // The table to query
+                    columns,                   // The columns to return
+                    whereClause,               // The columns for the WHERE clause
+                    whereArgs,                 // The values for the WHERE clause
+                    groupBy,                   // don't group the rows
+                    having,                    // don't filter by row groups
+                    orderBy                    // The sort order
+            );
+            while (c.moveToNext()) {
+                FormsContract fc = new FormsContract();
+                allFC.add(fc.Hydrate(c));
+            }
+        } finally {
+            if (c != null) {
+                c.close();
+            }
+            if (db != null) {
+                db.close();
+            }
+        }
+        return allFC;
+    }
+
+    public Collection<FormsContract> getUnsyncedFormsV4() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = null;
+        String[] columns = {
+                FormsTable._ID,
+                FormsTable.COLUMN__UID,
+                FormsTable.COLUMN_DSSID,
+                FormsTable.COLUMN_STUDYID,
+                FormsTable.COLUMN_CHILDNAME,
+                FormsTable.COLUMN_FORMDATE,
+                FormsTable.COLUMN_FORMTYPE,
+                FormsTable.COLUMN_USER,
+                FormsTable.COLUMN_SELIGIBLE,
+                FormsTable.COLUMN_NEXTAPP,
+                FormsTable.COLUMN_ISTATUS,
+                FormsTable.COLUMN_SINFO,
+                FormsTable.COLUMN_SCHBF,
+                FormsTable.COLUMN_SBLOODSAMPLE,
+                FormsTable.COLUMN_SRANDOMIZATION,
+                FormsTable.COLUMN_SVACCINE,
+                FormsTable.COLUMN_GPSLAT,
+                FormsTable.COLUMN_GPSLNG,
+                FormsTable.COLUMN_GPSDT,
+                FormsTable.COLUMN_GPSACC,
+                FormsTable.COLUMN_DEVICEID,
+                FormsTable.COLUMN_DEVICETAGID
+
+
+        };
+        String whereClause = FormsTable.COLUMN_SYNCED + " is null AND " + FormsTable.COLUMN_FORMTYPE + " =?";
+        String[] whereArgs = new String[]{"V4"};
+        String groupBy = null;
+        String having = null;
+
+        String orderBy =
+                FormsTable._ID + " ASC";
+
+        Collection<FormsContract> allFC = new ArrayList<FormsContract>();
+        try {
+            c = db.query(
+                    FormsTable.TABLE_NAME,  // The table to query
+                    columns,                   // The columns to return
+                    whereClause,               // The columns for the WHERE clause
+                    whereArgs,                 // The values for the WHERE clause
+                    groupBy,                   // don't group the rows
+                    having,                    // don't filter by row groups
+                    orderBy                    // The sort order
+            );
+            while (c.moveToNext()) {
+                FormsContract fc = new FormsContract();
+                allFC.add(fc.Hydrate(c));
+            }
+        } finally {
+            if (c != null) {
+                c.close();
+            }
+            if (db != null) {
+                db.close();
+            }
+        }
+        return allFC;
+    }
+
+    public Collection<FormsContract> getUnsyncedFormsV5() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = null;
+        String[] columns = {
+                FormsTable._ID,
+                FormsTable.COLUMN__UID,
+                FormsTable.COLUMN_DSSID,
+                FormsTable.COLUMN_STUDYID,
+                FormsTable.COLUMN_CHILDNAME,
+                FormsTable.COLUMN_FORMDATE,
+                FormsTable.COLUMN_FORMTYPE,
+                FormsTable.COLUMN_USER,
+                FormsTable.COLUMN_SELIGIBLE,
+                FormsTable.COLUMN_NEXTAPP,
+                FormsTable.COLUMN_ISTATUS,
+                FormsTable.COLUMN_SINFO,
+                FormsTable.COLUMN_SCHBF,
+                FormsTable.COLUMN_SBLOODSAMPLE,
+                FormsTable.COLUMN_SRANDOMIZATION,
+                FormsTable.COLUMN_SVACCINE,
+                FormsTable.COLUMN_GPSLAT,
+                FormsTable.COLUMN_GPSLNG,
+                FormsTable.COLUMN_GPSDT,
+                FormsTable.COLUMN_GPSACC,
+                FormsTable.COLUMN_DEVICEID,
+                FormsTable.COLUMN_DEVICETAGID
+
+
+        };
+        String whereClause = FormsTable.COLUMN_SYNCED + " is null AND " + FormsTable.COLUMN_FORMTYPE + " =?";
+        String[] whereArgs = new String[]{"V5"};
+        String groupBy = null;
+        String having = null;
+
+        String orderBy =
+                FormsTable._ID + " ASC";
+
+        Collection<FormsContract> allFC = new ArrayList<FormsContract>();
+        try {
+            c = db.query(
+                    FormsTable.TABLE_NAME,  // The table to query
+                    columns,                   // The columns to return
+                    whereClause,               // The columns for the WHERE clause
+                    whereArgs,                 // The values for the WHERE clause
+                    groupBy,                   // don't group the rows
+                    having,                    // don't filter by row groups
+                    orderBy                    // The sort order
+            );
+            while (c.moveToNext()) {
+                FormsContract fc = new FormsContract();
+                allFC.add(fc.Hydrate(c));
+            }
+        } finally {
+            if (c != null) {
+                c.close();
+            }
+            if (db != null) {
+                db.close();
+            }
+        }
+        return allFC;
+    }
+
+    public void updateForms(String id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+// New value for one column
+        ContentValues values = new ContentValues();
+        values.put(FormsTable.COLUMN_SYNCED, true);
+        values.put(FormsTable.COLUMN_SYNCED_DATE, new Date().toString());
+
+// Which row to update, based on the title
+        String where = FormsTable._ID + " LIKE ?";
+        String[] whereArgs = {id};
+
+        int count = db.update(
+                FormsTable.TABLE_NAME,
+                values,
+                where,
+                whereArgs);
+    }
+
+
     public int updateFormID() {
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -966,7 +1238,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 whereArgs);
     }
 
-    public Collection<EligibilityContract> getTodayForms() {
+
+    public Collection<EligibilityContract> getTodaysForms() {
+
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = null;
         String[] columns = {
@@ -1012,6 +1286,54 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             }
         }
         return allFC;
+    }
+
+    public Collection<FormsContract> getTodayForms() {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = null;
+        String[] columns = {
+                FormsTable._ID,
+                FormsTable.COLUMN_DSSID,
+                FormsTable.COLUMN_FORMDATE,
+                FormsTable.COLUMN_SYNCED,
+        };
+
+        String whereClause = FormsTable.COLUMN_FORMDATE + " LIKE ?";
+        String[] whereArgs = {spDateT};
+        String groupBy = null;
+        String having = null;
+
+        String orderBy =
+                FormsTable._ID + " ASC";
+
+        Collection<FormsContract> formList = new ArrayList<FormsContract>();
+        try {
+            c = db.query(
+                    FormsTable.TABLE_NAME,  // The table to query
+                    columns,                   // The columns to return
+                    whereClause,               // The columns for the WHERE clause
+                    whereArgs,                 // The values for the WHERE clause
+                    groupBy,                   // don't group the rows
+                    having,                    // don't filter by row groups
+                    orderBy                    // The sort order
+            );
+            while (c.moveToNext()) {
+                FormsContract fc = new FormsContract();
+                formList.add(fc.Hydrate(c));
+            }
+        } finally {
+            if (c != null) {
+                c.close();
+            }
+            if (db != null) {
+                db.close();
+            }
+        }
+
+
+        // return contact list
+        return formList;
     }
 
     // ANDROID DATABASE MANAGER
