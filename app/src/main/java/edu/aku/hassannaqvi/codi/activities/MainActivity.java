@@ -34,6 +34,10 @@ import edu.aku.hassannaqvi.codi.core.AppMain;
 import edu.aku.hassannaqvi.codi.core.DatabaseHelper;
 import edu.aku.hassannaqvi.codi.sync.SyncChildren;
 import edu.aku.hassannaqvi.codi.sync.SyncForms;
+import edu.aku.hassannaqvi.codi.sync.SyncFormsV2;
+import edu.aku.hassannaqvi.codi.sync.SyncFormsV3;
+import edu.aku.hassannaqvi.codi.sync.SyncFormsV4;
+import edu.aku.hassannaqvi.codi.sync.SyncFormsV5;
 
 public class MainActivity extends Activity {
 
@@ -104,10 +108,15 @@ public class MainActivity extends Activity {
             builder.show();
         }
 
-
+/*
         DatabaseHelper db = new DatabaseHelper(this);
-        Collection<FormsContract> todaysForms = db.getTodayForms();
+        Collection<FormsContract> todayForms = db.getTodayForms();
         Collection<FormsContract> unsyncedForms = db.getUnsyncedForms();
+        Collection<FormsContract> unsyncedForms2 = db.getUnsyncedFormsV2();
+        Collection<FormsContract> unsyncedForms3 = db.getUnsyncedFormsV3();
+        Collection<FormsContract> unsyncedForms4 = db.getUnsyncedFormsV4();
+        Collection<FormsContract> unsyncedForms5 = db.getUnsyncedFormsV5();
+
 
         rSumText += "TODAY'S RECORDS SUMMARY\r\n";
 
@@ -122,6 +131,7 @@ public class MainActivity extends Activity {
             rSumText += "[ DSS_ID ] \t[Form Status] \t[Sync Status]----------\r\n";
             rSumText += "--------------------------------------------------\r\n";
 
+            for (FormsContract fc : todayForms) {
             for (FormsContract fc : todaysForms) {
                 if (fc.getIstatus() != null) {
                     switch (fc.getIstatus()) {
@@ -144,7 +154,7 @@ public class MainActivity extends Activity {
                     iStatus = "\tN/A";
                 }
 
-                rSumText += fc.getDSSID();
+                rSumText += fc.get_ID();
 
                 rSumText += " " + iStatus + " ";
 
@@ -153,9 +163,6 @@ public class MainActivity extends Activity {
                 rSumText += "--------------------------------------------------\r\n";
             }
         }
-
-
-
         if (AppMain.admin) {
             adminsec.setVisibility(View.VISIBLE);
             SharedPreferences syncPref = getSharedPreferences("SyncInfo", Context.MODE_PRIVATE);
@@ -163,18 +170,25 @@ public class MainActivity extends Activity {
             rSumText += "\r\n";
             rSumText += "Last Data Upload: \t" + syncPref.getString("LastUpSyncServer", "Never Synced");
             rSumText += "\r\n";
+            rSumText += "Unsynced Forms: \t" + unsyncedForms.size();
             rSumText += "\r\n";
-            //rSumText += "Unsynced Forms: \t" + unsyncedElForms.size();
-            //rSumText += "Unsynced Forms: \t" + unsyncedEnForms.size();
-            //rSumText += "Unsynced Forms: \t" + unsyncedV2Forms.size();
+            rSumText += "Unsynced FormsV2: \t" + unsyncedForms2.size();
             rSumText += "\r\n";
+            rSumText += "Unsynced FormsV3: \t" + unsyncedForms3.size();
+            rSumText += "\r\n";
+            rSumText += "Unsynced FormsV4: \t" + unsyncedForms4.size();
+            rSumText += "\r\n";
+            rSumText += "Unsynced FormsV5: \t" + unsyncedForms5.size();
+            rSumText += "\r\n";
+
+
         }
         Log.d(TAG, "onCreate: " + rSumText);
         recordSummary.setText(rSumText);
 
 
+    }*/
     }
-
 
     public void openForm(View v) {
         if (sharedPref.getString("tagName", null) != "" && sharedPref.getString("tagName", null) != null) {
@@ -243,7 +257,6 @@ public class MainActivity extends Activity {
         startActivity(v5);
         AppMain.formType = "V5";*/
     }
-
 
     public void openMembers(View v) {
        /* Intent iMem = new Intent(this, MotherListActivity.class);
@@ -347,13 +360,16 @@ public class MainActivity extends Activity {
         if (networkInfo != null && networkInfo.isConnected()) {
             Toast.makeText(getApplicationContext(), "Syncing Forms", Toast.LENGTH_SHORT).show();
             new SyncForms(this).execute();
+            new SyncFormsV2(this).execute();
+            new SyncFormsV3(this).execute();
+            new SyncFormsV4(this).execute();
+            new SyncFormsV5(this).execute();
 
 /*            Toast.makeText(getApplicationContext(), "Syncing Eligiblity", Toast.LENGTH_SHORT).show();
             new SyncEligibilities(this).execute();*/
 
             Toast.makeText(getApplicationContext(), "Syncing Children", Toast.LENGTH_SHORT).show();
             new SyncChildren(this).execute();
-
 
             /*Toast.makeText(getApplicationContext(), "Syncing Mother", Toast.LENGTH_SHORT).show();
             new SyncMother(this).execute();
