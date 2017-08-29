@@ -473,16 +473,39 @@
         </LinearLayout>
 
 
-        <Button
-            android:id="@+id/btnNext"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:layout_weight="1"
-            android:onClick="submitSecA"
-            android:text="@string/saveForm"
-            android:textColor="@android:color/holo_green_light"
-            android:textSize="24sp" />
+            android:layout_gravity="end"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_End"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="80dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/red"
+                android:enabled="true"
+                android:onClick="endInterview"
+                android:text="@string/end_interview"
+                android:textColor="#ff1e1e"
+                android:visibility="visible" />
+
+            <!--'onClick' for btn_End will NOT change and always call 'endInterview'-->
+
+            <Button
+                android:id="@+id/btnNext"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="80dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/green"
+                android:onClick="startInterview"
+                android:text="@string/start_interview"
+                android:textColor="#1ed61e" />
+            <!--'onClick' for btn_Continue will call next section form e.g.: openSection2-->
+        </LinearLayout>
 
     </LinearLayout>
 

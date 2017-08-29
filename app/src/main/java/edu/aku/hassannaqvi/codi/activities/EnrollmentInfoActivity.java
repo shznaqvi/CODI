@@ -230,28 +230,28 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
         }
     }
 */
-//    @OnClick(R.id.btn_End)
-//    void onBtnEndClick() {
-//        Toast.makeText(this, "Processing This Section", Toast.LENGTH_SHORT).show();
-//
-//        if (ValidateForm()) {
-//            try {
-//                SaveDraft();
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
-//            if (UpdateDB()) {
-//                finish();
-//                Toast.makeText(this, "Starting Form Ending Section", Toast.LENGTH_SHORT).show();
-//                Intent endSec = new Intent(this, EndingActivity.class);
-//                endSec.putExtra("complete", false);
-//                startActivity(endSec);
-//            } else {
-//                Toast.makeText(this, "Failed to Update Database!", Toast.LENGTH_SHORT).show();
-//            }
-//        }
-//
-//    }
+    @OnClick(R.id.btn_End)
+    void onBtnEndClick() {
+        Toast.makeText(this, "Processing This Section", Toast.LENGTH_SHORT).show();
+
+        //if (ValidateForm()) {
+        try {
+            SaveDraft();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        if (UpdateDB()) {
+            finish();
+            Toast.makeText(this, "Starting Form Ending Section", Toast.LENGTH_SHORT).show();
+            Intent endSec = new Intent(this, EndingActivity.class);
+            endSec.putExtra("complete", false);
+            startActivity(endSec);
+        } else {
+            Toast.makeText(this, "Failed to Update Database!", Toast.LENGTH_SHORT).show();
+        }
+        //}
+
+    }
 
 
     @OnClick(R.id.btn_Continue)

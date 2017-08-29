@@ -121,13 +121,14 @@
                 android:id="@+id/btn_End"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="80dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/red"
-                android:enabled="false"
+                android:enabled="true"
                 android:onClick="endInterview"
                 android:text="@string/end_interview"
                 android:textColor="#ff1e1e"
-                android:visibility="gone" />
+                android:visibility="visible" />
 
             <!--'onClick' for btn_End will NOT change and always call 'endInterview'-->
 

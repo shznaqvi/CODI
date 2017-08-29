@@ -21,17 +21,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
-import java.util.Collection;
 import java.util.Date;
 import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import edu.aku.hassannaqvi.codi.R;
-import edu.aku.hassannaqvi.codi.contracts.FormsContract;
 import edu.aku.hassannaqvi.codi.core.AndroidDatabaseManager;
 import edu.aku.hassannaqvi.codi.core.AppMain;
-import edu.aku.hassannaqvi.codi.core.DatabaseHelper;
 import edu.aku.hassannaqvi.codi.sync.SyncChildren;
 import edu.aku.hassannaqvi.codi.sync.SyncForms;
 import edu.aku.hassannaqvi.codi.sync.SyncFormsV2;
@@ -247,15 +244,15 @@ public class MainActivity extends Activity {
     }
 
     public void openV4(View v) {
-        /*Intent v4 = new Intent(this, VisitInfoActivity.class);
+        Intent v4 = new Intent(this, VisitInfoActivity.class);
         startActivity(v4);
-        AppMain.formType = "V4";*/
+        AppMain.formType = "V4";
     }
 
     public void openV5(View v) {
-        /*Intent v5 = new Intent(this, VisitInfoActivity.class);
+        Intent v5 = new Intent(this, VisitInfoActivity.class);
         startActivity(v5);
-        AppMain.formType = "V5";*/
+        AppMain.formType = "V5";
     }
 
     public void openMembers(View v) {

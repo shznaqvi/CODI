@@ -238,31 +238,61 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
     @OnClick(R.id.btnNext)
     void onBtnNextClick() {
         if (ValidateForm()) {
-            try {
-                SaveDraft();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            if (UpdateDB()) {
-                Toast.makeText(this, "Starting Next Section", Toast.LENGTH_SHORT).show();
-
-                //finish();
-
-                if (flag) {
-                    startActivity(new Intent(this, EnrollmentInfoActivity.class));
-                } else {
-                    Intent intent = new Intent(this, EndingActivity.class);
-                    intent.putExtra("complete", true);
-                    startActivity(intent);
-
+            {
+                try {
+                    SaveDraft();
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
+                if (UpdateDB()) {
+                    Toast.makeText(this, "Starting Next Section", Toast.LENGTH_SHORT).show();
+
+                    //finish();
+
+                    if (flag) {
+                        startActivity(new Intent(this, EnrollmentInfoActivity.class));
+                    } else {
+                        Intent intent = new Intent(this, EndingActivity.class);
+                        intent.putExtra("complete", true);
+                        startActivity(intent);
+
+                    }
 
 /*
                 startActivity(new Intent(this, SectionBActivity.class));
 */
+
+                } else {
+                    Toast.makeText(this, "Failed to Update Database!", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+        }
+    }
+
+
+    @OnClick(R.id.btn_End)
+    void onBtnEndClick() {
+
+        Toast.makeText(this, "Processing This Section", Toast.LENGTH_SHORT).show();
+
+        if (check) {
+            try {
+                SaveDraftIncomplete();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            if (UpdateDB()) {
+                finish();
+                Toast.makeText(this, "Starting Form Ending Section", Toast.LENGTH_SHORT).show();
+                Intent endSec = new Intent(this, EndingActivity.class);
+                endSec.putExtra("complete", false);
+                startActivity(endSec);
             } else {
                 Toast.makeText(this, "Failed to Update Database!", Toast.LENGTH_SHORT).show();
             }
+        } else {
+            Toast.makeText(this, "Click on Check Button", Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -285,6 +315,25 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
             Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
         }
         return true;
+    }
+
+    private void SaveDraftIncomplete() throws JSONException {
+        Toast.makeText(this, "Saving Draft for this Section", Toast.LENGTH_SHORT).show();
+
+        SharedPreferences sharedPref = getSharedPreferences("tagName", MODE_PRIVATE);
+
+        AppMain.fc = new FormsContract();
+
+        AppMain.fc.setDevicetagID(sharedPref.getString("tagName", null));
+        AppMain.fc.setFormDate(dtToday);
+        AppMain.fc.setUser(AppMain.userName);
+        AppMain.fc.setDeviceID(Settings.Secure.getString(getApplicationContext().getContentResolver(),
+                Settings.Secure.ANDROID_ID));
+        AppMain.fc.setDSSID(dssID.getText().toString());
+        AppMain.fc.setFormType("V1");
+
+        setGPS();
+
     }
 
     private void SaveDraft() throws JSONException {
