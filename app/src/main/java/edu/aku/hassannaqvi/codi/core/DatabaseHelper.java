@@ -560,10 +560,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return childrenList;
     }
 
-    public List<FormsContract> getChildByStudyID(String studyID) {
-        List<FormsContract> formsList = new ArrayList<>();
+    public List<VisitContract> getChildByStudyID(String studyID, String formType) {
+        List<VisitContract> formsList = new ArrayList<>();
         // Select All Query
-        String selectQuery = "SELECT * FROM " + FormsTable.TABLE_NAME + " where " + FormsTable.COLUMN_STUDYID + " = '" + studyID + "';";
+        String selectQuery = "SELECT * FROM " + VisitContract.singleFollowUps.TABLE_NAME + " where "
+                + VisitContract.singleFollowUps.COLUMN_STUDYID + " = '" + studyID + "' AND "+
+                VisitContract.singleFollowUps.COLUMN_VISITNUM + " = '" + formType + "';";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor c = db.rawQuery(selectQuery, null);
@@ -571,7 +573,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // looping through all rows and adding to list
         if (c.moveToFirst()) {
             do {
-                FormsContract cc = new FormsContract();
+                VisitContract cc = new VisitContract();
                 formsList.add(cc.Hydrate(c));
             } while (c.moveToNext());
         }
@@ -1219,6 +1221,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return allFC;
     }
 
+
     public void updateSyncedChildren(String id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -1297,17 +1300,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 FormsTable.COLUMN_DSSID,
                 FormsTable.COLUMN_FORMDATE,
                 FormsTable.COLUMN_SYNCED,
-        };
 
-        String whereClause = FormsTable.COLUMN_FORMDATE + " LIKE ?";
-        String[] whereArgs = {spDateT};
+        };
+        String whereClause = FormsTable.COLUMN_FORMDATE + " Like ? ";
+        String[] whereArgs = new String[]{"%" + spDateT.substring(0, 8).trim() + "%"};
         String groupBy = null;
         String having = null;
 
         String orderBy =
                 FormsTable._ID + " ASC";
 
-        Collection<FormsContract> formList = new ArrayList<FormsContract>();
+        Collection<FormsContract> allFC = new ArrayList<>();
         try {
             c = db.query(
                     FormsTable.TABLE_NAME,  // The table to query
@@ -1320,7 +1323,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             );
             while (c.moveToNext()) {
                 FormsContract fc = new FormsContract();
-                formList.add(fc.Hydrate(c));
+                fc.set_ID(c.getString(c.getColumnIndex(FormsTable._ID)));
+                fc.setDSSID(c.getString(c.getColumnIndex(FormsTable.COLUMN_DSSID)));
+                fc.setFormDate(c.getString(c.getColumnIndex(FormsTable.COLUMN_FORMDATE)));
+                fc.setSynced(c.getString(c.getColumnIndex(FormsTable.COLUMN_SYNCED)));
+                allFC.add(fc);
             }
         } finally {
             if (c != null) {
@@ -1330,10 +1337,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 db.close();
             }
         }
-
-
-        // return contact list
-        return formList;
+        return allFC;
     }
 
     // ANDROID DATABASE MANAGER
