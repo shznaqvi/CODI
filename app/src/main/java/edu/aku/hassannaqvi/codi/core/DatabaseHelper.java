@@ -259,7 +259,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 JSONObject jsonObjectCC = jsonArray.getJSONObject(i);
 
                 VisitContract vc = new VisitContract();
-                vc.Sync(jsonObjectCC);
+                vc.Sync1(jsonObjectCC);
 
                 ContentValues values = new ContentValues();
 
@@ -815,8 +815,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
         };
-        String whereClause = FormsTable.COLUMN_SYNCED + " is null";
-        String[] whereArgs = null;
+        String whereClause = FormsTable.COLUMN_SYNCED + " is null AND " + FormsTable.COLUMN_FORMTYPE + " =?";
+        String[] whereArgs = new String[]{"V1"};
         String groupBy = null;
         String having = null;
 

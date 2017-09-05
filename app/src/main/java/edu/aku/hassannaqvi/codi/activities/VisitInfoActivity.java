@@ -166,9 +166,10 @@ public class VisitInfoActivity extends Activity {
         try {
             Date date1 = myFormat.parse(date);
             Date date2 = new Date();
-            long diff = date2.getTime() - date1.getTime();
+            long diff = date1.getTime() - date2.getTime();
 
-            return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS) <= 7;
+
+            return TimeUnit.MILLISECONDS.toDays(diff) <= 7;
 
         } catch (ParseException e) {
             e.printStackTrace();

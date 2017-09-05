@@ -64,7 +64,7 @@ public class SyncFormsV5 extends AsyncTask<Void, Void, String> {
 
         String line = "No Response";
         try {
-            String url = AppMain._HOST_URL + FormsContract.FormsTable._URL.replace(".php", "V5.php");
+            String url = AppMain._HOST_URL + FormsContract.FormsTable._URL.replace(".php", "v5.php");
             Log.d(TAG, "doInBackground: URL " + url);
             return downloadUrl(url);
         } catch (IOException e) {
