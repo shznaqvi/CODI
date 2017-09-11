@@ -191,7 +191,7 @@ public class MainActivity extends Activity {
         if (sharedPref.getString("tagName", null) != "" && sharedPref.getString("tagName", null) != null) {
             Intent oF = new Intent(MainActivity.this, EligibilityFormActivity.class);
             startActivity(oF);
-            AppMain.formType = "EL";
+            AppMain.formType = "V1";
         } else {
 
             builder = new AlertDialog.Builder(MainActivity.this);
@@ -228,7 +228,7 @@ public class MainActivity extends Activity {
     public void openForm1(View v) {
         Intent iMem = new Intent(this, EnrollmentInfoActivity.class);
         startActivity(iMem);
-        AppMain.formType = "EN";
+        AppMain.formType = "V1";
     }
 
     public void openV2(View v) {

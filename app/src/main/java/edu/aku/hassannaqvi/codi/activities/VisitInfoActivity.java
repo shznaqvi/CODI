@@ -31,7 +31,7 @@ import edu.aku.hassannaqvi.codi.core.DatabaseHelper;
 public class VisitInfoActivity extends Activity {
 
     private static final String TAG = VisitInfoActivity.class.getSimpleName();
-
+    final SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
     @BindView(R.id.studyId)
     EditText studyId;
     @BindView(R.id.csv01)
@@ -42,9 +42,7 @@ public class VisitInfoActivity extends Activity {
     //EditText csv03;
     @BindView(R.id.heading)
     TextView heading;
-
     boolean check = false;
-
     DatabaseHelper db;
 
     @Override
@@ -134,6 +132,7 @@ public class VisitInfoActivity extends Activity {
     void onBtnCheckClick() {
 
 
+
         AppMain.visitList = db.getChildByStudyID(studyId.getText().toString().toUpperCase(),String.valueOf(AppMain.formType.charAt(1)));
 
         if (AppMain.visitList.size() != 0) {
@@ -142,9 +141,10 @@ public class VisitInfoActivity extends Activity {
 
                 Toast.makeText(getApplicationContext(), "Children found", Toast.LENGTH_LONG).show();
 
-                csv01.setText(AppMain.visitList.get(0).getEXPECTEDDT());
 
-                csv02.setText(new SimpleDateFormat("dd-MM-yyyy").format(System.currentTimeMillis()));
+                csv01.setText(AppMain.convertDateFormat(AppMain.visitList.get(0).getEXPECTEDDT()));
+
+                csv02.setText(sdf.format(System.currentTimeMillis()));
 
                 //fldGrpChild.setVisibility(View.VISIBLE);
 
