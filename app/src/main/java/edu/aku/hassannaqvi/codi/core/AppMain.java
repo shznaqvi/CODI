@@ -14,12 +14,13 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.text.format.DateFormat;
 
+import org.json.JSONObject;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import edu.aku.hassannaqvi.codi.activities.EndingActivity;
 import edu.aku.hassannaqvi.codi.contracts.ChildrenContract;
@@ -58,7 +59,7 @@ public class AppMain extends Application {
     public static final long MILLISECONDS_IN_MONTH = MILLIS_IN_SECOND * SECONDS_IN_MINUTE * MINUTES_IN_HOUR * HOURS_IN_DAY * DAYS_IN_MONTH;
     private static final long DAYS_IN_14_WEEKS = (7 * 14);
     public static final long MILLISECONDS_IN_14_WEEKS = MILLIS_IN_SECOND * SECONDS_IN_MINUTE * MINUTES_IN_HOUR * HOURS_IN_DAY * DAYS_IN_14_WEEKS;
-    private static final long DAYS_IN_14_WEEKS1 = (7 * 14) + 6;
+    private static final long DAYS_IN_14_WEEKS1 = (7 * 18) + 6;
     public static final long MILLISECONDS_IN_14_WEEKS1 = MILLIS_IN_SECOND * SECONDS_IN_MINUTE * MINUTES_IN_HOUR * HOURS_IN_DAY * DAYS_IN_14_WEEKS1;
     private static final double DAYS_IN_9_MONTHS = 273.75;
     public static final double MILLISECONDS_IN_9_MONTH = MILLIS_IN_SECOND * SECONDS_IN_MINUTE * MINUTES_IN_HOUR * HOURS_IN_DAY * DAYS_IN_9_MONTHS;
@@ -83,6 +84,7 @@ public class AppMain extends Application {
     public static String motherName = "";
     public static List<VisitContract> visitList;
     public static String studyID;
+    public static JSONObject sInfo;
 
 
     //    Total No of members got from Section A
@@ -241,7 +243,7 @@ public class AppMain extends Application {
         alert.show();
     }
 
-    public static double ageInDays(String dateStr) {
+    public static long ageInYears(String dateStr) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         Calendar cal = getCalendarDate(dateStr);
         Date dob = cal.getTime();
@@ -249,10 +251,12 @@ public class AppMain extends Application {
 
         Long diff = today.getTime() - dob.getTime();
 
-        double ageindays = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+        //double ageindays = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+
+        long ageInYears = (diff / (24 * 60 * 60 * 1000)) / 365;
 
 
-        return ageindays;
+        return ageInYears;
 
     }
 
@@ -287,7 +291,7 @@ public class AppMain extends Application {
     }
 
     public static String convertDateFormat(String dateStr) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date d = sdf.parse(dateStr);
             return new SimpleDateFormat("dd-MM-yyyy").format(d);

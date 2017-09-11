@@ -48,22 +48,22 @@ public class AppointmentActivity extends Activity {
             cendt.setText("Date: " + sdf.format(cal.getTime()) + "\n\nTime : " + new SimpleDateFormat("HH:mm").format(System.currentTimeMillis()));
         } else if (AppMain.fc.getFormType().equals("V2") && AppMain.fc.getStudyID().contains("14W")) {
             heading.setText(getResources().getString(R.string.csvatcsub));
-            Calendar cal = AppMain.getCalendarDate(AppMain.visitList.get(0).getEXPECTEDDT());
+            Calendar cal = AppMain.getCalendarDate(AppMain.convertDateFormat(AppMain.visitList.get(0).getEXPECTEDDT()));
             cal.add(Calendar.MONTH, 6);
             cendt.setText("Date: " + sdf.format(cal.getTime()) + "\n\nTime : " + new SimpleDateFormat("HH:mm").format(System.currentTimeMillis()));
         } else if (AppMain.fc.getFormType().equals("V2") && AppMain.fc.getStudyID().contains("09M")) {
             heading.setText(getResources().getString(R.string.csvatcsub1));
-            Calendar cal = AppMain.getCalendarDate(AppMain.visitList.get(0).getEXPECTEDDT());
+            Calendar cal = AppMain.getCalendarDate(AppMain.convertDateFormat(AppMain.visitList.get(0).getEXPECTEDDT()));
             cal.add(Calendar.MONTH, 11);
             cendt.setText("Date: " + sdf.format(cal.getTime()) + "\n\nTime : " + new SimpleDateFormat("HH:mm").format(System.currentTimeMillis()));
         } else if (AppMain.fc.getFormType().equals("V3")) {
             heading.setText(getResources().getString(R.string.ctvafcsub));
-            Calendar cal = AppMain.getCalendarDate(AppMain.visitList.get(0).getEXPECTEDDT());
+            Calendar cal = AppMain.getCalendarDate(AppMain.convertDateFormat(AppMain.visitList.get(0).getEXPECTEDDT()));
             cal.add(Calendar.MONTH, 1);
             cendt.setText("Date: " + sdf.format(cal.getTime()) + "\n\nTime : " + new SimpleDateFormat("HH:mm").format(System.currentTimeMillis()));
         } else if (AppMain.fc.getFormType().equals("V4")) {
             heading.setText(getResources().getString(R.string.cfvafcsub));
-            Calendar cal = AppMain.getCalendarDate(AppMain.visitList.get(0).getEXPECTEDDT());
+            Calendar cal = AppMain.getCalendarDate(AppMain.convertDateFormat(AppMain.visitList.get(0).getEXPECTEDDT()));
             cal.add(Calendar.MONTH, 11);
             cendt.setText("Date: " + sdf.format(cal.getTime()) + "\n\nTime : " + new SimpleDateFormat("HH:mm").format(System.currentTimeMillis()));
         }
@@ -141,19 +141,19 @@ public class AppointmentActivity extends Activity {
             cal.add(Calendar.DAY_OF_MONTH, 28);
             AppMain.fc.setNextApp(new SimpleDateFormat("dd-MM-yyyy").format(cal.getTime()) + " " + new SimpleDateFormat("HH:mm").format(System.currentTimeMillis()));
         } else if (AppMain.fc.getFormType().equals("V2") && AppMain.fc.getStudyID().contains("14W")) {
-            Calendar cal = AppMain.getCalendarDate(AppMain.visitList.get(0).getEXPECTEDDT());
+            Calendar cal = AppMain.getCalendarDate(AppMain.convertDateFormat(AppMain.visitList.get(0).getEXPECTEDDT()));
             cal.add(Calendar.MONTH, 6);
             AppMain.fc.setNextApp(new SimpleDateFormat("dd-MM-yyyy").format(cal.getTime()) + " " + new SimpleDateFormat("HH:mm").format(System.currentTimeMillis()));
         } else if (AppMain.fc.getFormType().equals("V2") && AppMain.fc.getStudyID().contains("09M")) {
-            Calendar cal = AppMain.getCalendarDate(AppMain.visitList.get(0).getEXPECTEDDT());
+            Calendar cal = AppMain.getCalendarDate(AppMain.convertDateFormat(AppMain.visitList.get(0).getEXPECTEDDT()));
             cal.add(Calendar.MONTH, 11);
             AppMain.fc.setNextApp(new SimpleDateFormat("dd-MM-yyyy").format(cal.getTime()) + " " + new SimpleDateFormat("HH:mm").format(System.currentTimeMillis()));
         } else if (AppMain.fc.getFormType().equals("V3")) {
-            Calendar cal = AppMain.getCalendarDate(AppMain.visitList.get(0).getEXPECTEDDT());
+            Calendar cal = AppMain.getCalendarDate(AppMain.convertDateFormat(AppMain.visitList.get(0).getEXPECTEDDT()));
             cal.add(Calendar.MONTH, 1);
             AppMain.fc.setNextApp(new SimpleDateFormat("dd-MM-yyyy").format(cal.getTime()) + " " + new SimpleDateFormat("HH:mm").format(System.currentTimeMillis()));
         } else if (AppMain.fc.getFormType().equals("V4")) {
-            Calendar cal = AppMain.getCalendarDate(AppMain.visitList.get(0).getEXPECTEDDT());
+            Calendar cal = AppMain.getCalendarDate(AppMain.convertDateFormat(AppMain.visitList.get(0).getEXPECTEDDT()));
             cal.add(Calendar.MONTH, 11);
             AppMain.fc.setNextApp(new SimpleDateFormat("dd-MM-yyyy").format(cal.getTime()) + " " + new SimpleDateFormat("HH:mm").format(System.currentTimeMillis()));
         }

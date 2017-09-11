@@ -319,4 +319,24 @@
     <string name="cfiv16"> Number of serum sample on Cryotube: (Sample Number - S1) </string>
 
 
+  <string name="anthroHeading"> Anthropometric Measurements </string>
+  <string name="measure1">1st measurement</string>
+  <string name="measure2">2nd measurement</string>
+  <string name="measure3">3rd measurement</string>
+  <string name="an01">What is the child’s mid upper arm circumference (MUAC)? (1st measurement) </string>
+  <string name="an02">What is the child’s mid upper arm circumference (MUAC)? (2nd measurement) </string>
+  <string name="an03">What is the child’s mid upper arm circumference (MUAC)? (3rd measurement)</string>
+  <string name="hint">If measure 2 differs from measure 1, subtract the lower measure from the higher measure and, if the difference is 0.2cm or greater, obtain a third measurement.</string>
+  <string name="an04">How was the weight recorded?</string>
+  <string name="an04a">With infant scale, normal mode</string>
+  <string name="an04b">With infant scale, using hold function</string>
+  <string name="an04c">With adult scale, using tare function</string>
+  <string name="an05">What is the child’s weight? (1st measurement) </string>
+  <string name="an06">What is the child’s weight? (2nd measurement) </string>
+  <string name="an07">What is the child’s weight? (3rd measurement) </string>
+  <string name="an08">What is the child’s length? (1st measurement)</string>
+  <string name="an09">What is the child’s length? (2nd measurement)</string>
+  <string name="an10">What is the child’s length? (3rd measurement)</string>
+
+
 </resources>

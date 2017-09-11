@@ -174,62 +174,9 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
         cen05.setText(AppMain.motherName);
         cen06.setText(AppMain.dob);
 
-        //cen01.setManager(getSupportFragmentManager());
-        //cen01.setMaxDate(dateToday);
-        //cen06.setManager(getSupportFragmentManager());
-
-        //cen06.setMaxDate(dateToday);
-
-        //double ageInDays = AppMain.ageInDays(cen06.); //
-
-        /*db = new DatabaseHelper(this);
-
-        dssid.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-                flag = false;
-                fldGrpCheckChild.setVisibility(View.GONE);
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });*/
 
     }
 
-    /*@OnClick(R.id.btn_Check) void onBtnCheckClick() {
-        //TODO implement
-
-        AppMain.getEnrollmentChild = db.getChildByDSS(dssid.getText().toString().toUpperCase());
-
-        if(AppMain.getEnrollmentChild.size()!=0){
-
-            if (AppMain.getEnrollmentChild.get(0).getArmSlc().equals("null")) {
-
-                Toast.makeText(getApplicationContext(), "Children found", Toast.LENGTH_LONG).show();
-
-                fldGrpCheckChild.setVisibility(View.VISIBLE);
-
-                flag = true;
-            }else {
-                Toast.makeText(getApplicationContext(),"Children Already Randomized!",Toast.LENGTH_LONG).show();
-            }
-        }else {
-             Toast.makeText(getApplicationContext(),"Children Not found",Toast.LENGTH_LONG).show();
-
-            flag = false;
-        }
-    }
-*/
     @OnClick(R.id.btn_End)
     void onBtnEndClick() {
         Toast.makeText(this, "Processing This Section", Toast.LENGTH_SHORT).show();
@@ -269,13 +216,7 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
 
                     finish();
 
-                    /*if(AppMain.formType.equals("V3") && AppMain.arm.equals("AB"))
-                    {
-                        startActivity(new Intent(this, VaccineActivity.class));
-                    }else {
-                        startActivity(new Intent(this, BloodSamplingActivity.class));
-                    }
-*/
+
                     startActivity(new Intent(this, ChildHealthAndBreastFeedActivity.class));
 
 
@@ -294,35 +235,35 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
 
         SharedPreferences sharedPref = getSharedPreferences("tagName", MODE_PRIVATE);
 
-        JSONObject sInfo = new JSONObject();
+        AppMain.sInfo = new JSONObject();
 
-        //sInfo.put("dssid", AppMain.elc.getDSSID());
-        //sInfo.put("studyId", AppMain.elc.getStudyID());
-        sInfo.put("cen01", AppMain.enrollDate);
-        sInfo.put("cen02", "1");
-        sInfo.put("cen03", "1");
-        // sInfo.put("cen05", AppMain.motherName);
-        //sInfo.put("cen06", AppMain.dob);
-        sInfo.put("cen07w", cen07w.getText().toString());
-        sInfo.put("cen07m", cen07m.getText().toString());
-        //sInfo.put("cen07a", cen07w.isChecked() ? "1" : cen07m.isChecked() ? "2" : "0");
-        sInfo.put("cen08", cen08a.isChecked() ? "1" : cen08b.isChecked() ? "2" : "0");
-        sInfo.put("cen09", cen09.getText().toString());
-        sInfo.put("cenfp", cenfp.getText().toString());
-        sInfo.put("cenmp", cenmp.getText().toString());
-        sInfo.put("cenac", cenac.getText().toString());
-        sInfo.put("cen10", cen10a.isChecked() ? "1" : cen10b.isChecked() ? "2" : cen10c.isChecked() ? "3"
+        //AppMain.sInfo.put("dssid", AppMain.elc.getDSSID());
+        //AppMain.sInfo.put("studyId", AppMain.elc.getStudyID());
+        AppMain.sInfo.put("cen01", AppMain.enrollDate);
+        AppMain.sInfo.put("cen02", "1");
+        AppMain.sInfo.put("cen03", "1");
+        // AppMain.sInfo.put("cen05", AppMain.motherName);
+        //AppMain.sInfo.put("cen06", AppMain.dob);
+        AppMain.sInfo.put("cen07w", cen07w.getText().toString());
+        AppMain.sInfo.put("cen07m", cen07m.getText().toString());
+        //AppMain.sInfo.put("cen07a", cen07w.isChecked() ? "1" : cen07m.isChecked() ? "2" : "0");
+        AppMain.sInfo.put("cen08", cen08a.isChecked() ? "1" : cen08b.isChecked() ? "2" : "0");
+        AppMain.sInfo.put("cen09", cen09.getText().toString());
+        AppMain.sInfo.put("cenfp", cenfp.getText().toString());
+        AppMain.sInfo.put("cenmp", cenmp.getText().toString());
+        AppMain.sInfo.put("cenac", cenac.getText().toString());
+        AppMain.sInfo.put("cen10", cen10a.isChecked() ? "1" : cen10b.isChecked() ? "2" : cen10c.isChecked() ? "3"
                 : cen10d.isChecked() ? "4" : cen10e.isChecked() ? "5" : cen10f.isChecked() ? "6"
                 : cen1099.isChecked() ? "99" : "0");
-        sInfo.put("cen11", cen11a.isChecked() ? "1" : cen11b.isChecked() ? "2" : cen11c.isChecked() ? "3"
+        AppMain.sInfo.put("cen11", cen11a.isChecked() ? "1" : cen11b.isChecked() ? "2" : cen11c.isChecked() ? "3"
                 : cen11d.isChecked() ? "4" : cen11e.isChecked() ? "5" : cen11f.isChecked() ? "6" : "0");
-        sInfo.put("cen12", cen12a.isChecked() ? "1" : cen12b.isChecked() ? "2" : cen12c.isChecked() ? "3"
+        AppMain.sInfo.put("cen12", cen12a.isChecked() ? "1" : cen12b.isChecked() ? "2" : cen12c.isChecked() ? "3"
                 : cen12d.isChecked() ? "4" : "0");
-        sInfo.put("cen13", cen13.getText().toString());
-        sInfo.put("cen14", cen14.getText().toString());
+        AppMain.sInfo.put("cen13", cen13.getText().toString());
+        AppMain.sInfo.put("cen14", cen14.getText().toString());
 
 
-        AppMain.fc.setsInfo(String.valueOf(sInfo));
+        AppMain.fc.setsInfo(String.valueOf(AppMain.sInfo));
 
 
         //setGPS();
