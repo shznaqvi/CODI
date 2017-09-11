@@ -13,7 +13,7 @@ import java.util.Collections;
 import java.util.List;
 
 import edu.aku.hassannaqvi.codi.R;
-import edu.aku.hassannaqvi.codi.contracts.FormsContract;
+import edu.aku.hassannaqvi.codi.data.FormsContract;
 
 /**
  * Created by hassan.naqvi on 8/1/2016.

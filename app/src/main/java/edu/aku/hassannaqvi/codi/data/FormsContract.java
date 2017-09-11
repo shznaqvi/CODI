@@ -1,6 +1,7 @@
-package edu.aku.hassannaqvi.codi.contracts;
+package edu.aku.hassannaqvi.codi.data;
 
 import android.database.Cursor;
+import android.net.Uri;
 import android.provider.BaseColumns;
 
 import org.json.JSONException;
@@ -11,6 +12,16 @@ import org.json.JSONObject;
  */
 
 public class FormsContract {
+
+    // The authority, which is how your code knows which Content Provider to access
+    public static final String AUTHORITY = "edu.aku.hassannaqvi.codi";
+
+    // The base content URI = "content://" + <authority>
+    public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + AUTHORITY);
+
+    // Define the possible paths for accessing data in this contract
+    // This is the path for the "tasks" directory
+    public static final String PATH_FORMS = "forms";
 
     private final String projectName = "CODI";
     //private final String surveyType = "Enrollment";
@@ -355,6 +366,8 @@ public class FormsContract {
 
 
     public static abstract class FormsTable implements BaseColumns {
+
+        public static final Uri CONTENT_URI = BASE_CONTENT_URI.buildUpon().appendPath(PATH_FORMS).build();
 
         public static final String TABLE_NAME = "forms";
         public static final String COLUMN_NAME_NULLABLE = "NULLHACK";

@@ -23,10 +23,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Collection;
 
-import edu.aku.hassannaqvi.codi.contracts.EligibilityContract;
-import edu.aku.hassannaqvi.codi.contracts.FormsContract;
 import edu.aku.hassannaqvi.codi.core.AppMain;
 import edu.aku.hassannaqvi.codi.core.DatabaseHelper;
+import edu.aku.hassannaqvi.codi.data.FormsContract;
 
 /**
  * Created by hassan.naqvi on 7/26/2016.

@@ -24,8 +24,8 @@ import java.util.concurrent.TimeUnit;
 import edu.aku.hassannaqvi.codi.activities.EndingActivity;
 import edu.aku.hassannaqvi.codi.contracts.ChildrenContract;
 import edu.aku.hassannaqvi.codi.contracts.EligibilityContract;
-import edu.aku.hassannaqvi.codi.contracts.FormsContract;
 import edu.aku.hassannaqvi.codi.contracts.VisitContract;
+import edu.aku.hassannaqvi.codi.data.FormsContract;
 
 /**
  * Created by hassan.naqvi on 11/30/2016.
@@ -331,7 +331,7 @@ public class AppMain extends Application {
         if (location != null) {
             String message = String.format(
                     "Current Location \n Longitude: %1$s \n Latitude: %2$s",
-                    location.getLongitude(), location.getLatitude()
+                    location.getLongitude(), location.getLatitude(), location.getProvider()
             );
             //Toast.makeText(getApplicationContext(), message,
             //Toast.LENGTH_SHORT).show();
@@ -411,6 +411,7 @@ public class AppMain extends Application {
                 editor.putString("Latitude", String.valueOf(location.getLatitude()));
                 editor.putString("Accuracy", String.valueOf(location.getAccuracy()));
                 editor.putString("Time", String.valueOf(location.getTime()));
+
                 String date = DateFormat.format("dd-MM-yyyy HH:mm", Long.parseLong(String.valueOf(location.getTime()))).toString();
 //                Toast.makeText(getApplicationContext(),
 //                        "GPS Commit! LAT: " + String.valueOf(location.getLongitude()) +

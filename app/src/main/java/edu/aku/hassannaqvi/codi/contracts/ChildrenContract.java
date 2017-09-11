@@ -115,7 +115,6 @@ public class ChildrenContract {
         json.put(ChildrenTable.COLUMN_ARMSLC, this.armSlc == null ? JSONObject.NULL : this.armSlc);
         json.put(ChildrenTable.COLUMN_RANDOMIZATION_DATE, this.randDate == null ? JSONObject.NULL : this.randDate);
 
-
         return json;
     }
 

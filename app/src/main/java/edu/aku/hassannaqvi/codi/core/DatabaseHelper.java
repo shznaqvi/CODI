@@ -22,11 +22,11 @@ import edu.aku.hassannaqvi.codi.contracts.ChildrenContract;
 import edu.aku.hassannaqvi.codi.contracts.ChildrenContract.ChildrenTable;
 import edu.aku.hassannaqvi.codi.contracts.EligibilityContract;
 import edu.aku.hassannaqvi.codi.contracts.EligibilityContract.EligibilityTable;
-import edu.aku.hassannaqvi.codi.contracts.FormsContract;
-import edu.aku.hassannaqvi.codi.contracts.FormsContract.FormsTable;
 import edu.aku.hassannaqvi.codi.contracts.UsersContract;
 import edu.aku.hassannaqvi.codi.contracts.UsersContract.singleUser;
 import edu.aku.hassannaqvi.codi.contracts.VisitContract;
+import edu.aku.hassannaqvi.codi.data.FormsContract;
+import edu.aku.hassannaqvi.codi.data.FormsContract.FormsTable;
 
 
 /**
