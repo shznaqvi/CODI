@@ -444,7 +444,7 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
         if (cel02a.isChecked()) {
             Calendar selectedDate = AppMain.getCalendarDate(celdob.getText().toString());
             Calendar minDate = Calendar.getInstance();
-            minDate.add(Calendar.DAY_OF_YEAR, -105);
+            minDate.add(Calendar.DAY_OF_YEAR, -133);
 
             if (selectedDate.before(minDate)) {
                 Toast.makeText(this, "ERROR(invalid)" + getString(R.string.cel02) + " " + getString(R.string.celdob), Toast.LENGTH_SHORT).show();
@@ -700,11 +700,6 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
         return i == celEligibleYes.size();
     }
 
-    @Override
-    public void onBackPressed() {
-//        Toast.makeText(getApplicationContext(), "You Can't go back", Toast.LENGTH_LONG).show();
-        super.onBackPressed();
-    }
 
     public void setGPS() {
         SharedPreferences GPSPref = getSharedPreferences("GPSCoordinates", Context.MODE_PRIVATE);
