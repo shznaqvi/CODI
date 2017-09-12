@@ -92,12 +92,20 @@
             android:theme="@style/AppTheme1"
             android:windowSoftInputMode="adjustResize|stateHidden" />
     </application>
-    <service android:name="services.AuthenticatorService">
+    <service
+        android:name=".AuthenticatorService"
+        android:exported="true">
         <intent-filter>
             <action android:name="android.accounts.AccountAuthenticator" />
         </intent-filter>
         <meta-data
             android:name="android.accounts.AccountAuthenticator"
-            android:resource="@xml/authenticator" />
+            android:resource="@xml/auth" />
     </service>
+
+    <provider
+        android:name="edu.aku.hassannaqvi.codi.sync.StubProvider"
+        android:authorities="edu.aku.hassannaqvi.codi.provider"
+        android:exported="false"
+        android:syncable="true" />
 </manifest>
