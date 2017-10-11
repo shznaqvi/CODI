@@ -220,7 +220,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 values.put(ChildrenTable.COLUMN_DSSID, cc.getDSSID());
                 values.put(ChildrenTable.COLUMN_ARMGRP, cc.getArmGrp());
                 values.put(ChildrenTable.COLUMN_ARMSLC, cc.getArmSlc());
-                values.put(ChildrenTable.COLUMN_RANDOMIZATION_DATE, cc.getArmSlc());
+                values.put(ChildrenTable.COLUMN_RANDOMIZATION_DATE, cc.getRandDate());
                 db.insert(ChildrenTable.TABLE_NAME, null, values);
             }
 

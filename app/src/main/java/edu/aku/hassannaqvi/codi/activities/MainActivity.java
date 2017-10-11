@@ -355,6 +355,8 @@ public class MainActivity extends Activity {
                 getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         if (networkInfo != null && networkInfo.isConnected()) {
+            Toast.makeText(getApplicationContext(), "Syncing Children", Toast.LENGTH_SHORT).show();
+            new SyncChildren(this).execute();
             Toast.makeText(getApplicationContext(), "Syncing Forms", Toast.LENGTH_SHORT).show();
             new SyncForms(this).execute();
             new SyncFormsV2(this).execute();
@@ -365,8 +367,7 @@ public class MainActivity extends Activity {
 /*            Toast.makeText(getApplicationContext(), "Syncing Eligiblity", Toast.LENGTH_SHORT).show();
             new SyncEligibilities(this).execute();*/
 
-            Toast.makeText(getApplicationContext(), "Syncing Children", Toast.LENGTH_SHORT).show();
-            new SyncChildren(this).execute();
+
 
             /*Toast.makeText(getApplicationContext(), "Syncing Mother", Toast.LENGTH_SHORT).show();
             new SyncMother(this).execute();
