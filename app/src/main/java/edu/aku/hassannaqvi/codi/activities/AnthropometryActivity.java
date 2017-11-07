@@ -91,7 +91,10 @@ public class AnthropometryActivity extends Activity {
 
                 finish();
 
-                if (AppMain.fc.getFormType().equals("V1")) {
+
+                if (AppMain.formType.equals("V3") && AppMain.fc.getStudyID().contains("14W")) {
+                    startActivity(new Intent(this, VaccineActivity.class));
+                } else {
 
                     startActivity(new Intent(this, BloodSamplingActivity.class));
                 }
