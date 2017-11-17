@@ -15,7 +15,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 
@@ -235,7 +234,7 @@ public class EnrollmentInfoActivity extends AppCompatActivity {
 
         SharedPreferences sharedPref = getSharedPreferences("tagName", MODE_PRIVATE);
 
-        AppMain.sInfo = new JSONObject();
+        //AppMain.sInfo = new JSONObject();
 
         //AppMain.sInfo.put("dssid", AppMain.elc.getDSSID());
         //AppMain.sInfo.put("studyId", AppMain.elc.getStudyID());

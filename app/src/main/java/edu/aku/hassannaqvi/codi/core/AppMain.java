@@ -84,7 +84,7 @@ public class AppMain extends Application {
     public static String motherName = "";
     public static List<VisitContract> visitList;
     public static String studyID;
-    public static JSONObject sInfo;
+    public static JSONObject sInfo = new JSONObject();
 
 
     //    Total No of members got from Section A
