@@ -233,21 +233,34 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     public boolean Login(String username, String password) throws SQLException {
+
+        // Cursor mCursor = db.rawQuery("SELECT * FROM " + UsersContract.singleUser.TABLE_NAME + " WHERE " + UsersContract.singleUser.ROW_USERNAME +
+        // "= ? AND " + UsersContract.singleUser.ROW_PASSWORD + "=?", new String[]{username, password});
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor mCursor = db.rawQuery("SELECT * FROM " + singleUser.TABLE_NAME + " WHERE " + singleUser.ROW_USERNAME + "=? AND " + singleUser.ROW_PASSWORD + "=?", new String[]{username, password});
-        if (mCursor != null) {
-            if (mCursor.getCount() > 0) {
+// New value for one column
+        String[] columns = {
+                UsersContract.singleUser._ID
+        };
 
-                if (mCursor.moveToFirst()) {
-/*
-                    AppMain.regionDss = mCursor.getString(mCursor.getColumnIndex("region_dss"));
-*/
-                }
-                return true;
-            }
-        }
-        return false;
+// Which row to update, based on the ID
+        String selection = UsersContract.singleUser.ROW_USERNAME + " = ?" + " AND " + UsersContract.singleUser.ROW_PASSWORD + " = ?";
+        String[] selectionArgs = {username, password};
+        Cursor cursor = db.query(UsersContract.singleUser.TABLE_NAME, //Table to query
+                columns,                    //columns to return
+                selection,                  //columns for the WHERE clause
+                selectionArgs,              //The values for the WHERE clause
+                null,                       //group the rows
+                null,                       //filter by row groups
+                null);                      //The sort order
+
+        int cursorCount = cursor.getCount();
+
+        cursor.close();
+        db.close();
+        return cursorCount > 0;
+
+
     }
 
     public void syncVisits(JSONArray Followupslist) {
