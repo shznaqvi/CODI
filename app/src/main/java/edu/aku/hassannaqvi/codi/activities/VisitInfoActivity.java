@@ -59,10 +59,10 @@ public class VisitInfoActivity extends Activity {
         } else if (AppMain.formType.equals("V3")) //&& AppMain.cc.getArmGrp().equals("AB"))
         {
             heading.setText(R.string.ctvheading);
-        } else if (AppMain.formType.equals("V3") && AppMain.cc.getArmGrp().equals("CD"))
+        } /*else if (AppMain.formType.equals("V3") && AppMain.cc.getArmGrp().equals("CD"))
         {
             heading.setText(R.string.ctvbheading);
-        } else if (AppMain.formType.equals("V4")) {
+        }*/ else if (AppMain.formType.equals("V4")) {
             heading.setText(R.string.cfvheading);
         } else if (AppMain.formType.equals("V5")) {
             heading.setText(R.string.cfivheading);

@@ -75,6 +75,7 @@ public class BloodSamplingActivity extends AppCompatActivity {
 
     String dateToday;
     String scanned;
+    DatabaseHelper db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,6 +88,7 @@ public class BloodSamplingActivity extends AppCompatActivity {
         cen20.setManager(getSupportFragmentManager());
         cen21.setManager(getSupportFragmentManager());
         cen20.setMaxDate(dateToday);
+        //AppMain.getEnrollmentChild = db.getChildByStudyID()
 
         if (!AppMain.fc.getFormType().equals("V1")) {
             cen20.setMinDate(convertDateFormat(AppMain.visitList.get(0).getEXPECTEDDT()));
@@ -242,12 +244,13 @@ public class BloodSamplingActivity extends AppCompatActivity {
 
                     startActivity(new Intent(this, RandomizationActivity.class));
                 } else if (AppMain.fc.getFormType().equals("V2") ||
-                        (AppMain.fc.getFormType().equals("V3") && AppMain.getEnrollmentChild.get(0).getArmGrp().equals("AB"))
+                        (AppMain.fc.getFormType().equals("V3") && AppMain.visitList.get(0).getSTUDYID().contains("14W"))
                         || AppMain.fc.getFormType().equals("V4")) {
                     startActivity(new Intent(this, AppointmentActivity.class));
                 } else if (AppMain.fc.getFormType().equals("V5") || (AppMain.fc.getFormType().equals("V3")
-                        && AppMain.getEnrollmentChild.get(0).getArmGrp().equals("CD"))) {
-                    startActivity(new Intent(this, EndingActivity.class));
+                        && AppMain.visitList.get(0).getSTUDYID().contains("09M"))) {
+                    startActivity(new Intent(this, EndingActivity.class).putExtra("complete", true));
+
                 }
 
             } else {

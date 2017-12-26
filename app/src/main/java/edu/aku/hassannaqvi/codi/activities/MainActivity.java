@@ -239,8 +239,9 @@ public class MainActivity extends Activity {
 
     public void openV3(View v) {
         Intent v3 = new Intent(this, VisitInfoActivity.class);
-        startActivity(v3);
         AppMain.formType = "V3";
+        startActivity(v3);
+
     }
 
     public void openV4(View v) {
