@@ -41,7 +41,7 @@ public class AppointmentActivity extends Activity {
 
         //cendt.setText(AppMain.visitList.get(0).getEXPECTEDDT());
 
-        cendt.setText("Date: " + sdf.format(AppMain.visitList.get(0).getEXPECTEDDT()) + "\n\nTime : " + new SimpleDateFormat("HH:mm").format(System.currentTimeMillis()));
+        cendt.setText("Date: " + AppMain.convertDateFormat(AppMain.visitList.get(0).getEXPECTEDDT()) + "\n\nTime : " + new SimpleDateFormat("HH:mm").format(System.currentTimeMillis()));
 
 /*
         if (AppMain.fc.getFormType().equals("V1")) {
@@ -140,7 +140,7 @@ public class AppointmentActivity extends Activity {
         Toast.makeText(this, "Saving Draft for this Section", Toast.LENGTH_SHORT).show();
 
 
-        AppMain.fc.setNextApp(new SimpleDateFormat("dd-MM-yyyy").format(AppMain.visitList.get(0).getEXPECTEDDT()) + " " + new SimpleDateFormat("HH:mm").format(System.currentTimeMillis()));
+        AppMain.fc.setNextApp(AppMain.visitList.get(0).getEXPECTEDDT() + " " + new SimpleDateFormat("HH:mm").format(System.currentTimeMillis()));
        /* if (AppMain.fc.getFormType().equals("V1")) {
             Calendar cal = AppMain.getCalendarDate(AppMain.enrollDate);
             cal.add(Calendar.DAY_OF_MONTH, 28);
