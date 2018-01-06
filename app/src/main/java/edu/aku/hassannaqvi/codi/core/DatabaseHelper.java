@@ -124,6 +124,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             VisitContract.singleFollowUps.COLUMN_EXPECTEDDT + " TEXT"
             + " );";
 
+    private static final String SQL_CREATE_FOLLOWUPS1 = "ALTER TABLE " +
+            VisitContract.singleFollowUps.TABLE_NAME + " ADD COLUMN " +
+            VisitContract.singleFollowUps.COLUMN_VISITDT + " TEXT";
 
     private static final String SQL_DELETE_USERS =
             "DROP TABLE IF EXISTS " + singleUser.TABLE_NAME;
@@ -172,7 +175,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         switch (i) {
             case 1:
-                db.execSQL(SQL_CREATE_FOLLOWUPS);
+                db.execSQL(SQL_CREATE_FOLLOWUPS1);
 
         }
         /*db.execSQL(SQL_DELETE_USERS);
@@ -348,7 +351,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         return visitList;
     }
-
 
 
     public Long addEligibility(EligibilityContract elc) {
@@ -586,7 +588,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         List<VisitContract> formsList = new ArrayList<>();
         // Select All Query
         String selectQuery = "SELECT * FROM " + VisitContract.singleFollowUps.TABLE_NAME + " where "
-                + VisitContract.singleFollowUps.COLUMN_STUDYID + " = '" + studyID + "' AND "+
+                + VisitContract.singleFollowUps.COLUMN_STUDYID + " = '" + studyID + "' AND " +
                 VisitContract.singleFollowUps.COLUMN_VISITNUM + " = '" + formType + "';";
 
         SQLiteDatabase db = this.getWritableDatabase();
