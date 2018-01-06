@@ -140,7 +140,7 @@ public class VisitInfoActivity extends Activity {
 
         if (AppMain.visitList.size() != 0) {
 
-            if (getDays(AppMain.visitList.get(0).getEXPECTEDDT())) {
+            if (getDays(AppMain.visitList.get(0).getVISITDT())) {
 
                 Toast.makeText(getApplicationContext(), "Children found", Toast.LENGTH_LONG).show();
 
