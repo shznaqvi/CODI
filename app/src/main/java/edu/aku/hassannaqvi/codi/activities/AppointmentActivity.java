@@ -9,7 +9,6 @@ import android.widget.Toast;
 import org.json.JSONException;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,7 +39,11 @@ public class AppointmentActivity extends Activity {
         //Calendar cal = AppMain.getCalendarDate(AppMain.visitList.get(0).getEXPECTEDDT());
 
 
+        //cendt.setText(AppMain.visitList.get(0).getEXPECTEDDT());
 
+        cendt.setText("Date: " + sdf.format(AppMain.visitList.get(0).getEXPECTEDDT()) + "\n\nTime : " + new SimpleDateFormat("HH:mm").format(System.currentTimeMillis()));
+
+/*
         if (AppMain.fc.getFormType().equals("V1")) {
             heading.setText(getResources().getString(R.string.cenascsub));
             Calendar cal = AppMain.getCalendarDate(AppMain.enrollDate);
@@ -68,6 +71,7 @@ public class AppointmentActivity extends Activity {
             cendt.setText("Date: " + sdf.format(cal.getTime()) + "\n\nTime : " + new SimpleDateFormat("HH:mm").format(System.currentTimeMillis()));
         }
 
+*/
 
 
     }
@@ -136,7 +140,8 @@ public class AppointmentActivity extends Activity {
         Toast.makeText(this, "Saving Draft for this Section", Toast.LENGTH_SHORT).show();
 
 
-        if (AppMain.fc.getFormType().equals("V1")) {
+        AppMain.fc.setNextApp(new SimpleDateFormat("dd-MM-yyyy").format(AppMain.visitList.get(0).getEXPECTEDDT()) + " " + new SimpleDateFormat("HH:mm").format(System.currentTimeMillis()));
+       /* if (AppMain.fc.getFormType().equals("V1")) {
             Calendar cal = AppMain.getCalendarDate(AppMain.enrollDate);
             cal.add(Calendar.DAY_OF_MONTH, 28);
             AppMain.fc.setNextApp(new SimpleDateFormat("dd-MM-yyyy").format(cal.getTime()) + " " + new SimpleDateFormat("HH:mm").format(System.currentTimeMillis()));
@@ -156,7 +161,7 @@ public class AppointmentActivity extends Activity {
             Calendar cal = AppMain.getCalendarDate(AppMain.convertDateFormat(AppMain.visitList.get(0).getEXPECTEDDT()));
             cal.add(Calendar.MONTH, 11);
             AppMain.fc.setNextApp(new SimpleDateFormat("dd-MM-yyyy").format(cal.getTime()) + " " + new SimpleDateFormat("HH:mm").format(System.currentTimeMillis()));
-        }
+        }*/
 
 
         //AppMain.fc.setNextApp(String.valueOf(nextApp));

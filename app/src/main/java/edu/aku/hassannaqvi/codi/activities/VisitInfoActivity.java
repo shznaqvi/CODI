@@ -51,6 +51,9 @@ public class VisitInfoActivity extends Activity {
         setContentView(R.layout.activity_visit_info);
         ButterKnife.bind(this);
 
+        AppMain.enrollDate = new SimpleDateFormat("dd-MM-yyyy HH:mm").format(System.currentTimeMillis());
+
+
         db = new DatabaseHelper(this);
 
         if (AppMain.formType.equals("V2")) {
@@ -142,7 +145,7 @@ public class VisitInfoActivity extends Activity {
                 Toast.makeText(getApplicationContext(), "Children found", Toast.LENGTH_LONG).show();
 
 
-                csv01.setText(AppMain.convertDateFormat(AppMain.visitList.get(0).getEXPECTEDDT()));
+                csv01.setText(AppMain.convertDateFormat(AppMain.visitList.get(0).getVISITDT()));
 
                 csv02.setText(sdf.format(System.currentTimeMillis()));
 
