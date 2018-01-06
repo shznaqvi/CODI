@@ -162,7 +162,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_CREATE_ELIGIBILITY);
         db.execSQL(SQL_CREATE_FORMS);
         db.execSQL(SQL_CREATE_CHILDREN);
-        //db.execSQL(SQL_CREATE_FOLLOWUPS);
+        db.execSQL(SQL_CREATE_FOLLOWUPS);
 
 
     }
