@@ -39,7 +39,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "codi.db";
     public static final String DB_NAME = "codi_copy.db";
 
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     private static final String SQL_CREATE_USERS = "CREATE TABLE " + singleUser.TABLE_NAME + "("
             + singleUser._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -119,9 +119,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             VisitContract.singleFollowUps.COLUMN_STUDYID + " TEXT," +
             VisitContract.singleFollowUps.COLUMN_CHILDNAME + " TEXT," +
             VisitContract.singleFollowUps.COLUMN_MOTHERNAME + " TEXT," +
-            VisitContract.singleFollowUps.COLUMN_EXPECTEDDT + " TEXT," +
-            VisitContract.singleFollowUps.COLUMN_VISITNUM + " TEXT" +
-            " );";
+            VisitContract.singleFollowUps.COLUMN_VISITDT + " TEXT," +
+            VisitContract.singleFollowUps.COLUMN_VISITNUM + " TEXT," +
+            VisitContract.singleFollowUps.COLUMN_EXPECTEDDT + " TEXT"
+            + " );";
 
 
     private static final String SQL_DELETE_USERS =
@@ -161,19 +162,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_CREATE_ELIGIBILITY);
         db.execSQL(SQL_CREATE_FORMS);
         db.execSQL(SQL_CREATE_CHILDREN);
-        db.execSQL(SQL_CREATE_FOLLOWUPS);
+        //db.execSQL(SQL_CREATE_FOLLOWUPS);
 
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
-        db.execSQL(SQL_DELETE_USERS);
+
+        switch (i) {
+            case 1:
+                db.execSQL(SQL_CREATE_FOLLOWUPS);
+
+        }
+        /*db.execSQL(SQL_DELETE_USERS);
         db.execSQL(SQL_DELETE_ELIGIBILITY);
         db.execSQL(SQL_DELETE_FORMS);
         db.execSQL(SQL_DELETE_CHILDREN);
         db.execSQL(SQL_DELETE_FOLLOWUPS);
-
+*/
     }
 
     public void syncUser(JSONArray userlist) {
@@ -278,9 +285,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
                 values.put(VisitContract.singleFollowUps.COLUMN_CHILDNAME, vc.getCHILDNAME());
                 values.put(VisitContract.singleFollowUps.COLUMN_STUDYID, vc.getSTUDYID());
-                values.put(VisitContract.singleFollowUps.COLUMN_EXPECTEDDT, vc.getEXPECTEDDT());
+                values.put(VisitContract.singleFollowUps.COLUMN_VISITDT, vc.getVISITDT());
                 values.put(VisitContract.singleFollowUps.COLUMN_VISITNUM, vc.getVISITNUM());
                 values.put(VisitContract.singleFollowUps.COLUMN_MOTHERNAME, vc.getMOTHERNAME());
+                values.put(VisitContract.singleFollowUps.COLUMN_EXPECTEDDT, vc.getEXPECTEDDT());
 
 
                 db.insert(VisitContract.singleFollowUps.TABLE_NAME, null, values);
@@ -302,7 +310,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 VisitContract.singleFollowUps.COLUMN_STUDYID,
                 VisitContract.singleFollowUps.COLUMN_EXPECTEDDT,
                 VisitContract.singleFollowUps.COLUMN_VISITNUM,
-                VisitContract.singleFollowUps.COLUMN_MOTHERNAME
+                VisitContract.singleFollowUps.COLUMN_MOTHERNAME,
+                VisitContract.singleFollowUps.COLUMN_VISITDT
 
         };
 

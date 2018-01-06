@@ -17,6 +17,7 @@ public class VisitContract {
     String CHILDNAME;
     String STUDYID;
     String EXPECTEDDT;
+    String VISITDT;
     String VISITNUM;
     String MOTHERNAME;
     //String AGE;
@@ -33,6 +34,7 @@ public class VisitContract {
         this.MOTHERNAME = vc.getMOTHERNAME();
         this.VISITNUM = vc.getVISITNUM();
         this.EXPECTEDDT = vc.getEXPECTEDDT();
+        this.VISITDT = vc.getVISITDT();
         //this.AGE = vc.getAGE();
 
     }
@@ -42,6 +44,7 @@ public class VisitContract {
         this.CHILDNAME = jsonObject.getString(singleFollowUps.COLUMN_CHILDNAME);
         this.STUDYID = jsonObject.getString(singleFollowUps.COLUMN_STUDYID);
         this.EXPECTEDDT = jsonObject.getString(singleFollowUps.COLUMN_EXPECTEDDT);
+        this.VISITDT = jsonObject.getString(singleFollowUps.COLUMN_VISITDT);
         this.VISITNUM = jsonObject.getString(singleFollowUps.COLUMN_VISITNUM);
         this.MOTHERNAME = jsonObject.getString(singleFollowUps.COLUMN_MOTHERNAME);
         //this.AGE = jsonObject.getString(singleFollowUps.COLUMN_AGE);
@@ -55,7 +58,8 @@ public class VisitContract {
         //this.DSSID = jsonObject.getString(singleFollowUps.COLUMN_DSSID);
         this.CHILDNAME = jsonObject.getString(singleFollowUps.COLUMN_CHILDNAME);
         this.STUDYID = jsonObject.getString(singleFollowUps.COLUMN_STUDYID);
-        this.EXPECTEDDT = jsonObject.getString("visitdt");
+        this.EXPECTEDDT = jsonObject.getString(singleFollowUps.COLUMN_EXPECTEDDT);
+        this.VISITDT = jsonObject.getString(singleFollowUps.COLUMN_VISITDT);
         this.VISITNUM = jsonObject.getString("vround");
         this.MOTHERNAME = jsonObject.getString("mother");
         //this.AGE = jsonObject.getString(singleFollowUps.COLUMN_AGE);
@@ -71,6 +75,7 @@ public class VisitContract {
         this.CHILDNAME = cursor.getString(cursor.getColumnIndex(singleFollowUps.COLUMN_CHILDNAME));
         this.STUDYID = cursor.getString(cursor.getColumnIndex(singleFollowUps.COLUMN_STUDYID));
         this.EXPECTEDDT = cursor.getString(cursor.getColumnIndex(singleFollowUps.COLUMN_EXPECTEDDT));
+        this.VISITDT = cursor.getString(cursor.getColumnIndex(singleFollowUps.COLUMN_VISITDT));
         this.VISITNUM = cursor.getString(cursor.getColumnIndex(singleFollowUps.COLUMN_VISITNUM));
         this.MOTHERNAME = cursor.getString(cursor.getColumnIndex(singleFollowUps.COLUMN_MOTHERNAME));
         //this.AGE = cursor.getString(cursor.getColumnIndex(singleFollowUps.COLUMN_AGE));
@@ -137,6 +142,15 @@ public class VisitContract {
         this.EXPECTEDDT = EXPECTEDDT;
     }
 
+    public String getVISITDT() {
+
+        return VISITDT;
+    }
+
+    public void setVISITDT(String VISITDT) {
+        this.VISITDT = VISITDT;
+    }
+
     public String getVISITNUM() {
         return VISITNUM;
     }
@@ -153,6 +167,7 @@ public class VisitContract {
         json.put(singleFollowUps.COLUMN_CHILDNAME, this.CHILDNAME == null ? JSONObject.NULL : this.CHILDNAME);
         json.put(singleFollowUps.COLUMN_STUDYID, this.STUDYID == null ? JSONObject.NULL : this.STUDYID);
         json.put(singleFollowUps.COLUMN_EXPECTEDDT, this.EXPECTEDDT == null ? JSONObject.NULL : this.EXPECTEDDT);
+        json.put(singleFollowUps.COLUMN_VISITDT, this.VISITDT == null ? JSONObject.NULL : this.VISITDT);
         json.put(singleFollowUps.COLUMN_VISITNUM, this.VISITNUM == null ? JSONObject.NULL : this.VISITNUM);
         json.put(singleFollowUps.COLUMN_MOTHERNAME, this.MOTHERNAME == null ? JSONObject.NULL : this.MOTHERNAME);
         //json.put(singleFollowUps.COLUMN_AGE, this.AGE == null ? JSONObject.NULL : this.AGE);
@@ -169,6 +184,7 @@ public class VisitContract {
         public static final String COLUMN_CHILDNAME = "childname";
         public static final String COLUMN_STUDYID = "studyid";
         public static final String COLUMN_EXPECTEDDT = "expecteddt";
+        public static final String COLUMN_VISITDT = "visitdt";
         public static final String COLUMN_VISITNUM = "visitnum";
         public static final String COLUMN_MOTHERNAME = "mothername";
         //public static final String COLUMN_AGE = "age";
