@@ -13,7 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -219,12 +218,12 @@ public class VisitInfoActivity extends Activity {
         //AppMain.fc.setFormType("V1");
         AppMain.fc.setFormType(AppMain.formType);
 
-        JSONObject sInfo = new JSONObject();
+        //JSONObject sInfo = new JSONObject();
 
-        sInfo.put("csv01", csv01.getText().toString());
-        sInfo.put("csv02", csv02.getText().toString());
+        AppMain.sInfo.put("csv01", csv01.getText().toString());
+        AppMain.sInfo.put("csv02", csv02.getText().toString());
 
-        AppMain.fc.setsInfo(String.valueOf(sInfo));
+        AppMain.fc.setsInfo(String.valueOf(AppMain.sInfo));
 
         setGPS();
 
