@@ -30,6 +30,7 @@ public class AppointmentActivity extends Activity {
     @BindView(R.id.heading)
     TextView heading;
     Calendar cal = AppMain.getCalendarDate(AppMain.enrollDate);
+    Calendar today = Calendar.getInstance();
 
 
     @Override
@@ -48,6 +49,10 @@ public class AppointmentActivity extends Activity {
             //Calendar cal = AppMain.getCalendarDate(AppMain.enrollDate);
             cal.add(Calendar.DAY_OF_MONTH, 28);
             cendt.setText("Date: " + sdf.format(cal.getTime()) + "\n\nTime : " + new SimpleDateFormat("HH:mm").format(System.currentTimeMillis()));
+        } else if (AppMain.fc.getFormType().equals("V3") && AppMain.fc.getStudyID().contains("14W")) {
+            heading.setText("Appointment for Next Visit");
+            today.add(Calendar.DAY_OF_MONTH, 28);
+            cendt.setText("Date: " + sdf.format(today.getTime()) + "\n\nTime : " + new SimpleDateFormat("HH:mm").format(System.currentTimeMillis()));
         } else {
             heading.setText("Appointment for Next Visit");
             cendt.setText("Date: " + AppMain.convertDateFormat(AppMain.visitList.get(0).getEXPECTEDDT()) + "\n\nTime : " + new SimpleDateFormat("HH:mm").format(System.currentTimeMillis()));
@@ -153,6 +158,8 @@ public class AppointmentActivity extends Activity {
 
         if (AppMain.fc.getFormType().equals("V1")) {
             AppMain.fc.setNextApp(new SimpleDateFormat("yyyy-MM-dd").format(cal.getTime()));
+        } else if (AppMain.fc.getFormType().equals("V3") && AppMain.fc.getStudyID().contains("14W")) {
+            AppMain.fc.setNextApp(new SimpleDateFormat("yyyy-MM-dd").format(today.getTime()));
         } else {
             AppMain.fc.setNextApp(AppMain.visitList.get(0).getEXPECTEDDT() + " " + new SimpleDateFormat("HH:mm").format(System.currentTimeMillis()));
         }
