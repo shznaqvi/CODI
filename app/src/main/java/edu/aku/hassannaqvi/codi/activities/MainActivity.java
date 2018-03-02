@@ -29,6 +29,7 @@ import butterknife.ButterKnife;
 import edu.aku.hassannaqvi.codi.R;
 import edu.aku.hassannaqvi.codi.core.AndroidDatabaseManager;
 import edu.aku.hassannaqvi.codi.core.AppMain;
+import edu.aku.hassannaqvi.codi.core.DatabaseHelper;
 import edu.aku.hassannaqvi.codi.sync.SyncChildren;
 import edu.aku.hassannaqvi.codi.sync.SyncForms;
 import edu.aku.hassannaqvi.codi.sync.SyncFormsV2;
@@ -105,9 +106,12 @@ public class MainActivity extends Activity {
             builder.show();
         }
 
-/*
+
         DatabaseHelper db = new DatabaseHelper(this);
-        Collection<FormsContract> todayForms = db.getTodayForms();
+        if (db.getAllEnrolled() != null) {
+            recordSummary.setText("Enrolled: " + db.getAllEnrolled());
+        }
+  /*      Collection<FormsContract> todayForms = db.getTodayForms();
         Collection<FormsContract> unsyncedForms = db.getUnsyncedForms();
         Collection<FormsContract> unsyncedForms2 = db.getUnsyncedFormsV2();
         Collection<FormsContract> unsyncedForms3 = db.getUnsyncedFormsV3();
