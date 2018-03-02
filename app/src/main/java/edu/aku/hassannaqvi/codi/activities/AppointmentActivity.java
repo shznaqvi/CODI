@@ -157,9 +157,9 @@ public class AppointmentActivity extends Activity {
 
 
         if (AppMain.fc.getFormType().equals("V1")) {
-            AppMain.fc.setNextApp(new SimpleDateFormat("yyyy-MM-dd").format(cal.getTime()));
+            AppMain.fc.setNextApp(new SimpleDateFormat("dd-MM-yyyy").format(cal.getTime()) + " " + new SimpleDateFormat("HH:mm").format(System.currentTimeMillis()));
         } else if (AppMain.fc.getFormType().equals("V3") && AppMain.fc.getStudyID().contains("14W")) {
-            AppMain.fc.setNextApp(new SimpleDateFormat("yyyy-MM-dd").format(today.getTime()));
+            AppMain.fc.setNextApp(new SimpleDateFormat("dd-MM-yyyy").format(today.getTime()) + " " + new SimpleDateFormat("HH:mm").format(System.currentTimeMillis()));
         } else {
             AppMain.fc.setNextApp(AppMain.visitList.get(0).getEXPECTEDDT() + " " + new SimpleDateFormat("HH:mm").format(System.currentTimeMillis()));
         }
