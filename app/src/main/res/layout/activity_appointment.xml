@@ -57,7 +57,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"
-                android:focusable="true"
+                android:focusable="false"
                 android:hint="@string/cendt"
                 android:textColor="@android:color/black"
                 app:dateFormat="dd-MM-yyyy" />
