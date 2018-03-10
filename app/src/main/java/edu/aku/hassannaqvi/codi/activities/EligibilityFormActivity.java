@@ -354,7 +354,7 @@ public class EligibilityFormActivity extends AppCompatActivity implements RadioG
         AppMain.motherName = celmn.getText().toString();
         AppMain.dob = celdob.getText().toString();
         AppMain.fc.setFormType("V1");
-        AppMain.fc.setProjectName("CODI");
+
 
         JSONObject sel = new JSONObject();
 

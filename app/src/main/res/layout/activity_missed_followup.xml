@@ -81,7 +81,7 @@
             android:inputType="textCapWords" />
 
 
-        <TextView
+        <!--<TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -95,7 +95,7 @@
             android:layout_weight="1"
             android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
             android:hint="@string/celmn"
-            android:inputType="textCapWords" />
+            android:inputType="textCapWords" />-->
 
 
         <TextView

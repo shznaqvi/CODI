@@ -195,7 +195,7 @@ public class VisitInfoActivity extends Activity {
         //AppMain.fc.setDSSID(dssID.getText().toString());
         AppMain.fc.setStudyID(AppMain.visitList.get(0).getSTUDYID());
         AppMain.fc.setFormType(AppMain.formType);
-        AppMain.fc.setProjectName("CODI");
+
 
         setGPS();
 
@@ -218,7 +218,7 @@ public class VisitInfoActivity extends Activity {
         //AppMain.dob = celdob.getText().toString();
         //AppMain.fc.setFormType("V1");
         AppMain.fc.setFormType(AppMain.formType);
-        AppMain.fc.setProjectName("CODI");
+
 
         //JSONObject sInfo = new JSONObject();
 

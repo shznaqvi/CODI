@@ -34,8 +34,8 @@ public class MissedFollowupActivity extends AppCompatActivity {
     EditText studyid;
     @BindView(R.id.childname)
     EditText childname;
-    @BindView(R.id.mother)
-    EditText mother;
+    /*@BindView(R.id.mother)
+    EditText mother;*/
     @BindView(R.id.csv01)
     DatePickerInputEditText csv01;
     @BindView(R.id.csv02)
@@ -126,7 +126,6 @@ public class MissedFollowupActivity extends AppCompatActivity {
         AppMain.fc.setStudyID(studyid.getText().toString());
         AppMain.fc.setFormType("V" + vround.getText().toString());
         AppMain.formType = "V" + vround.getText().toString();
-        AppMain.fc.setProjectName("CODI-AMNA");
 
         setGPS();
 
@@ -150,8 +149,8 @@ public class MissedFollowupActivity extends AppCompatActivity {
 
         AppMain.sInfo.put("csv01", csv01.getText().toString());
         AppMain.sInfo.put("csv02", csv02.getText().toString());
-        AppMain.sInfo.put("mother", mother.getText().toString());
-        AppMain.sInfo.put("vround", vround.getText().toString());
+        //AppMain.sInfo.put("mother", mother.getText().toString());
+        //AppMain.sInfo.put("vround", vround.getText().toString());
 
         AppMain.fc.setsInfo(String.valueOf(AppMain.sInfo));
 
@@ -270,7 +269,7 @@ public class MissedFollowupActivity extends AppCompatActivity {
         }
 
 
-        if (mother.getText().toString().isEmpty()) {
+        /*if (mother.getText().toString().isEmpty()) {
             Toast.makeText(this, "ERROR(Empty)" + getString(R.string.celmn), Toast.LENGTH_SHORT).show();
             mother.setError("This data is Required!");
 
@@ -278,7 +277,7 @@ public class MissedFollowupActivity extends AppCompatActivity {
             return false;
         } else {
             mother.setError(null);
-        }
+        }*/
 
         if (csv01.getText().toString().isEmpty()) {
             Toast.makeText(this, "ERROR(Empty)" + getString(R.string.csv01), Toast.LENGTH_SHORT).show();
