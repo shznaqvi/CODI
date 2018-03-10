@@ -39,8 +39,8 @@ import edu.aku.hassannaqvi.codi.sync.SyncFormsV5;
 
 public class MainActivity extends Activity {
 
+    static boolean missed = false;
     private final String TAG = "MainActivity";
-
     String dtToday = new SimpleDateFormat("dd-MM-yy HH:mm").format(new Date().getTime());
     @BindView(R.id.adminsec)
     LinearLayout adminsec;
@@ -48,7 +48,6 @@ public class MainActivity extends Activity {
     TextView lblheader;
     @BindView(R.id.recordSummary)
     TextView recordSummary;
-
     @BindView(R.id.syncDevice)
     Button syncDevice;
     SharedPreferences sharedPref;
@@ -192,6 +191,7 @@ public class MainActivity extends Activity {
     }
 
     public void openForm(View v) {
+        missed = false;
         if (sharedPref.getString("tagName", null) != "" && sharedPref.getString("tagName", null) != null) {
             Intent oF = new Intent(MainActivity.this, EligibilityFormActivity.class);
             startActivity(oF);
@@ -230,18 +230,21 @@ public class MainActivity extends Activity {
     }
 
     public void openForm1(View v) {
+        missed = false;
         Intent iMem = new Intent(this, EnrollmentInfoActivity.class);
         startActivity(iMem);
         AppMain.formType = "V1";
     }
 
     public void openV2(View v) {
+        missed = false;
         Intent v2 = new Intent(this, VisitInfoActivity.class);
         startActivity(v2);
         AppMain.formType = "V2";
     }
 
     public void openV3(View v) {
+        missed = false;
         Intent v3 = new Intent(this, VisitInfoActivity.class);
         AppMain.formType = "V3";
         startActivity(v3);
@@ -249,12 +252,14 @@ public class MainActivity extends Activity {
     }
 
     public void openV4(View v) {
+        missed = false;
         Intent v4 = new Intent(this, VisitInfoActivity.class);
         startActivity(v4);
         AppMain.formType = "V4";
     }
 
     public void openV5(View v) {
+        missed = false;
         Intent v5 = new Intent(this, VisitInfoActivity.class);
         startActivity(v5);
         AppMain.formType = "V5";
@@ -338,6 +343,13 @@ public class MainActivity extends Activity {
         for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
             Log.d("Map", entry.getKey() + ": " + entry.getValue().toString());
         }
+
+    }
+
+    public void openMissed(View v) {
+        missed = true;
+        Intent missedInt = new Intent(getApplicationContext(), MissedFollowupActivity.class);
+        startActivity(missedInt);
 
     }
 

@@ -78,7 +78,9 @@ public class VaccineActivity extends AppCompatActivity {
         cen30.setManager(getSupportFragmentManager());
         cen31.setManager(getSupportFragmentManager());
         cen30.setMaxDate(dateToday);
-        cen30.setMinDate(convertDateFormat(AppMain.enrollDate));
+        if (!MainActivity.missed) {
+            cen30.setMinDate(convertDateFormat(AppMain.enrollDate));
+        }
 
 
         //============== Vacccine after randomization skip pattern=========

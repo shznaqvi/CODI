@@ -90,8 +90,10 @@ public class BloodSamplingActivity extends AppCompatActivity {
         cen20.setMaxDate(dateToday);
         //AppMain.getEnrollmentChild = db.getChildByStudyID()
 
-        if (!AppMain.fc.getFormType().equals("V1")) {
-            cen20.setMinDate(convertDateFormat(AppMain.visitList.get(0).getVISITDT()));
+        if (!MainActivity.missed) {
+            if (!AppMain.fc.getFormType().equals("V1")) {
+                cen20.setMinDate(convertDateFormat(AppMain.visitList.get(0).getVISITDT()));
+            }
         }
 
 

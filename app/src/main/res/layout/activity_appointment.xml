@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -37,17 +38,43 @@
             android:background="@color/colorPrimary" />
 
 
-        <!--<io.blackbox_vision.datetimepickeredittext.view.DatePickerInputEditText
-            android:id="@+id/cendt"
+        <!--Missed-->
+
+        <LinearLayout
+            android:id="@+id/fldGrpMissed"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="1dp"
-            android:focusable="true"
-            android:hint="@string/cendt"
-            android:textColor="@android:color/black"
-            app:dateFormat="dd-MM-yyyy" />-->
+            android:orientation="vertical">
 
-        <TextView
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/cendt" />
+
+            <io.blackbox_vision.datetimepickeredittext.view.DatePickerInputEditText
+                android:id="@+id/cendtedt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:focusable="true"
+                android:hint="@string/cendt"
+                android:textColor="@android:color/black"
+                app:dateFormat="dd-MM-yyyy" />
+
+
+        </LinearLayout>
+
+        <!-- Not missed-->
+        <LinearLayout
+            android:id="@+id/fldGrpregular"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+
+            <TextView
             android:id="@+id/cendt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -56,7 +83,6 @@
             android:gravity="center"
             android:text=""
             android:textSize="50sp" />
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -72,15 +98,6 @@
                 android:gravity="center"
                 android:text="@string/centime" />
 
-            <!--<io.blackbox_vision.datetimepickeredittext.view.TimePickerInputEditText
-                android:id="@+id/centime"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="1dp"
-                android:focusable="true"
-                android:hint="@string/centime"
-                android:textColor="@android:color/black"
-                app:timeFormat="HH:mm" />-->
 
             <TextView
                 android:id="@+id/centime"
@@ -92,6 +109,9 @@
                 android:gravity="center"
                 android:text="" />
         </LinearLayout>
+
+        </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"

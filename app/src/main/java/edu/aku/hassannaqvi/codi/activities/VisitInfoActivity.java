@@ -188,13 +188,14 @@ public class VisitInfoActivity extends Activity {
         AppMain.fc = new FormsContract();
 
         AppMain.fc.setDevicetagID(sharedPref.getString("tagName", null));
-        AppMain.fc.setFormDate(new Date().toString());
+        AppMain.fc.setFormDate(new SimpleDateFormat("dd-MM-yyyy HH:mm").format(System.currentTimeMillis()));
         AppMain.fc.setUser(AppMain.userName);
         AppMain.fc.setDeviceID(Settings.Secure.getString(getApplicationContext().getContentResolver(),
                 Settings.Secure.ANDROID_ID));
         //AppMain.fc.setDSSID(dssID.getText().toString());
         AppMain.fc.setStudyID(AppMain.visitList.get(0).getSTUDYID());
         AppMain.fc.setFormType(AppMain.formType);
+        AppMain.fc.setProjectName("CODI");
 
         setGPS();
 
@@ -206,7 +207,7 @@ public class VisitInfoActivity extends Activity {
         AppMain.fc = new FormsContract();
 
         AppMain.fc.setDevicetagID(sharedPref.getString("tagName", null));
-        AppMain.fc.setFormDate(new Date().toString());
+        AppMain.fc.setFormDate(new SimpleDateFormat("dd-MM-yyyy HH:mm").format(System.currentTimeMillis()));
         AppMain.fc.setUser(AppMain.userName);
         AppMain.fc.setDeviceID(Settings.Secure.getString(getApplicationContext().getContentResolver(),
                 Settings.Secure.ANDROID_ID));
@@ -217,6 +218,7 @@ public class VisitInfoActivity extends Activity {
         //AppMain.dob = celdob.getText().toString();
         //AppMain.fc.setFormType("V1");
         AppMain.fc.setFormType(AppMain.formType);
+        AppMain.fc.setProjectName("CODI");
 
         //JSONObject sInfo = new JSONObject();
 

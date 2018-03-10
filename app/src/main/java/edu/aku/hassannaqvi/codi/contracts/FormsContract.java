@@ -12,7 +12,7 @@ import org.json.JSONObject;
 
 public class FormsContract {
 
-    private final String projectName = "CODI";
+    private final String projectName = "CODI-AMNA";
     //private final String surveyType = "Enrollment";
     private String _ID = "";
     private String _UID = "";
