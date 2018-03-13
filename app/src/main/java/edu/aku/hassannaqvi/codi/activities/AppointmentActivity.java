@@ -9,6 +9,7 @@ import android.widget.Toast;
 import org.json.JSONException;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,7 +29,8 @@ public class AppointmentActivity extends Activity {
     TextView centime;
     @BindView(R.id.heading)
     TextView heading;
-
+    Calendar cal = AppMain.getCalendarDate(AppMain.enrollDate);
+    Calendar today = Calendar.getInstance();
 
 
     @Override
@@ -41,7 +43,21 @@ public class AppointmentActivity extends Activity {
 
         //cendt.setText(AppMain.visitList.get(0).getEXPECTEDDT());
 
-        cendt.setText("Date: " + sdf.format(AppMain.visitList.get(0).getEXPECTEDDT()) + "\n\nTime : " + new SimpleDateFormat("HH:mm").format(System.currentTimeMillis()));
+
+        if (AppMain.fc.getFormType().equals("V1")) {
+            heading.setText(getResources().getString(R.string.cenascsub));
+            //Calendar cal = AppMain.getCalendarDate(AppMain.enrollDate);
+            cal.add(Calendar.DAY_OF_MONTH, 28);
+            cendt.setText("Date: " + sdf.format(cal.getTime()) + "\n\nTime : " + new SimpleDateFormat("HH:mm").format(System.currentTimeMillis()));
+        } else if (AppMain.fc.getFormType().equals("V3") && AppMain.fc.getStudyID().contains("14W")) {
+            heading.setText("Appointment for Next Visit");
+            today.add(Calendar.DAY_OF_MONTH, 28);
+            cendt.setText("Date: " + sdf.format(today.getTime()) + "\n\nTime : " + new SimpleDateFormat("HH:mm").format(System.currentTimeMillis()));
+        } else {
+            heading.setText("Appointment for Next Visit");
+            cendt.setText("Date: " + AppMain.convertDateFormat(AppMain.visitList.get(0).getEXPECTEDDT()) + "\n\nTime : " + new SimpleDateFormat("HH:mm").format(System.currentTimeMillis()));
+        }
+
 
 /*
         if (AppMain.fc.getFormType().equals("V1")) {
@@ -140,7 +156,14 @@ public class AppointmentActivity extends Activity {
         Toast.makeText(this, "Saving Draft for this Section", Toast.LENGTH_SHORT).show();
 
 
-        AppMain.fc.setNextApp(new SimpleDateFormat("dd-MM-yyyy").format(AppMain.visitList.get(0).getEXPECTEDDT()) + " " + new SimpleDateFormat("HH:mm").format(System.currentTimeMillis()));
+        if (AppMain.fc.getFormType().equals("V1")) {
+            AppMain.fc.setNextApp(new SimpleDateFormat("dd-MM-yyyy").format(cal.getTime()) + " " + new SimpleDateFormat("HH:mm").format(System.currentTimeMillis()));
+        } else if (AppMain.fc.getFormType().equals("V3") && AppMain.fc.getStudyID().contains("14W")) {
+            AppMain.fc.setNextApp(new SimpleDateFormat("dd-MM-yyyy").format(today.getTime()) + " " + new SimpleDateFormat("HH:mm").format(System.currentTimeMillis()));
+        } else {
+            AppMain.fc.setNextApp(AppMain.visitList.get(0).getEXPECTEDDT() + " " + new SimpleDateFormat("HH:mm").format(System.currentTimeMillis()));
+        }
+
        /* if (AppMain.fc.getFormType().equals("V1")) {
             Calendar cal = AppMain.getCalendarDate(AppMain.enrollDate);
             cal.add(Calendar.DAY_OF_MONTH, 28);

@@ -10,6 +10,7 @@ import android.widget.ScrollView;
 import android.widget.Toast;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -83,6 +84,11 @@ public class EndingActivity extends Activity {
             }
             if (UpdateDB()) {
                 finish();
+                AppMain.formType = "";
+                AppMain.enrollDate = "";
+                AppMain.dob = "";
+                AppMain.child_name = "";
+                AppMain.sInfo = new JSONObject();
                 Toast.makeText(this, "Closing Form!", Toast.LENGTH_SHORT).show();
                 Intent endSec = new Intent(this, MainActivity.class);
                 //AppMain.mnb1 = "TEST";

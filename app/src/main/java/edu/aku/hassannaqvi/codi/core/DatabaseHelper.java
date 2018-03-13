@@ -28,13 +28,11 @@ import edu.aku.hassannaqvi.codi.contracts.UsersContract;
 import edu.aku.hassannaqvi.codi.contracts.UsersContract.singleUser;
 import edu.aku.hassannaqvi.codi.contracts.VisitContract;
 
-
 /**
  * Created by hassan.naqvi on 11/30/2016.
  */
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-
 
     public static final String DATABASE_NAME = "codi.db";
     public static final String DB_NAME = "codi_copy.db";
@@ -269,7 +267,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return cursorCount > 0;
-
 
     }
 
@@ -564,6 +561,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
+    public String getAllEnrolled() {
+        // Select All Query
+        SQLiteDatabase db = this.getWritableDatabase();
+        String MATCH_STRING = "celner\":\"\"";
+        Cursor c = db.query(FormsTable.TABLE_NAME, new String[]{"count(*) as enrolled"}, FormsTable.COLUMN_SELIGIBLE + " like ? and " + FormsTable.COLUMN_ISTATUS + " = 1", new String[]{"%" + MATCH_STRING + "%"}, null, null, null);
+
+        if (c.moveToFirst()) {
+            do {
+                Log.d(TAG, "getAllEnrolled: " + c.getString(c.getColumnIndex("enrolled")));
+                return c.getString(c.getColumnIndex("enrolled"));
+            } while (c.moveToNext());
+        }
+        return null;
+    }
     public List<ChildrenContract> getChildByDSS(String dssID) {
         List<ChildrenContract> childrenList = new ArrayList<>();
         // Select All Query
